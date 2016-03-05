@@ -1,0 +1,8 @@
+<h1>Bienvenue sur RunTheShow</h1>
+<div ng-show="authenticated">
+    <p>Votre nom est : {{greeting.login}}</p>
+    <p ng-class="greeting.roles.join(', ')">Vos roles sont : {{greeting.roles.join(', ')}}</p>
+</div>
+<div  ng-show="!authenticated">
+    <p>Bonjour, connectez-vous pour voir les détails</p>
+</div>
