@@ -2,7 +2,6 @@ package runtheshow.frontend.boot;
 
 
 
-import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,9 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
 import static org.junit.Assert.assertEquals;
+import runtheshow.frontend.config.AppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Boot.class)
+@SpringApplicationConfiguration(classes = AppConfiguration.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
 public class BootTest {
@@ -51,7 +51,7 @@ public class BootTest {
 
 	@Test
 	public void loginSucceeds() {
-		RestTemplate template = new TestRestTemplate("user", "password");
+		RestTemplate template = new TestRestTemplate("utilisateur", "utilisateur");
 		ResponseEntity<String> response = template.getForEntity("http://localhost:" + port
 				+ "/user", String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());
