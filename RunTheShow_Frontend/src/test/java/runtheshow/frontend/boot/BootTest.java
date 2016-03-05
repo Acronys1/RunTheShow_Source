@@ -45,7 +45,7 @@ public class BootTest {
 	@Test
 	public void resourceEndpointProtected() {
 		ResponseEntity<String> response = template.getForEntity("http://localhost:"
-				+ port + "/resource", String.class);
+				+ port + "/resource/user/current", String.class);
 		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
 	}
 

@@ -22,10 +22,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.web.client.RestTemplate;
-import runtheshow.resource.boot.Boot;
+import runtheshow.resource.config.AppConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Boot.class)
+@SpringApplicationConfiguration(classes = AppConfiguration.class)
 @WebAppConfiguration
 @IntegrationTest("server.port:0")
 public class BootTests {
@@ -37,8 +37,9 @@ public class BootTests {
 
 	@Test
 	public void resourceProtected() {
-		ResponseEntity<String> response = template.getForEntity("http://localhost:${port}/", String.class);
-		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+		ResponseEntity<String> response = template.getForEntity("http://localhost:"
+				+ port + "/user/current", String.class);
+		assertEquals(HttpStatus.FORBIDDEN, response.getStatusCode());
 	}
 
 }
