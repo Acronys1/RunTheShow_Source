@@ -34,6 +34,8 @@ function($rootScope, $scope, $http, $location, $route) {
 		}).success(function(data) {
 			if (data.name) {
 				$rootScope.authenticated = true;
+                                $rootScope.isAdmin = $filter('filter')(data.authorities, {authority:"\"ROLE_ADMIN\""});
+                                
 			} else {
 				$rootScope.authenticated = false;
 			}
