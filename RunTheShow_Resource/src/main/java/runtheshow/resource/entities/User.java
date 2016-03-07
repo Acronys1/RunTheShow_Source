@@ -7,6 +7,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "USERS")
@@ -16,12 +17,17 @@ public class User extends AbstractEntity {
 
     // propriétés
     @Column(name="user_login")
+    @NotNull
     private String login;
+    
     @Column(name="user_password")
+    @NotNull
     private String password;
+    
     @Column(name="user_enabled")
+    @NotNull
     private Boolean enabled;
-
+    
     @ManyToMany
     @JoinTable(
             name = "USERS_ROLES",
@@ -33,10 +39,9 @@ public class User extends AbstractEntity {
     public User() {
     }
 
-    public User(String login, String password, Boolean enabled, List<Role> roles) {
+    public User(String login, String password, List<Role> roles) {
         this.login = login;
         this.password = password;
-        this.enabled = enabled;
         this.roles = roles;
     }
 
@@ -77,5 +82,6 @@ public class User extends AbstractEntity {
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
+
 
 }

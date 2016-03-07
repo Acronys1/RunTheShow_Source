@@ -1,3 +1,16 @@
 runtheshow\resource\config\AppConfiguration.class
+runtheshow\resource\entities\UserRole.class
+runtheshow\resource\metiers\IUserMetier.class
+runtheshow\resource\repository\RoleRepository.class
+runtheshow\resource\webservice\UserService.class
+runtheshow\resource\repository\UserRepository.class
 runtheshow\resource\boot\Boot.class
+runtheshow\resource\entities\Role.class
+runtheshow\resource\config\SecurityConfiguration.class
+runtheshow\resource\webservice\AppUserDetails.class
+runtheshow\resource\repository\UserRoleRepository.class
+runtheshow\resource\config\SecurityConfiguration$1.class
 runtheshow\resource\entities\AbstractEntity.class
+runtheshow\resource\webservice\AppUserDetailsService.class
+runtheshow\resource\metiers\UserMetier.class
+runtheshow\resource\entities\User.class

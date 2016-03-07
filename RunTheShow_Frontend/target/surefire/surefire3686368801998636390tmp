@@ -1,7 +1,0 @@
-#surefire
-#Wed Mar 02 15:25:46 CET 2016
-maven.ext.class.path=C\:\\ProgrammesDev\\NetBeans 8.1\\java\\maven-nblib\\netbeans-eventspy.jar
-user.dir=C\:\\Users\\decalf_m\\Documents\\workspace_netbeans\\RunTheShow_Source_bis\\RunTheShow_Frontend
-file.encoding=UTF-8
-localRepository=C\:\\Users\\decalf_m\\.m2\\repository
-basedir=C\:\\Users\\decalf_m\\Documents\\workspace_netbeans\\RunTheShow_Source_bis\\RunTheShow_Frontend

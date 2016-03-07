@@ -1,12 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: runtheshow.resource.BootTests
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 9.052 sec <<< FAILURE! - in runtheshow.resource.BootTests
-loginSucceeds(runtheshow.resource.BootTests)  Time elapsed: 0.027 sec  <<< FAILURE!
-java.lang.AssertionError: expected:<200> but was:<403>
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotEquals(Assert.java:834)
-	at org.junit.Assert.assertEquals(Assert.java:118)
-	at org.junit.Assert.assertEquals(Assert.java:144)
-	at runtheshow.resource.BootTests.loginSucceeds(BootTests.java:50)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 9.907 sec - in runtheshow.resource.BootTests

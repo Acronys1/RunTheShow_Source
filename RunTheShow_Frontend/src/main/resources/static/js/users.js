@@ -4,8 +4,9 @@ angular.module('hello').controller('users', function($scope, $http) {
 		$scope.greeting = data;
 	})
         
+        if ($scope.authenticated){
         $http.get('resource/user/all').success(function(data) {
                 cache: true;
 		$scope.allusers = data;
-	})
+	})}
 });
