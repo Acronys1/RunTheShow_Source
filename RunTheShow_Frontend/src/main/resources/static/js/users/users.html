@@ -1,0 +1,34 @@
+<h1>Les utilisateurs</h1>
+<div>
+    <p>La liste des utilisateurs</p>
+    <table class="table table-hover">
+        <thead><td>Login</td><td>Enabled</td><td>Rôles</td></thead>
+
+        <tr ng-repeat="user in users">
+            <td>{{user.login}}</td>
+            <td>{{user.enabled}}</td>
+            <td ng-class="user.roles.join(', ')">{{user.roles.join(', ')}}</td>
+        </tr>
+    </table>
+</div>
+
+
+
+<!--
+Coming soon !
+
+<div>
+    <form ng-submit="submit()" ng-controller="users">
+        <label for="login">Login : </label>
+        <input id="login" type="text" ng-model="userLogin" name="login" />
+        <label for="login">Password : </label>
+        <input id="password" type="password" ng-model="userPassword" name="password" />
+        <select ng-model="userRole" ng-options="priority as priority for priority in priorities">
+                <option value="">-- Select --</option>
+        </select>
+        <input type="text" ng-model="login" name="login" />
+        <input type="submit" id="submit" value="Submit" />
+        <pre>list={{list}}</pre>
+</form>
+</div>
+-->

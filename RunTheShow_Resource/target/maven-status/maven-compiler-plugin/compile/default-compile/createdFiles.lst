@@ -9,7 +9,6 @@ runtheshow\resource\entities\Role.class
 runtheshow\resource\config\SecurityConfiguration.class
 runtheshow\resource\webservice\AppUserDetails.class
 runtheshow\resource\repository\UserRoleRepository.class
-runtheshow\resource\config\SecurityConfiguration$1.class
 runtheshow\resource\entities\AbstractEntity.class
 runtheshow\resource\webservice\AppUserDetailsService.class
 runtheshow\resource\metiers\UserMetier.class

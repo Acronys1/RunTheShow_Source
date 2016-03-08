@@ -20,10 +20,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  * @author maxim
  */
-@EnableJpaRepositories(basePackages = {"runtheshow.frontend.security"})
 @EnableAutoConfiguration
 @ComponentScan(basePackages = {"runtheshow.frontend"})
-@EntityScan(basePackages = {"runtheshow.frontend.entities", "runtheshow.frontend.security"})
 @EnableTransactionManagement
 public class AppConfiguration {
 
