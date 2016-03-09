@@ -11,7 +11,11 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
 
 			$scope.authenticated = function() {
 				return auth.authenticated;
-			}
+			};
+                        
+                        $scope.admin = function() {
+				return auth.isAdmin;
+			};
 
 			$scope.login = function() {
 				auth.authenticate($scope.credentials, function(authenticated) {
@@ -25,6 +29,6 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
 				})
 			};
 
-			$scope.logout = auth.clear;
+                        $scope.logout = auth.clear;
 
 		});
