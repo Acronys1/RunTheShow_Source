@@ -1,6 +1,6 @@
 <h1>Les utilisateurs</h1>
 <div>
-    <p>La liste des utilisateurs</p>
+    <p class="titre"> La liste des utilisateurs</p>
     <table class="table table-hover">
         <thead><td>Login</td><td>Enabled</td><td>Rôles</td></thead>
 
@@ -13,22 +13,24 @@
 </div>
 
 
-
-<!--
-Coming soon !
-
-<div>
-    <form ng-submit="submit()" ng-controller="users">
-        <label for="login">Login : </label>
-        <input id="login" type="text" ng-model="userLogin" name="login" />
-        <label for="login">Password : </label>
-        <input id="password" type="password" ng-model="userPassword" name="password" />
-        <select ng-model="userRole" ng-options="priority as priority for priority in priorities">
-                <option value="">-- Select --</option>
-        </select>
-        <input type="text" ng-model="login" name="login" />
-        <input type="submit" id="submit" value="Submit" />
-        <pre>list={{list}}</pre>
-</form>
+<p class="titre"> Ajout d'un utilisateur </p>
+<div class="alert alert-danger" ng-show="errorAjout">
+    {{errorMessage}}
 </div>
--->
+<form role="form" ng-submit="addUser()">
+    <div class="form-group">
+        <label for="login">Login :</label>
+        <input id="login" class="form-control" type="text" ng-model="user.userLogin" name="login" required />
+    </div>
+    <div class="form-group">
+        <label for="login">Password : </label>
+        <input id="password" class="form-control" type="password" ng-model="user.userPassword" name="password" required />
+    </div>
+    <div class="form-group">
+        <label for="role">Role : </label>
+        <select id="role" name="role" class="form-control" ng-model="user.userRole" ng-options="role.name for role in roles" required>
+            <option value="" >-- Select --</option>
+        </select>
+    </div>
+    <button type="submit" id="submit" class="btn btn-primary">Créer</button>
+</form>

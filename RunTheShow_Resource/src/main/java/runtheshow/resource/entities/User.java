@@ -39,9 +39,10 @@ public class User extends AbstractEntity {
     public User() {
     }
 
-    public User(String login, String password, List<Role> roles) {
+    public User(String login, String password, Boolean enabled, List<Role> roles) {
         this.login = login;
         this.password = password;
+        this.enabled = enabled;
         this.roles = roles;
     }
 

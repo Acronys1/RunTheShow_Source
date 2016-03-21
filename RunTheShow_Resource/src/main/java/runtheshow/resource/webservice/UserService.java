@@ -6,6 +6,7 @@
 package runtheshow.resource.webservice;
 
 import java.security.Principal;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
 import runtheshow.resource.metiers.IUserMetier;
 
@@ -34,7 +36,7 @@ public class UserService {
     
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
     public Boolean addUser(@RequestBody User user, HttpServletResponse response) {
-        return metier.addUser(user.getLogin(), user.getPassword(), user.getRoles());
+        return metier.addUser(user.getLogin(), user.getPassword(), user.getEnabled(), user.getRoles());
     }
     
     @RequestMapping("/all")
@@ -45,6 +47,12 @@ public class UserService {
     @RequestMapping("/current")
     public String getCurrentUser(Principal user) {
         return metier.getUserByName(user.getName()).toString();
+        
+    }
+    
+    @RequestMapping("/role/all")
+    public List<Role> getAllRole() {
+        return metier.getAllRole();
         
     }
 }
