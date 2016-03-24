@@ -1,5 +1,5 @@
 angular
-		.module('app', [ 'ngRoute', 'auth', 'home', 'users', 'navigation' ])
+		.module('app', [ 'ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables' ])
 		.config(
 
 				function($routeProvider, $httpProvider, $locationProvider) {
