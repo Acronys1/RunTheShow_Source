@@ -26,6 +26,7 @@ angular.module('users', []).controller('users', function ($scope, $http) {
             enabled: true,
             roles: [{id: $scope.user.userRole.id}]
         })
+        
         $http.post("/resource/user/add", data).success(function (data, status) {
             $scope.response = data;
             $scope.initFirst();
@@ -33,7 +34,7 @@ angular.module('users', []).controller('users', function ($scope, $http) {
 
         if (!$scope.response) {
             $scope.errorAjout = true;
-            $scope.errorMessage = "Erreur lors de l'ajout, un ou plusieurs champs est manquant";
+            $scope.errorMessage = "Erreur lors de l'ajout, un ou plusieurs champs sont manquants";
         }
         else
             $scope.errorAjout = false;

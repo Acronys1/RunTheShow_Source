@@ -22,6 +22,8 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
 					if (authenticated) {
 						console.log("Login succeeded")
 						$scope.error = false;
+                                                $("#login-modal").modal('hide');
+                                                location.reload();
 					} else {
 						console.log("Login failed")
 						$scope.error = true;
