@@ -2,11 +2,13 @@
 <div ng-init="initFirst()">
     <p class="titre"> La liste des utilisateurs</p>
 
-    <table datatable="" class="table row-border hover">
+    <table datatable="ng" class="table row-border hover">
         <thead>
-            <th>Login</th>
-            <th>Enabled</th>
-            <th>Rôles</th>
+            <tr>
+                <th>Login</th>
+                <th>Enabled</th>
+                <th>Rôles</th>
+            </tr>
         </thead>
         <tbody>
             <tr ng-repeat="user in users">
