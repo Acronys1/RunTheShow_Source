@@ -36,7 +36,7 @@ public class UserService {
     
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
     public Boolean addUser(@RequestBody User user, HttpServletResponse response) {
-        return metier.addUser(user.getLogin(), user.getPassword(), user.getEnabled(), user.getRoles());
+        return metier.AddUser(user);
     }
     
     @RequestMapping("/all")

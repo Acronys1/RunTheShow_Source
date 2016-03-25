@@ -49,7 +49,7 @@ public class User extends AbstractEntity {
     // identité
     @Override
     public String toString() {
-        return String.format("{\"login\":\"%s\",\"enabled\":%s,\"roles\":%s}", login, enabled, roles.toString());
+        return String.format("{\"id\":\"%s\",\"login\":\"%s\",\"enabled\":%s,\"roles\":%s}", id, login, enabled, roles.toString());
     }
 
     public String getLogin() {

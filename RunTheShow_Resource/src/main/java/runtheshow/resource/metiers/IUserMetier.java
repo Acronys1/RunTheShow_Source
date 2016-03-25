@@ -13,7 +13,10 @@ public interface IUserMetier {
         public User getUserByName(String name);
         
         //ajout d'un utilisateur
-        public Boolean addUser(String login, String password, Boolean enabled, List<Role> roles);
+        public Boolean AddUser(User user);
+        
+        //update d'un utilisateur
+        public Boolean UpdateUser(User user);
         
         public List<Role> getAllRole();
 }

@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
@@ -41,11 +44,18 @@ public class UserMetier implements IUserMetier {
 	}
         
         @Override
-	public Boolean addUser(String login, String password, Boolean enabled, List<Role> roles) {
-                password = BCrypt.hashpw(password, BCrypt.gensalt(12));
-                User user = new User(login,password, enabled, roles);
-                user = userRepository.save(user);
+	public Boolean AddUser(User user) {
+                user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+                User userPersist = new User(user.getLogin(),user.getPassword(),user.getEnabled(), user.getRoles());
+                user = userRepository.save(userPersist);
                 return user != null;
 	}
-
+        
+        @Override
+	public Boolean UpdateUser(User user) {
+                user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
+                User userUpdate = new User(user.getLogin(),user.getPassword(),user.getEnabled(), user.getRoles());
+                user = userRepository.save(userUpdate);
+                return user != null;
+        }
 }
