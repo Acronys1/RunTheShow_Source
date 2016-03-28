@@ -1,4 +1,4 @@
-angular.module('auth', []).factory(
+angular.module('auth', ['home']).factory(
         'auth',
         function ($rootScope, $http, $location) {
 
@@ -41,8 +41,10 @@ angular.module('auth', []).factory(
                                 }
                             })
 
+                            //on positionne les flags en rootScope pour les utiliser dans le header
                             auth.authenticated = true;
                             $rootScope.authenticated = true;
+                            $rootScope.name = data.name;
                             
                         } else {
                             auth.authenticated = false;
