@@ -42,11 +42,12 @@ angular.module('users', []).controller('users', function ($scope, $http, $window
         $scope.editingUser[$scope.userEdit.id] = false;
     };
     
-    $scope.deleteUser = function(){
+    $scope.deleteUser = function(user){
+        $scope.userEdit = user;
         var data = JSON.stringify({
                 id: $scope.userEdit.id
         })
-            $http.delete("/resource/user/delete", data).success(function (data, status) {
+            $http.post("/resource/user/delete", data).success(function (data, status) {
             $scope.response = data;
             $scope.initFirst();
         })

@@ -44,7 +44,7 @@ public class UserService {
         return metier.UpdateUser(user);
     }
     
-    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
     public Boolean deleteUser(@RequestBody User user, HttpServletResponse response) {
         return metier.DeleteUser(user);
     }

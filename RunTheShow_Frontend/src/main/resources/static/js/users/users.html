@@ -36,7 +36,7 @@
                     <button ng-hide="editingUser[user.id]" ng-click="modifyUser(user)">Modify</button>
                     <button ng-show="editingUser[user.id]" ng-click="updateUser(user)">Update</button>
                     <button ng-hide="viewField">Add</button>
-                    <button ng-hide="viewField">Remove</button>
+                    <button ng-hide="viewField" ng-click="deleteUser(user)">Remove</button>
                 </td>
 
             </tr>
