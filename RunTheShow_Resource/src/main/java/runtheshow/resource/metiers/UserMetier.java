@@ -55,7 +55,6 @@ public class UserMetier implements IUserMetier {
 	public Boolean UpdateUser(User user) {
                 User userBind = userRepository.findOne(user.getId());
                 userBind.setLogin(user.getLogin());
-                userBind.setPassword(user.getPassword());
                 userBind.setRoles(user.getRoles());
                 userBind = userRepository.save(userBind);
                 return userBind != null;
