@@ -36,12 +36,17 @@ public class UserService {
     
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
     public Boolean addUser(@RequestBody User user, HttpServletResponse response) {
-        return metier.AddUpdateUser(user);
+        return metier.AddUser(user);
     }
     
     @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
     public Boolean updateUser(@RequestBody User user, HttpServletResponse response) {
-        return metier.AddUpdateUser(user);
+        return metier.UpdateUser(user);
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE, consumes = "application/json; charset=UTF-8")
+    public Boolean deleteUser(@RequestBody User user, HttpServletResponse response) {
+        return metier.DeleteUser(user);
     }
     
     @RequestMapping("/all")

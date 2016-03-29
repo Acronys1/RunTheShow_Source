@@ -44,11 +44,27 @@ public class UserMetier implements IUserMetier {
 	}
         
         @Override
-	public Boolean AddUpdateUser(User user) {
+	public Boolean AddUser(User user) {
                 user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
                 User userPersist = new User(user.getLogin(),user.getPassword(),user.getEnabled(), user.getRoles());
                 user = userRepository.save(userPersist);
                 return user != null;
+	}
+        
+        @Override
+	public Boolean UpdateUser(User user) {
+                User userBind = userRepository.findOne(user.getId());
+                userBind.setLogin(user.getLogin());
+                userBind.setPassword(user.getPassword());
+                userBind.setRoles(user.getRoles());
+                userBind = userRepository.save(userBind);
+                return userBind != null;
+	}
+        
+        @Override
+	public Boolean DeleteUser(User user) { 
+                userRepository.delete(user);
+                return userRepository.findOne(user.getId()) != null;
 	}
        
 }

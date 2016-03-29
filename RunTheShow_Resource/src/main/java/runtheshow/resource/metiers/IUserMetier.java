@@ -12,8 +12,14 @@ public interface IUserMetier {
         //récupérer un utilisateur par son nom
         public User getUserByName(String name);
         
-        //ajout/update d'un utilisateur
-        public Boolean AddUpdateUser(User user);
+        //ajout d'un utilisateur
+        public Boolean AddUser(User user);
+        
+        //update d'un utilisateur
+        public Boolean UpdateUser(User user);
+        
+        //delete d'un utilisateur
+        public Boolean DeleteUser(User user);
         
         public List<Role> getAllRole();
 }
