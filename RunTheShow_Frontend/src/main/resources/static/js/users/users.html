@@ -7,19 +7,42 @@
             <tr>
                 <th>Login</th>
                 <th>Enabled</th>
-                <th>Rôles</th>
+                <th>RÃ´les</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <tr ng-repeat="user in users">
-                <td>{{user.login}}</td>
-                <td>{{user.enabled}}</td>
-                <td ng-class="user.roles.join(', ')">{{user.roles.join(', ')}}</td>
+                <td>                    
+                    <div ng-hide="editingUser[user.id]">{{user.login}}</div>
+                    <div ng-show="editingUser[user.id]"><input type="text" ng-model="user.login"></div>
+                </td>
+                <td>                    
+                    <div ng-hide="editingUser[user.id]">{{user.enabled}}</div>
+                    <div ng-show="editingUser[user.id]"><input type="text" ng-model="user.enabled"></div>
+                </td>
+                <td>                    
+                    <div ng-hide="editingUser[user.id]">{{user.roles.join(', ')}}</div>
+                    <!--<div ng-show="editingUser[user.id]"><input type="text" ng-model="user.roles.id"></div>-->
+                    <div ng-show="editingUser[user.id]">
+                        <select id="role" name="role" class="form-control" ng-model="user.userRole" ng-options="role.name for role in roles" required>
+                            <option value="" >-- Select --</option>
+                        </select>
+                    </div>
+                </td>
+
+                <!--  update, delete !-->
+                <td>
+                    <button ng-hide="editingUser[user.id]" ng-click="modifyUser(user)">Modify</button>
+                    <button ng-show="editingUser[user.id]" ng-click="updateUser(user)">Update</button>
+                    <button ng-hide="viewField">Add</button>
+                    <button ng-hide="viewField">Remove</button>
+                </td>
+
             </tr>
         </tbody>
     </table>
 </div>
-
 
 <p class="titre"> Ajout d'un utilisateur </p>
 <div class="alert alert-danger" ng-show="errorAjout">
@@ -40,5 +63,5 @@
             <option value="" >-- Select --</option>
         </select>
     </div>
-    <button type="submit" id="submit" class="btn btn-primary">Créer</button>
+    <button type="submit" id="submit" class="btn btn-primary">CrÃ©er</button>
 </form>
