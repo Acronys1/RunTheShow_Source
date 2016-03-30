@@ -1,8 +1,10 @@
 package runtheshow.resource.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -28,7 +30,8 @@ public class User extends AbstractEntity {
     @NotNull
     private Boolean enabled;
     
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonBackReference
     @JoinTable(
             name = "USERS_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),

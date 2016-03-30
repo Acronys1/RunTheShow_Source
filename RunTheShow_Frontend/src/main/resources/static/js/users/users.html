@@ -7,7 +7,7 @@
             <tr>
                 <th>Login</th>
                 <th>Enabled</th>
-                <th>RÃ´les</th>
+                <th>Rôles</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -58,10 +58,10 @@
         <input id="password" class="form-control" type="password" ng-model="user.userPassword" name="password" required />
     </div>
     <div class="form-group">
-        <label for="role">Role : </label>
+        <label for="role">Rôle : </label>
         <select id="role" name="role" class="form-control" ng-model="user.userRole" ng-options="role.name for role in roles" required>
             <option value="" >-- Select --</option>
         </select>
     </div>
-    <button type="submit" id="submit" class="btn btn-primary">CrÃ©er</button>
+    <button type="submit" id="submit" class="btn btn-primary">Créer</button>
 </form>

@@ -3,8 +3,11 @@
  */
 package runtheshow.resource.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,10 @@ public class Role extends AbstractEntity {
     // propriétés
     @Column(name="role_name")
     private String name;
+    
+    @ManyToMany(mappedBy="roles")
+    @JsonManagedReference
+    private List<User> users;
 
     // constructeurs
     public Role() {
@@ -40,4 +47,11 @@ public class Role extends AbstractEntity {
         this.name = name;
     }
 
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
 }
