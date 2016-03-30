@@ -21,7 +21,6 @@ public class Role extends AbstractEntity {
     private String name;
     
     @ManyToMany(mappedBy="roles")
-    //@JsonManagedReference
     private List<User> users;
 
     // constructeurs

@@ -31,7 +31,7 @@ public class User extends AbstractEntity {
     private Boolean enabled;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    //@JsonBackReference
+    @JsonBackReference
     @JoinTable(
             name = "USERS_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),
