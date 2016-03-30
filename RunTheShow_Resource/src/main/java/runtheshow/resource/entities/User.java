@@ -58,7 +58,7 @@ public class User extends AbstractEntity {
     private List<SousEvenement> mesSousEvenements;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("USERROLE")
     @JoinTable(
             name = "USERS_ROLES",
             joinColumns = @JoinColumn(name = "USER_ID", referencedColumnName = "ID"),

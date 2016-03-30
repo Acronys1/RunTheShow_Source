@@ -53,7 +53,7 @@ public class Lieu extends AbstractEntity {
     private List<Evenement> mesEvenements;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("LIEUTAG")
     @JoinTable(
             name = "TAG_LIEU",
             joinColumns = @JoinColumn(name = "LIEU_ID", referencedColumnName = "ID"),

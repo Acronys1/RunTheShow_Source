@@ -32,7 +32,7 @@ public class Tag implements Serializable{
     private String libelle;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("TAGEVENT")
     @JoinTable(
             name = "TAG_EV",
             joinColumns = @JoinColumn(name = "TAG_LIBELLE", referencedColumnName = "TAG_LIBELLE"),
@@ -40,7 +40,7 @@ public class Tag implements Serializable{
     private List<Evenement> evenement;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("TAGLIEU")
     @JoinTable(
             name = "TAG_LIEU",
             joinColumns = @JoinColumn(name = "TAG_LIBELLE", referencedColumnName = "TAG_LIBELLE"),
@@ -48,7 +48,7 @@ public class Tag implements Serializable{
     private List<Lieu> lieu;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("TAGSOUSTAG")
     @JoinTable(
             name = "TAG_SOUS",
             joinColumns = @JoinColumn(name = "TAG_LIBELLE", referencedColumnName = "TAG_LIBELLE"),
@@ -56,7 +56,7 @@ public class Tag implements Serializable{
     private List<SousTag> sousTag;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("TAGSOUSEVENT")
     @JoinTable(
             name = "TAG_SOUSEVENT",
             joinColumns = @JoinColumn(name = "TAG_LIBELLE", referencedColumnName = "TAG_LIBELLE"),

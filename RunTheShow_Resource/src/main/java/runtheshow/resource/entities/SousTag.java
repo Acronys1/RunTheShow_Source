@@ -32,7 +32,7 @@ public class SousTag implements Serializable{
     private String libelle;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference
+    @JsonBackReference("SOUSTAGTAG")
     @JoinTable(
             name = "TAG_SOUS",
             joinColumns = @JoinColumn(name = "SOUSTAG_LIBELLE", referencedColumnName = "SOUSTAG_LIBELLE"),
