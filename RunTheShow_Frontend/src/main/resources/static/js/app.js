@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -11,6 +11,9 @@ angular
                     }).when('/users', {
                         templateUrl: 'js/users/users.html',
                         controller: 'users'
+                    }).when('/event', {
+                        templateUrl: 'js/event/event.html',
+                        controller: 'event'
                     }).when('/login', {
                         templateUrl: 'js/navigation/login.html',
                         controller: 'navigation'

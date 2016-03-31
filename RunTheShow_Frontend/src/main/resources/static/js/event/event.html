@@ -1,0 +1,36 @@
+
+<div ng-init="initFirst()">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#myEvent">Mes évènements</a></li>
+        <li><a data-toggle="tab" href="#addEvent">Ajouter un évènement</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div id="myEvent" class="tab-pane fade in active">Yoho</div>
+        <div id="addEvent" class="tab-pane fade">
+            <form role="form" ng-submit="addEvent()">
+                <fieldset class="form-group">
+                    <label for="login">Intitulé :</label>
+                    <input id="intitule" class="form-control" type="text" ng-model="event.intitule" name="intitule" required />
+                </fieldset>
+                
+                <fieldset class="form-group">
+                   <label for="exampleTextarea">Description</label>
+                   <textarea class="form-control" id="description" ng-model="event.description" name="description" rows="3"></textarea>
+                </fieldset>
+                
+                <div class="control-group">
+                    <p>Enter Date: <input type="text" id="datepicker-13"></p>
+                </div>
+            </form>
+            <script>
+                $(function() {
+                   $( "#datepicker-13" ).datepicker();
+                   $( "#datepicker-13" ).datepicker("show");
+                });
+            </script>
+        </div>
+    </div>
+</div>
