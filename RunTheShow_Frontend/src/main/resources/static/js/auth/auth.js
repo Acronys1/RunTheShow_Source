@@ -68,7 +68,7 @@ angular.module('auth', ['home']).factory(
                         console.log("Logout failed");
                     });
                 },
-                init: function (homePath, loginPath, logoutPath) {
+                init: function (homePath, loginPath, logoutPath, DTOptionsBuilder) {
 
                     auth.homePath = homePath;
                     auth.loginPath = loginPath;
@@ -84,7 +84,6 @@ angular.module('auth', ['home']).factory(
                     $rootScope.$on('$routeChangeStart', function () {
                         enter();
                     });
-
                 }
 
             };

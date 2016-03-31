@@ -1,8 +1,8 @@
 <h1>Les utilisateurs</h1>
 <div ng-init="initFirst()">
     <p class="titre"> La liste des utilisateurs</p>
-
-    <table datatable="ng" class="table row-border hover">
+    
+    <table id="users_datatables" datatable="ng" dt-options="dtOptions" class="table row-border hover">
         <thead>
             <tr>
                 <th>Login</th>
