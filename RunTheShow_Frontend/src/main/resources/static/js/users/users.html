@@ -33,10 +33,9 @@
 
                 <!--  update, delete !-->
                 <td>
-                    <button ng-hide="editingUser[user.id]" ng-click="modifyUser(user)">Modify</button>
-                    <button ng-show="editingUser[user.id]" ng-click="updateUser(user)">Update</button>
-                    <button ng-hide="viewField">Add</button>
-                    <button ng-hide="viewField" ng-click="deleteUser(user)">Remove</button>
+                    <button ng-hide="editingUser[user.id]" ng-click="modifyUser(user)">Modifier</button>
+                    <button ng-show="editingUser[user.id]" ng-click="updateUser(user)">Valider</button>
+                    <button ng-click="deleteUser(user)">Supprimer</button>
                 </td>
 
             </tr>
