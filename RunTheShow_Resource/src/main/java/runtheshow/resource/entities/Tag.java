@@ -32,7 +32,7 @@ public class Tag implements Serializable{
     private String libelle;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference("TAGEVENT")
+    @JsonBackReference("tag_event")
     @JoinTable(
             name = "TAG_EV",
             joinColumns = @JoinColumn(name = "TAG_LIBELLE", referencedColumnName = "TAG_LIBELLE"),

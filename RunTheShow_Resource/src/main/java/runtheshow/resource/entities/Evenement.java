@@ -68,7 +68,7 @@ public class Evenement extends AbstractEntity {
     private List<Media> mesMedias;
     
     @ManyToMany
-    @JsonBackReference("EVENTTAG")
+    @JsonBackReference("event_tag")
     @JoinTable(
             name = "TAG_EV",
             joinColumns = @JoinColumn(name = "EVENEMENT_ID", referencedColumnName = "ID"),

@@ -69,7 +69,7 @@ public class SousEvenement extends AbstractEntity {
     private List<Invitation> lesInvitations;
     
     @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference("SOUSEVENTTAG")
+    @JsonBackReference("tag_sousevent")
     @JoinTable(
             name = "TAG_SOUSEVENT",
             joinColumns = @JoinColumn(name = "SOUSEVENEMENT_ID", referencedColumnName = "ID"),
