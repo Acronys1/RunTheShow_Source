@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -128,7 +129,21 @@ public class User extends AbstractEntity {
     // identité
     @Override
     public String toString() {
-        return String.format("{\"id\":\"%s\",\"login\":\"%s\",\"enabled\":%s,\"roles\":%s}", id, login, enabled, getRoles().toString());
+        return String.format("{\"id\":\"%s\","
+                + "\"login\":\"%s\","
+                + "\"nom\":\"%s\","
+                + "\"prenom\":\"%s\","
+                + "\"sexe\":\"%s\","
+                + "\"dateDeNaissance\":\"%s\","
+                + "\"telephoneFixe\":\"%s\","
+                + "\"telephonePortable\":\"%s\","
+                + "\"adresse\":\"%s\","
+                + "\"codePostal\":\"%s\","
+                + "\"ville\":\"%s\","
+                + "\"description\":\"%s\","
+                + "\"enabled\":%s,"
+                + "\"roles\":%s}", 
+                id, login, nom, prenom, sexe, dateDeNaissance.getTime(), telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
     }
 
     public String getLogin() {
