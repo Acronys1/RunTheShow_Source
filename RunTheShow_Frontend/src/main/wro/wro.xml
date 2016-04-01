@@ -14,6 +14,7 @@
     <css>file:@project.basedir@/src/main/wro/css/owl.theme.css</css>
     <css>file:@project.basedir@/src/main/wro/css/style.default.css</css>
     <css>file:@project.basedir@/src/main/wro/css/angular-datables.css</css>
+    <css>file:@project.basedir@/src/main/wro/css/datepicker.css</css>
     <js>webjar:jquery/2.1.1/jquery.min.js</js>
    </group>
    

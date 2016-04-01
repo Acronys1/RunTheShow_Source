@@ -12,24 +12,59 @@
         <div id="addEvent" class="tab-pane fade">
             <form role="form" ng-submit="addEvent()">
                 <fieldset class="form-group">
-                    <label for="login">Intitulé :</label>
+                    <label for="intitule">Intitulé :</label>
                     <input id="intitule" class="form-control" type="text" ng-model="event.intitule" name="intitule" required />
                 </fieldset>
                 
                 <fieldset class="form-group">
-                   <label for="exampleTextarea">Description</label>
+                   <label for="description">Description</label>
                    <textarea class="form-control" id="description" ng-model="event.description" name="description" rows="3"></textarea>
                 </fieldset>
                 
-                <div class="control-group">
-                    <p>Enter Date: <input type="text" id="datepicker-13"></p>
-                </div>
+                
+                <fieldset class="form-group">
+                    <table>
+                        <tr>
+                            <td><label for="dateDeb">Date début</label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><label for="dateFin">Date Fin</label></td>
+                        </tr>
+                        <tr>
+                            <td><label for="dateDeb"><input type="text" id="dpd1" data-date-format="dd/mm/yyyy"></label></td>
+                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                            <td><label for="dateFin"><input type="text" id="dpd2" data-date-format="dd/mm/yyyy"></label></td>
+                        </tr>
+                    </table>
+                </fieldset>
             </form>
             <script>
-                $(function() {
-                   $( "#datepicker-13" ).datepicker();
-                   $( "#datepicker-13" ).datepicker("show");
-                });
+                
+                var nowTemp = new Date();
+                var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+                
+                
+                
+                var checkin = $('#dpd1').datepicker({
+                  onRender: function(date) {
+                    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+                  }
+                }).on('changeDate', function(ev) {
+                  if (ev.date.valueOf() > checkout.date.valueOf()) {
+                    var newDate = new Date(ev.date)
+                    //newDate.setDate(newDate.getDate() + 1);
+                    checkout.setValue(newDate);
+                  }
+                  checkin.hide();
+                  $('#dpd2')[0].focus();
+                }).data('datepicker');
+                
+                var checkout = $('#dpd2').datepicker({
+                  onRender: function(date) {
+                    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+                  }
+                }).on('changeDate', function(ev) {
+                  checkout.hide();
+                }).data('datepicker');
             </script>
         </div>
     </div>
