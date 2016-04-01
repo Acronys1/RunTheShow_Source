@@ -45,7 +45,11 @@ angular.module('auth', ['home']).factory(
                             auth.authenticated = true;
                             $rootScope.authenticated = true;
                             $rootScope.name = data.name;
-                            
+                            //initialisation de la variable de session de l'utilisateur
+                            $http.get('/resource/user/current').success(function (data) {
+                                $rootScope.currentUser = data;
+                            });
+                            //fin initilisation de la variable de session de l'utilisateur
                         } else {
                             auth.authenticated = false;
                             $rootScope.authenticated = false;
@@ -56,6 +60,7 @@ angular.module('auth', ['home']).factory(
                         auth.authenticated = false;
                         callback && callback(false);
                     });
+                    
 
                 },
                 clear: function () {
