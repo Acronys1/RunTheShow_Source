@@ -2,6 +2,7 @@ package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -9,9 +10,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -34,6 +38,44 @@ public class User extends AbstractEntity {
     @Column(name="user_enabled")
     @NotNull
     private Boolean enabled;
+    
+    @Column(name="user_nom")
+    private String nom;
+    
+    @Column(name="user_prenom")
+    private String prenom;
+    
+    @Column(name="user_artiste_nom")
+    private String nomArtiste;
+    
+    @Column(name="user_sexe")
+    private int sexe;
+    
+    @Temporal(TemporalType.DATE)
+    @Column(name="user_date_de_naissance")
+    private Calendar dateDeNaissance;
+    
+    @Column(name="user_mail_contact")
+    private String mailContact;
+    
+    @Column(name="user_telephone_fixe")
+    private String telephoneFixe;
+    
+    @Column(name="user_telephone_portable")
+    private String telephonePortable;
+    
+    @Column(name="user_adresse")
+    private String adresse;
+    
+    @Column(name="user_code_postal")
+    private String codePostal;
+    
+    @Column(name="user_ville")
+    private String ville;
+    
+    @Lob
+    @Column(name="user_description")
+    private String description;
     
     /**
      * Relations avec les aures entités
@@ -69,8 +111,10 @@ public class User extends AbstractEntity {
     public User() {
     }
 
-    public User(String login, String password, Boolean enabled, List<Role> roles) {
+    public User(String login, String password, Boolean enabled, String nom, String prenom, List<Role> roles) {
         this.login = login;
+        this.nom = nom;
+        this.prenom = prenom;
         this.password = password;
         this.enabled = enabled;
         this.roles = roles;
@@ -117,6 +161,102 @@ public class User extends AbstractEntity {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public String getNomArtiste() {
+        return nomArtiste;
+    }
+
+    public void setNomArtiste(String nomArtiste) {
+        this.nomArtiste = nomArtiste;
+    }
+
+    public int getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(int sexe) {
+        this.sexe = sexe;
+    }
+
+    public Calendar getDateDeNaissance() {
+        return dateDeNaissance;
+    }
+
+    public void setDateDeNaissance(Calendar dateDeNaissance) {
+        this.dateDeNaissance = dateDeNaissance;
+    }
+
+    public String getMailContact() {
+        return mailContact;
+    }
+
+    public void setMailContact(String mailContact) {
+        this.mailContact = mailContact;
+    }
+
+    public String getTelephoneFixe() {
+        return telephoneFixe;
+    }
+
+    public void setTelephoneFixe(String telephoneFixe) {
+        this.telephoneFixe = telephoneFixe;
+    }
+
+    public String getTelephonePortable() {
+        return telephonePortable;
+    }
+
+    public void setTelephonePortable(String telephonePortable) {
+        this.telephonePortable = telephonePortable;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(String codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
