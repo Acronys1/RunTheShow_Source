@@ -42,13 +42,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         AppConfiguration uneConfiguration = new AppConfiguration();
         DataSource ds = uneConfiguration.dataSource();
 
-        final String findUserQuery = "select user_mail,user_password,user_enabled "
+        final String findUserQuery = "select user_login,user_password,user_enabled "
                 + "from users "
-                + "where user_mail = ?";
+                + "where user_login = ?";
 
-        final String findRoles = "select u.user_mail,r.role_name "
+        final String findRoles = "select u.user_login,r.role_name "
                 + "from roles r, users u, users_roles ur "
-                + "where u.user_mail = ? and u.id = ur.user_id and ur.role_id = r.id";
+                + "where u.user_login = ? and u.id = ur.user_id and ur.role_id = r.id";
 
         registry.jdbcAuthentication().dataSource(ds)
                 .usersByUsernameQuery(findUserQuery)
