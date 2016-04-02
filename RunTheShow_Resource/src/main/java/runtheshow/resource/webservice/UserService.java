@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
@@ -61,7 +60,7 @@ public class UserService {
         
     }
     
-    @RequestMapping("/role/all")
+    @RequestMapping(value = "/role/all", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public List<Role> getAllRole() {
         return metier.getAllRole();
         
