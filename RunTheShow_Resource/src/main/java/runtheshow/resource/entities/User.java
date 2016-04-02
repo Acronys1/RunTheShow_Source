@@ -1,6 +1,7 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -129,6 +130,10 @@ public class User extends AbstractEntity {
     // identité
     @Override
     public String toString() {
+        
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        String dateDeNaissanceFormatted = format.format(dateDeNaissance.getTime());
+        
         return String.format("{\"id\":\"%s\","
                 + "\"login\":\"%s\","
                 + "\"nom\":\"%s\","
@@ -143,7 +148,7 @@ public class User extends AbstractEntity {
                 + "\"description\":\"%s\","
                 + "\"enabled\":%s,"
                 + "\"roles\":%s}", 
-                id, login, nom, prenom, sexe, dateDeNaissance.getTime(), telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
+                id, login, nom, prenom, sexe, dateDeNaissanceFormatted, telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
     }
 
     public String getLogin() {
