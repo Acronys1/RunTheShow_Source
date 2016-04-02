@@ -6,6 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import java.security.Principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -53,9 +58,9 @@ public class UserMetier implements IUserMetier {
         
         @Override
 	public Boolean UpdateUser(User user) {
+            
                 User userBind = userRepository.findOne(user.getId());
-                userBind.setLogin(user.getLogin());
-                
+                userBind.setLogin(user.getLogin()); 
                 userBind.setNom(user.getNom());
                 userBind.setPrenom(user.getPrenom());
                 userBind.setSexe(user.getSexe());

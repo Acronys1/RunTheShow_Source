@@ -1,5 +1,6 @@
 package runtheshow.resource.metiers;
 
+import java.security.Principal;
 import java.util.List;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;

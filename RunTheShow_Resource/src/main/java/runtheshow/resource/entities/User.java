@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +18,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "USERS")
@@ -29,78 +29,80 @@ public class User extends AbstractEntity {
     /**
      * Propriétés de la classe
      */
-    @Column(name="user_login")
+    @Column(name = "user_login")
     @NotNull
     private String login;
-    
-    @Column(name="user_password")
+
+    @Column(name = "user_password")
     @NotNull
     private String password;
-    
-    @Column(name="user_enabled")
+
+    @Column(name = "user_enabled")
     @NotNull
     private Boolean enabled;
-    
-    @Column(name="user_nom")
+
+    @Column(name = "user_nom")
+    @NotNull
     private String nom;
-    
-    @Column(name="user_prenom")
+
+    @Column(name = "user_prenom")
+    @NotNull
     private String prenom;
-    
-    @Column(name="user_artiste_nom")
+
+    @Column(name = "user_artiste_nom")
     private String nomArtiste;
-    
-    @Column(name="user_sexe")
+
+    @Column(name = "user_sexe")
     private int sexe;
-    
+
     @Temporal(TemporalType.DATE)
-    @Column(name="user_date_de_naissance")
+    @Column(name = "user_date_de_naissance")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Calendar dateDeNaissance;
-    
-    @Column(name="user_mail_contact")
+
+    @Column(name = "user_mail_contact")
     private String mailContact;
-    
-    @Column(name="user_telephone_fixe")
+
+    @Column(name = "user_telephone_fixe")
     private String telephoneFixe;
-    
-    @Column(name="user_telephone_portable")
+
+    @Column(name = "user_telephone_portable")
     private String telephonePortable;
-    
-    @Column(name="user_adresse")
+
+    @Column(name = "user_adresse")
     private String adresse;
-    
-    @Column(name="user_code_postal")
+
+    @Column(name = "user_code_postal")
     private String codePostal;
-    
-    @Column(name="user_ville")
+
+    @Column(name = "user_ville")
     private String ville;
-    
+
     @Lob
-    @Column(name="user_description")
+    @Column(name = "user_description")
     private String description;
-    
+
     /**
      * Relations avec les aures entités
      */
-    
-    @OneToMany(mappedBy="createur",cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "createur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Evenement> mesEvenements;
-    
-    @OneToMany(mappedBy="expediteur",cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "expediteur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Invitation> mesInvitationsExpediteur;
-    
-    @OneToMany(mappedBy="destinataire",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "destinataire", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Invitation> mesInvitationsDestintaire;
-    
-    @OneToMany(mappedBy="organisateur",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "organisateur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Contrat> mesContratsOrganisateur;
-    
-    @OneToMany(mappedBy="artiste",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "artiste", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Contrat> mesContratsArtiste;
-    
-    @OneToMany(mappedBy="user",cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<SousEvenement> mesSousEvenements;
-    
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JsonBackReference("users_roles")
     @JoinTable(
@@ -130,14 +132,14 @@ public class User extends AbstractEntity {
     // identité
     @Override
     public String toString() {
-        
+
         String dateDeNaissanceFormatted = "";
-        
-        if(dateDeNaissance != null){
+
+        if (dateDeNaissance != null) {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             dateDeNaissanceFormatted = format.format(dateDeNaissance.getTime());
-        }        
-        
+        }
+
         return String.format("{\"id\":\"%s\","
                 + "\"login\":\"%s\","
                 + "\"nom\":\"%s\","
@@ -152,7 +154,7 @@ public class User extends AbstractEntity {
                 + "\"ville\":\"%s\","
                 + "\"description\":\"%s\","
                 + "\"enabled\":%s,"
-                + "\"roles\":%s}", 
+                + "\"roles\":%s}",
                 id, login, nom, prenom, sexe, dateDeNaissanceFormatted, mailContact, telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
     }
 
@@ -367,6 +369,5 @@ public class User extends AbstractEntity {
     public void setMesSousEvenements(List<SousEvenement> mesSousEvenements) {
         this.mesSousEvenements = mesSousEvenements;
     }
-
 
 }
