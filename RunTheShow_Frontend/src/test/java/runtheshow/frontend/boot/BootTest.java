@@ -51,7 +51,7 @@ public class BootTest {
 
 	@Test
 	public void loginSucceeds() {
-		RestTemplate template = new TestRestTemplate("utilisateur", "utilisateur");
+		RestTemplate template = new TestRestTemplate("admin@admin.fr", "admin");
 		ResponseEntity<String> response = template.getForEntity("http://localhost:" + port
 				+ "/user", String.class);
 		assertEquals(HttpStatus.OK, response.getStatusCode());

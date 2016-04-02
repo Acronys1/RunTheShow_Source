@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -17,6 +17,9 @@ angular
                     }).when('/login', {
                         templateUrl: 'js/navigation/login.html',
                         controller: 'navigation'
+                    }).when('/userprofile', {
+                        templateUrl: 'js/userprofile/userprofile.html',
+                        controller: 'userprofile'
                     }).otherwise('/');
 
                     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

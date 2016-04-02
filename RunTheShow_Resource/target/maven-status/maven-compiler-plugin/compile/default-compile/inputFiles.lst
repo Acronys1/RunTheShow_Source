@@ -1,15 +1,28 @@
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\repository\RoleRepository.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\webservice\AppUserDetailsService.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\UserRole.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\webservice\AppUserDetails.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\boot\Boot.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\repository\UserRepository.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Role.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\config\AppConfiguration.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\User.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\metiers\UserMetier.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\repository\UserRoleRepository.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\webservice\UserService.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\config\SecurityConfiguration.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\AbstractEntity.java
-C:\Users\maxim\Documents\workspace\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\metiers\IUserMetier.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\TaguerSousTag.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Role.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\TaguerSousEvent.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Evenement.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Contrat.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\config\AppConfiguration.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\repository\RoleRepository.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Invitation.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\webservice\AppUserDetails.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\TaguerLieu.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\metiers\UserMetier.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\boot\Boot.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Media.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\AbstractEntity.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\SousEvenement.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\repository\UserRoleRepository.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\metiers\IUserMetier.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Tag.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\UserRole.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\config\SecurityConfiguration.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\TaguerEv.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\webservice\AppUserDetailsService.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\TypeTarification.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\SousTag.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\webservice\UserService.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\User.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\repository\UserRepository.java
+T:\programmes\Dev\Projet PSI2 M2\RunTheShow_Source\RunTheShow_Resource\src\main\java\runtheshow\resource\entities\Lieu.java
