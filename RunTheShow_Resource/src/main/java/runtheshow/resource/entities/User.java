@@ -58,7 +58,6 @@ public class User extends AbstractEntity {
 
     @Temporal(TemporalType.DATE)
     @Column(name = "user_date_de_naissance")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Calendar dateDeNaissance;
 
