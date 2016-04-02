@@ -504,16 +504,17 @@ body.boxed .navbar-affixed-top.affix {
 #login-modal form {
   margin-bottom: 20px;
 }
-#login-modal a {
+/*desactivate*/
+/*#login-modal a {
   color: #38a7bb;
-}
+}*/
 #login-modal p {
   font-weight: 300;
   margin-bottom: 20px;
   font-size: 13px;
 }
 /* buttons  */
-.btn {
+/*.btn {
   font-weight: 700;
   font-family: "Roboto", Helvetica, Arial, sans-serif;
   text-transform: uppercase;
@@ -543,7 +544,7 @@ body.boxed .navbar-affixed-top.affix {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 0;
-}
+}*/
 .btn-template-main {
   color: #38a7bb;
   background-color: #ffffff;
@@ -3238,7 +3239,9 @@ hr {
 label {
   font-weight: normal;
 }
-.form-control {
+
+/*desactiver*/
+/*.form-control {
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0;
@@ -3248,7 +3251,7 @@ label {
   outline: 0;
   -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(56, 167, 187, 0.6);
   box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(56, 167, 187, 0.6);
-}
+}*/
 .form-group {
   margin-bottom: 20px;
 }
