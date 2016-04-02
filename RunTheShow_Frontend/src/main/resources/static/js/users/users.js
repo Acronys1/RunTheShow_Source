@@ -70,6 +70,8 @@ angular.module('users', []).controller('users', function ($scope, $http) {
         var data = JSON.stringify({
             login: $scope.user.userLogin,
             password: $scope.user.userPassword,
+            nom : $scope.user.userNom,
+            prenom : $scope.user.userPrenom,
             enabled: true,
             roles: [{id: $scope.user.userRole.id}]
         })

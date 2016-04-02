@@ -57,6 +57,12 @@
         <input id="password" class="form-control" type="password" ng-model="user.userPassword" name="password" required />
     </div>
     <div class="form-group">
+        <input id="nom" class="form-control" type="text" ng-model="user.userNom" name="nom" required />
+    </div>
+    <div class="form-group">
+        <input id="prenom" class="form-control" type="text" ng-model="user.userPrenom" name="prenom" required />
+    </div>
+    <div class="form-group">
         <label for="role">Rôle : </label>
         <select id="role" name="role" class="form-control" ng-model="user.userRole" ng-options="role.name for role in roles" required>
             <option value="" >-- Select --</option>
