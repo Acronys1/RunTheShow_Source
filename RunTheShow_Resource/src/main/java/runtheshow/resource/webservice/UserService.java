@@ -49,7 +49,7 @@ public class UserService {
         return metier.DeleteUser(user);
     }
     
-    @RequestMapping("/all")
+    @RequestMapping(value = "/all", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public String getAllUser() {
         return metier.getAllUser().toString();
     }
