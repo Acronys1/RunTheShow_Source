@@ -6,8 +6,11 @@
         <thead>
             <tr>
                 <th>Login</th>
+                <th>Nom</th>
+                <th>Prenom</th>
                 <th>Enabled</th>
                 <th>Rôles</th>
+                <th>Sexe</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -16,6 +19,14 @@
                 <td>                    
                     <div ng-hide="editingUser[user.id]">{{user.login}}</div>
                     <div ng-show="editingUser[user.id]"><input type="text" ng-model="user.login"></div>
+                </td>
+                <td>                    
+                    <div ng-hide="editingUser[user.id]">{{user.nom}}</div>
+                    <div ng-show="editingUser[user.id]"><input type="text" ng-model="user.nom"></div>
+                </td>
+                <td>                    
+                    <div ng-hide="editingUser[user.id]">{{user.prenom}}</div>
+                    <div ng-show="editingUser[user.id]"><input type="text" ng-model="user.prenom"></div>
                 </td>
                 <td>                    
                     <div ng-hide="editingUser[user.id]">{{user.enabled}}</div>
@@ -31,7 +42,7 @@
                     </div>
                 </td>
                 
-                <td>                    
+                <td style="width:15%">                    
                     <div ng-hide="editingUser[user.id]">{{user.sexe}}</div>
                     <!--<div ng-show="editingUser[user.id]"><input type="text" ng-model="user.roles.id"></div>-->
                     <div ng-show="editingUser[user.id]">
