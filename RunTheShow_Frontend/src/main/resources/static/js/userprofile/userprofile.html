@@ -5,6 +5,10 @@
     <div class="alert alert-danger" ng-repeat="(key, value) in errorMessage">
         <p>{{value}}</p>
     </div>
+    
+    <div class="alert alert-success" ng-show="updateOK">
+        <p>{{updateOK}}</p>
+    </div>
 
     <form role="form" ng-submit="updateUser()">
 

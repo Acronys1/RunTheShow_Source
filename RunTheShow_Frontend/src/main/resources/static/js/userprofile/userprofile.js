@@ -8,6 +8,7 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
 
     $scope.userToEdit = {};
     $scope.errorMessage = {};
+    $scope.updateOK = null;
 
     function isEmail(myVar) {
         // La 1ère étape consiste à définir l'expression régulière d'une adresse email
@@ -30,6 +31,8 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
 
     $scope.updateUser = function () {
         var noError = true;
+        $scope.errorMessage = {};        
+        $scope.updateOK = null;
         if (!isEmail($rootScope.currentUser.mailContact)) {
             $scope.errorMessage["emailContact"] =  "L'email de contact n'est pas valide.";
             noError = false;
@@ -58,11 +61,11 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
             $scope.errorMessage["codePostal"] = "Le code postal n'est pas valide.";
             noError = false;
         }
-        if ($rootScope.currentUser.adresse.length <= 5) {
+        if ($rootScope.currentUser.adresse.length < 5) {
             $scope.errorMessage["adresse"] = "L'adresse n'est pas valide.";
             noError = false;
         }       
-        if ($rootScope.currentUser.ville.length <= 2) {
+        if ($rootScope.currentUser.ville.length < 2) {
             $scope.errorMessage["ville"] = "La ville doit comporter au moins deux caractères.";
             noError = false;
         }
@@ -91,6 +94,7 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
                 $scope.response = data;
             })
             console.log("User update");
+            $scope.updateOK = "Informations mises à jour";
         }
         else{
             console.log("User NOT update");
