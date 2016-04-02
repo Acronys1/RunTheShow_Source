@@ -30,6 +30,18 @@
                         </select>
                     </div>
                 </td>
+                
+                <td>                    
+                    <div ng-hide="editingUser[user.id]">{{user.sexe}}</div>
+                    <!--<div ng-show="editingUser[user.id]"><input type="text" ng-model="user.roles.id"></div>-->
+                    <div ng-show="editingUser[user.id]">
+                        <select id="sexe" name="sexe" class="form-control" ng-model="user.sexe" required>
+                            <option value="0">M</option>
+                            <option value="1">F</option>
+                            <option value="2">Autre</option>
+                        </select>
+                    </div>
+                </td>
 
                 <!--  update, delete !-->
                 <td>
