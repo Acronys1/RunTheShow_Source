@@ -1,6 +1,7 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,6 +59,7 @@ public class User extends AbstractEntity {
     @Temporal(TemporalType.DATE)
     @Column(name = "user_date_de_naissance")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Calendar dateDeNaissance;
 
     @Column(name = "user_mail_contact")
