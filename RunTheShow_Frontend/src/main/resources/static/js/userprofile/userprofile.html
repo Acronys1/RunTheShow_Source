@@ -2,8 +2,27 @@
     <div class="heading">
         <h3 class="text-uppercase">Personal details</h3>
     </div>
+    <div class="alert alert-danger" ng-repeat="(key, value) in errorMessage">
+        <p>{{value}}</p>
+    </div>
 
-    <form>
+    <form role="form" ng-submit="updateUser()">
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="mailContact">Email de contact</label>
+                    <input class="form-control" id="nom" type="mailContact" ng-model="currentUser.mailContact">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="login">Login</label>
+                    <input class="form-control" id="Login" type="login" ng-model="currentUser.login">
+                </div>
+            </div>               
+        </div>
+
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
@@ -22,15 +41,19 @@
 
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-group">
+                <div class="form-group" ng-model="currentUser.sexe">
                     <label for="Sexe">Sexe</label>
-                    <input class="form-control" id="sexe" type="text" ng-model="currentUser.sexe">
+                    <select id="sexe" name="sexe" class="form-control" ng-model="currentUser.sexe" required>
+                        <option value="0">M</option>
+                        <option value="1">F</option>
+                        <option value="2">Autre</option>
+                    </select>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="DateDeNaissance">Date de naissance</label>
-                    <input class="form-control" id="dateDeNaissance" type="date" ng-model="currentUser.dateDeNaissance">
+                    <input class="form-control" id="dateDeNaissance" type="text" ng-model="currentUser.dateDeNaissance">
                 </div>
             </div>
         </div>        
@@ -38,13 +61,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="telFixe">Télephone fixe</label>
-                    <input class="form-control" id="telFixe" type="number" ng-model="currentUser.telephoneFixe">
+                    <input class="form-control" id="telFixe" type="text" ng-model="currentUser.telephoneFixe">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="telPortable">Télphone portable</label>
-                    <input class="form-control" id="telPortable" type="number" ng-model="currentUser.telephonePortable">
+                    <input class="form-control" id="telPortable" type="text" ng-model="currentUser.telephonePortable">
                 </div>
             </div>
         </div>
@@ -59,7 +82,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="codePostal">Code postal</label>
-                    <input class="form-control" id="codePostal" type="number" ng-model="currentUser.codePostal">
+                    <input class="form-control" id="codePostal" type="text" ng-model="currentUser.codePostal">
                 </div>
             </div>
         </div>
@@ -83,7 +106,7 @@
 
         <div class="row">
             <div class="col-sm-12 text-center">
-                <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Save changes</button>
+                <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Sauvegarder les modifications</button>
 
             </div>
         </div>
