@@ -63,6 +63,5 @@ public class UserService {
     @RequestMapping(value = "/role/all", method=RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public List<Role> getAllRole() {
         return metier.getAllRole();
-        
     }
 }

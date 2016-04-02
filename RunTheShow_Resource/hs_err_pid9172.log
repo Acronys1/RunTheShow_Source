@@ -1,0 +1,109 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 32744 bytes for ChunkPool::allocate
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (allocation.cpp:273), pid=9172, tid=1748
+#
+# JRE version:  (8.0_66-b18) (build )
+# Java VM: Java HotSpot(TM) 64-Bit Server VM (25.66-b18 mixed mode windows-amd64 compressed oops)
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00000000020ee800):  JavaThread "Unknown thread" [_thread_in_vm, id=1748, stack(0x00000000020f0000,0x00000000021f0000)]
+
+Stack: [0x00000000020f0000,0x00000000021f0000]
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+
+Other Threads:
+
+=>0x00000000020ee800 (exited) JavaThread "Unknown thread" [_thread_in_vm, id=1748, stack(0x00000000020f0000,0x00000000021f0000)]
+
+VM state:not at safepoint (not fully initialized)
+
+VM Mutex/Monitor currently owned by a thread: None
+
+Deoptimization events (0 events):
+No events
+
+Internal exceptions (0 events):
+No events
+
+Events (0 events):
+No events
+
+
+Dynamic libraries:
+0x00007ff66fa70000 - 0x00007ff66faa7000 	C:\Program Files\Java\jdk1.8.0_66\bin\java.exe
+0x00007ffa7d3f0000 - 0x00007ffa7d5b1000 	C:\WINDOWS\SYSTEM32\ntdll.dll
+0x00007ffa7cee0000 - 0x00007ffa7cf8d000 	C:\WINDOWS\system32\KERNEL32.DLL
+0x00007ffa79aa0000 - 0x00007ffa79c88000 	C:\WINDOWS\system32\KERNELBASE.dll
+0x00007ffa7cc80000 - 0x00007ffa7cd27000 	C:\WINDOWS\system32\ADVAPI32.dll
+0x00007ffa7ae60000 - 0x00007ffa7aefd000 	C:\WINDOWS\system32\msvcrt.dll
+0x00007ffa7d2c0000 - 0x00007ffa7d31b000 	C:\WINDOWS\system32\sechost.dll
+0x00007ffa7b0b0000 - 0x00007ffa7b1cc000 	C:\WINDOWS\system32\RPCRT4.dll
+0x00007ffa7b1f0000 - 0x00007ffa7b346000 	C:\WINDOWS\system32\USER32.dll
+0x00007ffa7b4e0000 - 0x00007ffa7b666000 	C:\WINDOWS\system32\GDI32.dll
+0x00007ffa694e0000 - 0x00007ffa69754000 	C:\WINDOWS\WinSxS\amd64_microsoft.windows.common-controls_6595b64144ccf1df_6.0.10586.0_none_8c15ae12515e1c22\COMCTL32.dll
+0x00007ffa7d040000 - 0x00007ffa7d2bd000 	C:\WINDOWS\system32\combase.dll
+0x00007ffa79c90000 - 0x00007ffa79cfa000 	C:\WINDOWS\system32\bcryptPrimitives.dll
+0x00007ffa7b670000 - 0x00007ffa7b6ab000 	C:\WINDOWS\system32\IMM32.DLL
+0x000000005cfd0000 - 0x000000005d0a2000 	C:\Program Files\Java\jdk1.8.0_66\jre\bin\msvcr100.dll
+0x000000005d0b0000 - 0x000000005d939000 	C:\Program Files\Java\jdk1.8.0_66\jre\bin\server\jvm.dll
+0x00007ffa7b350000 - 0x00007ffa7b358000 	C:\WINDOWS\system32\PSAPI.DLL
+0x00007ffa70190000 - 0x00007ffa70199000 	C:\WINDOWS\SYSTEM32\WSOCK32.dll
+0x00007ffa7d380000 - 0x00007ffa7d3eb000 	C:\WINDOWS\system32\WS2_32.dll
+0x00007ffa78030000 - 0x00007ffa78053000 	C:\WINDOWS\SYSTEM32\WINMM.dll
+0x00007ffa75330000 - 0x00007ffa7533a000 	C:\WINDOWS\SYSTEM32\VERSION.dll
+0x00007ffa77de0000 - 0x00007ffa77e0c000 	C:\WINDOWS\SYSTEM32\WINMMBASE.dll
+0x00007ffa79d00000 - 0x00007ffa79d43000 	C:\WINDOWS\system32\cfgmgr32.dll
+0x000000005cf80000 - 0x000000005cf8f000 	C:\Program Files\Java\jdk1.8.0_66\jre\bin\verify.dll
+0x000000005cf50000 - 0x000000005cf79000 	C:\Program Files\Java\jdk1.8.0_66\jre\bin\java.dll
+
+VM Arguments:
+jvm_args: -Dclassworlds.conf=C:\Program Files\NetBeans 8.1\java\maven\bin\m2.conf -Dmaven.home=C:\Program Files\NetBeans 8.1\java\maven 
+java_command: org.codehaus.plexus.classworlds.launcher.Launcher -Dmaven.ext.class.path=C:\Program Files\NetBeans 8.1\java\maven-nblib\netbeans-eventspy.jar -Dfile.encoding=UTF-8 clean install
+java_class_path (initial): C:\Program Files\NetBeans 8.1\java\maven\boot\plexus-classworlds-2.4.jar
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+JAVA_HOME=C:\Program Files\Java\jdk1.8.0_66
+PATH=C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\oraclexe\app\oracle\product\11.2.0\server\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\ATI Technologies\ATI.ACE\Core-Static;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\MinGW\bin;C:\MinGW;C:\Program Files\doxygen\bin;C:\Program Files (x86)\Mscgen;C:\Program Files\MiKTeX 2.9\miktex\bin\x64\;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files (x86)\Microsoft SDKs\TypeScript\1.0\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files (x86)\AMD\ATI.ACE\Core-Static;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Java\jre1.8.0_60\bin;C:\Program Files\Java\jdk1.8.0_60\bin;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Skype\Phone\;C:\Android;C:\Windows\System32
+USERNAME=Shahin
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 60 Stepping 3, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 10.0 , 64 bit Build 10586 (10.0.10586.0)
+
+CPU:total 4 
+
+Memory: 4k page, physical 16719884k(7084152k free), swap 17768460k(4148k free)
+
+vm_info: Java HotSpot(TM) 64-Bit Server VM (25.66-b18) for windows-amd64 JRE (1.8.0_66-b18), built on Nov  9 2015 10:51:13 by "java_re" with MS VC++ 10.0 (VS2010)
+
+time: Sat Apr 02 12:58:40 2016
+elapsed time: 0 seconds (0d 0h 0m 0s)
+

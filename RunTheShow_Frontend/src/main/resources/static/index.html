@@ -141,7 +141,7 @@
                                             <img src="/img/customer-3.png" class ="img-circle img-small" alt=""> {{name}}
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="/userprofile">Mon profil</a>
+                                            <li ng-show="authenticated()"><a href="/userprofile">Mon profil</a>
                                             </li>
                                             <li><a href="/event">Mes évènements</a>
                                             </li>

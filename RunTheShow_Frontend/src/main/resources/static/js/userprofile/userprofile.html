@@ -7,14 +7,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="firstname">Firstname</label>
-                    <input class="form-control" id="firstname" type="text" ng-model="userToEdit.login">
+                    <label for="nom">Nom</label>
+                    <input class="form-control" id="nom" type="text" ng-model="currentUser.nom">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="lastname">Lastname</label>
-                    <input class="form-control" id="lastname" type="text" ng-model="currentUser.login">
+                    <label for="prenom">Prénom</label>
+                    <input class="form-control" id="prenom" type="text" ng-model="currentUser.prenom">
                 </div>
             </div>
         </div>
@@ -23,62 +23,69 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="company">Company</label>
-                    <input class="form-control" id="company" type="text">
+                    <label for="Sexe">Sexe</label>
+                    <input class="form-control" id="sexe" type="text" ng-model="currentUser.sexe">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="street">Street</label>
-                    <input class="form-control" id="street" type="text">
+                    <label for="DateDeNaissance">Date de naissance</label>
+                    <input class="form-control" id="dateDeNaissance" type="date" ng-model="currentUser.dateDeNaissance">
+                </div>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="telFixe">Télephone fixe</label>
+                    <input class="form-control" id="telFixe" type="number" ng-model="currentUser.telephoneFixe">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="telPortable">Télphone portable</label>
+                    <input class="form-control" id="telPortable" type="number" ng-model="currentUser.telephonePortable">
                 </div>
             </div>
         </div>
-        <!-- /.row -->
 
         <div class="row">
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="city">Company</label>
-                    <input class="form-control" id="city" type="text">
+                    <label for="adresse">Adresse</label>
+                    <input class="form-control" id="adresse" type="text" ng-model="currentUser.adresse">
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
+            <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="zip">ZIP</label>
-                    <input class="form-control" id="zip" type="text">
+                    <label for="codePostal">Code postal</label>
+                    <input class="form-control" id="codePostal" type="number" ng-model="currentUser.codePostal">
                 </div>
             </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <select class="form-control" id="state"></select>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-3">
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <select class="form-control" id="country"></select>
-                </div>
-            </div>
+        </div>
 
+        <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="phone">Telephone</label>
-                    <input class="form-control" id="phone" type="text">
+                    <label for="ville">Ville</label>
+                    <input class="form-control" id="ville" type="text" ng-model="currentUser.ville">
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="email_account">Email</label>
-                    <input class="form-control" id="email_account" type="text">
+                    <label for="description">Description</label>
+                    <input class="form-control" id="description" type="text" ng-model="currentUser.description">
                 </div>
             </div>
+        </div>        
+
+
+
+        <div class="row">
             <div class="col-sm-12 text-center">
                 <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Save changes</button>
 
             </div>
-
         </div>
 
     </form>
