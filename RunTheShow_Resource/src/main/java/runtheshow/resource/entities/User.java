@@ -140,6 +140,7 @@ public class User extends AbstractEntity {
                 + "\"prenom\":\"%s\","
                 + "\"sexe\":\"%s\","
                 + "\"dateDeNaissance\":\"%s\","
+                + "\"mailContact\":\"%s\","
                 + "\"telephoneFixe\":\"%s\","
                 + "\"telephonePortable\":\"%s\","
                 + "\"adresse\":\"%s\","
@@ -148,7 +149,7 @@ public class User extends AbstractEntity {
                 + "\"description\":\"%s\","
                 + "\"enabled\":%s,"
                 + "\"roles\":%s}", 
-                id, login, nom, prenom, sexe, dateDeNaissanceFormatted, telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
+                id, login, nom, prenom, sexe, dateDeNaissanceFormatted, mailContact, telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
     }
 
     public String getLogin() {
