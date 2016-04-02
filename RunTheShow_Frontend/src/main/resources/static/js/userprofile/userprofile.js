@@ -4,6 +4,6 @@
  * and open the template in the editor.
  */
 angular.module('userprofile', []).controller('userprofile', function ($scope, $http, $rootScope, $window) {
-
+    $scope.userToEdit = $rootScope.currentUser;
 });
 
