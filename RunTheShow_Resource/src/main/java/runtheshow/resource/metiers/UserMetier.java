@@ -55,7 +55,18 @@ public class UserMetier implements IUserMetier {
 	public Boolean UpdateUser(User user) {
                 User userBind = userRepository.findOne(user.getId());
                 userBind.setLogin(user.getLogin());
-                userBind.setRoles(user.getRoles());
+                
+                userBind.setNom(user.getNom());
+                userBind.setPrenom(user.getPrenom());
+                userBind.setSexe(user.getSexe());
+                userBind.setDateDeNaissance(user.getDateDeNaissance());
+                userBind.setTelephoneFixe(user.getTelephoneFixe());
+                userBind.setTelephonePortable(user.getTelephonePortable());
+                userBind.setAdresse(user.getAdresse());
+                userBind.setCodePostal(user.getCodePostal());
+                userBind.setVille(user.getVille());
+                userBind.setDescription(user.getDescription());
+                
                 userBind = userRepository.save(userBind);
                 return userBind != null;
 	}

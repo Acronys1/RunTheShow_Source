@@ -131,8 +131,12 @@ public class User extends AbstractEntity {
     @Override
     public String toString() {
         
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        String dateDeNaissanceFormatted = format.format(dateDeNaissance.getTime());
+        String dateDeNaissanceFormatted = "";
+        
+        if(dateDeNaissance != null){
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            dateDeNaissanceFormatted = format.format(dateDeNaissance.getTime());
+        }        
         
         return String.format("{\"id\":\"%s\","
                 + "\"login\":\"%s\","
