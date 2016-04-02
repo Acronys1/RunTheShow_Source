@@ -91,10 +91,14 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
                 adresse: $rootScope.currentUser.adresse
             })
             $http.put("/resource/user/update", data).success(function (data, status) {
-                $scope.response = data;
-            })
-            console.log("User update");
-            $scope.updateOK = "Informations mises à jour";
+                $scope.response = data;                
+                console.log("User update");
+                $scope.updateOK = "Informations mises à jour";
+            }).error(function (data, status) { // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                $scope.errorMessage["erreurServeur"] = "Erreur lors de la mise à jours des infos";
+                console.log("User NOT update");
+            });
         }
         else{
             console.log("User NOT update");
