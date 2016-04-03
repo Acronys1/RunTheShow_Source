@@ -83,6 +83,9 @@ public class User extends AbstractEntity {
     @Column(name = "user_description")
     private String description;
 
+    @Column(name = "user_photo")
+    private String photo;
+
     /**
      * Relations avec les aures entités
      */
@@ -154,9 +157,10 @@ public class User extends AbstractEntity {
                 + "\"codePostal\":\"%s\","
                 + "\"ville\":\"%s\","
                 + "\"description\":\"%s\","
+                + "\"photo\":\"%s\","
                 + "\"enabled\":%s,"
                 + "\"roles\":%s}",
-                id, login, nom, prenom, sexe, dateDeNaissanceFormatted, mailContact, telephoneFixe, telephonePortable, adresse, codePostal, ville, description, enabled, getRoles().toString());
+                id, login, nom, prenom, sexe, dateDeNaissanceFormatted, mailContact, telephoneFixe, telephonePortable, adresse, codePostal, ville, description, photo, enabled, getRoles().toString());
     }
 
     public String getLogin() {
@@ -286,6 +290,15 @@ public class User extends AbstractEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+    
 
     /**
      * @return the mesEvenements
