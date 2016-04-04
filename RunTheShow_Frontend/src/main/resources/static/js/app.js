@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile','signup'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users','contactChipsDemo','ngMaterial', 'navigation', 'datatables', 'event', 'userprofile','signup'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -20,6 +20,9 @@ angular
                     }).when('/userprofile', {
                         templateUrl: 'js/userprofile/userprofile.html',
                         controller: 'userprofile'
+                    }).when('/invitation', {
+                        templateUrl: 'js/event/invitation.html',
+                        controller: 'ContactChipDemoCtrl'
                     }).otherwise('/');
 
                     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
