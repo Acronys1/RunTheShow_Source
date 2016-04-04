@@ -56,7 +56,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
             $http.post("/resource/user/add", data).success(function (data, status) {
                 $scope.response = data;
                 $scope.initFirst();
-                $scope.updateOK = "Inscription réussie.";
+                $scope.signUpOK = "Inscription réussie.";
                 console.log("signup organisator OK");
             }).error(function (data, status) { // called asynchronously if an error occurs
                 // or server returns response with an error status.
@@ -83,7 +83,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                 $http.post("/resource/user/add", data).success(function (data, status) {
                     $scope.response = data;
                     $scope.initFirst();
-                    $scope.updateOK = "Inscription réussie.";
+                    $scope.signUpOK = "Inscription réussie.";
                     console.log("signup solo artist OK");
                 }).error(function (data, status) { // called asynchronously if an error occurs
                     // or server returns response with an error status.
@@ -109,7 +109,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                 $scope.errorMessage["mailRespTroupe"] = "L'email du responsable de la troupe n'est pas valide.";
                 noError = false;
             }
-            if (noError && $scope.newUser.role == true && newUser.typeArtist == false) {
+            if (noError && $scope.newUser.role == true && $scope.newUser.typeArtist == false) {
                 var data = JSON.stringify({
                     login: $scope.newUser.username,
                     password: $scope.newUser.password,
@@ -124,7 +124,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                 $http.post("/resource/user/add", data).success(function (data, status) {
                     $scope.response = data;
                     $scope.initFirst();
-                    $scope.updateOK = "Inscription réussie.";
+                    $scope.signUpOK = "Inscription réussie.";
                     console.log("signup troupe artist OK");
                 }).error(function (data, status) { // called asynchronously if an error occurs
                     // or server returns response with an error status.

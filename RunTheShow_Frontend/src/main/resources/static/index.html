@@ -264,7 +264,13 @@ _________________________________________________________ -->
                                 <span class="h6 signup-or-separator--text">ou</span>
                                 <hr>
                             </div>
+                            <div class="alert alert-danger" ng-repeat="(key, value) in errorMessage">
+                                <p>{{value}}</p>
+                            </div>
 
+                            <div class="alert alert-success" ng-show="signUpOK">
+                                <p>{{signUpOK}}</p>
+                            </div>
                             <form role="form" ng-submit="signUp()">
 
                                 <div class="form-group">
