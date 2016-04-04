@@ -21,50 +21,55 @@
                    <textarea class="form-control" id="description" ng-model="event.description" name="description" rows="3"></textarea>
                 </fieldset>
                 
+                <div class="container">
+                    <div class='col-md-5'>
+                        <label for="checkin">Date début</label>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker6'>
+                                <input type='text' class="form-control" id="checkin" name="checkin" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class='col-md-5'>
+                        <label for="checkout">Date fin</label>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker7'>
+                                <input type='text' class="form-control" id="checkout" name="checkout" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 
                 <fieldset class="form-group">
-                    <table>
-                        <tr>
-                            <td><label for="dateDeb">Date début</label></td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><label for="dateFin">Date Fin</label></td>
-                        </tr>
-                        <tr>
-                            <td><label for="dateDeb"><input type="text" id="dpd1" data-date-format="dd/mm/yyyy"></label></td>
-                            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                            <td><label for="dateFin"><input type="text" id="dpd2" data-date-format="dd/mm/yyyy"></label></td>
-                        </tr>
-                    </table>
+                   <label for="description">Informations complémentaires</label>
+                   <textarea class="form-control" id="info" ng-model="event.info" name="info" rows="3"></textarea>
                 </fieldset>
             </form>
-            <script>
-                
-                var nowTemp = new Date();
-                var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-                
-                
-                
-                var checkin = $('#dpd1').datepicker({
-                  onRender: function(date) {
-                    return date.valueOf() < now.valueOf() ? 'disabled' : '';
-                  }
-                }).on('changeDate', function(ev) {
-                  if (ev.date.valueOf() > checkout.date.valueOf()) {
-                    var newDate = new Date(ev.date)
-                    //newDate.setDate(newDate.getDate() + 1);
-                    checkout.setValue(newDate);
-                  }
-                  checkin.hide();
-                  $('#dpd2')[0].focus();
-                }).data('datepicker');
-                
-                var checkout = $('#dpd2').datepicker({
-                  onRender: function(date) {
-                    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
-                  }
-                }).on('changeDate', function(ev) {
-                  checkout.hide();
-                }).data('datepicker');
+            <script type="text/javascript">
+                $(function () {
+                    var min = new Date();
+                    $('#datetimepicker6').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        minDate: min
+                    });
+                    $('#datetimepicker7').datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        minDate: min
+                    });
+                    $("#datetimepicker6").on("dp.change", function (e) {
+                        $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+                    });
+                    $("#datetimepicker7").on("dp.change", function (e) {
+                        $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+                    });
+                });
             </script>
         </div>
     </div>
