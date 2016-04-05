@@ -1,31 +1,49 @@
 <groups xmlns="http://www.isdc.ro/wro">
-  <group name="angular-bootstrap">
-    <!--<css>webjar:bootstrap/3.3.2/less/bootstrap.less</css>-->     
-    <css>file:@project.basedir@/src/main/wro/main.less</css>
-    <js>webjar:angularjs/1.5.2/angular.min.js</js>
-    <js>webjar:angularjs/1.5.2/angular-route.min.js</js>
-    <js>webjar:angularjs/1.5.2/angular-cookies.min.js</js>
-   </group>
+    <group name="angular-bootstrap">
+        <!--<css>webjar:bootstrap/3.3.2/less/bootstrap.less</css>-->     
+        <css>file:@project.basedir@/src/main/wro/main.less</css>
+        <js>webjar:angularjs/1.5.2/angular.min.js</js>
+        <js>webjar:angularjs/1.5.2/angular-route.min.js</js>
+        <js>webjar:angularjs/1.5.2/angular-cookies.min.js</js>
+    </group>
    
-   <group name="theme">  
-    <css>webjar:font-awesome/4.5.0/css/font-awesome.min.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/animate.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/owl.carousel.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/owl.theme.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/style.default.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/angular-datables.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/bootstrap-datepicker-standalone.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/bootstrap-datepicker.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/bootstrap-datepicker.min.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/bootstrap-datetimepicker-standalone.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/bootstrap-datetimepicker.css</css>
-    <css>file:@project.basedir@/src/main/wro/css/bootstrap-datetimepicker.min.css</css>
-    <js>webjar:jquery/2.1.1/jquery.min.js</js>
-   </group>
+    <group name="theme">  
+        <css>webjar:font-awesome/4.5.0/css/font-awesome.min.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/animate.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/owl.carousel.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/owl.theme.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/style.default.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/angular-datables.css</css>
+    </group>
+    
+    <group name="jquery">
+        <js>webjar:jquery/2.1.1/jquery.min.js</js>
+        <js>webjar:jquery/1.11.4/jquery-ui.min.js</js>
+    </group>
    
-   <group name="angular-datatables">
-       <js>webjar:angular-datatables/0.5.2/angular-datatables.js</js>
-       <js>webjar:datatables/1.10.11/js/jquery.dataTables.js</js>
-       <css>webjar:datatables/1.10.11/css/jquery.dataTables.css</css>
-   </group>
+    <group name="datetimepicker">  
+        <css>file:@project.basedir@/src/main/wro/css/bootstrap-datepicker.min.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/bootstrap-datetimepicker.min.css</css>
+        <js>file:@project.basedir@/src/main/wro/js/moment.js</js>
+        <js>file:@project.basedir@/src/main/wro/js/bootstrap-datepicker.js</js>
+        <js>file:@project.basedir@/src/main/wro/js/bootstrap-datetimepicker.min.js</js> 
+    </group>
+   
+    <group name="angular-datatables">
+        <js>webjar:angular-datatables/0.5.2/angular-datatables.js</js>
+        <js>webjar:datatables/1.10.11/js/jquery.dataTables.js</js>
+        <css>webjar:datatables/1.10.11/css/jquery.dataTables.css</css>
+    </group>
+   
+    <group name="app-component">
+        <js>file:@project.basedir@/src/main/resources/static/js/auth/auth.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/home/home.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/users/users.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/userprofile/userprofile.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/signup/signup.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/event/event.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/navigation/navigation.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/event/invitation.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/app.js</js>
+    </group>
 </groups>
