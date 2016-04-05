@@ -18,23 +18,15 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
         $scope.signUpOK = null;
 
         console.log("test signup");
-        if ($scope.newUser.userlastname == null || ($scope.newUser.userlastname.length < 2 || $scope.newUser.userlastname.length > 100)) {
-            $scope.errorMessage["nom"] = "Le nom doit avoir au minimum deux caractères et au maximum 100.";
-            noError = false;
-        }
-        if ($scope.newUser.userfirstname == null || ($scope.newUser.userfirstname.length < 2 || $scope.newUser.userfirstname.length > 100)) {
-            $scope.errorMessage["prenom"] = "Le prenom doit avoir au minimum deux caractères et au maximum 100.";
-            noError = false;
-        }
         if ($scope.newUser.username == null || !isEmail($scope.newUser.username)) {
             $scope.errorMessage["emailContact"] = "L'email n'est pas valide.";
             noError = false;
         }
-        if ($scope.newUser.password == null || $scope.newUser.password < 5) {
+        if ($scope.newUser.password == null || $scope.newUser.password.length < 5) {
             $scope.errorMessage["motDePasse"] = "Le mot de passe doit contenir au moins 5 caractères.";
             noError = false;
         }
-        if ($scope.newUser.passwordConfirmed == null || $scope.newUser.passwordConfirmed < 5) {
+        if ($scope.newUser.passwordConfirmed == null || $scope.newUser.passwordConfirmed.length < 5) {
             $scope.errorMessage["motDePasse"] = "Le mot de passe doit contenir au moins 5 caractères.";
             noError = false;
         }
@@ -42,53 +34,53 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
             $scope.errorMessage["motDePasseNotEquals"] = "Les mots de passe ne correspondent pas.";
             noError = false;
         }
-        //Appel inscription d'organisateur
-        if (noError && $scope.newUser.role == false) {
-            var data = JSON.stringify({
-                login: $scope.newUser.username,
-                password: $scope.newUser.password,
-                nom: $scope.newUser.userlastname,
-                prenom: $scope.newUser.userfirstname,
-                //enabled: true,
-                roles: 1
-            })
-            console.log("request signup organisator...");
-            $http.post("/resource/user/add", data).success(function (data, status) {
-                $scope.response = data;
-                $scope.initFirst();
-                $scope.signUpOK = "Inscription réussie.";
-                console.log("signup organisator OK");
-            }).error(function (data, status) { // called asynchronously if an error occurs
-                // or server returns response with an error status.
-                $scope.errorMessage["erreurServeur"] = "Erreur lors de l'envoie des informations, inscription echouée.";
-            });
-        }
-        //artiste solo
-        if (($scope.newUser.typeArtist == true) && ($scope.newUser.role == true)){
-            if ($scope.newUser.nomArtiste == null || $scope.newUser.nomArtiste < 5) {
-                $scope.errorMessage["nomArtiste"] = "Le mot de passe doit contenir au moins 5 caractères.";
+        if ($scope.newUser.sexe == null) {
+            $scope.errorMessage["sexe"] = "Veuillez renseigner le sexe.";
+            noError = false;
+        }        
+        if (($scope.newUser.typeArtist == null || $scope.newUser.typeArtist == true)) {
+            if ($scope.newUser.userlastname == null || ($scope.newUser.userlastname.length < 2 || $scope.newUser.userlastname.length > 100)) {
+                $scope.errorMessage["nom"] = "Le nom doit avoir au minimum deux caractères et au maximum 100.";
                 noError = false;
             }
-            if (noError && $scope.newUser.role == true) {
+            if ($scope.newUser.userfirstname == null || ($scope.newUser.userfirstname.length < 2 || $scope.newUser.userfirstname.length > 100)) {
+                $scope.errorMessage["prenom"] = "Le prenom doit avoir au minimum deux caractères et au maximum 100.";
+                noError = false;
+            }
+            if (($scope.newUser.typeArtist == true) && ($scope.newUser.role == true)) {
+                if ($scope.newUser.nomArtiste != null && $scope.newUser.nomArtiste.length < 5) {
+                    $scope.errorMessage["nomArtiste"] = "Le nom d'artise doit comporter au moins 5 caractère.";
+                    noError = false;
+                }
+                else{
+                    $scope.newUser.nomArtiste = "";
+                }                    
+                $scope.newUser.userRole = 3;
+            }
+            if ($scope.newUser.role == false) {
+                $scope.newUser.nomArtiste = "";
+                $scope.newUser.userRole = 1;
+            }
+            if (noError) {
                 var data = JSON.stringify({
                     login: $scope.newUser.username,
                     password: $scope.newUser.password,
                     nom: $scope.newUser.userlastname,
                     prenom: $scope.newUser.userfirstname,
                     nomArtiste: $scope.newUser.nomArtiste,
-                    //enabled: true,
-                    roles: 3
+                    sexe: $scope.newUser.sexe,
+                    roles: [{id:$scope.newUser.userRole}]
                 })
-                console.log("request signup solo artiste...");
+                console.log("request signup...");
                 $http.post("/resource/user/add", data).success(function (data, status) {
                     $scope.response = data;
-                    $scope.initFirst();
                     $scope.signUpOK = "Inscription réussie.";
-                    console.log("signup solo artist OK");
+                    console.log("signup OK");
                 }).error(function (data, status) { // called asynchronously if an error occurs
                     // or server returns response with an error status.
                     $scope.errorMessage["erreurServeur"] = "Erreur lors de l'envoie des informations, inscription echouée.";
                 });
+
             }
         }
         //Artiste Troupe
@@ -110,20 +102,21 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                 noError = false;
             }
             if (noError && $scope.newUser.role == true && $scope.newUser.typeArtist == false) {
+                $scope.newUser.nomArtiste = "";
+                $scope.newUser.userRole = 3;
                 var data = JSON.stringify({
                     login: $scope.newUser.username,
                     password: $scope.newUser.password,
-                    nom: $scope.newUser.userlastname,
-                    prenom: $scope.newUser.userfirstname,
-                    nomArtiste: $scope.newUser.nomArtiste,
-                    mailContact:$scope.newUser.mailRespTroupe,
-                    //enabled: true,
-                    roles: 3
+                    nom: $scope.newUser.nomRespTroupe,
+                    prenom: $scope.newUser.prenomRespTroupe,
+                    nomArtiste: $scope.newUser.nomTroupe,
+                    mailContact: $scope.newUser.mailRespTroupe,
+                    sexe: $scope.newUser.sexe,
+                    roles: [{id:$scope.newUser.userRole}]
                 })
                 console.log("request signup troupe artiste...");
                 $http.post("/resource/user/add", data).success(function (data, status) {
                     $scope.response = data;
-                    $scope.initFirst();
                     $scope.signUpOK = "Inscription réussie.";
                     console.log("signup troupe artist OK");
                 }).error(function (data, status) { // called asynchronously if an error occurs
