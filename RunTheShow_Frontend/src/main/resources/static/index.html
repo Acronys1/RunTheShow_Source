@@ -271,7 +271,7 @@ _________________________________________________________ -->
                             <div class="alert alert-success" ng-show="signUpOK">
                                 <p>{{signUpOK}}</p>
                             </div>
-                            <form role="form" ng-submit="signUp()">  
+                            <form role="form" ng-submit="signUp()" ng-hide="signUpOK">  
                                 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -346,6 +346,16 @@ _________________________________________________________ -->
                                             <div class="input-group-addon"><i class="fa fa-info"></i></div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <select id="sexe" name="sexe" class="form-control" ng-model="newUser.sexe">
+                                            <option value="">Sexe</option>
+                                            <option value="0">M</option>
+                                            <option value="1">F</option>
+                                            <option value="2">Autre</option>
+                                        </select>
+                                    </div>
+                                    
                                 </div>
                                 
                                 <!--  Inscription Troupes -->
@@ -367,7 +377,17 @@ _________________________________________________________ -->
                                             <input type="text" class="form-control" id="prenomRespTroupe" placeholder="Prenom du responsable de la troupe" ng-model="newUser.prenomRespTroupe">
                                             <div class="input-group-addon"><i class="fa fa-phone"></i></div>
                                         </div>
-                                    </div>  
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <select id="sexe" name="sexe" class="form-control" ng-model="newUser.sexe">
+                                            <option value="">Sexe du responsable de la troupe</option>
+                                            <option value="0">M</option>
+                                            <option value="1">F</option>
+                                            <option value="2">Autre</option>
+                                        </select>
+                                    </div>
+                                    
                                     <div class="form-group">
                                         <div class="input-group">
                                             <input type="text" class="form-control" id="mailRespTroupe" placeholder="Mail du responsable de la troupe" ng-model="newUser.mailRespTroupe">
