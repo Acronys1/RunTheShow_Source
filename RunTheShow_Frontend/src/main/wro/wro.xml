@@ -5,7 +5,7 @@
         <js>webjar:angularjs/1.5.2/angular-route.min.js</js>
         <js>webjar:angularjs/1.5.2/angular-cookies.min.js</js>
         <js>webjar:bootstrap/3.3.6/js/bootstrap.min.js</js>
-        <css>webjar:bootstrap/3.3.6/css/bootstrap.min.css</css>
+        <!--<css>webjar:bootstrap/3.3.6/css/bootstrap.min.css</css>-->
         <css>file:@project.basedir@/src/main/wro/main.less</css>
     </group>
    
