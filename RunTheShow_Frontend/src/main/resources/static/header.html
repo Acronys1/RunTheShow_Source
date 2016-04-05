@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<header ng-controller="navigation">
+
+    <!-- *** NAVBAR ***
+_________________________________________________________ -->
+
+    <div class="navbar-affixed-top" data-spy="affix" data-offset-top="200">
+
+        <div class="navbar navbar-default yamm" role="navigation" id="navbar">
+
+            <div class="container">
+                <div class="navbar-header">
+
+                    <a class="navbar-brand home" href="index.html">
+                        <img src="img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
+                        <img src="img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span>
+                    </a>
+                    <div class="navbar-buttons">
+                        <button type="button" class="navbar-toggle btn-template-main" data-toggle="collapse" data-target="#navigation">
+                            <span class="sr-only">Toggle navigation</span>
+                            <i class="fa fa-align-justify"></i>
+                        </button>
+                    </div>
+                </div>
+                <!--/.navbar-header -->
+
+                <div class="navbar-collapse collapse" id="navigation">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown use-yamm yamm-  fw">
+
+                            <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="modal" data-target="#login-modal" ng-show="!authenticated()">Connexion</a>
+                        </li>
+                        <li class="dropdown active">
+                            <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Home </a>
+                            <ul class="dropdown-menu">
+                                <li ng-class="{active:tab('home')}"><a href="/">Home</a>
+                                </li>
+                                <li ng-show="admin()" ng-class="{active:tab('users')}"><a href="/users">Users</a>
+                                </li>
+                                <li><a href="/login">Login</a>
+                                </li>
+
+                            </ul>
+                        </li>
+                        <li class="dropdown use-yamm yamm-fw">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Features </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <div class="yamm-content">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <img src="img/template-easy-customize.png" class="img-responsive hidden-xs" alt="">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h5>Shortcodes</h5>
+                                                <ul>
+                                                    <li><a href="template-accordions.html">Accordions</a>
+                                                    </li>
+                                                    <li><a href="template-alerts.html">Alerts</a>
+                                                    </li>
+                                                    <li><a href="template-buttons.html">Buttons</a>
+                                                    </li>
+                                                    <li><a href="template-content-boxes.html">Content boxes</a>
+                                                    </li>
+                                                    <li><a href="template-blocks.html">Horizontal blocks</a>
+                                                    </li>
+                                                    <li><a href="template-pagination.html">Pagination</a>
+                                                    </li>
+                                                    <li><a href="template-tabs.html">Tabs</a>
+                                                    </li>
+                                                    <li><a href="template-typography.html">Typography</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <h5>Header variations</h5>
+                                                <ul>
+                                                    <li><a href="template-header-default.html">Default sticky header</a>
+                                                    </li>
+                                                    <li><a href="template-header-nosticky.html">No sticky header</a>
+                                                    </li>
+                                                    <li><a href="template-header-light.html">Light header</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown" ng-show="authenticated()">
+                            <a href="javascript: void(0)" class="dropdown-user" data-toggle="dropdown"> 
+                                <img src="/img/customer-3.png" class ="img-circle img-small" alt=""> {{currentUser.prenom}}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li ng-show="authenticated()"><a href="/userprofile">Mon profil</a>
+                                </li>
+                                <li><a href="/event">Mes évènements</a>
+                                </li>
+                                <li><a href="/invitation">Invitations</a>
+                                </li>
+                                <li><a href="#">Paramètre du compte</a>
+                                </li>
+                                <li ng-show="authenticated()"><a href="" ng-click="logout()">Déconnexion</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </div>
+                <!--/.nav-collapse -->
+
+
+
+                <div class="collapse clearfix" id="search">
+
+                    <form class="navbar-form" role="search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="input-group-btn">
+
+                                <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button>
+
+                            </span>
+                        </div>
+                    </form>
+
+                </div>
+                <!--/.nav-collapse -->
+
+            </div>
+
+
+        </div>
+        <!-- /#navbar -->
+
+    </div>
+
+    <!-- *** NAVBAR END *** -->
+
+</header>

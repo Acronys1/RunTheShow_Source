@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- *** LOGIN MODAL ***
+_________________________________________________________ -->
+
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true" ng-controller="navigation">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="Login">Connexion</h4>
+            </div>
+            <div class="modal-body">
+                <a style="margin-bottom: 15px" class="btn login-modal btn-primary btn-lg btn-block" href="#">
+                    <i class="fa fa-facebook"></i> Connexion avec Facebook</a>
+
+                <a class="btn login-modal btn-danger btn-lg btn-block" href="#">
+                    <i class="fa fa-google"></i> Connexion avec Google</a>
+                <div class="signup-or-separator">
+                    <span class="h6 signup-or-separator--text">ou</span>
+                    <hr>
+                </div>
+
+                <form role="form" ng-submit="login()">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="username" placeholder="Adresse e-mail" ng-model="credentials.username">
+                            <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" placeholder="Mot de passe" ng-model="credentials.password">
+                            <div class="input-group-addon"><i class="fa fa-lock"></i></div>
+                        </div>
+                    </div>
+
+                    <p class="text-center">
+                        <button class="btn btn-lg btn-template-main"><i class="fa fa-sign-in"></i> Connexion</button>
+                    </p>
+
+                </form>
+
+                <p class="text-center text-muted">Pas encore inscrit ?</p>
+                <p class="text-center text-muted"><a href="javascript: void(0)" data-toggle="modal" data-target="#signUp-modal" data-dismiss="modal">
+                        <strong>Inscrivez-vous</strong></a> ! C'est simple et ça prend moins d'une minute !
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /login modal -->
