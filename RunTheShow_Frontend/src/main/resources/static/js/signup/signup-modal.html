@@ -23,9 +23,6 @@ and open the template in the editor.
                     <span class="h6 signup-or-separator--text">ou</span>
                     <hr>
                 </div>
-                <div class="alert alert-danger" ng-repeat="(key, value) in errorMessage">
-                    <p>{{value}}</p>
-                </div>
 
                 <div class="alert alert-success" ng-show="signUpOK">
                     <p>{{signUpOK}}</p>
@@ -37,19 +34,32 @@ and open the template in the editor.
                             <input type="text" class="form-control" id="username" placeholder="Adresse e-mail" ng-model="newUser.username">
                             <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
                         </div>
-                    </div>                              
+
+                        <span class="text-danger" ng-show="errorMessage.emailContact"> 
+                            {{errorMessage.emailContact}}                     
+                        </span>
+                    </div>                    
 
                     <div class="form-group">
                         <div class="input-group">
                             <input type="password" class="form-control" id="password" placeholder="Mot de passe" ng-model="newUser.password">
                             <div class="input-group-addon"><i class="fa fa-lock"></i></div>
                         </div>
+                        <span class="text-danger" ng-show="errorMessage.motDePasse"> 
+                            {{errorMessage.motDePasse}}                     
+                        </span>                        
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <input type="password" class="form-control" id="passwordConfirmed" placeholder="Confirmer le mot de passe" ng-model="newUser.passwordConfirmed">
                             <div class="input-group-addon"><i class="fa fa-lock"></i></div>
                         </div>
+                        <span class="text-danger" ng-show="errorMessage.emailContact"> 
+                            {{errorMessage.motDePasseConfirmed}}                     
+                        </span>
+                        <span class="text-danger" ng-show="errorMessage.motDePasseNotEquals"> 
+                            {{errorMessage.motDePasseNotEquals}}                     
+                        </span>                        
                     </div>
                     <div class="form-group" ng-model="newUser.role">
                         <label>
@@ -78,7 +88,10 @@ and open the template in the editor.
                                 <input type="text" class="form-control" id="nomArtiste" placeholder="Nom d'artiste" ng-model="newUser.nomArtiste">
                                 <div class="input-group-addon"><i class="fa fa-info-circle"></i></div>
                             </div>
-                        </div>
+                            <span class="text-danger" ng-show="errorMessage.nomArtiste"> 
+                                {{errorMessage.nomArtiste}}                     
+                            </span>                            
+                        </div>                        
                     </div>
 
                     <div class="form-group" ng-show="((newUser.typeArtist == true) && (newUser.role == true)) || (newUser.role == false)">
@@ -87,6 +100,9 @@ and open the template in the editor.
                                 <input type="text" class="form-control" id="lastname" placeholder="Nom" ng-model="newUser.userlastname">
                                 <div class="input-group-addon"><i class="fa fa-info"></i></div>
                             </div>
+                            <span class="text-danger" ng-show="errorMessage.nom"> 
+                                {{errorMessage.nom}}                     
+                            </span>                            
                         </div>                                 
 
                         <div class="form-group">
@@ -94,6 +110,9 @@ and open the template in the editor.
                                 <input type="text" class="form-control" id="firstname" placeholder="Prenom" ng-model="newUser.userfirstname">
                                 <div class="input-group-addon"><i class="fa fa-info"></i></div>
                             </div>
+                            <span class="text-danger" ng-show="errorMessage.prenom"> 
+                                {{errorMessage.prenom}}                     
+                            </span>                            
                         </div>
 
                         <div class="form-group">
@@ -114,18 +133,27 @@ and open the template in the editor.
                                 <input type="text" class="form-control" id="nomTroupe" placeholder="Nom de la troupe" ng-model="newUser.nomTroupe">
                                 <div class="input-group-addon"><i class="fa fa-info-circle"></i></div>
                             </div>
+                            <span class="text-danger" ng-show="errorMessage.nomTroupe"> 
+                                {{errorMessage.nomTroupe}}                     
+                            </span>                            
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="nomRespTroupe" placeholder="Nom du responsable de la troupe" ng-model="newUser.nomRespTroupe">
                                 <div class="input-group-addon"><i class="fa fa-info"></i></div>
                             </div>
+                            <span class="text-danger" ng-show="errorMessage.nomRespTroupe"> 
+                                {{errorMessage.nomRespTroupe}}                     
+                            </span>
                         </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="prenomRespTroupe" placeholder="Prenom du responsable de la troupe" ng-model="newUser.prenomRespTroupe">
                                 <div class="input-group-addon"><i class="fa fa-phone"></i></div>
                             </div>
+                            <span class="text-danger" ng-show="errorMessage.prenomRespTroupe"> 
+                                {{errorMessage.prenomRespTroupe}}                     
+                            </span>                            
                         </div>
 
                         <div class="form-group">
@@ -142,6 +170,9 @@ and open the template in the editor.
                                 <input type="text" class="form-control" id="mailRespTroupe" placeholder="Mail du responsable de la troupe" ng-model="newUser.mailRespTroupe">
                                 <div class="input-group-addon"><i class="fa fa-envelope-o"></i></div>
                             </div>
+                            <span class="text-danger" ng-show="errorMessage.mailRespTroupe"> 
+                                {{errorMessage.mailRespTroupe}}                     
+                            </span>                            
                         </div>
 
                         <div class="form-group">

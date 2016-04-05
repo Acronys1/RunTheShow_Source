@@ -9,8 +9,6 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
 
         return regEmail.test(myVar);
     }
-
-
     $scope.signUp = function () {
 
         var noError = true;
@@ -19,42 +17,41 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
 
         console.log("test signup");
         if ($scope.newUser.username == null || !isEmail($scope.newUser.username)) {
-            $scope.errorMessage["emailContact"] = "L'email n'est pas valide.";
+            $scope.errorMessage.emailContact = "L'email n'est pas valide.";
             noError = false;
         }
         if ($scope.newUser.password == null || $scope.newUser.password.length < 5) {
-            $scope.errorMessage["motDePasse"] = "Le mot de passe doit contenir au moins 5 caractères.";
+            $scope.errorMessage.motDePasse = "Le mot de passe doit contenir au moins 5 caractères.";
             noError = false;
         }
         if ($scope.newUser.passwordConfirmed == null || $scope.newUser.passwordConfirmed.length < 5) {
-            $scope.errorMessage["motDePasse"] = "Le mot de passe doit contenir au moins 5 caractères.";
+            $scope.errorMessage.motDePasseConfirmed = "Le mot de passe doit contenir au moins 5 caractères.";
             noError = false;
         }
         if ($scope.newUser.password != $scope.newUser.passwordConfirmed) {
-            $scope.errorMessage["motDePasseNotEquals"] = "Les mots de passe ne correspondent pas.";
+            $scope.errorMessage.motDePasseNotEquals = "Les mots de passe ne correspondent pas.";
             noError = false;
         }
         if ($scope.newUser.sexe == null) {
-            $scope.errorMessage["sexe"] = "Veuillez renseigner le sexe.";
+            $scope.errorMessage.sexe = "Veuillez renseigner le sexe.";
             noError = false;
-        }        
+        }
         if (($scope.newUser.typeArtist == null || $scope.newUser.typeArtist == true)) {
             if ($scope.newUser.userlastname == null || ($scope.newUser.userlastname.length < 2 || $scope.newUser.userlastname.length > 100)) {
-                $scope.errorMessage["nom"] = "Le nom doit avoir au minimum deux caractères et au maximum 100.";
+                $scope.errorMessage.nom = "Le nom doit avoir au minimum deux caractères et au maximum 100.";
                 noError = false;
             }
             if ($scope.newUser.userfirstname == null || ($scope.newUser.userfirstname.length < 2 || $scope.newUser.userfirstname.length > 100)) {
-                $scope.errorMessage["prenom"] = "Le prenom doit avoir au minimum deux caractères et au maximum 100.";
+                $scope.errorMessage.prenom = "Le prenom doit avoir au minimum deux caractères et au maximum 100.";
                 noError = false;
             }
             if (($scope.newUser.typeArtist == true) && ($scope.newUser.role == true)) {
-                if ($scope.newUser.nomArtiste != null && $scope.newUser.nomArtiste.length < 5) {
-                    $scope.errorMessage["nomArtiste"] = "Le nom d'artise doit comporter au moins 5 caractère.";
+                if ($scope.newUser.nomArtiste != null && $scope.newUser.nomArtiste != "" && $scope.newUser.nomArtiste.length < 5) {
+                    $scope.errorMessage.nomArtiste = "Le nom d'artiste doit comporter au moins 5 caractère.";
                     noError = false;
-                }
-                else{
+                } else {
                     $scope.newUser.nomArtiste = "";
-                }                    
+                }
                 $scope.newUser.userRole = 3;
             }
             if ($scope.newUser.role == false) {
@@ -69,7 +66,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                     prenom: $scope.newUser.userfirstname,
                     nomArtiste: $scope.newUser.nomArtiste,
                     sexe: $scope.newUser.sexe,
-                    roles: [{id:$scope.newUser.userRole}]
+                    roles: [{id: $scope.newUser.userRole}]
                 })
                 console.log("request signup...");
                 $http.post("/resource/user/add", data).success(function (data, status) {
@@ -86,19 +83,19 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
         //Artiste Troupe
         if ($scope.newUser.role == true && $scope.newUser.typeArtist == false) {
             if ($scope.newUser.nomTroupe == null || ($scope.newUser.nomTroupe.length < 2 || $scope.newUser.nomTroupe.length > 100)) {
-                $scope.errorMessage["nomTroupe"] = "Le nom de la troupe doit avoir au minimum deux caractères et au maximum 100.";
+                $scope.errorMessage.nomTroupe = "Le nom de la troupe doit avoir au minimum deux caractères et au maximum 100.";
                 noError = false;
             }
             if ($scope.newUser.nomRespTroupe == null || ($scope.newUser.nomRespTroupe.length < 2 || $scope.newUser.nomRespTroupe.length > 100)) {
-                $scope.errorMessage["nomRespTroupe"] = "Le nom du responsable de la troupe doit avoir au minimum deux caractères et au maximum 100.";
+                $scope.errorMessage.nomRespTroupe = "Le nom du responsable de la troupe doit avoir au minimum deux caractères et au maximum 100.";
                 noError = false;
             }
             if ($scope.newUser.prenomRespTroupe == null || ($scope.newUser.prenomRespTroupe.length < 2 || $scope.newUser.prenomRespTroupe.length > 100)) {
-                $scope.errorMessage["prenomRespTroupe"] = "Le prenom du responsable de la troupe doit avoir au minimum deux caractères et au maximum 100.";
+                $scope.errorMessage.prenomRespTroupe = "Le prenom du responsable de la troupe doit avoir au minimum deux caractères et au maximum 100.";
                 noError = false;
             }
             if ($scope.newUser.mailRespTroupe == null || !isEmail($scope.newUser.mailRespTroupe)) {
-                $scope.errorMessage["mailRespTroupe"] = "L'email du responsable de la troupe n'est pas valide.";
+                $scope.errorMessage.mailRespTroupe = "L'email du responsable de la troupe n'est pas valide.";
                 noError = false;
             }
             if (noError && $scope.newUser.role == true && $scope.newUser.typeArtist == false) {
@@ -112,7 +109,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                     nomArtiste: $scope.newUser.nomTroupe,
                     mailContact: $scope.newUser.mailRespTroupe,
                     sexe: $scope.newUser.sexe,
-                    roles: [{id:$scope.newUser.userRole}]
+                    roles: [{id: $scope.newUser.userRole}]
                 })
                 console.log("request signup troupe artiste...");
                 $http.post("/resource/user/add", data).success(function (data, status) {
