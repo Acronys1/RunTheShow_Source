@@ -41,7 +41,7 @@ public class UserMetier implements IUserMetier {
     @Override
     public Boolean AddUser(User user) {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
-        User userPersist = new User(user.getLogin(), user.getPassword(), user.getNom(), user.getPrenom(), user.getNomArtiste(), user.getMailContact(),  user.getRoles());
+        User userPersist = new User(user.getLogin(), user.getPassword(), user.getNom(), user.getPrenom(), user.getNomArtiste(), user.getMailContact(), user.getSexe(), user.getRoles());
         user = userRepository.save(userPersist);
         return user != null;
     }
