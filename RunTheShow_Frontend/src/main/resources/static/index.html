@@ -271,21 +271,7 @@ _________________________________________________________ -->
                             <div class="alert alert-success" ng-show="signUpOK">
                                 <p>{{signUpOK}}</p>
                             </div>
-                            <form role="form" ng-submit="signUp()">
-
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="lastname" placeholder="Nom" ng-model="newUser.userlastname">
-                                        <div class="input-group-addon"><i class="fa fa-info"></i></div>
-                                    </div>
-                                </div>                                 
-                                
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" id="firstname" placeholder="Prenom" ng-model="newUser.userfirstname">
-                                        <div class="input-group-addon"><i class="fa fa-info"></i></div>
-                                    </div>
-                                </div>  
+                            <form role="form" ng-submit="signUp()">  
                                 
                                 <div class="form-group">
                                     <div class="input-group">
@@ -345,6 +331,23 @@ _________________________________________________________ -->
                                         </div>
                                     </div>
                                 </div>
+                                
+                                <div class="form-group" ng-show="((newUser.typeArtist == true) && (newUser.role == true)) || (newUser.role == false)">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="lastname" placeholder="Nom" ng-model="newUser.userlastname">
+                                            <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                                        </div>
+                                    </div>                                 
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="firstname" placeholder="Prenom" ng-model="newUser.userfirstname">
+                                            <div class="input-group-addon"><i class="fa fa-info"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <!--  Inscription Troupes -->
                                 <div class="form-group" ng-show="(newUser.typeArtist == false) && (newUser.role == true)">
                                     <div class="form-group">
