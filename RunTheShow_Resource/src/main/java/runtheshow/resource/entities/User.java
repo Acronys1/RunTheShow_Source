@@ -119,7 +119,7 @@ public class User extends AbstractEntity {
     public User() {
     }
 
-    public User(String login, String password, String nom, String prenom, String nomArtiste, String mailContact, List<Role> roles) {
+    public User(String login, String password, String nom, String prenom, String nomArtiste, String mailContact, int sexe, List<Role> roles) {
         this.login = login;
         this.nom = nom;
         this.prenom = prenom;
@@ -127,6 +127,7 @@ public class User extends AbstractEntity {
         this.enabled = true;
         this.nomArtiste = nomArtiste;
         this.mailContact = mailContact;
+        this.sexe = sexe;
         this.roles = roles;
         this.mesContratsArtiste = new ArrayList<>();
         this.mesContratsOrganisateur = new ArrayList<>();
