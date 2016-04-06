@@ -48,6 +48,7 @@ angular.module('auth', ['home']).factory(
                             //initialisation de la variable de session de l'utilisateur
                             $http.get('/resource/user/current').success(function (data) {
                                 $rootScope.currentUser = data;
+                                $rootScope.currentUserPrenomHeader = data.prenom;
                             });
                             //fin initilisation de la variable de session de l'utilisateur
                         } else {
@@ -73,7 +74,7 @@ angular.module('auth', ['home']).factory(
                         console.log("Logout failed");
                     });
                 },
-                init: function (homePath, loginPath, logoutPath, DTOptionsBuilder) {
+                init: function (homePath, loginPath, logoutPath) {
 
                     auth.homePath = homePath;
                     auth.loginPath = loginPath;
@@ -86,9 +87,9 @@ angular.module('auth', ['home']).factory(
                     })
 
                     // Guard route changes and switch to login page if unauthenticated
-                    $rootScope.$on('$routeChangeStart', function () {
+                    /*$rootScope.$on('$routeChangeStart', function () {
                         enter();
-                    });
+                    });*/
                 }
 
             };
