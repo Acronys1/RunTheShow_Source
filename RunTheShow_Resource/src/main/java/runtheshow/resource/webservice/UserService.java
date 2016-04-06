@@ -5,6 +5,7 @@
  */
 package runtheshow.resource.webservice;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -56,7 +57,7 @@ public class UserService {
     
     @RequestMapping("/current")
     public String getCurrentUser(Principal user) {
-        return metier.getUserByName(user.getName()).toString();
+        return metier.getUserByName(user.getName()).toString().replace("null", "");
         
     }
     
