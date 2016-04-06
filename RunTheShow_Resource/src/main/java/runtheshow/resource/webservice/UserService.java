@@ -57,8 +57,7 @@ public class UserService {
     
     @RequestMapping("/current")
     public String getCurrentUser(Principal user) {
-        String str = metier.getUserByName(user.getName()).toString().replace("null", "");
-        return str;
+        return metier.getUserByName(user.getName()).toString().replace("null", "");
         
     }
     
