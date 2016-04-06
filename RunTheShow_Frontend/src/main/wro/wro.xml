@@ -37,7 +37,7 @@
         <css>webjar:datatables/1.10.11/css/jquery.dataTables.css</css>
     </group>
    
-    <group name="app-component">
+    <!--<group name="app-component">
         <js>file:@project.basedir@/src/main/resources/static/js/auth/auth.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/home/home.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/users/users.js</js>
@@ -47,5 +47,7 @@
         <js>file:@project.basedir@/src/main/resources/static/js/navigation/navigation.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/event/invitation.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/app.js</js>
-    </group>
+    </group>-->
+    
+   
 </groups>
