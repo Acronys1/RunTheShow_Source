@@ -2,10 +2,7 @@
     <div class="heading">
         <h3 class="text-uppercase">Personal details</h3>
     </div>
-    <div class="alert alert-danger" ng-repeat="(key, value) in errorMessage">
-        <p>{{value}}</p>
-    </div>
-    
+
     <div class="alert alert-success" ng-show="updateOK">
         <p>{{updateOK}}</p>
     </div>
@@ -17,13 +14,21 @@
                 <div class="form-group">
                     <label for="mailContact">Email de contact</label>
                     <input class="form-control" id="nom" type="mailContact" ng-model="currentUser.mailContact">
+                    <span class="text-danger" ng-show="errorMessage.emailContact"> 
+                        {{errorMessage.emailContact}}                     
+                    </span>                
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="login">Login</label>
                     <input class="form-control" id="Login" type="login" ng-model="currentUser.login">
+                    <span class="text-danger" ng-show="errorMessage.login"> 
+                        {{errorMessage.login}}                     
+                    </span>                
                 </div>
+
+
             </div>               
         </div>
 
@@ -32,12 +37,20 @@
                 <div class="form-group">
                     <label for="nom">Nom</label>
                     <input class="form-control" id="nom" type="text" ng-model="currentUser.nom">
+                    <span class="text-danger" ng-show="errorMessage.nom"> 
+                        {{errorMessage.nom}}                     
+                    </span>                
                 </div>
+
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="prenom">Prénom</label>
                     <input class="form-control" id="prenom" type="text" ng-model="currentUser.prenom">
+
+                    <span class="text-danger" ng-show="errorMessage.prenom"> 
+                        {{errorMessage.prenom}}                     
+                    </span>                
                 </div>
             </div>
         </div>
@@ -54,11 +67,14 @@
                     </select>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="DateDeNaissance">Date de naissance</label>
-                    <input class="form-control" id="dateDeNaissance" type="text" ng-model="currentUser.dateDeNaissance">
-                </div>
+            <div class="col-sm-6">                
+                <label for="DateDeNaissance">Date de naissance</label>
+                <div class="form-group" id="divDateNaissance">
+                    <input class="form-control" id="dateDeNaissance" type="text" ng-model="currentUser.dateDeNaissance">                    
+                    <span class="text-danger" ng-show="errorMessage.dateNaissance"> 
+                        {{errorMessage.dateNaissance}}                     
+                    </span>                     
+                </div>                  
             </div>
         </div>        
         <div class="row">
@@ -66,13 +82,19 @@
                 <div class="form-group">
                     <label for="telFixe">Télephone fixe</label>
                     <input class="form-control" id="telFixe" type="text" ng-model="currentUser.telephoneFixe">
+                    <span class="text-danger" ng-show="errorMessage.telFixe"> 
+                        {{errorMessage.telFixe}}                     
+                    </span>                
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="telPortable">Télphone portable</label>
                     <input class="form-control" id="telPortable" type="text" ng-model="currentUser.telephonePortable">
-                </div>
+                    <span class="text-danger" ng-show="errorMessage.telPortable"> 
+                        {{errorMessage.telPortable}}                     
+                    </span>                 
+                </div>               
             </div>
         </div>
 
@@ -81,13 +103,19 @@
                 <div class="form-group">
                     <label for="adresse">Adresse</label>
                     <input class="form-control" id="adresse" type="text" ng-model="currentUser.adresse">
+                    <span class="text-danger" ng-show="errorMessage.adresse"> 
+                        {{errorMessage.adresse}}                     
+                    </span>                
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="codePostal">Code postal</label>
                     <input class="form-control" id="codePostal" type="text" ng-model="currentUser.codePostal">
-                </div>
+                    <span class="text-danger" ng-show="errorMessage.codePostal"> 
+                        {{errorMessage.codePostal}}                     
+                    </span>                 
+                </div>               
             </div>
         </div>
 
@@ -95,8 +123,12 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="ville">Ville</label>
-                    <input class="form-control" id="ville" type="text" ng-model="currentUser.ville">
-                </div>
+                    <input class="form-control" id="ville" type="text" ng-model="currentUser.ville">                    
+
+                    <span class="text-danger" ng-show="errorMessage.ville"> 
+                        {{errorMessage.ville}}                     
+                    </span>                    
+                </div>             
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
@@ -116,5 +148,4 @@
         </div>
 
     </form>
-
 </div>

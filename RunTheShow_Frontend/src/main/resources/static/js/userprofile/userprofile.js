@@ -34,43 +34,43 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
         $scope.errorMessage = {};        
         $scope.updateOK = null;
         if (!isEmail($rootScope.currentUser.mailContact)) {
-            $scope.errorMessage["emailContact"] =  "L'email de contact n'est pas valide.";
+            $scope.errorMessage.emailContact =  "L'email de contact n'est pas valide.";
             noError = false;
         }
         if (!isEmail($rootScope.currentUser.login)) {
-            $scope.errorMessage["login"] = "Le login doit être un email valide.";
+            $scope.errorMessage.login = "Le login doit être un email valide.";
             noError = false;
         }
         if (!isTelephone($rootScope.currentUser.telephoneFixe)) {
-            $scope.errorMessage["telFixe"] =  "Le télephone fixe n'est pas valide: il doit comporter 10 chiffres.";
+            $scope.errorMessage.telFixe =  "Le télephone fixe n'est pas valide: il doit comporter 10 chiffres.";
             noError = false;
         }
         if (!isTelephone($rootScope.currentUser.telephonePortable)) {
-            $scope.errorMessage["telPortable"] =  "Le télephone portable n'est pas valide: il doit comporter 10 chiffres.";
+            $scope.errorMessage.telPortable =  "Le télephone portable n'est pas valide: il doit comporter 10 chiffres.";
             noError = false;
         }
         if ($rootScope.currentUser.nom.length < 2 || $rootScope.currentUser.nom.length > 100) {
-            $scope.errorMessage["nom"] = "Le nom doit avoir au minimum deux caractères et au maximum 100.";
+            $scope.errorMessage.nom = "Le nom doit avoir au minimum deux caractères et au maximum 100.";
             noError = false;
         }
         if ($rootScope.currentUser.prenom.length < 2 || $rootScope.currentUser.prenom.length > 100) {
-            $scope.errorMessage["prenom"] = "Le prenom doit avoir au minimum deux caractères et au maximum 100.";
+            $scope.errorMessage.prenom = "Le prenom doit avoir au minimum deux caractères et au maximum 100.";
             noError = false;
         }
         if ($rootScope.currentUser.codePostal.length < 5) {
-            $scope.errorMessage["codePostal"] = "Le code postal n'est pas valide.";
+            $scope.errorMessage.codePostal = "Le code postal n'est pas valide.";
             noError = false;
         }
         if ($rootScope.currentUser.adresse.length < 5) {
-            $scope.errorMessage["adresse"] = "L'adresse n'est pas valide.";
+            $scope.errorMessage.adresse = "L'adresse n'est pas valide.";
             noError = false;
         }       
         if ($rootScope.currentUser.ville.length < 2) {
-            $scope.errorMessage["ville"] = "La ville doit comporter au moins deux caractères.";
+            $scope.errorMessage.ville = "La ville doit comporter au moins deux caractères.";
             noError = false;
         }
         if (!isDate($rootScope.currentUser.dateDeNaissance)) {
-            $scope.errorMessage["dateNaissance"] = "La date doit être sous la forme jj/mm/aaaa";
+            $scope.errorMessage.dateNaissance = "La date doit être sous la forme jj/mm/aaaa";
             noError = false;
         }
         if (noError == true) {
