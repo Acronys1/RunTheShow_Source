@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -66,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/", "/login", "/message", "/home", "/resource/user/add").permitAll()
+                .antMatchers("/index.html", "/", "/login", "/message", "/home", "/resource/user/add","/artist_presentation").permitAll()
                 .antMatchers("/user", "/event","/userprofile").authenticated()
                 .antMatchers("/resource/user/**").authenticated()
                 .and()

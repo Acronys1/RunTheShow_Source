@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile','signup'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile','signup','artist_presentation'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -20,6 +20,9 @@ angular
                     }).when('/userprofile', {
                         templateUrl: 'js/userprofile/userprofile.html',
                         controller: 'userprofile'
+                    }).when('/artist_presentation', {
+                        templateUrl: 'js/artist_presentation/artist_presentation.html',
+                        controller: 'artist_presentation'
                     }).when('/invitation', {
                         templateUrl: 'js/event/invitation.html',
                         controller: 'invitation'
