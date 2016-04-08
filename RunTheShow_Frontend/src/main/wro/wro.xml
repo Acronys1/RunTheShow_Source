@@ -7,6 +7,10 @@
         <!--<css>webjar:bootstrap/3.3.6/css/bootstrap.min.css</css>-->
         <css>file:@project.basedir@/src/main/wro/main.less</css>
     </group>
+    
+    <group name="bootstrap">
+        <js>webjar:bootstrap/3.3.6/js/bootstrap.min.js</js>
+    </group>
    
     <group name="theme">  
         <css>webjar:font-awesome/4.5.0/css/font-awesome.min.css</css>
@@ -21,10 +25,6 @@
         <js>webjar:jquery/2.1.1/jquery.min.js</js>
         <js>webjar:jquery/1.11.4/jquery-ui.min.js</js>
     </group>
-    
-    <group name="bootstrap">
-        <js>webjar:bootstrap/3.3.6/js/bootstrap.min.js</js>
-    </group>
    
     <group name="datetimepicker">  
         <css>file:@project.basedir@/src/main/wro/css/bootstrap-datepicker.min.css</css>
@@ -34,12 +34,10 @@
         <js>file:@project.basedir@/src/main/wro/js/bootstrap-datetimepicker.min.js</js> 
     </group>
    
-    <group name="angular-plugin">
+    <group name="angular-modules">
         <js>webjar:angular-datatables/0.5.2/angular-datatables.js</js>
         <js>webjar:datatables/1.10.11/js/jquery.dataTables.js</js>
         <css>webjar:datatables/1.10.11/css/jquery.dataTables.css</css>
-        <js>webjar:angular-xeditable/0.1.9/js/xeditable.min.js</js>
-        <css>webjar:angular-xeditable/0.1.9/css/xeditable.min.css</css>
     </group>
    
     <!--<group name="app-component">
@@ -51,8 +49,7 @@
         <js>file:@project.basedir@/src/main/resources/static/js/event/event.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/navigation/navigation.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/event/invitation.js</js>
+        <js>file:@project.basedir@/src/main/resources/static/js/artist_presentation/artist_presentation.js</js>
         <js>file:@project.basedir@/src/main/resources/static/js/app.js</js>
     </group>-->
-    
-   
 </groups>
