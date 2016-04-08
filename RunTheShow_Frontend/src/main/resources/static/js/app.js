@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile','signup','artist_presentation'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile','signup','artist_presentation','xeditable'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -33,12 +33,15 @@ angular
                     /**/
 
                 }
-        ).run(function (auth, $rootScope, DTOptionsBuilder) {
+        ).run(function (auth, $rootScope, DTOptionsBuilder,editableOptions) {
 
     // Initialize auth module with the home page and login/logout path
     // respectively
     auth.init('/', '/login', '/logout');
 
     $rootScope.dtOptions = DTOptionsBuilder.fromSource().withLanguageSource('/resources/French.json');
+
+    //xeditable
+    editableOptions.theme = 'bs3'; // bootstrap3 theme. Can be also 'bs2', 'default'
 
 });
