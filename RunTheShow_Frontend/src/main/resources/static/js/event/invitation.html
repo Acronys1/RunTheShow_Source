@@ -58,7 +58,7 @@
                                 <img style="float:left;border-radius: 25px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
                                 {{$item.name}}
                             </ui-select-match>
-                            <ui-select-choices repeat="person in ctrl.people | propsFilter: {name: $select.search}">
+                            <ui-select-choices refresh="refreshArtiste($select.search)" refresh-delay="1000" repeat="person in ctrl.people">
                                 <small>
                                   <img style="float:left;border-radius: 25px;" ng-src="{{person.image}}"  alt="ImageMarchePas" />
                                 </small>
