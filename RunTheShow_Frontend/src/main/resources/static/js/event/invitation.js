@@ -1,87 +1,87 @@
-(function () {
-  'use strict';
-  angular
-      .module('contactChipsDemo', ['ngMaterial'])
-      .controller('ContactChipDemoCtrl', DemoCtrl);
-  function DemoCtrl ($q, $timeout) {
-    var self = this;
-    var pendingSearch, cancelSearch = angular.noop;
-    var cachedQuery, lastSearch;
-    self.allContacts = loadContacts();
-    self.contacts = [self.allContacts[0]];
-    self.asyncContacts = [];
-    self.filterSelected = true;
-    self.querySearch = querySearch;
-    self.delayedQuerySearch = delayedQuerySearch;
-    /**
-     * Search for contacts; use a random delay to simulate a remote call
-     */
-    function querySearch (criteria) {
-      cachedQuery = cachedQuery || criteria;
-      return cachedQuery ? self.allContacts.filter(createFilterFor(cachedQuery)) : [];
-    }
-    /**
-     * Async search for contacts
-     * Also debounce the queries; since the md-contact-chips does not support this
-     */
-    function delayedQuerySearch(criteria) {
-      cachedQuery = criteria;
-      if ( !pendingSearch || !debounceSearch() )  {
-        cancelSearch();
-        return pendingSearch = $q(function(resolve, reject) {
-          // Simulate async search... (after debouncing)
-          cancelSearch = reject;
-          $timeout(function() {
-            resolve( self.querySearch() );
-            refreshDebounce();
-          }, 0, true)
-        });
-      }
-      return pendingSearch;
-    }
-    function refreshDebounce() {
-      lastSearch = 0;
-      pendingSearch = null;
-      cancelSearch = angular.noop;
-    }
-    /**
-     * Debounce if querying faster than 300ms
-     */
-    function debounceSearch() {
-      var now = new Date().getMilliseconds();
-      lastSearch = lastSearch || now;
-      return ((now - lastSearch) < 300);
-    }
-    /**
-     * Create filter function for a query string
-     */
-    function createFilterFor(query) {
-      var lowercaseQuery = angular.lowercase(query);
-      return function filterFn(contact) {
-        return (contact._lowername.indexOf(lowercaseQuery) != -1);;
-      };
-    }
-    function loadContacts() {
-      var contacts = [
-        'Marina Augustine',
-        'Oddr Sarno',
-        'Nick Giannopoulos',
-        'Narayana Garner',
-        'Anita Gros',
-        'Megan Smith',
-        'Tsvetko Metzger',
-        'Hector Simek',
-        'Some-guy withalongalastaname'
-      ];
-      return contacts.map(function (c, index) {
-        var cParts = c.split(' ');
-        var contact = {
-          name: c,
-          image: 'http://lorempixel.com/50/50/people?' + index,
-        };
-        contact._lowername = contact.name.toLowerCase();
-        return contact;
+'use strict';
+var app = angular.module('demo', ['ngSanitize', 'ui.select']);
+
+app.filter('propsFilter', function() {
+  return function(items, props) {
+    var out = [];
+    
+    
+    if (angular.isArray(items)) {
+      var keys = Object.keys(props);
+        
+      items.forEach(function(item) {
+        var itemMatches = false;
+
+
+        for (var i = 0; i < keys.length; i++) {
+          var prop = keys[i];
+          var text = props[prop].toLowerCase();
+          if (item[prop].toString().toLowerCase().indexOf(text) !== -1) {
+            itemMatches = true;
+            break;
+          }
+        }
+
+        if (itemMatches) {
+          out.push(item);
+        }
       });
+    } else {
+      // Let the output be the input untouched
+      out = items;
     }
-  }
-})();
+
+    return out;
+  };
+});
+
+app.controller('DemoCtrl', function ($scope, $http) {
+  var vm = this;
+  
+  $scope.bindCtrl = "Ok";
+
+  vm.disabled = undefined;
+  vm.searchEnabled = undefined;
+  
+  vm.selectedPeople = function(){
+      console.log("TEST");
+  };
+
+
+  vm.enable = function() {
+    vm.disabled = false;
+  };
+
+  vm.disable = function() {
+    vm.disabled = true;
+  };
+
+  vm.enableSearch = function() {
+    vm.searchEnabled = true;
+  };
+
+  vm.disableSearch = function() {
+    vm.searchEnabled = false;
+  };
+
+  
+  /**
+   * Tableau : nom/prenom + img
+   * 
+   */
+  vm.people = [
+    { name: 'Adam',      image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Amalie',    image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Estefana', image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Adrian',    image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Wladimir',  image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Samantha azymepetepaslescouilles',  image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Nicole',    image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Natasha',   image: 'http://lorempixel.com/50/50/people'},
+    { name: 'Michael',   image: 'http://lorempixel.com/50/50/people'},
+    { name: 'NicolÃ¡s',   image: 'http://lorempixel.com/50/50/people'}
+  ];
+  
+
+  
+});

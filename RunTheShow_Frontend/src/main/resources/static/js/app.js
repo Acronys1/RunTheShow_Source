@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'event', 'userprofile','signup','artist_presentation','xeditable'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile','signup','artist_presentation','xeditable'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -25,7 +25,7 @@ angular
                         controller: 'artist_presentation'
                     }).when('/invitation', {
                         templateUrl: 'js/event/invitation.html',
-                        controller: 'invitation'
+                        controller: 'DemoCtrl'
                     }).otherwise('/');
 
                     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
