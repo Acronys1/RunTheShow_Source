@@ -34,10 +34,12 @@
         <js>file:@project.basedir@/src/main/wro/js/bootstrap-datetimepicker.min.js</js> 
     </group>
    
-    <group name="angular-datatables">
+    <group name="angular-plugin">
         <js>webjar:angular-datatables/0.5.2/angular-datatables.js</js>
         <js>webjar:datatables/1.10.11/js/jquery.dataTables.js</js>
         <css>webjar:datatables/1.10.11/css/jquery.dataTables.css</css>
+        <js>webjar:angular-xeditable/0.1.9/js/xeditable.min.js</js>
+        <css>webjar:angular-xeditable/0.1.9/css/xeditable.min.css</css>
     </group>
    
     <!--<group name="app-component">
