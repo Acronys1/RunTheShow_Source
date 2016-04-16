@@ -33,6 +33,10 @@
         <js>file:@project.basedir@/src/main/wro/js/bootstrap-datepicker.js</js>
         <js>file:@project.basedir@/src/main/wro/js/bootstrap-datetimepicker.min.js</js> 
     </group>
+    
+    <group name="disable-all">
+        <js>file:@project.basedir@/src/main/wro/js/angular-disable-all.js</js>
+    </group>
    
     <group name="angular-modules">
         <js>webjar:angular-datatables/0.5.2/angular-datatables.js</js>
