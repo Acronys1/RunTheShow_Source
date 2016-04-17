@@ -56,15 +56,26 @@ event.directive('datepicker', function() {
         link : function (scope, element, attrs, ngModCtrl) {
             $(function () {
                 var min = new Date();
-                min.setHours(0,0,0,0)
+                var myHours = min.getHours();
+                min.setHours(myHours+6)
                 
                 element.datetimepicker({
                     format: 'DD/MM/YYYY HH:mm',
                     minDate: min,
-                    useCurrent: false,
                     calendarWeeks: true
                 });
                 
+                element.on("dp.hide", function (e) {
+                    if(attrs.id.indexOf("in") != -1)
+                    {
+                        ngModCtrl.$setViewValue(document.getElementById('checkin').value);
+                    }
+                    else
+                    {
+                        ngModCtrl.$setViewValue(document.getElementById('checkout').value);
+                    }
+                    
+                });
                 
                 element.on("dp.change", function (e) {
                     if(attrs.id.indexOf("in") != -1)
@@ -83,6 +94,8 @@ event.directive('datepicker', function() {
                     }
                     
                 });
+                
+                
                 
                 /*$('#datetimepicker6').datetimepicker({
                     format: 'DD/MM/YYYY HH:mm',
@@ -131,18 +144,32 @@ event.directive('sdatepicker', function() {
                     }
                     else
                     {
+                        datemin = $('#checkin').data("DateTimePicker").date();
                         //alert("Je suis dans scheckin-"+cpt)
-                        datemin = $("#scheckin-"+cpt).data("DateTimePicker").date();
+                        //datemin = $("#scheckin-"+cpt).data("DateTimePicker").date();
                     }
                 }
                 
-                element.datetimepicker({
-                    format: 'DD/MM/YYYY HH:mm',
-                    minDate: datemin,
-                    maxDate: datemax,
-                    useCurrent: false,
-                    calendarWeeks: true
-                });
+                if(attrs.id.indexOf("in") != -1)
+                {
+                    element.datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        minDate: datemin,
+                        maxDate: datemax,
+                        calendarWeeks: true
+                    });
+                }
+                else
+                {
+                    element.datetimepicker({
+                        format: 'DD/MM/YYYY HH:mm',
+                        minDate: datemin,
+                        maxDate: datemax,
+                        useCurrent: false,
+                        calendarWeeks: true
+                    });
+                }
+                
                 
                 element.on("dp.change", function (e) {
                     if(attrs.id.indexOf("in") != -1)
@@ -163,6 +190,18 @@ event.directive('sdatepicker', function() {
                         
                     }
                     
+                });
+                
+                element.on("dp.hide", function (e) {
+                    if(attrs.id.indexOf("in") != -1)
+                    {
+                        $("#scheckout-"+cpt).data("DateTimePicker").minDate(e.date);
+                        ngModelCtrl.$setViewValue(document.getElementById('scheckin-'+cpt).value);
+                    }
+                    else
+                    {
+                        ngModelCtrl.$setViewValue(document.getElementById('scheckout-'+cpt).value);
+                    }
                 });
             })
         }
