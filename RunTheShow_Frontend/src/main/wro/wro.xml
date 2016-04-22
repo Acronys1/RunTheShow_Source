@@ -55,6 +55,9 @@
         <css>webjar:datatables/1.10.11/css/jquery.dataTables.css</css>
         <css>webjar:angular-xeditable/0.1.9/css/xeditable.css</css>
         <js>webjar:angular-xeditable/0.1.9/js/xeditable.min.js</js>
+        <js>file:@project.basedir@/src/main/wro/js/dropzone.js</js>
+        <css>file:@project.basedir@/src/main/wro/css/basic.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/dropzone.css</css>
     </group>
     
     

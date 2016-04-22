@@ -5,9 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,23 +13,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import runtheshow.resource.entities.FileUpload;
 import runtheshow.resource.metiers.FileMetier;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
-public class FileController {
+@RequestMapping("/file")
+public class FileService {
 
     @Autowired
     FileMetier fileUploadService;
 
     // Download a file
-    @RequestMapping(
-            value = "/download2",
-            method = RequestMethod.GET
-    )
+    @RequestMapping(value = "/download2", method = RequestMethod.GET)
 
     public FileUpload downloadFile2(@RequestParam("filename") String filename) {
 
@@ -56,11 +50,8 @@ public class FileController {
 
     }
     
-    // Download a file
-    @RequestMapping(
-            value = "/downloadAll",
-            method = RequestMethod.GET
-    )
+    // Download all file
+    @RequestMapping(value = "/downloadAll",method = RequestMethod.GET)
     
     public List<FileUpload> downloadAllFile() {
 
@@ -72,7 +63,7 @@ public class FileController {
 
     }
 
-    // Download a file
+    /*// Download a file
     @RequestMapping(
             value = "/download",
             method = RequestMethod.GET
@@ -115,12 +106,9 @@ public class FileController {
         headers.setContentType(new MediaType(primaryType, subType));
 
         return new ResponseEntity<>(b, headers, HttpStatus.OK);
-    }
+    }*/
 
-    @RequestMapping(
-            value = "/upload",
-            method = RequestMethod.POST
-    )
+    @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ResponseEntity uploadFile(MultipartHttpServletRequest request) {
 
         try {

@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile','signup','artist_presentation','xeditable','disableAll'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_presentation', 'xeditable', 'disableAll', 'file'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -26,6 +26,9 @@ angular
                     }).when('/invitation', {
                         templateUrl: 'js/event/invitation.html',
                         controller: 'DemoCtrl'
+                    }).when('/file', {
+                        templateUrl: 'js/file/file_example.html',
+                        controller: 'file'
                     }).otherwise('/');
 
                     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
@@ -33,7 +36,7 @@ angular
                     /**/
 
                 }
-        ).run(function (auth, $rootScope, DTOptionsBuilder,editableOptions) {
+        ).run(function (auth, $rootScope, DTOptionsBuilder, editableOptions) {
 
     // Initialize auth module with the home page and login/logout path
     // respectively

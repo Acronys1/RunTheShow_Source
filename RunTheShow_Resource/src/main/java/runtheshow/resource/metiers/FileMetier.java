@@ -29,7 +29,7 @@ public class FileMetier implements IFileMetier{
         return fileUploadRepository.findAll();
     }
 
-    // Upload the file
+    // Store the file reference to database
     @Override
     public void UploadFile(FileUpload doc) throws IOException {
 
@@ -38,7 +38,7 @@ public class FileMetier implements IFileMetier{
         fileUploadRepository.saveAndFlush(doc);
     }
 
-    // Upload the file
+    // Upload the file to disk
     @Override
     public void SaveFileDirectory(FileUpload doc) throws IOException {
 
@@ -97,6 +97,6 @@ public class FileMetier implements IFileMetier{
         String deepPath2 = fileName.substring(2, 4);
         String filePath = fileName.substring(5);
         
-        return "../Backend/files_import/"+deepPath1+"/"+deepPath2+"/"+filePath;
+        return "../../RunTheShow_Resource/files_import/"+deepPath1+"/"+deepPath2+"/"+filePath;
     }
 }
