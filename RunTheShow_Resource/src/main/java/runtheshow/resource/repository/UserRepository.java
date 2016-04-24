@@ -1,5 +1,6 @@
 package runtheshow.resource.repository;
 
+import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import runtheshow.resource.entities.Role;
@@ -21,4 +22,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
 	// recherche d'un utilisateur via son login
 	User findUserByLogin(String login);
+
+        //Liste des user ayant un profil artiste avec un nom d'artiste contenant le pattern motCherche
+        // !!! Pas de LIMIT en JPA.........
+        @Query("SELECT ur.user "
+                + "FROM UserRole ur "
+                + "WHERE ur.role.name = 'ROLE_ARTISTE' "
+                + "AND ur.user.nomArtiste LIKE '%?1%' ")
+        List<User> findUserArtisteByMotCle(String motCherche);
 }

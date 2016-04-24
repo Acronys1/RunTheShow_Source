@@ -23,4 +23,6 @@ public interface IUserMetier {
         public Boolean DeleteUser(User user);
         
         public List<Role> getAllRole();
+        
+        public List<User> getUsersBySearch(String motCherche);
 }

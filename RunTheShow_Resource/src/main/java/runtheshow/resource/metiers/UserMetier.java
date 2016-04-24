@@ -72,4 +72,16 @@ public class UserMetier implements IUserMetier {
         return userRepository.findOne(user.getId()) != null;
     }
 
+    /**
+     * Retourne une liste de 10 artistes à partir d'un mot clé rentré par un user 
+     * @param motCherche
+     * @return Liste d'artiste
+     * @todo Chercher 5 artistes parmis les favorited et 5 parmis la base principale
+     */
+    @Override
+    public List<User> getUsersBySearch(String motCherche) {
+        List<User> lstUserArtiste = userRepository.findUserArtisteByMotCle(motCherche);
+        return Lists.newArrayList(lstUserArtiste);
+    }
+
 }

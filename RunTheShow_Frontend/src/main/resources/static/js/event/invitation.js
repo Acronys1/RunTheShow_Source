@@ -35,7 +35,7 @@ app.filter('propsFilter', function() {
   };
 });
 
-app.controller('DemoCtrl', function ($scope, $http) {
+app.controller('DemoCtrl', function ($scope, $http, $timeout) {
   var vm = this;
   
   $scope.bindCtrl = "Ok";
@@ -45,22 +45,21 @@ app.controller('DemoCtrl', function ($scope, $http) {
   
   
   $scope.refreshArtiste = function(caracteres){
-      //var test = [];
-      console.log(caracteres);
-      //var numTest = Math.random();
-      //numTest = numTest.toString();
-      //test.push({ name: numTest,      image: 'http://lorempixel.com/50/50/people'});
-      //console.log(test);
       
-      //Pour pas trop surcharger le nombre de tapage dans la base
-      /*
-         $timeout(function() {
-            $http.get("").success(function (data, status) {
+      console.log(caracteres);
+      //vm.people.push({ name: numTest,      image: 'http://lorempixel.com/50/50/people'});
+      if(caracteres.length > 3){
+          $timeout(function() {
+            $http.get("/resource/invitation/filter", {params: { cara: caracteres }}).success(function (data, status) {
+                    //vm.people = [];
+                    //vm.people.push(datas);
+                    console.log(data);
                 }).error(function (data, status) { // called asynchronously if an error occurs
                     console.log("Erreur lors de l'envoie des informations.");
                 });
           }, 1000, true);//Délais de 1 seconde entre chaque appel
-      */
+      }
+         
   };   
 
   vm.enable = function() {
