@@ -143,35 +143,69 @@
                 <div ng-app="event">
                     <fieldset style="background: #FCFCFC;padding: 16px;border: 1px solid #D5D5D5;box-shadow: 8px 8px 0px #aaa; " data-ng-repeat="choice in choices">
                         <div class="container" disable-all="lastDateTimePickerSousEvent($index)">
-                            <div class='col-md-5'>
-                                <label for="checkin">Date début sous-évènement</label>
-                                <div class="form-group">
-                                    <div class='input-group date' id="datetimedeb">
-                                        <input type='text' class="form-control" sdatepicker="" ng-model="scheckin[$index]" id="scheckin-{{$index}}"/>
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
+                            <div class="row">
+                                <div class='col-md-5'>
+                                    <label for="checkin">Date début sous-évènement</label>
+                                    <div class="form-group">
+                                        <div class='input-group date' id="datetimedeb">
+                                            <input type='text' class="form-control" sdatepicker="" ng-model="scheckin[$index]" id="scheckin-{{$index}}"/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                        <span class="text-danger"> 
+                                            {{scheckin[$index]}}                     
                                         </span>
                                     </div>
-                                    <span class="text-danger"> 
-                                        {{scheckin[$index]}}                     
-                                    </span>
                                 </div>
-                            </div>
 
-                            <div class='col-md-5'>
-                                <label for="checkout">Date fin sous-évènement</label>
-                                <div class="form-group">
-                                    <div class='input-group date' id="datetimefin">
-                                        <input type='text' class="form-control" sdatepicker="" ng-model="scheckout[$index]" id="scheckout-{{$index}}" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
+                                <div class='col-md-5'>
+                                    <label for="checkout">Date fin sous-évènement</label>
+                                    <div class="form-group">
+                                        <div class='input-group date' id="datetimefin">
+                                            <input type='text' class="form-control" sdatepicker="" ng-model="scheckout[$index]" id="scheckout-{{$index}}" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                        <span class="text-danger"> 
+                                            {{scheckout[$index]}}                     
                                         </span>
                                     </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class='col-md-10'>
+                                    <div class="form-group">
+                                        <label for="sdescription">Description</label>
+                                        <textarea class="form-control" sinput="" id="sdescription-{{$index}}"  ng-model="sdescription[$index]" name="sdescription" rows="3"></textarea>
+                                    </div>
                                     <span class="text-danger"> 
-                                        {{scheckout[$index]}}                     
+                                        {{sdescription[$index]}}                     
                                     </span>
                                 </div>
                             </div>
+                            
+                            
+                            <div class="row">
+                                <div class='col-md-2'>
+                                    <div class="form-group">
+                                        <label for="setage">Etage</label>
+                                        <input type="number" min="0" max ="20" class="form-control" sinput="" id="setage-{{$index}}" ng-model="setage[$index]" name="setage-{{$index}}">
+                                    </div>
+                                    <div role="alert">
+                                        <span class="error" ng-show="setage[$index].$error.required">
+                                          Required!</span>
+                                        <span class="error" ng-show="setage[$index].$error.number">
+                                          Not valid number!</span>
+                                    </div>
+                                    <span class="text-danger"> 
+                                        {{setage[$index]}}                     
+                                    </span>
+                                </div>
+                            </div>
+                            
                         </div>  
                         <button class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">Supprimer</button>
 
@@ -191,7 +225,18 @@
                     <div id="scheckoutDisplay">
                        {{ scheckout }}
                     </div>
+                    
+                    <div id="sdescriptionDisplay">
+                       {{ sdescription }}
+                    </div>
+                    
+                    <div id="setageDisplay">
+                       {{ setage }}
+                    </div>
+                    
                 </div>
+                
+                
             </form>
         </div>
     </div>

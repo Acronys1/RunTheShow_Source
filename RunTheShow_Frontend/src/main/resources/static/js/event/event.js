@@ -5,13 +5,18 @@ event.controller('event', function ($scope, $http) {
     $scope.choices = [];
     $scope.scheckin = [];
     $scope.scheckout = [];
+    $scope.sdescription = [];
+    $scope.setage = [];
     $scope.result;
+    
   
     $scope.addNewChoice = function() {
         var newItemNo = $scope.choices.length+1;
         $scope.choices.push({'id':'choice'+newItemNo});
         $scope.scheckin.push({});
         $scope.scheckout.push({});
+        $scope.sdescription.push({});
+        $scope.setage.push({});
     };
 
     $scope.removeChoice = function() {
@@ -19,6 +24,8 @@ event.controller('event', function ($scope, $http) {
       $scope.choices.splice(lastItem);
       $scope.scheckin.splice(lastItem);
       $scope.scheckout.splice(lastItem);
+      $scope.sdescription.splice(lastItem);
+      $scope.setage.splice(lastItem);
     };
     
     $scope.removeAllChoice = function() {
@@ -29,6 +36,8 @@ event.controller('event', function ($scope, $http) {
             $scope.choices.splice(i);
             $scope.scheckin.splice(i);
             $scope.scheckout.splice(i);
+            $scope.sdescription.splice(i);
+            $scope.setage.splice(i);
         }
     };
     
@@ -94,26 +103,6 @@ event.directive('datepicker', function() {
                     }
                     
                 });
-                
-                
-                
-                /*$('#datetimepicker6').datetimepicker({
-                    format: 'DD/MM/YYYY HH:mm',
-                    minDate: min
-                });
-                $('#datetimepicker7').datetimepicker({
-                    format: 'DD/MM/YYYY HH:mm',
-                    minDate: min
-                });
-                $("#datetimepicker6").on("dp.change", function (e) {
-                    $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
-                    ngModelCtrl.$setViewValue(document.getElementById('checkin').value);
-                });
-                $("#datetimepicker7").on("dp.change", function (e) {
-                    $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
-                    ngModelCtrl.$setViewValue(document.getElementById('checkout').value);
-                });*/
-                
             });
         }
     }
@@ -201,6 +190,26 @@ event.directive('sdatepicker', function() {
                     else
                     {
                         ngModelCtrl.$setViewValue(document.getElementById('scheckout-'+cpt).value);
+                    }
+                });
+            })
+        }
+    }
+});
+
+event.directive('sinput', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+            $(function(){
+                ngModelCtrl.$setViewValue(attrs.id);
+                
+                element.on("keypress", function (e) {
+                    //alert("toto");
+                    
+                    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                       //alert("Seul les chiffres sont autorisés")
                     }
                 });
             })
