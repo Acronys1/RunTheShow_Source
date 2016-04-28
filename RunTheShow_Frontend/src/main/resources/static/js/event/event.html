@@ -90,6 +90,9 @@
         
         
         <div id="addEvent" class="tab-pane fade">
+            <div class="alert alert-danger" ng-show="errorAjout">
+                {{errorMessage}}
+            </div>
             <form name="fen" role="form" ng-submit="addEvent()">
                 <fieldset class="form-group">
                     <label for="intitule">Intitulé :</label>
@@ -236,6 +239,7 @@
                     
                 </div>
                 
+                <button type="submit" class="btn btn-template-main" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))"><i class="fa fa-save"></i> Sauvegarder les évènements</button>
                 
             </form>
         </div>

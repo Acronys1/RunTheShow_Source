@@ -6,7 +6,9 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -41,18 +43,19 @@ public class Evenement extends AbstractEntity {
     private String description;
     
     @Column(name="event_dateHeureDebut")
-    @Temporal(TemporalType.TIMESTAMP)
     @NotNull
-    private java.util.Calendar dateHeureDebut;
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    private Calendar dateHeureDebut;
     
     @Column(name="event_dateHeureFin")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Calendar dateHeureFin;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    private Calendar dateHeureFin;
     
     @Lob
     @Column(name="event_infoComp")
-    @NotNull
     private String infoComp;
     
     @ManyToOne
@@ -79,6 +82,18 @@ public class Evenement extends AbstractEntity {
     public Evenement() {
         this.mesSousEvenements = new ArrayList<>();
         this.mesMedias = new ArrayList<>();
+    }
+    
+    public Evenement(String intitule, String description, Calendar dateHeureDebut, Calendar dateHeureFin, String infoComp, User u){
+        this.intitule = intitule;
+        this.description = description;
+        this.dateHeureDebut = dateHeureDebut;
+        this.dateHeureFin = dateHeureFin;
+        this.infoComp = infoComp;
+        this.createur = u;
+        this.mesSousEvenements = new ArrayList<>();
+        this.mesMedias = new ArrayList<>();
+        this.tag = new ArrayList<>();
     }
 
     /**

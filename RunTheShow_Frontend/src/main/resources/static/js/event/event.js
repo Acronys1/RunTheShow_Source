@@ -8,6 +8,7 @@ event.controller('event', function ($scope, $http) {
     $scope.sdescription = [];
     $scope.setage = [];
     $scope.result;
+    $scope.event = {};
     
   
     $scope.addNewChoice = function() {
@@ -54,6 +55,28 @@ event.controller('event', function ($scope, $http) {
     $scope.initFirst = function ()
     {
         
+    };
+    
+    $scope.addEvent = function ()
+    {
+
+        var data = JSON.stringify({
+            intitule: $scope.event.intitule,
+            description: $scope.event.description,
+            dateHeureDebut : $scope.event.datetimedebevent,
+            dateHeureFin : $scope.event.datetimefinevent,
+            infoComp: $scope.event.info
+        })
+        
+        $http.post("/resource/event/add", data).success(function (data, status) {
+            $scope.response = data;
+            $scope.initFirst();
+            $scope.errorAjout = false;
+        }).error(function (data, status) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.errorAjout = true;
+            $scope.errorMessage = "Erreur lors de l'ajout, un ou plusieurs champs sont manquants. Data : " + data + "    Status : " + status;
+        });
     };
     
 });
