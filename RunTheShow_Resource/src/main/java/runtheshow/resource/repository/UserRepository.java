@@ -28,6 +28,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
         @Query("SELECT ur.user "
                 + "FROM UserRole ur "
                 + "WHERE ur.role.name = 'ROLE_ARTISTE' "
-                + "AND ur.user.nomArtiste LIKE '%?1%' ")
+                + "AND ur.user.nomArtiste LIKE %?1%")
         List<User> findUserArtisteByMotCle(String motCherche);
 }

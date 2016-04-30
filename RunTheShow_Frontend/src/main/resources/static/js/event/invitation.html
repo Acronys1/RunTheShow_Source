@@ -52,9 +52,9 @@
                         <h1>Recherche plusieurs artistes +  com perso pour envoyer invit</h1>
                         
                         <hr>
-                        <h3>Array of objects (sorting enabled)</h3>
+                        <label>Inviter des artistes</label>
                         <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: 800px;">
-                            <ui-select-match placeholder="Sélectionnez des artistes à inviter">
+                            <ui-select-match placeholder="Chercher des artistes à inviter">
                                 <img style="float:left;border-radius: 25px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
                                 {{$item.name}}
                             </ui-select-match>
@@ -67,9 +67,21 @@
                           </ui-select-choices>
                         </ui-select>
                         selection : {{ ctrl.multipleDemo.selectedPeople }}<br>
-                        tape : {{ tapeCara }}
-                    </div>
+                    
+                        <br><br>
+                        <fieldset class="form-group">
+                            <label for="msgPerso">Envoyer un message personnel</label>
+                            <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
+                        </fieldset>
+
+                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button ng-click="sendInvitation()" type="submit" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
+                            </div>
+                        </div>
+                    </div>                    
                 </section>
+                
 
             </div>
             <!-- /.col-md-9 -->

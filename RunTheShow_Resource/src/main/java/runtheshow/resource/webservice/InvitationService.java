@@ -29,8 +29,13 @@ public class InvitationService {
     @Autowired
     private IUserMetier metier;
 
-    @RequestMapping(value = "/filter", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    @RequestMapping(value = "/filter/{caracteres}", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public String filter(@PathVariable String caracteres) {
         return metier.getUsersBySearch(caracteres).toString();
+    }
+    
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
+    public Boolean addUser(@RequestBody User user, HttpServletResponse response) {
+        return metier.AddUser(user);
     }
 }
