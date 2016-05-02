@@ -9,6 +9,7 @@ event.controller('event', function ($scope, $http) {
     $scope.setage = [];
     $scope.result;
     $scope.event = {};
+    $scope.sousEvent = {};
     
   
     $scope.addNewChoice = function() {
@@ -59,23 +60,48 @@ event.controller('event', function ($scope, $http) {
     
     $scope.addEvent = function ()
     {
-
         var data = JSON.stringify({
             intitule: $scope.event.intitule,
             description: $scope.event.description,
-            dateHeureDebut : $scope.event.datetimedebevent,
-            dateHeureFin : $scope.event.datetimefinevent,
+            dateHeureDebut: $scope.event.datetimedebevent,
+            dateHeureFin: $scope.event.datetimefinevent,
             infoComp: $scope.event.info
         })
         
+        console.log("JSON1 " + data);
+        
         $http.post("/resource/event/add", data).success(function (data, status) {
             $scope.response = data;
-            $scope.initFirst();
+            
+            for(var i = 0; i<$scope.scheckin.length; i++)
+            {
+                var ssEvent = JSON.stringify({
+                    dateDebut: $scope.sousEvent.scheckin[i],
+                    dateFin: $scope.sousEvent.scheckout[i],
+                    intitule: $scope.sousEvent.sdescription[i],
+                    etage: $scope.sousEvent.setage[i]
+                })
+                
+                console.log("JSON " + ssEvent);
+                
+                $http.post("/resource/sousEvent/add", ssEvent).success(function (ssEvent, status) {
+                    $scope.response = ssEvent;
+
+                    $scope.initFirst();
+                    $scope.errorAjout = false;
+                }).error(function (ssEvent, status) { // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    $scope.errorAjout = true;
+                    $scope.errorMessage = "Erreur lors de l'ajout d'un sous-évènement, un ou plusieurs champs sont manquants. Data : " + ssEvent + "    Status : " + status;
+                });
+            }
+            
+            
             $scope.errorAjout = false;
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;
-            $scope.errorMessage = "Erreur lors de l'ajout, un ou plusieurs champs sont manquants. Data : " + data + "    Status : " + status;
+            $scope.errorMessage = "Erreur lors de l'ajout d'un évènement, un ou plusieurs champs sont manquants. Data : " + data + "    Status : " + status;
         });
     };
     

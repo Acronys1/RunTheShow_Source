@@ -151,13 +151,13 @@
                                     <label for="checkin">Date début sous-évènement</label>
                                     <div class="form-group">
                                         <div class='input-group date' id="datetimedeb">
-                                            <input type='text' class="form-control" sdatepicker="" ng-model="scheckin[$index]" id="scheckin-{{$index}}"/>
+                                            <input type='text' class="form-control" sdatepicker="" ng-model="sousEvent.scheckin[$index]" id="scheckin-{{$index}}"/>
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
                                         <span class="text-danger"> 
-                                            {{scheckin[$index]}}                     
+                                            {{sousEvent.scheckin[$index]}}                     
                                         </span>
                                     </div>
                                 </div>
@@ -166,13 +166,13 @@
                                     <label for="checkout">Date fin sous-évènement</label>
                                     <div class="form-group">
                                         <div class='input-group date' id="datetimefin">
-                                            <input type='text' class="form-control" sdatepicker="" ng-model="scheckout[$index]" id="scheckout-{{$index}}" />
+                                            <input type='text' class="form-control" sdatepicker="" ng-model="sousEvent.scheckout[$index]" id="scheckout-{{$index}}" />
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
                                             </span>
                                         </div>
                                         <span class="text-danger"> 
-                                            {{scheckout[$index]}}                     
+                                            {{sousEvent.scheckout[$index]}}                     
                                         </span>
                                     </div>
                                 </div>
@@ -182,10 +182,10 @@
                                 <div class='col-md-10'>
                                     <div class="form-group">
                                         <label for="sdescription">Description</label>
-                                        <textarea class="form-control" sinput="" id="sdescription-{{$index}}"  ng-model="sdescription[$index]" name="sdescription" rows="3"></textarea>
+                                        <textarea class="form-control" sinput="" id="sdescription-{{$index}}"  ng-model="sousEvent.sdescription[$index]" name="sdescription" rows="3"></textarea>
                                     </div>
                                     <span class="text-danger"> 
-                                        {{sdescription[$index]}}                     
+                                        {{sousEvent.sdescription[$index]}}                     
                                     </span>
                                 </div>
                             </div>
@@ -195,16 +195,16 @@
                                 <div class='col-md-2'>
                                     <div class="form-group">
                                         <label for="setage">Etage</label>
-                                        <input type="number" min="0" max ="20" class="form-control" sinput="" id="setage-{{$index}}" ng-model="setage[$index]" name="setage-{{$index}}">
+                                        <input type="number" min="0" max ="20" class="form-control" sinput="" id="setage-{{$index}}" ng-model="sousEvent.setage[$index]" name="setage-{{$index}}">
                                     </div>
                                     <div role="alert">
-                                        <span class="error" ng-show="setage[$index].$error.required">
+                                        <span class="error" ng-show="sousEvent.setage[$index].$error.required">
                                           Required!</span>
-                                        <span class="error" ng-show="setage[$index].$error.number">
+                                        <span class="error" ng-show="sousEvent.setage[$index].$error.number">
                                           Not valid number!</span>
                                     </div>
                                     <span class="text-danger"> 
-                                        {{setage[$index]}}                     
+                                        {{sousEvent.setage[$index]}}                     
                                     </span>
                                 </div>
                             </div>
@@ -215,26 +215,26 @@
                     </fieldset>
                     <br>
                     <br>
-                    <button class="btn btn-primary" ng-click="addNewChoice()" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))">Ajouter</button>
+                    <button type="button" class="btn btn-primary" ng-click="addNewChoice()" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))">Ajouter</button>
 
                     <div id="choicesDisplay">
                        {{ choices }}
                     </div>
                     
                     <div id="scheckinDisplay">
-                       {{ scheckin }}
+                       {{ sousEvent.scheckin }}
                     </div>
                     
                     <div id="scheckoutDisplay">
-                       {{ scheckout }}
+                       {{ sousEvent.scheckout }}
                     </div>
                     
                     <div id="sdescriptionDisplay">
-                       {{ sdescription }}
+                       {{ sousEvent.sdescription }}
                     </div>
                     
                     <div id="setageDisplay">
-                       {{ setage }}
+                       {{ sousEvent.setage }}
                     </div>
                     
                 </div>

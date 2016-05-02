@@ -5,14 +5,21 @@
  */
 package runtheshow.resource.repository;
 
+import java.security.Principal;
+import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import runtheshow.resource.entities.Evenement;
+import runtheshow.resource.entities.Role;
+import runtheshow.resource.entities.User;
 
 /**
  *
  * @author Sonatines
  */
-public interface EventRepository extends CrudRepository<Evenement, Long>{
+public interface EventRepository extends CrudRepository<Evenement, Long> {
+    
+    // Le dernier évènement créé par un utilisateur
+    Evenement findTop1ByCreateur(User user);
     
 }

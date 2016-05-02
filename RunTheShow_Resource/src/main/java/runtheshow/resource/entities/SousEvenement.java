@@ -6,7 +6,9 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,11 +37,13 @@ public class SousEvenement extends AbstractEntity {
     @Column(name="sevent_dateDebut")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private java.util.Calendar dateDebut;
     
     @Column(name="sevent_dateFin")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
     private java.util.Calendar dateFin;
     
     @Lob
@@ -83,7 +87,19 @@ public class SousEvenement extends AbstractEntity {
         this.lesContrats = new ArrayList<>();
         this.lesInvitations = new ArrayList<>();
     }
-
+    
+    public SousEvenement(Calendar dateDebut, Calendar dateFin, String intitule, int etage, Evenement evenement)
+    {
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.intitule = intitule;
+        this.etage = etage;
+        this.scene = 0;
+        this.statut = "rien";
+        this.evenement = evenement;
+        this.lesContrats = new ArrayList<>();
+        this.lesInvitations = new ArrayList<>();
+    }
     /**
      * @return the dateDebut
      */

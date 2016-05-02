@@ -35,7 +35,6 @@ public class EventMetier implements IEventMetier {
     @Override
     public Boolean addEvent(Principal user, Evenement event) 
     {
-        
         Evenement eventPersist = new Evenement(event.getIntitule(), event.getDescription(), event.getDateHeureDebut(), event.getDateHeureFin(), event.getInfoComp(), userRepository.findUserByLogin(user.getName()));
         event = eventRepository.save(eventPersist);
         return event != null;
