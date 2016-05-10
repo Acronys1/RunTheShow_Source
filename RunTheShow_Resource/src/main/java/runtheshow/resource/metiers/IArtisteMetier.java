@@ -4,13 +4,16 @@ import java.security.Principal;
 import java.util.List;
 import runtheshow.resource.entities.ProfileArtiste;
 
-public interface IProfileArtisteMetier {
+public interface IArtisteMetier {
 
     // liste des profiles d'artiste
     public List<ProfileArtiste> getAllArtiste();
 
-    //récupérer un utilisateur par son nom
+    //récupérer un artiste par son nom
     public ProfileArtiste getArtisteByName(String name);
+    
+    //récupérer un artiste par son id
+    public ProfileArtiste getArtisteById(Long id);
 
     //update d'un artiste
     public Boolean UpdateArtiste(ProfileArtiste artiste, Principal user);

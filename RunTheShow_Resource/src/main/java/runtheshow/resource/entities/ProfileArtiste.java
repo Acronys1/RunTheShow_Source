@@ -45,8 +45,10 @@ public class ProfileArtiste extends AbstractEntity {
     private String typeArtiste;
 
     @Column(name = "profile_artiste_taille")
-    @NotNull
     private int tailleGroupe;
+    
+    @Column(name = "profile_artiste_localisation")
+    private String localisation;
 
     @Column(name = "profile_artiste_note")
     @NotNull
@@ -103,6 +105,14 @@ public class ProfileArtiste extends AbstractEntity {
 
     public void setTailleGroupe(int tailleGroupe) {
         this.tailleGroupe = tailleGroupe;
+    }
+
+    public String getLocalisation() {
+        return localisation;
+    }
+
+    public void setLocalisation(String localisation) {
+        this.localisation = localisation;
     }
 
     public Long getNote() {
