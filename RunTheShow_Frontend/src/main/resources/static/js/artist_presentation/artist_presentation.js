@@ -16,7 +16,17 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
     }
     
     $scope.updateUser = function() {
-        return $http.post('/updateUser', $scope.user);
+        var data = $scope.artist;
+        $http.put("/resource/artiste/update", data).success(function (data, status) {
+            $scope.response = data;
+            $scope.artistUpdateOK = true;
+            console.log("update artiste OK");
+        }).error(function (data, status) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.response = data;
+            $scope.artistUpdateOK = false;
+            console.log("update artiste KO");
+        });
     };
 
 });
