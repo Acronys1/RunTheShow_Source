@@ -1,5 +1,5 @@
 
-
+<div class="container">
 <div class="col-xs-6 col-xs-offset-3">
     <div class="well">
         <form action="" class="dropzone" dropzone="" id="dropzone">
@@ -22,11 +22,14 @@
         </form>
     </div>
 </div>
-
-<a href="" class="thumb"><img ng-src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+<img src="banner.jpg" alt="test" width="100">
+    
+    
+<a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
 <p>{{image.filename}}</p>
 
 <a ng-repeat="images in all_image" href="">
-    <img ng-src="{{images.filename}}" width="100">
+    <img src="{{images.filename}}" alt="test" width="100">
     <h5>{{images.filename}}</h5>   
 </a>
+</div>

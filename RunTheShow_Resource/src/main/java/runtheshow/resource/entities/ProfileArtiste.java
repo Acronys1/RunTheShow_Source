@@ -59,7 +59,6 @@ public class ProfileArtiste extends AbstractEntity {
     private String description;
 
     @Column(name = "profile_artiste_imageprofile")
-    @NotNull
     private String imageProfile;
 
     @Column(name = "profile_artiste_imagebanniere")

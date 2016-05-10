@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import java.util.Set;
 import org.springframework.security.crypto.bcrypt.BCrypt;
+import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
+import runtheshow.resource.repository.ProfileArtisteRepository;
 import runtheshow.resource.repository.RoleRepository;
 import runtheshow.resource.repository.UserRepository;
 
@@ -18,6 +20,9 @@ public class UserMetier implements IUserMetier {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private ProfileArtisteRepository artisteRepository;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -44,6 +49,16 @@ public class UserMetier implements IUserMetier {
         user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
         User userPersist = new User(user.getLogin(), user.getPassword(), user.getNom(), user.getPrenom(), user.getNomArtiste(), user.getMailContact(), user.getSexe(), user.getRoles());
         user = userRepository.save(userPersist);
+        
+            if (user.getRoles().get(0).getId() == 3){
+            ProfileArtiste unProfile = new ProfileArtiste();
+            unProfile.setNomArtiste(user.getNomArtiste());
+            unProfile.setTypeArtiste("INC");
+            unProfile.setNote(new Long(0));
+            unProfile.setUserArtiste(userPersist);
+            artisteRepository.save(unProfile);
+        }
+        
         return user != null;
     }
 
