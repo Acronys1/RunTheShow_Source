@@ -7,15 +7,13 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import java.security.Principal;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import runtheshow.resource.entities.ProfileArtiste;
-import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
 import runtheshow.resource.repository.ProfileArtisteRepository;
 import runtheshow.resource.repository.UserRepository;
 
 @Service("profile_artiste_metier")
-public class ProfileArtisteMetier implements IProfileArtisteMetier {
+public class ArtisteMetier implements IArtisteMetier {
 
     @Autowired
     private ProfileArtisteRepository artisteRepository;
@@ -24,16 +22,31 @@ public class ProfileArtisteMetier implements IProfileArtisteMetier {
     private UserRepository userRepository;
 
     // liste des profiles d'artiste
+    @Override
     public List<ProfileArtiste> getAllArtiste(){
         return Lists.newArrayList(artisteRepository.findAll());
     }
 
-    //récupérer un utilisateur par son nom
+    //récupérer un artiste par son nom
+    @Override
     public ProfileArtiste getArtisteByName(String name){
         return artisteRepository.findByNomArtiste(name);
     }
+    
+    //récupérer un artiste par son user
+    @Override
+    public ProfileArtiste getArtisteByUserName(User user){
+        return artisteRepository.findByUserArtiste(user);
+    }
+    
+    //récupérer un utilisateur par son id
+    @Override
+    public ProfileArtiste getArtisteById(Long id){
+        return artisteRepository.findOne(id);
+    }
 
     //update d'un artiste, anti contrafaçon de l'id du profile
+    @Override
     public Boolean UpdateArtiste(ProfileArtiste artiste,Principal user){
         User unUser = userRepository.findUserByLogin(user.getName());
         ProfileArtiste unProfile = artisteRepository.findByUserArtiste(unUser);
