@@ -3,6 +3,7 @@ package runtheshow.resource.metiers;
 import java.security.Principal;
 import java.util.List;
 import runtheshow.resource.entities.ProfileArtiste;
+import runtheshow.resource.entities.User;
 
 public interface IArtisteMetier {
 
@@ -20,4 +21,7 @@ public interface IArtisteMetier {
 
     //recherche d'un artiste par le nom
     public List<ProfileArtiste> getArtisteBySearch(String artisteCherche);
+    
+    //recherche d'un artiste par son nom d'user
+    public ProfileArtiste getArtisteByUserName(User user);
 }

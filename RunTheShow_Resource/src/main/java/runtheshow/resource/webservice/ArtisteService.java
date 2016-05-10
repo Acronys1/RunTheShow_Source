@@ -5,6 +5,7 @@
  */
 package runtheshow.resource.webservice;
 
+import java.security.Principal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.metiers.IArtisteMetier;
+import runtheshow.resource.metiers.IUserMetier;
 
 /**
  *
@@ -25,8 +27,16 @@ public class ArtisteService {
     @Autowired
     private IArtisteMetier artisteMetier;
     
+    @Autowired
+    private IUserMetier userMetier;
+    
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ProfileArtiste getUserById(@PathVariable Long id) {
         return artisteMetier.getArtisteById(id);
+    }
+    
+    @RequestMapping(value = "/current", method = RequestMethod.GET)
+    public ProfileArtiste getUserById(Principal user) {
+        return artisteMetier.getArtisteByUserName(userMetier.getUserByName(user.getName()));
     }
 }

@@ -33,6 +33,12 @@ public class ArtisteMetier implements IArtisteMetier {
         return artisteRepository.findByNomArtiste(name);
     }
     
+    //récupérer un artiste par son user
+    @Override
+    public ProfileArtiste getArtisteByUserName(User user){
+        return artisteRepository.findByUserArtiste(user);
+    }
+    
     //récupérer un utilisateur par son id
     @Override
     public ProfileArtiste getArtisteById(Long id){
