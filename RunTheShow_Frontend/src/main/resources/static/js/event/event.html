@@ -25,69 +25,145 @@
                                     events: [
                                             {
                                                     title: 'All Day Event',
-                                                    start: '2016-01-01'
+                                                    start: '2016-01-01',
+                                                    id: '20'
                                             },
                                             {
                                                     title: 'Long Event',
                                                     start: '2016-01-07',
-                                                    end: '2016-01-10'
+                                                    end: '2016-01-10',
+                                                    url: 'http://fdietz.github.io/recipes-with-angular-js/common-user-interface-patterns/displaying-a-modal-dialog.html',
+                                                    id: '21'
                                             },
                                             {
                                                     id: 999,
                                                     title: 'Repeating Event',
-                                                    start: '2016-01-09T16:00:00'
+                                                    start: '2016-01-09T16:00:00',
                                             },
                                             {
                                                     id: 999,
                                                     title: 'Repeating Event',
-                                                    start: '2016-01-16T16:00:00'
+                                                    start: '2016-01-16T16:00:00',
                                             },
                                             {
                                                     title: 'Conference',
                                                     start: '2016-01-11',
-                                                    end: '2016-01-13'
+                                                    end: '2016-01-13',
+                                                    id: '29852'
                                             },
                                             {
                                                     title: 'Meeting',
                                                     start: '2016-01-12T10:30:00',
-                                                    end: '2016-01-12T12:30:00'
+                                                    end: '2016-01-12T12:30:00',
+                                                    id: '5'
                                             },
                                             {
                                                     title: 'Lunch',
-                                                    start: '2016-01-12T12:00:00'
+                                                    start: '2016-01-12T12:00:00',
+                                                    id: '7'
                                             },
                                             {
                                                     title: 'Meeting',
-                                                    start: '2016-01-12T14:30:00'
+                                                    start: '2016-01-12T14:30:00',
+                                                    id: '90'
                                             },
                                             {
                                                     title: 'Happy Hour',
-                                                    start: '2016-01-12T17:30:00'
+                                                    start: '2016-01-12T17:30:00',
+                                                    id: '42'
                                             },
                                             {
                                                     title: 'Dinner',
-                                                    start: '2016-01-12T20:00:00'
+                                                    start: '2016-01-12T20:00:00',
+                                                    id: '123'
                                             },
                                             {
                                                     title: 'Birthday Party',
-                                                    start: '2016-01-13T07:00:00'
+                                                    start: '2016-01-13T07:00:00',
+                                                    id: '879'
                                             },
                                             {
                                                     title: 'Click for Google',
                                                     url: 'http://google.com/',
-                                                    start: '2016-01-28'
+                                                    start: '2016-01-28',
+                                                    id: '1'
                                             }
-                                    ]
+                                    ],
+                                    eventClick: function(calEvent, jsEvent, view) {
+                                        // open modal
+                                        //alert('id: ' + calEvent.id);
+                                        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                                        //alert('View: ' + view.name);
+                                        
+                                        $('#myModal').modal('toggle');
+                                        $('#myModal').modal('show');
+                                        
+                                        // change the border color just for fun
+                                        $(this).css('border-color', 'red');
+                                    }
                             });
 
                     });
-
             </script>
         
             <div id='calendar'></div>
         </div>
         
-        
+        <!-- Modal -->
+        <div id="text-page" ng-controller="DemoCtrl as ctrl">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Inviter des artistes</h4>
+              </div>
+              <div class="modal-body">
+                <section>
+                    
+
+                        <!-- <p class="lead">A remplacer dans modal invitation multiple. Test binding ctrl : {{ bindCtrl }}</p> -->
+
+<!--                        <h3>Recherche plusieurs artistes +  com perso pour envoyer invit</h1>-->
+                        
+<!--                        <hr>-->
+                        <label>Inviter des artistes</label>
+                        <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: '1000px';">
+                            <ui-select-match placeholder="Chercher des artistes à inviter">
+                                <img style="float:left;border-radius: 25px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
+                                {{$item.name}}
+                            </ui-select-match>
+                            <ui-select-choices refresh="refreshArtiste($select.search)" refresh-delay="1000" repeat="person in ctrl.people">
+                                <small>
+                                  <img style="float:left;border-radius: 25px;" ng-src="{{person.image}}"  alt="ImageMarchePas" />
+                                </small>
+                              <div style="margin-left: 60px;" ng-bind-html="person.name | highlight: $select.search"></div>
+                              <div style="margin-left: 60px;">BLABLABLABLA</div>
+                          </ui-select-choices>
+                        </ui-select>
+                        selection : {{ ctrl.multipleDemo.selectedPeople }}<br>
+                    
+                        <br><br>
+                        <fieldset class="form-group">
+                            <label for="msgPerso">Envoyer un message personnel</label>
+                            <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
+                        </fieldset>
+
+<!--                        <div class="row">
+                            <div class="col-sm-12 text-center">
+                                <button ng-click="sendInvitation()" type="submit" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
+                            </div>
+                        </div>-->                    
+                </section>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                <button type="button" ng-click="sendInvitation()" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
         
         <div id="addEvent" class="tab-pane fade">
             <div class="alert alert-danger" ng-show="errorAjout">

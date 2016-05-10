@@ -50,7 +50,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
             $http.get("/resource/invitation/filter/"+caracteres).success(function (data, status) {
                 vm.people = [];    
                 for(var i in data){
-                    vm.people.push({ name: data[i]['nomArtiste'],      image: 'http://lorempixel.com/50/50/people'});
+                    vm.people.push({ name: data[i]['nomArtiste'],      image: 'http://lorempixel.com/50/50/people', id:data[i]['id']});
                 }
                 
                 }).error(function (data, status) { // called asynchronously if an error occurs
@@ -62,33 +62,28 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
   };
   
   $scope.sendInvitation = function(){
-      /*var data = JSON.stringify({
-            0:[{expediteur: $scope.user.userLogin,
-                destinataire: $scope.user.userPassword,
-                sousEvent : $scope.user.userNom,
-                commentaire : $scope.user.userPrenom,
-                roles: [{id: $scope.user.userRole.id}]
-            }],
-            1:[{expediteur: $scope.user.userLogin,
-                destinataire: $scope.user.userPassword,
-                sousEvent : $scope.user.userNom,
-                commentaire : $scope.user.userPrenom,
-                roles: [{id: $scope.user.userRole.id}]
-            }],
-        });
+      var mes_invit = {};
+      mes_invit['id_art'] = [];
+      mes_invit['message_perso'] = '';
+      if($scope.msgPerso !== '')
+          mes_invit['message_perso'] = $scope.msgPerso;
+      
+      $scope.ctrl.multipleDemo.selectedPeople.forEach(function(artiste){
+          mes_invit['id_art'].push(artiste.id);
+      });
+      var data;
+      data = JSON.stringify(mes_invit);
        
        $http.post("/resource/invitation/add", data).success(function (data, status) {
             $scope.response = data;
-            $scope.initFirst();
-            $scope.errorAjout = false;
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;
             $scope.errorMessage = "Erreur lors de l'ajout, un ou plusieurs champs sont manquants";
-        });*/
+        });
         
-      console.log($scope.msgPerso);
-      console.log($scope.ctrl.multipleDemo.selectedPeople);
+      //console.log($scope.msgPerso);
+      //console.log($scope.ctrl.multipleDemo.selectedPeople);
   }
 
   vm.enable = function() {
@@ -113,16 +108,16 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
    * 
    */
   vm.people = [
-    { name: 'Adam',      image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Amalie',    image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Estefana', image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Adrian',    image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Wladimir',  image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Samantha azymepetepaslescouilles',  image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Nicole',    image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Natasha',   image: 'http://lorempixel.com/50/50/people'},
-    { name: 'Michael',   image: 'http://lorempixel.com/50/50/people'},
-    { name: 'NicolÃ¡s',   image: 'http://lorempixel.com/50/50/people'}
+    { name: 'Adam',      image: 'http://lorempixel.com/50/50/people', id: '20'},
+    { name: 'Amalie',    image: 'http://lorempixel.com/50/50/people', id: '21'},
+    { name: 'Estefana', image: 'http://lorempixel.com/50/50/people', id: '22'},
+    { name: 'Adrian',    image: 'http://lorempixel.com/50/50/people', id: '23'},
+    { name: 'Wladimir',  image: 'http://lorempixel.com/50/50/people', id: '24'},
+    { name: 'Samantha azymepetepaslescouilles',  image: 'http://lorempixel.com/50/50/people', id: '25'},
+    { name: 'Nicole',    image: 'http://lorempixel.com/50/50/people', id: '26'},
+    { name: 'Natasha',   image: 'http://lorempixel.com/50/50/people', id: '27'},
+    { name: 'Michael',   image: 'http://lorempixel.com/50/50/people', id: '28'},
+    { name: 'NicolÃ¡s',   image: 'http://lorempixel.com/50/50/people', id: '29'}
   ];
   
 

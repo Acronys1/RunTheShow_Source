@@ -2,6 +2,7 @@ package runtheshow.resource.metiers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
 
@@ -25,4 +26,6 @@ public interface IUserMetier {
         public List<Role> getAllRole();
         
         public List<User> getUsersBySearch(String motCherche);
+        
+        public List<User> getUsersArtisteByListId(Set ids);
 }

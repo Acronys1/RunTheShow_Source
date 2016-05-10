@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import java.util.Set;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
@@ -83,5 +84,13 @@ public class UserMetier implements IUserMetier {
         List<User> lstUserArtiste = userRepository.findUserArtisteByMotCle(motCherche);
         return Lists.newArrayList(lstUserArtiste);
     }
+
+    @Override
+    public List<User> getUsersArtisteByListId(Set ids) {
+        List<User> lstUserArtiste = userRepository.findUserArtisteByIds(ids);
+        return Lists.newArrayList(lstUserArtiste);
+    }
+    
+    
 
 }
