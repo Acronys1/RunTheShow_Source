@@ -5,6 +5,8 @@
  */
 package runtheshow.resource.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -12,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -40,9 +43,10 @@ public class ProfileArtiste extends AbstractEntity {
     @NotNull
     private String nomArtiste;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference("profils")
     @Column(name = "profile_artiste_type")
-    @NotNull
-    private String typeArtiste;
+    private TypeArtiste typeArtiste;
 
     @Column(name = "profile_artiste_taille")
     private int tailleGroupe;
@@ -90,14 +94,14 @@ public class ProfileArtiste extends AbstractEntity {
         this.nomArtiste = nomArtiste;
     }
 
-    public String getTypeArtiste() {
+    public TypeArtiste getTypeArtiste() {
         return typeArtiste;
     }
 
-    public void setTypeArtiste(String typeArtiste) {
+    public void setTypeArtiste(TypeArtiste typeArtiste) {
         this.typeArtiste = typeArtiste;
     }
-
+    
     public int getTailleGroupe() {
         return tailleGroupe;
     }
