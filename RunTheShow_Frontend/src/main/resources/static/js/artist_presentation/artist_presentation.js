@@ -1,9 +1,10 @@
 angular.module('artist_presentation', []).controller('artist_presentation', function ($scope, $http, $rootScope, $window) {
 
     $scope.artist = {};
-
+    $scope.errorMessage = "";
+    
     $scope.initArtistPresentation = function () {
-        $http.get("/resource/user/current").success(function (data, status) {
+        $http.get("/resource/artiste/current").success(function (data, status) {
             $scope.artist = data;
             if ($scope.artist.roles[0] == "ROLE_ARTISTE") {
                 $scope.errorMessage.init = "OKKKKKKKKKKKKKK";
@@ -12,9 +13,11 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
             // or server returns response with an error status.
             $scope.errorMessage.init = "Pas un artiste.";
         });
-
-
     }
+    
+    $scope.updateUser = function() {
+        return $http.post('/updateUser', $scope.user);
+    };
 
 });
 

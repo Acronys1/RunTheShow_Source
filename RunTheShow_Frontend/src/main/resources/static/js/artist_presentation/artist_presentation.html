@@ -21,7 +21,7 @@ and open the template in the editor.
                 </div>
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
-                    <h2><label editable-text="artist.nomArtiste" e-required>{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
+                    <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
                     <p><label editable-text="artist.localisation" e-required>{{artist.localisation|| 'Pas de localisation'}}</label></p>
                     <p><label editable-text="artist.typeArtiste" e-required>{{artist.typeArtiste|| 'Pas de type groupe'}}</label></p>
                     <p><label editable-text="artist.tailleGroupe" e-required>{{artist.tailleGroupe|| 'Pas de taille groupe'}}</label></p>
