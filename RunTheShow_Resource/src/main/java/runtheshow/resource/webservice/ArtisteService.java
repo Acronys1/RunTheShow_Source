@@ -6,8 +6,10 @@
 package runtheshow.resource.webservice;
 
 import java.security.Principal;
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +40,10 @@ public class ArtisteService {
     @RequestMapping(value = "/current", method = RequestMethod.GET)
     public ProfileArtiste getUserById(Principal user) {
         return artisteMetier.getArtisteByUserName(userMetier.getUserByName(user.getName()));
+    }
+    
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
+    public Boolean updateArtiste(@RequestBody ProfileArtiste artiste, Principal user, HttpServletResponse response) {
+        return artisteMetier.UpdateArtiste(artiste, user);
     }
 }
