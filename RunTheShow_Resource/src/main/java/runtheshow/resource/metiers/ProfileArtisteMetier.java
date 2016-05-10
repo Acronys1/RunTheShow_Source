@@ -37,7 +37,7 @@ public class ProfileArtisteMetier implements IProfileArtisteMetier {
     public Boolean UpdateArtiste(ProfileArtiste artiste,Principal user){
         User unUser = userRepository.findUserByLogin(user.getName());
         ProfileArtiste unProfile = artisteRepository.findByUserArtiste(unUser);
-        artiste.ssetId(unProfile.getId());
+        artiste.setId(unProfile.getId());
         unProfile = artisteRepository.save(artiste);
         return unProfile!=null;
     }
