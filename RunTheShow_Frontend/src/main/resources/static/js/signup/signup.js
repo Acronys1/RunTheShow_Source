@@ -1,4 +1,4 @@
-angular.module('signup', []).controller('signup', function ($scope, $http, $rootScope, $window) {
+angular.module('signup', ['auth']).controller('signup', function ($scope, $http, $rootScope, $window, auth) {
 
     $scope.errorMessage = {};
     $scope.signUpOK = null;
@@ -78,6 +78,7 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
                     $scope.errorMessage["erreurServeur"] = "Erreur lors de l'envoie des informations, inscription echouée.";
                 });
 
+
             }
         }
         //Artiste Troupe
@@ -123,6 +124,22 @@ angular.module('signup', []).controller('signup', function ($scope, $http, $root
             }
         }
 
+        if (noError) {
+            var credentials = {};
+            credentials.username = $scope.newUser.username;
+            credentials.password = $scope.newUser.password;
+                auth.authenticate(credentials, function (authenticated) {
+                    if (authenticated) {
+                        console.log("Login succeeded")
+                        $scope.error = false;
+                        $("#login-modal").modal('hide');
+                        location.reload();
+                    } else {
+                        console.log("Login failed")
+                        $scope.error = true;
+                    }
+                })
+        }
     }
 });
 
