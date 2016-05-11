@@ -53,7 +53,6 @@ public class UserMetier implements IUserMetier {
             if (user.getRoles().get(0).getId() == 3){
             ProfileArtiste unProfile = new ProfileArtiste();
             unProfile.setNomArtiste(user.getNomArtiste());
-            unProfile.setTypeArtiste("INC");
             unProfile.setNote(new Long(0));
             unProfile.setUserArtiste(userPersist);
             artisteRepository.save(unProfile);
