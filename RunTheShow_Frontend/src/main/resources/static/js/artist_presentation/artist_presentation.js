@@ -31,7 +31,7 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
 
 });
 
-artist_presentation.directive('udatepicker', function () {
+artist_presentation.directive('datepicker', function () {
     return {
         restrict: 'A',
         require: 'ngModel',

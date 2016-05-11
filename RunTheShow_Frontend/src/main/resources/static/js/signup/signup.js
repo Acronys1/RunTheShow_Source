@@ -124,7 +124,7 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
             }
         }
 
-        if (noError) {
+        /*if (noError) {
             var credentials = {};
             credentials.username = $scope.newUser.username;
             credentials.password = $scope.newUser.password;
@@ -139,7 +139,7 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
                         $scope.error = true;
                     }
                 })
-        }
+        }*/
     }
 });
 
