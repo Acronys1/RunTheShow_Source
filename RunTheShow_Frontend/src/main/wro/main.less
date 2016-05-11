@@ -81,12 +81,37 @@ hr {
 
 //navbar
 .navbar {
-   background:rgba(250,250,250,0.75);   /* for latest browsers */
-   -webkit-box-shadow: 0 4px 8px -2px #999;
+    background:rgba(250,250,250,0.75);   /* for latest browsers */
+    -webkit-box-shadow: 0 4px 8px -2px #999;
     -moz-box-shadow: 0 4px 8px -2px #999;
     box-shadow: 0 4px 8px -2px #999;
 }
 
 .input-xs {
-   width : 220px !important;
+    width : 220px !important;
 }
+
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img {
+    width: 200%;
+    margin: auto;
+}
+
+.carousel-caption {
+    position: absolute;
+    top:0px;
+    right: 0%;
+    left: 0%;
+    padding-bottom: 30px;
+    box-shadow: 0 1px 15px 1 -3px #999 !important;
+    background: rgba(250, 250, 250, 0.15);
+    height: 150px;
+}
+
+//caroussel
+.h1{
+    &.text-center{
+        color : #ffffff !important;
+        font-family: inherit;
+    }
+} 

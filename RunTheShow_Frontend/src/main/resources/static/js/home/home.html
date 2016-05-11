@@ -1,8 +1,79 @@
-<h1>Bienvenue sur RunTheShow</h1>
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+        <li data-target="#myCarousel" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+        <div class="item active">
+            <img src="img/blog.jpg" alt="Chania" >
+            <div class="carousel-caption">
+                <p class="h1 text-center">Vos événements d'entreprises  <br>deviennent uniques !</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="img/blog2.jpg" alt="Chania">
+            <div class="carousel-caption">
+                <h3>Chania</h3>
+                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="img/blog.jpg" alt="Flower">
+            <div class="carousel-caption">
+                <h3>Flowers</h3>
+                <p>Beatiful flowers in Kolymbari, Crete.</p>
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="img/blog2.jpg" alt="Flower">
+            <div class="carousel-caption">
+                <h2>Flowers</h2>
+                <p>Beatiful flowers in Kolymbari, Crete.</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--<video autoplay loop>
+  <source src="https://video-cdg2-1.xx.fbcdn.net/v/t43.1792-2/13059090_467982336744883_480295172_n.mp4?efg=eyJybHIiOjE4NjcsInJsYSI6MTUxNCwidmVuY29kZV90YWciOiJzdmVfaGQifQ%3D%3D&rl=1867&vabr=1245&oh=1a9709c48576c9eac5afaf10a4033398&oe=5733631F" type="video/mp4">
+</video>
+
+<script type="text/javascript">
+
+                var $video = $('video'),
+                        $window = $(window);
+
+                $(window).resize(function () {
+
+                    var height = $window.height();
+                    $video.css('height', height);
+
+                    var videoWidth = $video.width(),
+                            windowWidth = $window.width(),
+                            marginLeftAdjust = (windowWidth - videoWidth) / 2;
+
+                    $video.css({
+                        'height': height,
+                        'marginLeft': marginLeftAdjust
+                    });
+                }).resize();
+</script>-->
+<!-- *** HOMEPAGE CAROUSEL END *** -->
+
+<!--<h1>Bienvenue sur RunTheShow</h1>
 <div ng-show="authenticated" ng-init="initFirstHome()">
     <p>Votre nom est : {{user.login}}</p>
     <p ng-class="user.roles.join(', ')">Vos roles sont : {{user.roles.join(', ')}}</p>
 </div>
 <div  ng-show="!authenticated">
     <p>Bonjour, connectez-vous pour voir les détails</p>
-</div>
+</div>-->

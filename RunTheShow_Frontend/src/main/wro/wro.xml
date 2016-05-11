@@ -15,10 +15,10 @@
     <group name="theme">  
         <css>webjar:font-awesome/4.5.0/css/font-awesome.min.css</css>
         <css>file:@project.basedir@/src/main/wro/css/animate.css</css>
-        <css>file:@project.basedir@/src/main/wro/css/owl.carousel.css</css>
         <css>file:@project.basedir@/src/main/wro/css/owl.theme.css</css>
         <css>file:@project.basedir@/src/main/wro/css/style.default.css</css>
         <css>file:@project.basedir@/src/main/wro/css/angular-datables.css</css>
+        <css>file:@project.basedir@/src/main/wro/css/owl.carousel.css</css>
     </group>
     
     <group name="jquery">

@@ -5,8 +5,6 @@
  */
 package runtheshow.resource.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -15,7 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
 import javax.persistence.Table;

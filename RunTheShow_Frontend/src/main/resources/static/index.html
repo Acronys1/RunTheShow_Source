@@ -27,22 +27,24 @@
 
         <!--Angular css-->
         <link href="css/angular.css" rel="stylesheet">
-        
+
         <!--Bootstrap css-->
         <link href="css/bootstrap.css" rel="stylesheet">
 
         <!--Module css-->
         <link href="css/angular-modules.css" rel="stylesheet" >
-        
+
         <link href="css/datetimepicker.css" rel="stylesheet">
-        
+
         <link href="css/calendar-js.css" rel="stylesheet">
         <link href="css/print-calendar.css" rel="stylesheet" media="print">
         <!-- Manu Select 2 -->
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">    
         <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
         <link rel="stylesheet" href="./select2.css">
-        
+
+        <link href="css/owl.carousel.css" rel="stylesheet">
+
         <style>
 
             .select2 > .select2-choice.ui-select-match {
@@ -55,14 +57,14 @@
             }
             /* Some additional styling to demonstrate that append-to-body helps achieve the proper z-index layering. */
             .select-box {
-              background: #fff;
-              position: relative;
-              z-index: 1;
+                background: #fff;
+                position: relative;
+                z-index: 1;
             }
             .alert-info.positioned {
-              margin-top: 1em;
-              position: relative;
-              z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
+                margin-top: 1em;
+                position: relative;
+                z-index: 10000; /* The select2 dropdown has a z-index of 9999 */
             }
         </style>
 
@@ -80,7 +82,7 @@
             <div ng-include="'header.html'"></div>
 
             <!--CONTAINER PRINCIPAL-->
-            <div ng-view class=""></div>
+            <div ng-view></div>
 
             <!-- Inscription modal -->
             <div ng-include="'js/auth/login-modal.html'"></div>
@@ -99,22 +101,30 @@
 
         <!-- jquery -->
         <script src="js/jquery.js"></script>
-
         <!-- angular js -->
         <script src="js/angular.js" type="text/javascript"></script>
-        
+
         <!-- bootstrap js -->
         <script src="js/bootstrap.js" type="text/javascript"></script>
+       
+        <script language="JavaScript" type="text/javascript">
+                $(document).ready(function () {
+                    $('.carousel').carousel({
+                        interval: 3000
+                    })
+                });
+        </script>
+
+
 
         <!--Module js-->
         <script src="js/datetimepicker.js"></script>
         <script src="js/disable-all.js"></script>
         <script src="js/calendar-js.js"></script>
-        <!-- owl carousel -->
-        <script src="js/owl.carousel.min.js"></script>
+
         <!--angular datatable -->
         <script src="js/angular-modules.js" type="text/javascript"></script>
-        
+
         <!-- Manu Select 2 -->
         <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular-sanitize.js"></script>
         <script src="js/select.js"></script>
@@ -132,5 +142,8 @@
         <script src="js/event/invitation.js" type="text/javascript"></script>
         <script src="js/file/file.js" type="text/javascript"></script>
         <script src="js/app.js" type="text/javascript"></script>
+
+        <!-- owl carousel -->
+
     </body>
 </html>
