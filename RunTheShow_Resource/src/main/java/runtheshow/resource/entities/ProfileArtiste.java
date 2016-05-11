@@ -43,8 +43,8 @@ public class ProfileArtiste extends AbstractEntity {
     @NotNull
     private String nomArtiste;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference("profils")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "profile_artiste_type")
     private TypeArtiste typeArtiste;
 
     @Column(name = "profile_artiste_taille")
