@@ -9,7 +9,7 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div id="myEvent" class="tab-pane fade in active">
-            <script>
+            <!-- <script>
 
                     $(document).ready(function() {
 
@@ -104,9 +104,11 @@
                             });
 
                     });
-            </script>
-        
-            <div id='calendar'></div>
+            </script> -->
+            
+            <div ng-controller="calendarCtrl as calDemo"> 
+                <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+            </div>
         </div>
         
         <!-- Modal -->

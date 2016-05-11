@@ -31,12 +31,7 @@ public class Tag implements Serializable{
     @Id
     private String libelle;
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JsonBackReference("tag_event")
-    @JoinTable(
-            name = "TAG_EV",
-            joinColumns = @JoinColumn(name = "TAG_LIBELLE", referencedColumnName = "TAG_LIBELLE"),
-            inverseJoinColumns = @JoinColumn(name = "EVENEMENT_ID", referencedColumnName = "ID"))
+    @ManyToMany(mappedBy = "tag")
     private List<Evenement> evenement;
     
     @ManyToMany(fetch = FetchType.EAGER)

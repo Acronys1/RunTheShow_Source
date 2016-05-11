@@ -7,6 +7,8 @@ package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -14,6 +16,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -59,7 +62,7 @@ public class Evenement extends AbstractEntity {
     private String infoComp;
     
     @ManyToOne
-    private User createur;
+    private User createur; 
     
     @ManyToOne
     private Lieu lieu;
@@ -194,5 +197,23 @@ public class Evenement extends AbstractEntity {
         this.tag = tag;
     }
     
-    
+    public String toString()
+    {
+        String dateDebutEvent = "";
+        String dateFinEvent = "";
+        
+        if (dateHeureFin != null && dateHeureDebut != null) {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            dateDebutEvent = format.format(dateHeureDebut.getTime());
+            dateFinEvent = format.format(dateHeureFin.getTime());
+        }
+        
+        return String.format("{\"id\":\"%s\","
+                + "\"intitule\":\"%s\","
+                + "\"description\":\"%s\","
+                + "\"dateHeureDebut\":\"%s\","
+                + "\"dateHeureFin\":\"%s\","
+                + "\"infoComp\":\"%s\"}",
+                id, intitule, description, dateHeureDebut, dateHeureFin, infoComp);
+    }
 }

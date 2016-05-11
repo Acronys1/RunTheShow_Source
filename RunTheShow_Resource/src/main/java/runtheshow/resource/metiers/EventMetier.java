@@ -5,6 +5,7 @@
  */
 package runtheshow.resource.metiers;
 
+import com.google.common.collect.Lists;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +29,16 @@ public class EventMetier implements IEventMetier {
     private UserRepository userRepository;
 
     @Override
-    public List<Evenement> findAllEvent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public Boolean addEvent(Principal user, Evenement event) 
     {
         Evenement eventPersist = new Evenement(event.getIntitule(), event.getDescription(), event.getDateHeureDebut(), event.getDateHeureFin(), event.getInfoComp(), userRepository.findUserByLogin(user.getName()));
         event = eventRepository.save(eventPersist);
         return event != null;
+    }
+
+    @Override
+    public List<Evenement> getAllEvent(Principal user) {
+        return Lists.newArrayList(eventRepository.findByCreateur(userRepository.findUserByLogin(user.getName())));
     }
     
     

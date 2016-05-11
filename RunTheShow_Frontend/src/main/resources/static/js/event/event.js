@@ -10,6 +10,8 @@ event.controller('event', function ($scope, $http) {
     $scope.result;
     $scope.event = {};
     $scope.sousEvent = {};
+    $scope.allEvent = {};
+    $scope.eventTab = [];
     
   
     $scope.addNewChoice = function() {
@@ -55,7 +57,21 @@ event.controller('event', function ($scope, $http) {
     
     $scope.initFirst = function ()
     {
-        
+        $http.get('/resource/event/all').success(function (data) {
+            $scope.allEvent = data;
+            
+            for(var i = 0; i<=$scope.allEvent.length; i++)
+            {
+                var eventJson = JSON.stringify({
+                    id: $scope.allEvent[i].id,
+                    title: $scope.allEvent[i].intitule,
+                    start: "2016-05-10",
+                    end: "2016-05-11"
+                })
+                
+                $scope.eventTab.push(eventJson);
+            }
+        });
     };
     
     $scope.addEvent = function ()
@@ -68,7 +84,7 @@ event.controller('event', function ($scope, $http) {
             infoComp: $scope.event.info
         })
         
-        console.log("JSON1 " + data);
+        //console.log("JSON1 " + data);
         
         $http.post("/resource/event/add", data).success(function (data, status) {
             $scope.response = data;
@@ -104,6 +120,8 @@ event.controller('event', function ($scope, $http) {
             $scope.errorMessage = "Erreur lors de l'ajout d'un évènement, un ou plusieurs champs sont manquants. Data : " + data + "    Status : " + status;
         });
     };
+    
+    
     
 });
 
