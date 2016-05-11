@@ -57,21 +57,7 @@ event.controller('event', function ($scope, $http) {
     
     $scope.initFirst = function ()
     {
-        $http.get('/resource/event/all').success(function (data) {
-            $scope.allEvent = data;
-            
-            for(var i = 0; i<=$scope.allEvent.length; i++)
-            {
-                var eventJson = JSON.stringify({
-                    id: $scope.allEvent[i].id,
-                    title: $scope.allEvent[i].intitule,
-                    start: "2016-05-10",
-                    end: "2016-05-11"
-                })
-                
-                $scope.eventTab.push(eventJson);
-            }
-        });
+        
     };
     
     $scope.addEvent = function ()

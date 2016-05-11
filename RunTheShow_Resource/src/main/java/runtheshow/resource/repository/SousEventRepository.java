@@ -5,13 +5,16 @@
  */
 package runtheshow.resource.repository;
 
+import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import runtheshow.resource.entities.SousEvenement;
+import runtheshow.resource.entities.User;
 
 /**
  *
  * @author Sonatines
  */
-public interface SousEventRepository extends CrudRepository<SousEvenement, Long> {
-    
+public interface SousEventRepository extends CrudRepository<SousEvenement, Long> 
+{
+    List<SousEvenement> findByUser(User user);
 }

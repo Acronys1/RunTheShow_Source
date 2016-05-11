@@ -6,6 +6,7 @@
 package runtheshow.resource.metiers;
 
 import ch.qos.logback.classic.util.ContextInitializer;
+import com.google.common.collect.Lists;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,10 +35,7 @@ public class SousEvenenementMetier implements ISousEventMetier {
     @Autowired
     private SousEventRepository sousEventRepository;
 
-    @Override
-    public List<SousEvenement> findAllSousEvent() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
     @Override
     public Boolean addSousEvent(Principal user, SousEvenement sousEvent) {
@@ -74,6 +72,11 @@ public class SousEvenenementMetier implements ISousEventMetier {
         sousEvent = sousEventRepository.save(sousEventPersist);
         
         return sousEvent != null;
+    }
+
+    @Override
+    public List<SousEvenement> getAllSousEvent(Principal user) {
+        return Lists.newArrayList(sousEventRepository.findByUser(userRepository.findUserByLogin(user.getName())));
     }
     
 }
