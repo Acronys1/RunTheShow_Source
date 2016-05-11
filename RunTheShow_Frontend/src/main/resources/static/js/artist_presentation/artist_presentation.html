@@ -5,9 +5,9 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <div ng-controller="artist_presentation" ng-init="initArtistPresentation()">
-                    <span class="text-danger" ng-show="errorMessage.init"> 
-                        {{errorMessage.init}}                     
-                    </span>  
+    <span class="text-danger" ng-show="errorMessage.init"> 
+        {{errorMessage.init}}                     
+    </span>  
     <div id="" class="ng-scope">
         <div class="jumbotron" ng-style="{'background-image': artist.imageBanniere || '', 'height':'300px'}"></div>
         <div class="container">
@@ -23,7 +23,12 @@ and open the template in the editor.
                     <!--<h4>Nom de l'artise</h4>-->
                     <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
                     <p><label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label></p>
-                    <p><label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label></p>
+                    <p>
+                        <a href="#" editable-select="artist.typeArtiste" e-ng-options="t.value as t.text for t in typesArtiste" onaftersave="updateUser()">
+                            {{ showArtistTypes()}}
+                        </a>
+                        <!--<label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label>-->
+                    </p>
                     <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{artist.tailleGroupe|| 'Pas de taille groupe'}}</label></p>
                     <p><label ng-bind="artist.note">{{artist.note|| 'Pas de note' }}</label></p>
                 </div>
