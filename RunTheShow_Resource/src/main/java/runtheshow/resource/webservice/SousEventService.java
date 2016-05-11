@@ -6,6 +6,7 @@
 package runtheshow.resource.webservice;
 
 import java.security.Principal;
+import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,5 +32,10 @@ public class SousEventService {
     @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
     public Boolean addSousEvent(Principal user, @RequestBody SousEvenement sousEvent, HttpServletResponse response) {
         return metier.addSousEvent(user, sousEvent);
+    }
+    
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public List<SousEvenement> getAllSousEvent(Principal user, HttpServletResponse response) {
+        return metier.getAllSousEvent(user);
     }
 }

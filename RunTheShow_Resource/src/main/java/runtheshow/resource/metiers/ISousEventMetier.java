@@ -15,7 +15,8 @@ import runtheshow.resource.entities.User;
  * @author Sonatines
  */
 public interface ISousEventMetier {
-    public List<SousEvenement> findAllSousEvent();
     
     public Boolean addSousEvent(Principal user, SousEvenement sousEvent);
+
+    public List<SousEvenement> getAllSousEvent(Principal user);
 }
