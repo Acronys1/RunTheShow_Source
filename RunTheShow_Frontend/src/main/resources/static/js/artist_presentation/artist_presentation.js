@@ -2,8 +2,25 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
 
     $scope.artist = {};
     $scope.errorMessage = "";
+    $scope.typesArtiste = {};
+    $scope.error = false;
     
     $scope.initArtistPresentation = function () {
+        //récupère les types d'artiste
+        $http.get("/resource/artiste/types").success(function (data) {
+            for(var i=0;i<data.length;i++){
+                $scope.typesArtiste[i] = data['nom'];
+            }
+            $scope.error = false;
+            console.log("récup rôles ok");
+        }).error(function (data) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.errorMessage.init = "erreur récupération type artiste.";
+            $scope.error = true;
+            console.log("récup roles KO");
+        });
+        
+        //récupère l'utilisateur et check si c'est un artiste.
         $http.get("/resource/artiste/current").success(function (data, status) {
             $scope.artist = data;
             if ($scope.artist.roles[0] == "ROLE_ARTISTE") {
