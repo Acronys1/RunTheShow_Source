@@ -26,7 +26,7 @@ public class TypeArtiste extends AbstractEntity {
     @NotNull
     private String nom;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "typeArtiste")
     private List<ProfileArtiste> profils;
 
     public TypeArtiste() {
