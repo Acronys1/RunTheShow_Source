@@ -29,6 +29,8 @@ angular
                     }).when('/file', {
                         templateUrl: 'js/file/file_example.html',
                         controller: 'file'
+                    }).when('/accueil', {
+                        templateUrl: 'js/home/accueil.html'
                     }).otherwise('/');
 
                     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
