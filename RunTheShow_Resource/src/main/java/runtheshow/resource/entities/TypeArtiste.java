@@ -26,9 +26,9 @@ public class TypeArtiste extends AbstractEntity {
     private String nom;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private List<ProfilArtiste> profils;
+    private List<ProfileArtiste> profils;
 
-    public TypeArtiste(String nom, List<ProfilArtiste> profils) {
+    public TypeArtiste(String nom, List<ProfileArtiste> profils) {
         this.nom = nom;
         this.profils = profils;
     }
@@ -41,11 +41,11 @@ public class TypeArtiste extends AbstractEntity {
         this.nom = nom;
     }
 
-    public List<ProfilArtiste> getProfils() {
+    public List<ProfileArtiste> getProfils() {
         return profils;
     }
 
-    public void setProfils(List<ProfilArtiste> profils) {
+    public void setProfils(List<ProfileArtiste> profils) {
         this.profils = profils;
     }
     
