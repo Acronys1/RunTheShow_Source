@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "TYPE_ARTISTE")
 public class TypeArtiste extends AbstractEntity {
+    private static final long serialVersionUID = 1L;
 
     @Column(name = "type_nom")
     @NotNull
@@ -27,6 +28,9 @@ public class TypeArtiste extends AbstractEntity {
 
     @OneToMany(fetch = FetchType.EAGER)
     private List<ProfileArtiste> profils;
+
+    public TypeArtiste() {
+    }
 
     public TypeArtiste(String nom, List<ProfileArtiste> profils) {
         this.nom = nom;

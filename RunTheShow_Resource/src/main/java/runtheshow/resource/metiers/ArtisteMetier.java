@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import java.security.Principal;
 import runtheshow.resource.entities.ProfileArtiste;
+import runtheshow.resource.entities.TypeArtiste;
 import runtheshow.resource.entities.User;
 import runtheshow.resource.repository.ProfileArtisteRepository;
+import runtheshow.resource.repository.TypeArtisteRepository;
 import runtheshow.resource.repository.UserRepository;
 
 @Service("profile_artiste_metier")
@@ -20,6 +22,9 @@ public class ArtisteMetier implements IArtisteMetier {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private TypeArtisteRepository typeArtisteRepository;
 
     // liste des profiles d'artiste
     @Override
@@ -58,5 +63,10 @@ public class ArtisteMetier implements IArtisteMetier {
     @Override
     public List<ProfileArtiste> getArtisteBySearch(String artisteCherche) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<TypeArtiste> GetAllArtistTypes() {
+        return Lists.newArrayList(typeArtisteRepository.findAll());
     }
 }
