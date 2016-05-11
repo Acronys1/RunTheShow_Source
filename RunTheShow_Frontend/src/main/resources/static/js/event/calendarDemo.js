@@ -166,6 +166,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         lang: 'fr',
         height: 450,
         editable: false,
+        timeFormat: 'HH:mm',
         header:{
           left: 'title',
           center: '',
