@@ -41,6 +41,7 @@
     <group name="calendar-js">
         <css>file:@project.basedir@/src/main/wro/css/fullcalendar.css</css>
         <js>file:@project.basedir@/src/main/wro/js/fullcalendar.min.js</js>
+        <js>file:@project.basedir@/src/main/wro/js/calendar.js</js>
     </group>
     
     <group name="print-calaendar">

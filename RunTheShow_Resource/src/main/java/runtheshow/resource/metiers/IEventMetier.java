@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface IEventMetier {
     
-    public List<Evenement> findAllEvent();
+    public List<Evenement> getAllEvent(Principal user);
     
     public Boolean addEvent(Principal user, Evenement event);
 }

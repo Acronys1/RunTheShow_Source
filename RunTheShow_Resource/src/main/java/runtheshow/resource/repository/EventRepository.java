@@ -6,6 +6,7 @@
 package runtheshow.resource.repository;
 
 import java.security.Principal;
+import java.util.List;
 import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,5 +22,7 @@ public interface EventRepository extends CrudRepository<Evenement, Long> {
     
     // Le dernier évènement créé par un utilisateur
     Evenement findTop1ByCreateur(User user);
+    
+    List<Evenement> findByCreateur(User user);
     
 }

@@ -90,6 +90,7 @@ public class User extends AbstractEntity {
      * Relations avec les aures entités
      */
     @OneToMany(mappedBy = "createur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonBackReference
     private List<Evenement> mesEvenements;
 
     @OneToMany(mappedBy = "expediteur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
