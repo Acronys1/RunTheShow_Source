@@ -39,6 +39,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
   var vm = this;
   
   $scope.bindCtrl = "Ok";
+  $scope.lstInvtitation = {};
   
   vm.disabled = undefined;
   vm.searchEnabled = undefined;
@@ -53,13 +54,52 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
                     vm.people.push({ name: data[i]['nomArtiste'],      image: 'http://lorempixel.com/50/50/people', id:data[i]['id']});
                 }
                 
-                }).error(function (data, status) { // called asynchronously if an error occurs
+                }).error(function (data, status) {
                     console.log("Erreur lors de l'envoie des informations.");
                 });
-          }, 1000, true);//Délais de 1 seconde entre chaque appel
+          }, 1000, true);
       }
          
   };
+  
+    $scope.initInvitationSend = function(){
+      $http.get("/resource/invitation/retreiveSentInvit").success(function (data, status) {
+            console.log(data);
+        }).error(function (data, status) { 
+
+        });
+    };
+    
+    $scope.initInvitationReceived = function(){
+      $http.get("/resource/invitation/retreiveReceivedInvit").success(function (data, status) {
+            $scope.lstInvtitation = data;
+        }).error(function (data, status) { 
+
+        });
+    };
+
+    $scope.refuserInvit = function(invitation){
+        var data = JSON.stringify({id: invitation.id});
+        console.log(data);
+      $http.post("/resource/invitation/refuserInvit", data).success(function (data, status) {
+            console.log(data);
+            $scope.initInvitationReceived();
+        }).error(function (data, status) { 
+
+        });
+    };
+
+  
+    $scope.accepterInvit = function(invitation){
+        var data = JSON.stringify({id: invitation.id});
+        $http.post("/resource/invitation/accepterInvit",data).success(function (data, status) {
+          console.log(data);
+          $scope.initInvitationReceived();
+        }).error(function (data, status) { 
+          
+        });
+  };
+  
   
   $scope.sendInvitation = function(){
       var mes_invit = {};
@@ -84,7 +124,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
         
       //console.log($scope.msgPerso);
       //console.log($scope.ctrl.multipleDemo.selectedPeople);
-  }
+  };
 
   vm.enable = function() {
     vm.disabled = false;
@@ -107,18 +147,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
    * Tableau : nom/prenom + img
    * 
    */
-  vm.people = [
-    { name: 'Adam',      image: 'http://lorempixel.com/50/50/people', id: '20'},
-    { name: 'Amalie',    image: 'http://lorempixel.com/50/50/people', id: '21'},
-    { name: 'Estefana', image: 'http://lorempixel.com/50/50/people', id: '22'},
-    { name: 'Adrian',    image: 'http://lorempixel.com/50/50/people', id: '23'},
-    { name: 'Wladimir',  image: 'http://lorempixel.com/50/50/people', id: '24'},
-    { name: 'Samantha azymepetepaslescouilles',  image: 'http://lorempixel.com/50/50/people', id: '25'},
-    { name: 'Nicole',    image: 'http://lorempixel.com/50/50/people', id: '26'},
-    { name: 'Natasha',   image: 'http://lorempixel.com/50/50/people', id: '27'},
-    { name: 'Michael',   image: 'http://lorempixel.com/50/50/people', id: '28'},
-    { name: 'NicolÃ¡s',   image: 'http://lorempixel.com/50/50/people', id: '29'}
-  ];
+  vm.people = [];
   
 
   

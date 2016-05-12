@@ -19,4 +19,6 @@ public interface ISousEventMetier {
     public Boolean addSousEvent(Principal user, SousEvenement sousEvent);
 
     public List<SousEvenement> getAllSousEvent(Principal user);
+    
+    public SousEvenement findSousEventById(Long id);
 }

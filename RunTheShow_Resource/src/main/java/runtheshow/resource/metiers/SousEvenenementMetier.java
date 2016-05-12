@@ -79,4 +79,9 @@ public class SousEvenenementMetier implements ISousEventMetier {
         return Lists.newArrayList(sousEventRepository.findByUser(userRepository.findUserByLogin(user.getName())));
     }
     
+    @Override
+    public SousEvenement findSousEventById(Long id) {
+        return sousEventRepository.findOne(id);
+    }
+    
 }

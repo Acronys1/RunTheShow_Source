@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
+import runtheshow.resource.entities.Invitation;
 import runtheshow.resource.repository.ProfileArtisteRepository;
 import runtheshow.resource.repository.RoleRepository;
 import runtheshow.resource.repository.UserRepository;
@@ -103,6 +104,16 @@ public class UserMetier implements IUserMetier {
     public List<User> getUsersArtisteByListId(Set ids) {
         List<User> lstUserArtiste = userRepository.findUserArtisteByIds(ids);
         return Lists.newArrayList(lstUserArtiste);
+    }
+    
+    @Override
+    public List<Invitation> getAllInvitationUserReceived(User u) {
+        return u.getMesInvitationsDestintaire();
+    }
+    
+    @Override
+    public List<Invitation> getAllInvitationUserSent(User u) {
+        return u.getMesInvitationsExpediteur();
     }
     
     

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 import runtheshow.resource.entities.Role;
 import runtheshow.resource.entities.User;
+import runtheshow.resource.entities.Invitation;
 
 public interface IUserMetier {
 
@@ -28,4 +29,8 @@ public interface IUserMetier {
         public List<User> getUsersBySearch(String motCherche);
         
         public List<User> getUsersArtisteByListId(Set ids);
+        
+        public List<Invitation> getAllInvitationUserReceived(User u);
+
+        public List<Invitation> getAllInvitationUserSent(User u);
 }
