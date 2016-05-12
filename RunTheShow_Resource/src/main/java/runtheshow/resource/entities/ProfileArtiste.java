@@ -5,6 +5,9 @@
  */
 package runtheshow.resource.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
@@ -41,6 +44,7 @@ public class ProfileArtiste extends AbstractEntity {
     private String nomArtiste;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "profile_artiste_type")
     private TypeArtiste typeArtiste;
 
