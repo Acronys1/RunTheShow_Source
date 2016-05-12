@@ -10,7 +10,8 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
         return regEmail.test(myVar);
     }
     
-    
+    //Fonction de réinitialisation du modal d'inscription
+    //seulement quand l'inscription est validé ou qu'il y'a une erreur serveur
     $scope.reInitSignUpModal = function (){
         if($scope.signUpOK != null || $scope.errorMessage.erreurServeur != null){
             $scope.errorMessage = {};
@@ -20,6 +21,7 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
         }
     };
     
+    //Fonction d'inscription de l'utilisateur
     $scope.signUp = function () {
 
         var noError = true;
