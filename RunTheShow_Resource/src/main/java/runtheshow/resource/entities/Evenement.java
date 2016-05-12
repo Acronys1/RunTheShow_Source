@@ -48,13 +48,13 @@ public class Evenement extends AbstractEntity {
     @Column(name="event_dateHeureDebut")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone="CET")
     private Calendar dateHeureDebut;
     
     @Column(name="event_dateHeureFin")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone="CET")
     private Calendar dateHeureFin;
     
     @Lob

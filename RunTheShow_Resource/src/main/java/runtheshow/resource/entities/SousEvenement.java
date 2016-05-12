@@ -37,13 +37,13 @@ public class SousEvenement extends AbstractEntity {
     @Column(name="sevent_dateDebut")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone="CET")
     private java.util.Calendar dateDebut;
     
     @Column(name="sevent_dateFin")
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy HH:mm", timezone="CET")
     private java.util.Calendar dateFin;
     
     @Lob

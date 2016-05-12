@@ -9,111 +9,22 @@
     <!-- Tab panes -->
     <div class="tab-content">
         <div id="myEvent" class="tab-pane fade in active">
-            <!-- <script>
-
-                    $(document).ready(function() {
-
-                            $('#calendar').fullCalendar({
-                                    header: {
-                                            left: 'prev,next today',
-                                            center: 'title',
-                                            right: 'month,agendaWeek,agendaDay'
-                                    },
-                                    defaultDate: '2016-01-12',
-                                    editable: false,
-                                    eventLimit: true, // allow "more" link when too many events
-                                    events: [
-                                            {
-                                                    title: 'All Day Event',
-                                                    start: '2016-01-01',
-                                                    id: '20'
-                                            },
-                                            {
-                                                    title: 'Long Event',
-                                                    start: '2016-01-07',
-                                                    end: '2016-01-10',
-                                                    url: 'http://fdietz.github.io/recipes-with-angular-js/common-user-interface-patterns/displaying-a-modal-dialog.html',
-                                                    id: '21'
-                                            },
-                                            {
-                                                    id: 999,
-                                                    title: 'Repeating Event',
-                                                    start: '2016-01-09T16:00:00',
-                                            },
-                                            {
-                                                    id: 999,
-                                                    title: 'Repeating Event',
-                                                    start: '2016-01-16T16:00:00',
-                                            },
-                                            {
-                                                    title: 'Conference',
-                                                    start: '2016-01-11',
-                                                    end: '2016-01-13',
-                                                    id: '29852'
-                                            },
-                                            {
-                                                    title: 'Meeting',
-                                                    start: '2016-01-12T10:30:00',
-                                                    end: '2016-01-12T12:30:00',
-                                                    id: '5'
-                                            },
-                                            {
-                                                    title: 'Lunch',
-                                                    start: '2016-01-12T12:00:00',
-                                                    id: '7'
-                                            },
-                                            {
-                                                    title: 'Meeting',
-                                                    start: '2016-01-12T14:30:00',
-                                                    id: '90'
-                                            },
-                                            {
-                                                    title: 'Happy Hour',
-                                                    start: '2016-01-12T17:30:00',
-                                                    id: '42'
-                                            },
-                                            {
-                                                    title: 'Dinner',
-                                                    start: '2016-01-12T20:00:00',
-                                                    id: '123'
-                                            },
-                                            {
-                                                    title: 'Birthday Party',
-                                                    start: '2016-01-13T07:00:00',
-                                                    id: '879'
-                                            },
-                                            {
-                                                    title: 'Click for Google',
-                                                    url: 'http://google.com/',
-                                                    start: '2016-01-28',
-                                                    id: '1'
-                                            }
-                                    ],
-                                    eventClick: function(calEvent, jsEvent, view) {
-                                        // open modal
-                                        //alert('id: ' + calEvent.id);
-                                        //alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-                                        //alert('View: ' + view.name);
-                                        
-                                        $('#myModal').modal('toggle');
-                                        $('#myModal').modal('show');
-                                        
-                                        // change the border color just for fun
-                                        $(this).css('border-color', 'red');
-                                    }
-                            });
-
-                    });
-            </script> -->
             
-            <div ng-controller="calendarCtrl as calDemo"> 
-                <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+            
+            <div ng-controller="calendarCtrl as calDemo">
+                <tab select="renderCalender('myCalendar1');">
+                    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                      <h4>{{alertMessage}}</h4>
+                    </div>
+                    <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                </tab>
+                <!-- <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> -->
             </div>
         </div>
         
         <!-- Modal -->
         <div id="text-page" ng-controller="DemoCtrl as ctrl">
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
