@@ -3,6 +3,8 @@ package runtheshow.resource.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
