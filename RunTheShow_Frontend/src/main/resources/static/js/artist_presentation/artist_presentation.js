@@ -25,24 +25,33 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
             $scope.artist = data;
             if ($scope.artist != null) {
                 $scope.errorMessage.init = "is an artist";
-                console.log("")
+                console.log("user is an artist")
             }
             else{
                 $scope.errorMessage.init = "not an artist";
             }
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
-            $scope.errorMessage.init = "Pas un artiste.";
+            $scope.errorMessage.init = "Pas un artiste.";            
+                console.log("user is not an artist")
         });
     };
 
     $scope.showArtistTypes = function () {
+        //renvoie la liste des types d'artiste utilisés affichés dans la vue
         if ($scope.artist == null || $scope.typesArtiste[0] == null)
             return 'no set';
         if ($scope.artist.typeArtiste == null)//default selected typeArtist
             return $scope.typesArtiste[0].text;
-        var selected = $filter('filter')($scope.typesArtiste, {value: $scope.artist.typeArtiste.id});
-        return ($scope.artist.typeArtiste && selected.length) ? selected[0].text : 'Not set';
+        var selected = null;
+        var idArtiste = $scope.artist.typeArtiste.id;
+        for(var i = 0;i<$scope.typesArtiste[i].value != null;i++){
+            var currIdArt = $scope.typesArtiste[i].value;
+            var libTypeArtiste = $scope.typesArtiste[i].text;
+            if( currIdArt == idArtiste)
+                return libTypeArtiste ;//par défault, le type d'artiste de l'artiste est selected
+        }
+        return 'Not set';
     };
 
     $scope.updateUser = function () {
