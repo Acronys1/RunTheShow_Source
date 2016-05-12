@@ -9,6 +9,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     
     $scope.bindCtrl = "Ok";
     $scope.eventTab = [];
+    $scope.sousEventTab = [];
     
     var date = new Date();
     var d = date.getDate();
@@ -71,6 +72,24 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         }
     });
     
+    $http.get('/resource/sousEvent/all').success(function (data) {
+        $scope.allSousEvent = data;
+
+        for(var i = 0; i<=$scope.allSousEvent.length; i++)
+        {
+            var eventJson = JSON.stringify({
+                id: $scope.allSousEvent[i].id,
+                title: $scope.allSousEvent[i].intitule,
+                start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
+                end: $scope.changeDate($scope.allSousEvent[i].dateFin)
+            })
+            
+            var eventParse = JSON.parse(eventJson);
+            
+            $scope.sousEventTab.push(eventParse);
+        }
+    });
+    
     
     
     /* event source that calls a function on every view switch */
@@ -83,13 +102,9 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     };
 
     $scope.calEventsExt = {
-       color: '#f00',
-       textColor: 'yellow',
-       events: [ 
-          {type:'party',title: 'Lunch',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Lunch 2',start: new Date(y, m, d, 12, 0),end: new Date(y, m, d, 14, 0),allDay: false},
-          {type:'party',title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
-        ]
+       color: '#40A447',
+       textColor: 'white',
+       events: $scope.sousEventTab
     };
     /* alert on eventClick */
     $scope.alertOnEventClick = function( date, jsEvent, view){
@@ -169,7 +184,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         $scope.uiConfig.calendar.dayNamesShort = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
     };
     /* event sources array*/
-    $scope.eventSources = [$scope.eventTab, $scope.eventSource, $scope.eventsF];
-    //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.events];
+    $scope.eventSources = [$scope.eventTab, $scope.calEventsExt];
+    //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.eventTab];
 });
 
