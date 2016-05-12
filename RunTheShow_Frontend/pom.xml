@@ -182,6 +182,11 @@
                         <artifactId>angular-xeditable</artifactId>
                         <version>0.1.9</version>
                     </dependency>
+                    <dependency>
+                        <groupId>org.webjars</groupId>
+                        <artifactId>bootstrap-select</artifactId>
+                        <version>1.9.4</version>
+                    </dependency>
                 </dependencies>
             </plugin>
         </plugins>

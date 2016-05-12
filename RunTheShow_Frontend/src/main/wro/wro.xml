@@ -10,6 +10,8 @@
     
     <group name="bootstrap">
         <js>webjar:bootstrap/3.3.6/js/bootstrap.min.js</js>
+        <css>webjar:bootstrap-select/1.9.4/css/bootstrap-select.min.css</css>
+        <js>webjar:bootstrap-select/1.9.4/js/bootstrap-select.min.js</js>
     </group>
    
     <group name="theme">  

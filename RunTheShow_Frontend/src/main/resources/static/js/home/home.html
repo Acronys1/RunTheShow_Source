@@ -1,11 +1,5 @@
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
+<div id="myCarousel" class="carousel slide " data-ride="carousel">
     <!-- Indicators -->
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
@@ -13,36 +7,124 @@
         <div class="item active">
             <img src="img/blog.jpg" alt="Chania" >
             <div class="carousel-caption">
-                <p class="h1 text-center">Vos événements d'entreprises  <br>deviennent uniques !</p>
+                <p class="h1 text-center">Organiser des concerts à domicile</p>
             </div>
         </div>
 
         <div class="item">
             <img src="img/blog2.jpg" alt="Chania">
             <div class="carousel-caption">
-                <h3>Chania</h3>
-                <p>The atmosphere in Chania has a touch of Florence and Venice.</p>
+                <p class="h1 text-center">Un mariage, un anniversaire ? <br/> Invitez des artistes en toute simplicité</p>
             </div>
         </div>
 
         <div class="item">
             <img src="img/blog.jpg" alt="Flower">
             <div class="carousel-caption">
-                <h3>Flowers</h3>
-                <p>Beatiful flowers in Kolymbari, Crete.</p>
+                <p class="h1 text-center"> Invitez plusieurs artistes pour le même evenement ? <br> C'est possible</p>
             </div>
         </div>
 
         <div class="item">
             <img src="img/blog2.jpg" alt="Flower">
             <div class="carousel-caption">
-                <h2>Flowers</h2>
-                <p>Beatiful flowers in Kolymbari, Crete.</p>
+                <p class="h1 text-center"> Invitez plusieurs artistes pour le même evenement ? <br> C'est possible</p>
             </div>
         </div>
     </div>
 
+    <div class="search_bar_accueil">
+        <div class="search">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-section">
+                            <div class="row">
+                                <form id="bootstrapSelectForm" method="post" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-4 col-sm-5  selectContainer">
+                                            <select name="colors" class="form-control" multiple title="Choose 2-4 colors">
+                                                <option value="black">Black</option>
+                                                <option value="blue">Blue</option>
+                                                <option value="green">Green</option>
+                                                <option value="orange">Orange</option>
+                                                <option value="red">Red</option>
+                                                <option value="yellow">Yellow</option>
+                                                <option value="white">White</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-md-2 col-sm-10">
+                                            <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+    $('#myCarousel').carousel({
+        interval: 4000,
+        pause: 'none'
+    });
+    $('#myCarousel').carousel('cycle');
+</script>
+
+<script>
+$(document).ready(function() {
+    $('#bootstrapSelectForm')
+        .find('[name="colors"]')
+            .selectpicker()
+            .change(function(e) {
+                // revalidate the color when it is changed
+                $('#bootstrapSelectForm').formValidation('revalidateField', 'colors');
+            })
+            .end()
+        .find('[name="language"]')
+            .selectpicker()
+            .change(function(e) {
+                // revalidate the language when it is changed
+                $('#bootstrapSelectForm').formValidation('revalidateField', 'language');
+            })
+            .end()
+        .formValidation({
+            framework: 'bootstrap',
+            excluded: ':disabled',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                colors: {
+                    validators: {
+                        callback: {
+                            message: 'Please choose 2-4 colors you like most',
+                            callback: function(value, validator, $field) {
+                                // Get the selected options
+                                var options = validator.getFieldElements('colors').val();
+                                return (options != null && options.length >= 2 && options.length <= 4);
+                            }
+                        }
+                    }
+                },
+                language: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select your native language.'
+                        }
+                    }
+                }
+            }
+        });
+});
+</script>
 <!--<video autoplay loop>
   <source src="https://video-cdg2-1.xx.fbcdn.net/v/t43.1792-2/13059090_467982336744883_480295172_n.mp4?efg=eyJybHIiOjE4NjcsInJsYSI6MTUxNCwidmVuY29kZV90YWciOiJzdmVfaGQifQ%3D%3D&rl=1867&vabr=1245&oh=1a9709c48576c9eac5afaf10a4033398&oe=5733631F" type="video/mp4">
 </video>
