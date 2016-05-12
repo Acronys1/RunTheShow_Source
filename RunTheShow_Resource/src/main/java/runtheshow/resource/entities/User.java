@@ -106,7 +106,6 @@ public class User extends AbstractEntity {
     private List<Contrat> mesContratsArtiste;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
-    @JsonBackReference
     private List<SousEvenement> mesSousEvenements;
 
     @ManyToMany(fetch = FetchType.EAGER)
