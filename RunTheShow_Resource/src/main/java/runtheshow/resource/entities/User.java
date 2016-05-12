@@ -2,6 +2,7 @@ package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -106,6 +107,7 @@ public class User extends AbstractEntity {
     private List<Contrat> mesContratsArtiste;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnore
     private List<SousEvenement> mesSousEvenements;
 
     @ManyToMany(fetch = FetchType.EAGER)
