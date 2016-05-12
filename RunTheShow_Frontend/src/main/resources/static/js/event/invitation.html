@@ -47,42 +47,44 @@
                 <section>
                     <div id="text-page" ng-controller="DemoCtrl as ctrl">
 
-                        <p class="lead">A remplacer dans modal invitation multiple. Test binding ctrl : {{ bindCtrl }}</p>
-
-                        <h1>Recherche plusieurs artistes +  com perso pour envoyer invit</h1>
+                        <p class="lead">Test binding ctrl : {{ bindCtrl }}</p>
                         
-                        <hr>
-                        <label>Inviter des artistes</label>
-                        <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: 800px;">
-                            <ui-select-match placeholder="Chercher des artistes à inviter">
-                                <img style="float:left;border-radius: 25px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
-                                {{$item.name}}
-                            </ui-select-match>
-                            <ui-select-choices refresh="refreshArtiste($select.search)" refresh-delay="1000" repeat="person in ctrl.people">
-                                <small>
-                                  <img style="float:left;border-radius: 25px;" ng-src="{{person.image}}"  alt="ImageMarchePas" />
-                                </small>
-                              <div style="margin-left: 60px;" ng-bind-html="person.name | highlight: $select.search"></div>
-                              <div style="margin-left: 60px;">BLABLABLABLA</div>
-                          </ui-select-choices>
-                        </ui-select>
-                        selection : {{ ctrl.multipleDemo.selectedPeople }}<br>
-                    
-                        <br><br>
-                        <fieldset class="form-group">
-                            <label for="msgPerso">Envoyer un message personnel</label>
-                            <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
-                        </fieldset>
+                        <h1>Afficher toutes les invits reçues et envoyées (voir dans les req envoyées et leur réponse dans l'outil de debug)</h1>
+                        
+                        <h4>Invitations envoyées</h4>
+                            <button ng-click ="initInvitationSend()" type="button">Test WS !</button> 
+                        <h4>Invitations reçues</h4>
+                            <button ng-click ="initInvitationReceived()" type="button">Test WS !</button>
+                            <br><br>
+                            <hr>
+                            <h2>Accepter/refuser une invitation reçue (cliquer d'abord sur le 2nd btn test WS)</h2>
+                            
+                            <table border="1">
+                                <thead>
+                                    <tr>
+                                        <th>Expediteur (=organisateur)</th>
+                                        <th>Statut</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="invitation in lstInvtitation">
+                                        <td>                    
+                                            {{ invitation.expediteur.prenom }} &nbsp; {{ invitation.expediteur.nom }}
+                                        </td>
+                                        <td>
+                                            {{ invitation.statut }}
+                                        </td>                                        
+                                        <td>
+                                            <button ng-click="accepterInvit(invitation)">Accepter</button>
+                                            <button ng-click="refuserInvit(invitation)">Refuser</button>
+                                        </td>
 
-                        <div class="row">
-                            <div class="col-sm-12 text-center">
-                                <button ng-click="sendInvitation()" type="submit" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
-                            </div>
-                        </div>
+                                    </tr>
+                                </tbody>
+                            </table>
                     </div>                    
                 </section>
-                
-
             </div>
             <!-- /.col-md-9 -->
 

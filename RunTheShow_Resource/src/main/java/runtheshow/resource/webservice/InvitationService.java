@@ -5,10 +5,7 @@
  */
 package runtheshow.resource.webservice;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gson.Gson;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
@@ -20,14 +17,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import runtheshow.resource.entities.User;
 import runtheshow.resource.metiers.IUserMetier;
-import com.google.gson.reflect.TypeToken;
-import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+import runtheshow.resource.entities.Invitation;
+import runtheshow.resource.entities.SousEvenement;
+import runtheshow.resource.metiers.IInvitationMetier;
+import runtheshow.resource.metiers.ISousEventMetier;
 
 /**
  *
@@ -36,38 +35,115 @@ import org.json.JSONException;
 @RestController
 @RequestMapping("/invitation")
 public class InvitationService {
+    
+    private static final String STATUT_CREEE = "Invitation envoyée.";
+    private static final String STATUT_REPONDU_OUI = "Invitation acceptée.";
+    private static final String STATUT_REPONDU_NON = "Invitation refusée.";
 
     @Autowired
-    private IUserMetier metier;
+    private IUserMetier userMetier;
+    @Autowired
+    private ISousEventMetier sousEventMetier;
+    @Autowired
+    private IInvitationMetier invitationMetier;
 
+    /**
+     * 
+     * @param caracteres
+     * @return 
+     */
     @RequestMapping(value = "/filter/{caracteres}", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
     public String filter(@PathVariable String caracteres) {
-        return metier.getUsersBySearch(caracteres).toString();
+        return userMetier.getUsersBySearch(caracteres).toString();
     }
     
-    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
-    public Boolean addInvitation(@RequestBody Object o, HttpServletResponse response) throws JSONException {
+    /**
+     * 
+     * @param user
+     * @return 
+     */
+    @RequestMapping(value = "/retreiveReceivedInvit", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    public List<Invitation> retreiveReceivedInvit(Principal user) {
+        return userMetier.getAllInvitationUserReceived(userMetier.getUserByName(user.getName()));
+    }
+    
+    /**
+     * 
+     * @param user
+     * @return 
+     */
+    @RequestMapping(value = "/retreiveSentInvit", method = RequestMethod.GET, produces = "application/json; charset=UTF-8")
+    public List<Invitation> retreiveSentInvit(Principal user) {
+        return userMetier.getAllInvitationUserSent(userMetier.getUserByName(user.getName()));
+    }
+    
+    /**
+     * 
+     * @param invit
+     * @return 
+     */
+    @RequestMapping(value = "/accepterInvit", method = RequestMethod.POST,consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+    public JSONObject accepterInvitation(@RequestBody Object o, HttpServletResponse response) {
         LinkedHashMap lhm = (LinkedHashMap) o;
-        Set<Long> set = new HashSet<Long>((Collection<Long>)lhm.get("id_art"));
-        Set<Long> setLong = new HashSet<Long>();
-        
-        Iterator i= set.iterator(); // on crée un Iterator pour parcourir notre HashSet
-        while(i.hasNext()) // tant qu'on a un suivant
-        {
-                setLong.add(Long.parseLong(i.next().toString()));
-        }
-        List<User> cavabuger = metier.getUsersArtisteByListId(setLong);
-        
-        
-        /*ArrayList<String> list = new ArrayList<String>();     
-        JSONArray jsonArray = (JSONArray)o; 
-        if (jsonArray != null) { 
-           int len = jsonArray.length();
-           for (int i=0;i<len;i++){ 
-            list.add(jsonArray.get(i).toString());
-           } 
-        }*/
-     
+        long idInvit = (long) (int) lhm.get("id");
+        invitationMetier.accepterInvitation(invitationMetier.getInvitationById(idInvit));
         return null;
     }
+    
+    /**
+     * 
+     * @param invit
+     * @return 
+     */
+    @RequestMapping(value = "/refuserInvit", method = RequestMethod.POST,consumes = "application/json; charset=UTF-8", produces = "application/json; charset=UTF-8")
+    public JSONObject refuserInvit(@RequestBody Object o, HttpServletResponse response) {
+        LinkedHashMap lhm = (LinkedHashMap) o;
+        long idInvit = (long) (int) lhm.get("id");
+        invitationMetier.refuserInvitation(invitationMetier.getInvitationById(idInvit));
+        return null;
+    }
+    
+    /**
+     * 
+     * @param o
+     * @param response
+     * @param user
+     * @return
+     * @throws JSONException 
+     */
+    @RequestMapping(value = "/add", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8",produces = "application/json; charset=UTF-8")
+    public JSONObject addInvitation(@RequestBody Object o, HttpServletResponse response, Principal user) throws JSONException {
+        LinkedHashMap lhm = (LinkedHashMap) o;
+        Set<Long> set = new HashSet<>((Collection<Long>)lhm.get("id_art"));
+        String msgPerso = null;
+        long idSousEvent = (long) (int) lhm.get("idSousEvent");
+        if(lhm.get("message_perso") != null)
+           msgPerso = (String) lhm.get("message_perso");
+        Set<Long> setLong = new HashSet<>();
+        
+        Iterator i= set.iterator(); // on crée un Iterator pour parcourir notre HashSet
+        while(i.hasNext()){
+                setLong.add(Long.parseLong(i.next().toString()));
+        }
+        List<User> lstArtiste = userMetier.getUsersArtisteByListId(setLong);
+        System.out.println(idSousEvent);
+        SousEvenement ssEvent = sousEventMetier.findSousEventById(idSousEvent); 
+        User exp = userMetier.getUserByName(user.getName());
+        
+        
+        for(User u:lstArtiste){
+            Invitation newInvit = new Invitation();
+            if(msgPerso != null)
+                newInvit.setCommentaire(msgPerso);
+            newInvit.setDestinataire(u);
+            newInvit.setExpediteur(exp);
+            newInvit.setSousEvenement(ssEvent);
+            newInvit.setStatut(STATUT_CREEE);
+            invitationMetier.addInvitation(newInvit);
+        }
+
+        return null;
+    }
+    
+    
 }
