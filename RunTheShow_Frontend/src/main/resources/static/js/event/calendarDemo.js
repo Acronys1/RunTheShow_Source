@@ -16,7 +16,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     var m = date.getMonth();
     var y = date.getFullYear();
     
-    $scope.changeTo = 'Hungarian';
+    //$scope.changeTo = 'Hungarian';
     
     $scope.changeDate = function(dateChange) {
         var array = dateChange.split(' ');
@@ -39,11 +39,11 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     
     
     /* event source that pulls from google.com */
-    $scope.eventSource = {
+    /*$scope.eventSource = {
             url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
             className: 'gcal-event',           // an option!
             currentTimezone: 'America/Chicago' // an option!
-    };
+    };*/
     /* event source that contains custom events on the scope */
     /*$scope.events = [
       {title: 'All Day Event',start: new Date(y, m, 1)},
@@ -54,6 +54,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];*/
     
+    /* Return all event for the User */
     $http.get('/resource/event/all').success(function (data) {
         $scope.allEvent = data;
 
@@ -72,6 +73,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         }
     });
     
+    /* Return all Sous-event for the User */
     $http.get('/resource/sousEvent/all').success(function (data) {
         $scope.allSousEvent = data;
 
@@ -93,21 +95,24 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     
     
     /* event source that calls a function on every view switch */
-    $scope.eventsF = function (start, end, timezone, callback) {
+    /*$scope.eventsF = function (start, end, timezone, callback) {
       var s = new Date(start).getTime() / 1000;
       var e = new Date(end).getTime() / 1000;
       var m = new Date(start).getMonth();
       var events = [{title: 'Feed Me ' + m,start: s + (50000),end: s + (100000),allDay: false, className: ['customFeed']}];
       callback(events);
-    };
-
+    };*/
+    
+    /* Retourne tous les sous-évènements dans la une couleur définie */
     $scope.calEventsExt = {
        color: '#40A447',
        textColor: 'white',
        events: $scope.sousEventTab
     };
+    
     /* alert on eventClick */
     $scope.alertOnEventClick = function( date, jsEvent, view){
+        angular.element('#myModal');
         $scope.alertMessage = (date.title + ' was clicked ');
     };
     /* alert on Drop */
