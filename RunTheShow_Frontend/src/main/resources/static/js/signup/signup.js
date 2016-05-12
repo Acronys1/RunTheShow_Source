@@ -2,13 +2,24 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
 
     $scope.errorMessage = {};
     $scope.signUpOK = null;
-
+    
     function isEmail(myVar) {
         // La 1ère étape consiste à définir l'expression régulière d'une adresse email
         var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$', 'i');
 
         return regEmail.test(myVar);
     }
+    
+    
+    $scope.reInitSignUpModal = function (){
+        if($scope.signUpOK != null || $scope.errorMessage.erreurServeur != null){
+            $scope.errorMessage = {};
+            $scope.signUpOK = null;
+            $scope.newUser = {};
+            console.log("Signup modal reinitialized");
+        }
+    };
+    
     $scope.signUp = function () {
 
         var noError = true;
@@ -123,23 +134,6 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
                 });
             }
         }
-
-        /*if (noError) {
-            var credentials = {};
-            credentials.username = $scope.newUser.username;
-            credentials.password = $scope.newUser.password;
-                auth.authenticate(credentials, function (authenticated) {
-                    if (authenticated) {
-                        console.log("Login succeeded")
-                        $scope.error = false;
-                        $("#login-modal").modal('hide');
-                        location.reload();
-                    } else {
-                        console.log("Login failed")
-                        $scope.error = true;
-                    }
-                })
-        }*/
-    }
+    };
 });
 

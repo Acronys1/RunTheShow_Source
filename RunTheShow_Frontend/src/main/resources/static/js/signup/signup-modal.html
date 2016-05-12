@@ -5,12 +5,12 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <!-- inscription form -->
-<div class="modal fade" id="signUp-modal" tabindex="-1" role="dialog" aria-labelledby="signUp" aria-hidden="true" ng-controller="signup">
+<div class="modal fade" id="signUp-modal" tabindex="-1" role="dialog" aria-labelledby="signUp" aria-hidden="true" ng-controller="signup" ng-click="reInitSignUpModal()">
     <div class="modal-dialog modal-sm">
 
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="reInitSignUpModal()">&times;</button>
                 <h4 class="modal-title" id="signUp">Inscription</h4>
             </div>
             <div class="modal-body">
@@ -23,7 +23,9 @@ and open the template in the editor.
                     <span class="h6 signup-or-separator--text">ou</span>
                     <hr>
                 </div>
-
+                <div class="alert alert-danger" ng-show="errorMessage.erreurServeur">
+                    <p>{{errorMessage.erreurServeur}}</p>
+                </div>
                 <div class="alert alert-success" ng-show="signUpOK">
                     <p>{{signUpOK}}</p>
                 </div>
