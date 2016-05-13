@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import runtheshow.resource.entities.ProfileArtiste;
+import runtheshow.resource.entities.Region;
 import runtheshow.resource.entities.TypeArtiste;
 import runtheshow.resource.metiers.IArtisteMetier;
 import runtheshow.resource.metiers.IUserMetier;
@@ -52,5 +53,10 @@ public class ArtisteService {
     @RequestMapping(value = "/types", method = RequestMethod.GET)
     public List<TypeArtiste> getAllArtistTypes(){
         return artisteMetier.GetAllArtistTypes();
+    }
+    
+    @RequestMapping(value = "/regions", method = RequestMethod.GET)
+    public List<Region> getAllRegion(){
+        return artisteMetier.getAllRegion();
     }
 }

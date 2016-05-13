@@ -14,7 +14,9 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderColumn;
@@ -51,8 +53,13 @@ public class ProfileArtiste extends AbstractEntity {
     @Column(name = "profile_artiste_taille")
     private int tailleGroupe;
     
-    @Column(name = "profile_artiste_localisation")
-    private String localisation;
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinTable(
+      name="region_artiste",
+      joinColumns=@JoinColumn(name="artiste_id_fk", referencedColumnName="ID"),
+      inverseJoinColumns=@JoinColumn(name="region_id_fk", referencedColumnName="ID"))
+    private List<Region> localisation;
 
     @Column(name = "profile_artiste_note")
     @NotNull
@@ -110,11 +117,11 @@ public class ProfileArtiste extends AbstractEntity {
         this.tailleGroupe = tailleGroupe;
     }
 
-    public String getLocalisation() {
+    public List<Region> getLocalisation() {
         return localisation;
     }
 
-    public void setLocalisation(String localisation) {
+    public void setLocalisation(List<Region> localisation) {
         this.localisation = localisation;
     }
 

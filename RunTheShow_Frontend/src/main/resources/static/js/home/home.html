@@ -1,4 +1,4 @@
-<div id="myCarousel" class="carousel slide " data-ride="carousel">
+<div id="myCarousel" class="carousel slide " data-ride="carousel" ng-init="initFirst()">
     <!-- Indicators -->
 
     <!-- Wrapper for slides -->
@@ -32,29 +32,28 @@
             </div>
         </div>
     </div>
-
-    <div class="search_bar_accueil">
+</div>
+<div class="search_bar_accueil">
         <div class="search">
             <div class="container">
                 <div class="row">
                     <div class="col-md-10 col-md-offset-1">
                         <div class="form-section">
                             <div class="row">
-                                <form id="bootstrapSelectForm" method="post" class="form-horizontal">
+                                <form id="search_artiste" method="post" class="form-horizontal">
                                     <div class="form-group">
-                                        <div class="col-md-4 col-sm-5  selectContainer">
-                                            <select name="colors" class="form-control" multiple title="Choose 2-4 colors">
-                                                <option value="black">Black</option>
-                                                <option value="blue">Blue</option>
-                                                <option value="green">Green</option>
-                                                <option value="orange">Orange</option>
-                                                <option value="red">Red</option>
-                                                <option value="yellow">Yellow</option>
-                                                <option value="white">White</option>
+                                        <div class="col-md-3 col-sm-5 search_field">
+                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" title="Type d'artiste">
+                                                <option class="small-font" ng-repeat="type in typesArtiste" data-select-watcher data-last="{{$last}}" value="{{type.id}}">{{type.nom}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3 col-sm-5 search_field">
+                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" title="Région">
+                                                <option class="small-font" ng-repeat="region in regions" data-select-watcher data-last="{{$last}}" value="{{region.id}}">{{region.nom}}</option>
                                             </select>
                                         </div>
 
-                                        <div class="col-md-2 col-sm-10">
+                                        <div class="col-md-2 col-sm-10 search_field">
                                             <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
                                         </div>
                                     </div>
@@ -66,64 +65,56 @@
             </div>
         </div>
     </div>
-</div>
 
 <script type="text/javascript">
-    $('#myCarousel').carousel({
-        interval: 4000,
-        pause: 'none'
-    });
-    $('#myCarousel').carousel('cycle');
+            $('#myCarousel').carousel({
+                interval: 4000,
+                pause: 'none'
+            });
+            $('#myCarousel').carousel('cycle');
 </script>
 
 <script>
-$(document).ready(function() {
-    $('#bootstrapSelectForm')
-        .find('[name="colors"]')
-            .selectpicker()
-            .change(function(e) {
-                // revalidate the color when it is changed
-                $('#bootstrapSelectForm').formValidation('revalidateField', 'colors');
-            })
-            .end()
-        .find('[name="language"]')
-            .selectpicker()
-            .change(function(e) {
-                // revalidate the language when it is changed
-                $('#bootstrapSelectForm').formValidation('revalidateField', 'language');
-            })
-            .end()
-        .formValidation({
-            framework: 'bootstrap',
-            excluded: ':disabled',
-            icon: {
-                valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
-                validating: 'glyphicon glyphicon-refresh'
-            },
-            fields: {
-                colors: {
-                    validators: {
-                        callback: {
-                            message: 'Please choose 2-4 colors you like most',
-                            callback: function(value, validator, $field) {
-                                // Get the selected options
-                                var options = validator.getFieldElements('colors').val();
-                                return (options != null && options.length >= 2 && options.length <= 4);
-                            }
-                        }
-                    }
-                },
-                language: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Please select your native language.'
-                        }
-                    }
-                }
-            }
-        });
-});
+           
+            
+            $('.selectpicker').selectpicker('selectAll');
+             
+             /*function toggleSelectAll(control) {
+             var allOptionIsSelected = (control.val() || []).indexOf("All") > -1;
+             function valuesOf(elements) {
+             return $.map(elements, function (element) {
+             return element.value;
+             });
+             }
+             
+             if (control.data('allOptionIsSelected') != allOptionIsSelected) {
+             // User clicked 'All' option
+             if (allOptionIsSelected) {
+             // Can't use .selectpicker('selectAll') because multiple "change" events will be triggered
+             control.selectpicker('val', valuesOf(control.find('option')));
+             } else {
+             control.selectpicker('val', []);
+             }
+             } else {
+             // User clicked other option
+             if (allOptionIsSelected && control.val().length != control.find('option').length) {
+             // All options were selected, user deselected one option
+             // => unselect 'All' option
+             control.selectpicker('val', valuesOf(control.find('option:selected[value==All]')));
+             allOptionIsSelected = false;
+             } else if (!allOptionIsSelected && control.val().length == control.find('option').length - 1) {
+             // Not all options were selected, user selected all options except 'All' option
+             // => select 'All' option too
+             control.selectpicker('val', valuesOf(control.find('option')));
+             allOptionIsSelected = true;
+             }
+             }
+             control.data('allOptionIsSelected', allOptionIsSelected);
+             }
+             
+             $('#type').selectpicker().change(function () {
+             toggleSelectAll($(this));
+             }).trigger('change');*/
 </script>
 <!--<video autoplay loop>
   <source src="https://video-cdg2-1.xx.fbcdn.net/v/t43.1792-2/13059090_467982336744883_480295172_n.mp4?efg=eyJybHIiOjE4NjcsInJsYSI6MTUxNCwidmVuY29kZV90YWciOiJzdmVfaGQifQ%3D%3D&rl=1867&vabr=1245&oh=1a9709c48576c9eac5afaf10a4033398&oe=5733631F" type="video/mp4">

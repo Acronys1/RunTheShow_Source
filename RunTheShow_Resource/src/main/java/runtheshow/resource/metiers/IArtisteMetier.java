@@ -3,6 +3,7 @@ package runtheshow.resource.metiers;
 import java.security.Principal;
 import java.util.List;
 import runtheshow.resource.entities.ProfileArtiste;
+import runtheshow.resource.entities.Region;
 import runtheshow.resource.entities.TypeArtiste;
 import runtheshow.resource.entities.User;
 
@@ -28,4 +29,7 @@ public interface IArtisteMetier {
     
     //récupérer tous les types d'artistes définis dans la base de données
     public List<TypeArtiste> GetAllArtistTypes();
+    
+    //récupère les régions
+    public List<Region> getAllRegion();
 }
