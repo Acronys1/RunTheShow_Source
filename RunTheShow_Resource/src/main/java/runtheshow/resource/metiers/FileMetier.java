@@ -48,8 +48,8 @@ public class FileMetier implements IFileMetier{
         
         //Create sub path for directory
         String deepPath1 = idOne.toString().substring(0, 2);
-        String deepPath2 = idOne.toString().substring(2, 4);
-        String filePath = idOne.toString().substring(5)+"-"+timestamp;
+        //String deepPath2 = idOne.toString().substring(2, 4);
+        String filePath = idOne.toString().substring(3)+"-"+timestamp;
         String ext = "";
 
         int i = doc.getFilename().lastIndexOf('.');
@@ -58,7 +58,7 @@ public class FileMetier implements IFileMetier{
         }
 
         //Create directory if not exist
-        File files = new File("files_import\\" + deepPath1 + "\\" + deepPath2);
+        File files = new File("..\\RunTheShow_Frontend\\src\\main\\resources\\static\\files_import\\"/* + deepPath1 */);
         if (!files.exists()) {
             if (files.mkdirs()) {
                 System.out.println("sub directories created successfully");
@@ -69,7 +69,7 @@ public class FileMetier implements IFileMetier{
 
         doc.setFilename(idOne.toString()+"-"+timestamp+"." + ext);
 
-        FileOutputStream stream = new FileOutputStream("files_import\\"+deepPath1 + "\\" + deepPath2 + "\\" + filePath + "." + ext);
+        FileOutputStream stream = new FileOutputStream("..\\RunTheShow_Frontend\\src\\main\\resources\\static\\files_import\\"/*+deepPath1 + "\\" */+ filePath + "." + ext);
 
         try {
             stream.write(doc.getFile());
@@ -83,10 +83,10 @@ public class FileMetier implements IFileMetier{
     public String getFileFromDirectory(String fileName){
         
         String deepPath1 = fileName.substring(0, 2);
-        String deepPath2 = fileName.substring(2, 4);
-        String filePath = fileName.substring(5);
+        //String deepPath2 = fileName.substring(2, 4);
+        String filePath = fileName.substring(3);
         
-        return "files_import\\"+deepPath1+"\\"+deepPath2+"\\"+filePath;
+        return "files_import\\"/*+deepPath1+"\\"*/+filePath;
     }
     
     // Retrive filename for webservice
@@ -94,9 +94,9 @@ public class FileMetier implements IFileMetier{
     public String getFilePathFromDirectory(String fileName){
         
         String deepPath1 = fileName.substring(0, 2);
-        String deepPath2 = fileName.substring(2, 4);
-        String filePath = fileName.substring(5);
+        //String deepPath2 = fileName.substring(2, 4);
+        String filePath = fileName.substring(3);
         
-        return "../../RunTheShow_Resource/files_import/"+deepPath1+"/"+deepPath2+"/"+filePath;
+        return "/files_import/"/*+deepPath1+"/"*/+filePath;
     }
 }
