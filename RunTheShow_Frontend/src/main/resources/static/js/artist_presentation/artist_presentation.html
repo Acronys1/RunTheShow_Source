@@ -11,9 +11,9 @@ and open the template in the editor.
     <div id="" class="ng-scope">
         <div class="jumbotron" ng-style="{'background-image': artist.imageBanniere || '', 'height':'300px'}"></div>
         <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="box-image">
+            <div class="row panelProfileArtiste">
+                <div class="col-md-3" id="divImgProfileArtiste">
+                    <div class="box-image" style="border-radius: 3%;">
                         <div class="image">
                             <img style="width:120%;height:120%;" ng-src="{{artist.imageProfile|| 'img/portfolio-1.jpg'}}" class="img-responsive">
                         </div>
@@ -33,8 +33,8 @@ and open the template in the editor.
                     <p><label ng-bind="artist.note">{{artist.note|| 'Pas de note' }}</label></p>
                 </div>
                 <div class="col-md-2"></div>
-                <form class="form-horizontal">
-                    <div class="panel panel-primary form-group col-md-3" style="border-style: solid;border-radius: 5px;">
+                <form class="form-horizontal text-center">
+                    <div class="form-group col-md-3" style="border-style: solid;border-radius: 5px;" id="divDmdPrestationProfileArtiste">
                         <div class="panel-heading">
                             <h4>Demande de prestation</h4>
                         </div>                            
@@ -75,7 +75,15 @@ and open the template in the editor.
                     <p class="lead" editable-textarea="artist.description" e-cols="140" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
+                <div class="col-md-2"></div>
+                <!-- Div Facebook-->
+                <div class="col-md-4">
+                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ "Groupe Facebook: " + artist.facebookArtiste || 'Pas de groupe Facebook: Ajoutez en un!'}}</label></p>
+                    <p ng-show="errorUrlFb" class="text-danger">{{errorUrlFb}}</p>
+                    <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
+                </div>
             </div>
+
             <div class="row portfolio-project">
 
                 <section>

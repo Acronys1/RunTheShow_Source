@@ -9,6 +9,7 @@ import java.security.Principal;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,5 +38,17 @@ public class SousEventService {
     @RequestMapping(value = "/all", method = RequestMethod.GET)
     public List<SousEvenement> getAllSousEvent(Principal user, HttpServletResponse response) {
         return metier.getAllSousEvent(user);
+    }
+    
+    @RequestMapping(value = "/filter/{id}", method = RequestMethod.GET)
+    public List<SousEvenement> getSousEventByIdEvent(@PathVariable String id) {
+        long idEvent = Long.parseLong(id);
+        return metier.getSousEventByIdEvent(idEvent);
+    }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public List<SousEvenement> getSousEventById(@PathVariable String id, Principal user) {
+        long idSousEvent = Long.parseLong(id);
+        return metier.getSousEventById(idSousEvent, user);
     }
 }

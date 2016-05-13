@@ -18,6 +18,53 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     
     //$scope.changeTo = 'Hungarian';
     
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+    
+    
+    $scope.initCalendar = function ()
+    {
+        /* Return all event for the User */
+        $http.get('/resource/event/all').success(function (data) {
+            $scope.allEvent = data;
+
+            for(var i = 0; i<=$scope.allEvent.length; i++)
+            {
+                var eventJson = JSON.stringify({
+                    id: $scope.allEvent[i].id,
+                    title: $scope.allEvent[i].intitule,
+                    start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
+                    end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
+                })
+
+                var eventParse = JSON.parse(eventJson);
+
+                $scope.eventTab.push(eventParse);
+            }
+        });
+
+        /* Return all Sous-event for the User */
+        $http.get('/resource/sousEvent/all').success(function (data) {
+            $scope.allSousEvent = data;
+
+            for(var i = 0; i<=$scope.allSousEvent.length; i++)
+            {
+                var eventJson = JSON.stringify({
+                    id: $scope.allSousEvent[i].id,
+                    title: $scope.allSousEvent[i].intitule,
+                    start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
+                    end: $scope.changeDate($scope.allSousEvent[i].dateFin)
+                })
+
+                var eventParse = JSON.parse(eventJson);
+
+                $scope.sousEventTab.push(eventParse);
+            }
+        });
+    };
+    
     $scope.changeDate = function(dateChange) {
         var array = dateChange.split(' ');
         var dateSplit = array[0].split('/');
@@ -37,7 +84,9 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     };
     
     
-    
+    $scope.infoSousEvent = function(idSousEvent) {
+        $scope.idSousEvent = idSousEvent;
+    }
     /* event source that pulls from google.com */
     /*$scope.eventSource = {
             url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
@@ -54,43 +103,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
       {title: 'Click for Google',start: new Date(y, m, 28),end: new Date(y, m, 29),url: 'http://google.com/'}
     ];*/
     
-    /* Return all event for the User */
-    $http.get('/resource/event/all').success(function (data) {
-        $scope.allEvent = data;
-
-        for(var i = 0; i<=$scope.allEvent.length; i++)
-        {
-            var eventJson = JSON.stringify({
-                id: $scope.allEvent[i].id,
-                title: $scope.allEvent[i].intitule,
-                start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
-                end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
-            })
-            
-            var eventParse = JSON.parse(eventJson);
-            
-            $scope.eventTab.push(eventParse);
-        }
-    });
     
-    /* Return all Sous-event for the User */
-    $http.get('/resource/sousEvent/all').success(function (data) {
-        $scope.allSousEvent = data;
-
-        for(var i = 0; i<=$scope.allSousEvent.length; i++)
-        {
-            var eventJson = JSON.stringify({
-                id: $scope.allSousEvent[i].id,
-                title: $scope.allSousEvent[i].intitule,
-                start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
-                end: $scope.changeDate($scope.allSousEvent[i].dateFin)
-            })
-            
-            var eventParse = JSON.parse(eventJson);
-            
-            $scope.sousEventTab.push(eventParse);
-        }
-    });
     
     
     
@@ -112,7 +125,23 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     
     /* alert on eventClick */
     $scope.alertOnEventClick = function( date, jsEvent, view){
-        angular.element('#myModal');
+        $scope.idEvent = date.id;
+        $scope.titleEvent = date.title;
+        
+        $http.get('/resource/sousEvent/filter/'+$scope.idEvent).success(function (data) {
+            $scope.allSousEventForOneEvent = data;
+            
+            if($scope.allSousEventForOneEvent.length == 0)
+            {
+                $http.get('/resource/sousEvent/'+$scope.idEvent).success(function (data) {
+                    $scope.allSousEventForOneEvent = data;
+                });
+            }
+        });
+        
+        
+        
+        $scope.toggleModal();
         $scope.alertMessage = (date.title + ' was clicked ');
     };
     /* alert on Drop */
@@ -136,15 +165,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         sources.push(source);
       }
     };
-    /* add custom event*/
-    $scope.addEvent = function() {
-      $scope.events.push({
-        title: 'Open Sesame',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        className: ['openSesame']
-      });
-    };
+    
     /* remove event */
     $scope.remove = function(index) {
       $scope.events.splice(index,1);
@@ -172,6 +193,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         height: 450,
         editable: false,
         timeFormat: 'HH:mm',
+        events: $scope.eventSources,
         header:{
           left: 'title',
           center: '',
@@ -185,12 +207,49 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
       }
     };
 
-    $scope.changeLang = function() {
-        $scope.uiConfig.calendar.dayNames = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
-        $scope.uiConfig.calendar.dayNamesShort = ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"];
-    };
     /* event sources array*/
     $scope.eventSources = [$scope.eventTab, $scope.calEventsExt];
     //$scope.eventSources2 = [$scope.calEventsExt, $scope.eventsF, $scope.eventTab];
 });
 
+app.directive('modal', function () {
+    return {
+      template: '<div class="modal fade">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                '<h4 class="modal-title">{{ title }}</h4>' + 
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      transclude: true,
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+        scope.title = attrs.title;
+
+        scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+      }
+    };
+  });

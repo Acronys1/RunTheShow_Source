@@ -73,6 +73,7 @@ public class UserMetier implements IUserMetier {
         userBind.setDateDeNaissance(user.getDateDeNaissance());
         userBind.setTelephoneFixe(user.getTelephoneFixe());
         userBind.setTelephonePortable(user.getTelephonePortable());
+        userBind.setRoles(user.getRoles());
         userBind.setAdresse(user.getAdresse());
         userBind.setCodePostal(user.getCodePostal());
         userBind.setVille(user.getVille());
