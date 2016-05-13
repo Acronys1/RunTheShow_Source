@@ -13,7 +13,7 @@ and open the template in the editor.
         <div class="container">
             <div class="row panelProfileArtiste">
                 <div class="col-md-3" id="divImgProfileArtiste">
-                    <div class="box-image" style="border-radius: 50%;">
+                    <div class="box-image" style="border-radius: 3%;">
                         <div class="image">
                             <img style="width:120%;height:120%;" ng-src="{{artist.imageProfile|| 'img/portfolio-1.jpg'}}" class="img-responsive">
                         </div>
@@ -75,7 +75,15 @@ and open the template in the editor.
                     <p class="lead" editable-textarea="artist.description" e-cols="140" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
+                <div class="col-md-2"></div>
+                <!-- Div Facebook-->
+                <div class="col-md-4">
+                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ "Groupe Facebook: " + artist.facebookArtiste || 'Pas de groupe Facebook: Ajoutez en un!'}}</label></p>
+                    <p ng-show="errorUrlFb" class="text-danger">{{errorUrlFb}}</p>
+                    <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
+                </div>
             </div>
+
             <div class="row portfolio-project">
 
                 <section>

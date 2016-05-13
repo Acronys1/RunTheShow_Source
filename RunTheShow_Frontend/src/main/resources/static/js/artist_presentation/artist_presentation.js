@@ -1,9 +1,11 @@
-angular.module('artist_presentation', []).controller('artist_presentation', function ($scope, $http, $rootScope, $window, $filter) {
+angular.module('artist_presentation', []).controller('artist_presentation', function ($scope, $http, $rootScope, $window, $filter, $sce) {
 
     $scope.artist = {};
     $scope.errorMessage = "";
     $scope.typesArtiste = {};
+    $scope.facebookURL = "";
     $scope.error = false;
+    $scope.errorUrlFb = "";
 
     //initialise le CV des artistes
     $scope.initArtistPresentation = function () {
@@ -26,6 +28,7 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
             $scope.artist = data;
             if ($scope.artist != null) {
                 console.log("user is an artist")
+                $scope.facebookURL = $scope.getFbUrlArtist();
             } else {
                 $scope.errorMessage.init = "not an artist";
                 $scope.error = true;
@@ -56,6 +59,7 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
         return 'Not set';
     };
 
+    //met à jour les informations de l'artiste
     $scope.updateUser = function () {
         var data = $scope.artist;
         $http.put("/resource/artiste/update", data).success(function (data, status) {
@@ -69,6 +73,32 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
             console.log("update artiste KO");
         });
     };
+
+    //formatte l'url pour qu'elle soit trusted
+    $scope.trustSrc = function (src) {
+        return $sce.trustAsResourceUrl(src);
+    };
+
+    //obtient l'url fb de du groupe fb de l'artiste
+    $scope.getFbUrlArtist = function () {
+        var fbUrlStart = "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F";
+        var fbArtist = $scope.artist != null && $scope.artist.facebookArtiste != null && $scope.artist.facebookArtiste != "" ? $scope.artist.facebookArtiste : "assassinscreed.france";
+        var fbUrlEnd = "&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId";
+        console.log(fbUrlStart + fbArtist + fbUrlEnd);
+        return $scope.trustSrc(fbUrlStart + fbArtist + fbUrlEnd);
+    };
+
+    //Vérifie l'url du groupe Facebook
+    /*$scope.checkFbUrl = function (data) {
+        $scope.errorUrlFb = "";
+        var urlExample = "https://www.facebook.com/FacebookFrance/";
+        var regex = new RegExp("(https:\/\/www.facebook.com\/)((\w+)\/)");
+        var monTableau = data.match(regex);
+        console.log(monTableau)
+        if (data !== 'awesome') {
+            $scope.errorUrlFb = "L'url devrait être sous la forme:`https://www.facebook.com/nom_groupe_facebook/";
+        }
+    };*/
 
 });
 
