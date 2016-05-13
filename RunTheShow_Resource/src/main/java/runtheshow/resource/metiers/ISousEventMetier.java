@@ -21,4 +21,8 @@ public interface ISousEventMetier {
     public List<SousEvenement> getAllSousEvent(Principal user);
     
     public SousEvenement findSousEventById(Long id);
+
+    public List<SousEvenement> getSousEventByIdEvent(Long id);
+
+    public List<SousEvenement> getSousEventById(Long idSousEvent, Principal user);
 }

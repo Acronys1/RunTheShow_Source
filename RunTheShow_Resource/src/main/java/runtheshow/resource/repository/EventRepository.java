@@ -21,8 +21,10 @@ import runtheshow.resource.entities.User;
 public interface EventRepository extends CrudRepository<Evenement, Long> {
     
     // Le dernier évènement créé par un utilisateur
-    Evenement findTop1ByCreateur(User user);
+    Evenement findTop1ByCreateurOrderByIdDesc(User user);
     
     List<Evenement> findByCreateur(User user);
+    
+    Evenement findById(Long id);
     
 }
