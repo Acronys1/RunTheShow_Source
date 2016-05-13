@@ -6,7 +6,9 @@
 package runtheshow.resource.repository;
 
 import java.util.List;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import runtheshow.resource.entities.Evenement;
 import runtheshow.resource.entities.SousEvenement;
 import runtheshow.resource.entities.User;
 
@@ -17,4 +19,11 @@ import runtheshow.resource.entities.User;
 public interface SousEventRepository extends CrudRepository<SousEvenement, Long> 
 {
     List<SousEvenement> findByUser(User user);
+    
+    List<SousEvenement> findByEvenement(Evenement event);
+    
+    SousEvenement findByIdAndUser(Long id, User user);
 }
+
+
+

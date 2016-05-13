@@ -39,7 +39,7 @@ public class SousEvenenementMetier implements ISousEventMetier {
 
     @Override
     public Boolean addSousEvent(Principal user, SousEvenement sousEvent) {
-        Evenement event = eventRepository.findTop1ByCreateur(userRepository.findUserByLogin(user.getName()));
+        Evenement event = eventRepository.findTop1ByCreateurOrderByIdDesc(userRepository.findUserByLogin(user.getName()));
         
         /*if(deb.length>0)
         {
@@ -78,10 +78,19 @@ public class SousEvenenementMetier implements ISousEventMetier {
     public List<SousEvenement> getAllSousEvent(Principal user) {
         return Lists.newArrayList(sousEventRepository.findByUser(userRepository.findUserByLogin(user.getName())));
     }
+
+    @Override
+    public List<SousEvenement> getSousEventByIdEvent(Long id) {
+        return Lists.newArrayList(sousEventRepository.findByEvenement(eventRepository.findById(id)));
+    }
     
     @Override
     public SousEvenement findSousEventById(Long id) {
         return sousEventRepository.findOne(id);
     }
     
+    @Override
+    public List<SousEvenement> getSousEventById(Long id, Principal user) {
+        return Lists.newArrayList(sousEventRepository.findByIdAndUser(id, userRepository.findUserByLogin(user.getName())));
+    }
 }
