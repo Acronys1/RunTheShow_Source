@@ -31,7 +31,7 @@
     <group name="datetimepicker">  
         <css>file:@project.basedir@/src/main/wro/css/bootstrap-datepicker.min.css</css>
         <css>file:@project.basedir@/src/main/wro/css/bootstrap-datetimepicker.min.css</css>
-        <js>file:@project.basedir@/src/main/wro/js/moment.js</js>
+        <!-- <js>file:@project.basedir@/src/main/wro/js/moment.js</js> -->
         <js>file:@project.basedir@/src/main/wro/js/bootstrap-datepicker.js</js>
         <js>file:@project.basedir@/src/main/wro/js/bootstrap-datetimepicker.min.js</js> 
     </group>

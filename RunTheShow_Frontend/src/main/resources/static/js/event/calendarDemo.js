@@ -30,14 +30,26 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         $http.get('/resource/event/all').success(function (data) {
             $scope.allEvent = data;
 
-            for(var i = 0; i<=$scope.allEvent.length; i++)
+            for(var i = 0; i<$scope.allEvent.length; i++)
             {
-                var eventJson = JSON.stringify({
-                    id: $scope.allEvent[i].id,
-                    title: $scope.allEvent[i].intitule,
-                    start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
-                    end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
-                })
+                if($scope.compareDateForAdd($scope.allEvent[i].dateHeureDebut, $scope.allEvent[i].dateHeureFin))
+                {
+                    var eventJson = JSON.stringify({
+                        id: $scope.allEvent[i].id,
+                        title: $scope.allEvent[i].intitule,
+                        start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
+                        end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
+                    })
+                }
+                else
+                {
+                    var eventJson = JSON.stringify({
+                        id: $scope.allEvent[i].id,
+                        title: $scope.allEvent[i].intitule,
+                        start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
+                        end: $scope.changeDateAddOneDay($scope.allEvent[i].dateHeureFin)
+                    })
+                }
 
                 var eventParse = JSON.parse(eventJson);
 
@@ -49,14 +61,26 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         $http.get('/resource/sousEvent/all').success(function (data) {
             $scope.allSousEvent = data;
 
-            for(var i = 0; i<=$scope.allSousEvent.length; i++)
+            for(var i = 0; i<$scope.allSousEvent.length; i++)
             {
-                var eventJson = JSON.stringify({
-                    id: $scope.allSousEvent[i].id,
-                    title: $scope.allSousEvent[i].intitule,
-                    start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
-                    end: $scope.changeDate($scope.allSousEvent[i].dateFin)
-                })
+                if($scope.compareDateForAdd($scope.allSousEvent[i].dateDebut, $scope.allSousEvent[i].dateFin))
+                {
+                    var eventJson = JSON.stringify({
+                        id: $scope.allSousEvent[i].id,
+                        title: $scope.allSousEvent[i].intitule,
+                        start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
+                        end: $scope.changeDate($scope.allSousEvent[i].dateFin)
+                    })
+                }
+                else
+                {
+                    var eventJson = JSON.stringify({
+                        id: $scope.allSousEvent[i].id,
+                        title: $scope.allSousEvent[i].intitule,
+                        start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
+                        end: $scope.changeDateAddOneDay($scope.allSousEvent[i].dateFin)
+                    })
+                }
 
                 var eventParse = JSON.parse(eventJson);
 
@@ -74,13 +98,58 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         return dateRecompose;
     };
     
+    $scope.compareDateForAdd = function(dateDeb, dateFin) {
+        /* On sépare la date et l'heure car format "dd/mm/yyyy hh:mm" */
+        var dateDebArray = dateDeb.split(' ');
+        var dateFinArray = dateFin.split(' ');
+        
+        /* On sépare la date car format "dd/mm/yyyy" */
+        var dateDebSplit = dateDebArray[0].split('/');
+        var dateFinSplit = dateFinArray[0].split('/');
+        
+        /* On compare la date de début et la date de fin sont les mêmes */
+        if(dateDebSplit[0] == dateFinSplit[0] && dateDebSplit[1] == dateFinSplit[1] && dateDebSplit[2] == dateFinSplit[2]) return true;
+        else return false;
+    };
+    
     $scope.changeDateAddOneDay = function(dateChange) {
         var array = dateChange.split(' ');
         var dateSplit = array[0].split('/');
         
-        var dateRecompose = dateSplit[2] + "-" + dateSplit[1] + "-" + (dateSplit[0]+1) + " " + array[1];
+        var dateRecompose = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
         
-        return dateRecompose;
+        var myAddDate = new Date(dateRecompose);
+        myAddDate.setMonth(myAddDate.getMonth()+1);
+        myAddDate.setDate(myAddDate.getDate()+1);
+        
+        var mois;
+        var jour;
+        
+        if(myAddDate.getMonth() < 10 && myAddDate.getDate() < 10)
+        {
+            mois = "0" + myAddDate.getMonth();
+            jour = "0" + myAddDate.getDate();
+        }
+        else if(myAddDate.getMonth() < 10 && myAddDate.getDate() > 9)
+        {
+            mois = "0" + myAddDate.getMonth();
+            jour = myAddDate.getDate();
+        }
+        else if (myAddDate.getMonth() > 9 && myAddDate.getDate() < 10) 
+        {
+            mois = myAddDate.getMonth();
+            jour = "0" + myAddDate.getDate();
+        }
+        else
+        {
+            mois = myAddDate.getMonth();
+            jour = myAddDate.getDate();
+        }
+        
+        
+        var dateRecomposeAdd = myAddDate.getFullYear() + "-" + mois + "-" + jour + " " + array[1];
+        
+        return dateRecomposeAdd;
     };
     
     
