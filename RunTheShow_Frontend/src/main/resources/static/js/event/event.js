@@ -122,6 +122,7 @@ event.directive('datepicker', function() {
                 min.setHours(myHours+6)
                 
                 element.datetimepicker({
+                    locale: 'fr',
                     format: 'DD/MM/YYYY HH:mm',
                     minDate: min,
                     calendarWeeks: true
