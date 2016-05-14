@@ -2,8 +2,8 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
 
     $scope.errorMessage = {};
     $scope.signUpOK = null;
-    $scope.ROLE_ARTISTE = 2;
-    $scope.ROLE_USER = 3;
+    $scope.ROLE_ARTISTE = 3;
+    $scope.ROLE_USER = 2;
 
     function isEmail(myVar) {
         // La 1ère étape consiste à définir l'expression régulière d'une adresse email
