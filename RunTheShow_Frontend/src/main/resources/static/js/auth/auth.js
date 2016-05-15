@@ -38,6 +38,8 @@ angular.module('auth', ['home']).factory(
                                 } else {
                                     auth.isAdmin = false;
                                     $rootScope.isAdmin = false;
+                                    auth.isArtist = authorities.authority === 'ROLE_ARTISTE' ? true : false;
+                                    $rootScope.isArtist = auth.isArtist;
                                 }
                             })
 

@@ -1,36 +1,40 @@
 angular.module('navigation', ['ngRoute', 'auth']).controller(
-		'navigation',
+        'navigation',
+        function ($scope, $route, auth) {
 
-		function($scope, $route, auth) {
+            $scope.credentials = {};
 
-			$scope.credentials = {};
+            $scope.tab = function (route) {
+                return $route.current && route === $route.current.controller;
+            };
 
-			$scope.tab = function(route) {
-				return $route.current && route === $route.current.controller;
-			};
+            $scope.authenticated = function () {
+                return auth.authenticated;
+            };
 
-			$scope.authenticated = function() {
-				return auth.authenticated;
-			};
-                        
-                        $scope.admin = function() {
-				return auth.isAdmin;
-			};
+            $scope.admin = function () {
+                return auth.isAdmin;
+            };
+            
+            $scope.artist = function () {
+                console.log("isArtist: "+auth.isArtist);
+                return auth.isArtist;
+            };
 
-			$scope.login = function() {
-				auth.authenticate($scope.credentials, function(authenticated) {
-					if (authenticated) {
-						console.log("Login succeeded")
-						$scope.error = false;
-                                                $("#login-modal").modal('hide');
-                                                location.reload();
-					} else {
-						console.log("Login failed")
-						$scope.error = true;
-					}
-				})
-			};
+            $scope.login = function () {
+                auth.authenticate($scope.credentials, function (authenticated) {
+                    if (authenticated) {
+                        console.log("Login succeeded")
+                        $scope.error = false;
+                        $("#login-modal").modal('hide');
+                        location.reload();
+                    } else {
+                        console.log("Login failed")
+                        $scope.error = true;
+                    }
+                })
+            };
 
-                        $scope.logout = auth.clear;
+            $scope.logout = auth.clear;
 
-		});
+        });
