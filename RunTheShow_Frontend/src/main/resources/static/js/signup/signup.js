@@ -1,26 +1,28 @@
-angular.module('signup', ['auth']).controller('signup', function ($scope, $http, $rootScope, $window, auth) {
+angular.module('signup', ['auth']).controller('signup', function ($scope, $http, $rootScope, $window, auth, $filter) {
 
     $scope.errorMessage = {};
     $scope.signUpOK = null;
-    
+    $scope.ROLE_ARTISTE = 3;
+    $scope.ROLE_USER = 2;
+
     function isEmail(myVar) {
         // La 1ère étape consiste à définir l'expression régulière d'une adresse email
         var regEmail = new RegExp('^[0-9a-z._-]+@{1}[0-9a-z.-]{2,}[.]{1}[a-z]{2,5}$', 'i');
 
         return regEmail.test(myVar);
     }
-    
+
     //Fonction de réinitialisation du modal d'inscription
     //seulement quand l'inscription est validé ou qu'il y'a une erreur serveur
-    $scope.reInitSignUpModal = function (){
-        if($scope.signUpOK != null || $scope.errorMessage.erreurServeur != null){
+    $scope.reInitSignUpModal = function () {
+        if ($scope.signUpOK != null || $scope.errorMessage.erreurServeur != null) {
             $scope.errorMessage = {};
             $scope.signUpOK = null;
             $scope.newUser = {};
             console.log("Signup modal reinitialized");
         }
     };
-    
+
     //Fonction d'inscription de l'utilisateur
     $scope.signUp = function () {
 
@@ -63,13 +65,12 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
                     $scope.errorMessage.nomArtiste = "Le nom d'artiste doit comporter au moins 5 caractère.";
                     noError = false;
                 } else {
-                    $scope.newUser.nomArtiste = "";
+                    $scope.newUser.userRole = $scope.ROLE_ARTISTE;
                 }
-                $scope.newUser.userRole = 3;
             }
             if ($scope.newUser.role == false) {
                 $scope.newUser.nomArtiste = "";
-                $scope.newUser.userRole = 1;
+                $scope.newUser.userRole = $scope.ROLE_USER;
             }
             if (noError) {
                 var data = JSON.stringify({
@@ -114,7 +115,7 @@ angular.module('signup', ['auth']).controller('signup', function ($scope, $http,
             }
             if (noError && $scope.newUser.role == true && $scope.newUser.typeArtist == false) {
                 $scope.newUser.nomArtiste = "";
-                $scope.newUser.userRole = 3;
+                $scope.newUser.userRole = $scope.ROLE_ARTISTE;
                 var data = JSON.stringify({
                     login: $scope.newUser.username,
                     password: $scope.newUser.password,

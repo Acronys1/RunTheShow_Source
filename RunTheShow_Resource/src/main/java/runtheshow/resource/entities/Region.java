@@ -37,6 +37,10 @@ public class Region extends AbstractEntity {
 
     public Region() {
     }
+    
+    public Region(String nom){
+        this.nom = nom;        
+    }
 
     public Region(String nom, List<ProfileArtiste> profils) {
         this.nom = nom;

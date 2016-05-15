@@ -54,7 +54,6 @@ public class ProfileArtiste extends AbstractEntity {
     private int tailleGroupe;
     
     @ManyToMany(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinTable(
       name="region_artiste",
       joinColumns=@JoinColumn(name="artiste_id_fk", referencedColumnName="ID"),

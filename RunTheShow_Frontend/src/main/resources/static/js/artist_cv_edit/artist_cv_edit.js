@@ -1,11 +1,16 @@
-angular.module('artist_presentation', []).controller('artist_presentation', function ($scope, $http, $rootScope, $window, $filter, $sce) {
+angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($scope, $http, $rootScope, $window, $filter, $sce) {
 
     $scope.artist = {};
     $scope.errorMessage = "";
     $scope.typesArtiste = {};
+    $scope.artistRegions = [];
+    $scope.regions = {};
     $scope.facebookURL = "";
+    $scope.youtubeURL = "";
     $scope.error = false;
     $scope.errorUrlFb = "";
+    $scope.errorUrlYoutube = "";
+    $scope.localisation = [];
 
     //initialise le CV des artistes
     $scope.initArtistPresentation = function () {
@@ -29,6 +34,7 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
             if ($scope.artist != null) {
                 console.log("user is an artist")
                 $scope.facebookURL = $scope.getFbUrlArtist();
+                $scope.initRegion();
             } else {
                 $scope.errorMessage.init = "not an artist";
                 $scope.error = true;
@@ -47,7 +53,7 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
         if ($scope.artist == null || $scope.typesArtiste[0] == null)
             return 'no set';
         if ($scope.artist.typeArtiste == null)//default selected typeArtist
-            return $scope.typesArtiste[0].text;
+            return "Type d'artiste non précisé, veuilliez en cliquez pour choisir un type d'artiste.";
         var selected = null;
         var idArtiste = $scope.artist.typeArtiste.id;
         for (var i = 0; i < $scope.typesArtiste[i].value != null; i++) {
@@ -61,6 +67,8 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
 
     //met à jour les informations de l'artiste
     $scope.updateUser = function () {
+        if($scope.localisation.length > 0)
+            $scope.artist.localisation = $scope.localisation;
         var data = $scope.artist;
         $http.put("/resource/artiste/update", data).success(function (data, status) {
             $scope.response = data;
@@ -82,27 +90,66 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
     //obtient l'url fb de du groupe fb de l'artiste
     $scope.getFbUrlArtist = function () {
         var fbUrlStart = "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F";
-        var fbArtist = $scope.artist != null && $scope.artist.facebookArtiste != null && $scope.artist.facebookArtiste != "" ? $scope.artist.facebookArtiste : "assassinscreed.france";
+        var fbArtist = $scope.artist != null && $scope.artist.facebookArtiste != null && $scope.artist.facebookArtiste != "" ? $scope.artist.facebookArtiste : "LesInconnusOfficiel";
         var fbUrlEnd = "&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId";
         console.log(fbUrlStart + fbArtist + fbUrlEnd);
         return $scope.trustSrc(fbUrlStart + fbArtist + fbUrlEnd);
     };
 
-    //Vérifie l'url du groupe Facebook
-    /*$scope.checkFbUrl = function (data) {
-        $scope.errorUrlFb = "";
-        var urlExample = "https://www.facebook.com/FacebookFrance/";
-        var regex = new RegExp("(https:\/\/www.facebook.com\/)((\w+)\/)");
-        var monTableau = data.match(regex);
-        console.log(monTableau)
-        if (data !== 'awesome') {
-            $scope.errorUrlFb = "L'url devrait être sous la forme:`https://www.facebook.com/nom_groupe_facebook/";
-        }
-    };*/
+    //obtient l'url de la chaîne youtube de l'artiste
+    $scope.getYtUrlArtist = function () {
+        var fbUrlStart = "http://www.youtube.com/embed/?listType=user_uploads&list=";
+        var fbArtist = $scope.artist != null && $scope.artist.youtubeArtiste != null && $scope.artist.youtubeArtiste != "" ? $scope.artist.youtubeArtiste : "lesinconnusVEVO";        
+        console.log(fbUrlStart + fbArtist);
+        return $scope.trustSrc(fbUrlStart + fbArtist);
+    };
 
+    $scope.initRegion = function () {
+        $http.get('/resource/artiste/regions').success(function (data, status) {
+            $scope.regions = data;
+            console.log("Récupération regions OK");
+            //Récupère les regions de l'artiste
+            for (var i = 0; i < $scope.regions.length; i++) {
+                $scope.artistRegions[i] = {'value': $scope.regions[i].id, 'text': $scope.regions[i].nom};
+            }
+        }).error(function (data, status) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.error = true;
+            console.log("Récupération regions KO");
+        });
+    };
+
+    //récupère les regions sélectionné par l'artiste
+    $scope.showArtistRegions = function () {
+        var selected = [];
+        var regionFound;
+        angular.forEach($scope.artistRegions, function (s) {
+            regionFound = $filter('filter')($scope.artist.localisation, {'id': s.value});
+            if (regionFound != null && regionFound.length > 0)
+                selected.push(regionFound[0].nom);
+        });
+        return selected.length ? selected.join(', ') : 'Localisation non précisée';
+    };
+
+    //mise à jour des régions de l'artiste
+    $scope.updateArtistRegions = function (data) {
+        //reconstruire le le tableau id, nom pour les regions   
+        $scope.localisation = [];
+        for (var i = 0; i < data.length; i++) {
+            if (i == 0)
+                $scope.artist.localisation = [];
+            var idRegion = data[i];
+            //utilisation de filter
+            var regionFound = $filter('filter')($scope.artistRegions, {'value': data[i]});
+            var regionName = regionFound[0].text;
+            $scope.localisation[i] = {'id': idRegion, 'nom': regionName};
+        }
+        data = $scope.localisation;
+        $scope.updateUser();
+    };
 });
 
-artist_presentation.directive('datepicker', function () {
+artist_cv_edit.directive('datepicker', function () {
     return {
         restrict: 'A',
         require: 'ngModel',

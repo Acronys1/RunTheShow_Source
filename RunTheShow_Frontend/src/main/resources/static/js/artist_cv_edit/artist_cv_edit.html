@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div ng-controller="artist_presentation" ng-init="initArtistPresentation()">
+<div ng-controller="artist_cv_edit" ng-init="initArtistPresentation()">
     <span class="text-danger" ng-show="errorMessage.init"> 
         {{errorMessage.init}}                     
     </span>  
@@ -22,15 +22,20 @@ and open the template in the editor.
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
                     <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
-                    <p><label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label></p>
+                    <p>  
+                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onbeforesave="updateArtistRegions($data)">
+                            {{ showArtistRegions()}}
+                        </a>
+                        <!--<label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label>-->
+                    </p>
                     <p>
-                        <a href="#" editable-select="artist.typeArtiste.id" e-ng-options="t.value as t.text for t in typesArtiste" onaftersave="updateUser()">
+                        <a href="#" editable-select="artist.typeArtiste.id" e-required e-ng-options="t.value as t.text for t in typesArtiste" onaftersave="updateUser()">
                             {{ showArtistTypes()}}
                         </a>
                         <!--<label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label>-->
                     </p>
-                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{artist.tailleGroupe|| 'Pas de taille groupe'}}</label></p>
-                    <p><label ng-bind="artist.note">{{artist.note|| 'Pas de note' }}</label></p>
+                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{'Taille du groupe: '+artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
+                    <p><label ng-bind="artist.note">{{'Note générale: '+artist.note || 'Pas de note, groupe non évalué' }}</label></p>
                 </div>
                 <div class="col-md-2"></div>
                 <form class="form-horizontal text-center">
@@ -72,55 +77,25 @@ and open the template in the editor.
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
 
-                    <p class="lead" editable-textarea="artist.description" e-cols="140" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                    <p class="lead" editable-textarea="artist.description" e-cols="80" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
                 <div class="col-md-2"></div>
                 <!-- Div Facebook-->
                 <div class="col-md-4">
-                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ "Groupe Facebook: " + artist.facebookArtiste || 'Pas de groupe Facebook: Ajoutez en un!'}}</label></p>
+                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ (artist.facebookArtiste != null ? 'Groupe Facebook:  '+artist.facebookArtiste : 'Pas de groupe Facebook: Ajoutez en un!')}}</label></p>
                     <p ng-show="errorUrlFb" class="text-danger">{{errorUrlFb}}</p>
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
+                </div>
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-md-4" id="divYoutubeChanProfilArtist">
+                    <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
+                    <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
+                    <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
                 </div>
             </div>
 
             <div class="row portfolio-project">
-
-                <section>
-
-                    <div class="col-sm-8">
-                        <div class="project owl-carousel">
-                            <div class="item">
-                                <img src="img/main-slider1.jpg" alt="" class="img-responsive">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="img/main-slider2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="img/main-slider3.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="img/main-slider4.jpg" alt="">
-                            </div>
-                        </div>
-                        <!-- /.project owl-slider -->
-
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="project-more">
-                            <h4>Client</h4>
-                            <p>Pietro Filippi</p>
-                            <h4>Services</h4>
-                            <p>Consulting, Webdesign, Print</p>
-                            <h4>Technologies</h4>
-                            <p>PHP, HipHop, Break-dance</p>
-                            <h4>Dates</h4>
-                            <p>10/2013 - 06/2014</p>
-                        </div>
-                    </div>
-
-                </section>
 
                 <section>
 
@@ -238,71 +213,3 @@ and open the template in the editor.
     </div>
 
 </div>
-<!--
-
-<div class="box clearfix" ng-controller="artist_presentation">
-    <div class="heading">
-        <h3 class="text-uppercase">Page de présentation</h3>
-    </div>
-    <div class="container">
-        <form class="form-horizontal" editable-form name="editableForm" onaftersave="saveUser()">
-            <div class="form-group">
-                <label class="control-label">Artiste:</label>
-                <label editable-text="artist.name" e-required>{{ artist.name || '' }}</label>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Specialite:</label>
-                    <label editable-text="artist.specialite" e-required>{{ artist.specialite || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Nombre d'artiste:</label>
-                <label editable-text="artist.nbArtist" e-required>{{ artist.nbArtist || '1' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Tarif minimum:</label>
-                <label editable-text="artist.tarifMin" e-required>{{ artist.tarifMin || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Tarif maximum:</label>
-                <label editable-text="artist.tarifMax" e-required>{{ artist.tarifMax || '' }}</label>                    
-            </div>
-
-            <div class="form-group">
-                <label class="title">A propos: </label>
-                <label editable-text="artist.apropos" e-required>{{ artist.apropos || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Pré-requis:</label>
-                <label editable-text="artist.prerequis" e-required>{{ artist.prerequis || 'Aucun' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Localisation</label>
-                <label editable-text="artist.localisation" e-required>{{ artist.localisation || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Notation:</label>
-                {{artist.note|| 'Pas de note'}}
-            </div>
-            <button type="button" class="btn btn-template-maint" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-                <i class="fa fa-save"></i> Editer
-            </button>
-            <span ng-show="editableForm.$visible">
-                <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-                    Save
-                </button>
-                <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-                    Cancel
-                </button>
-            </span>
-        </form>
-    </div>
-<!-- /.container
-
-
-</div> -->

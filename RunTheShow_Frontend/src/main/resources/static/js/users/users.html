@@ -1,7 +1,7 @@
 <h1>Les utilisateurs</h1>
 <div ng-init="initFirst()">
     <p class="titre"> La liste des utilisateurs</p>
-    
+
     <table id="users_datatables" datatable="ng" dt-options="dtOptions" class="table row-border hover">
         <thead>
             <tr>
@@ -41,7 +41,7 @@
                         </select>
                     </div>
                 </td>
-                
+
                 <td style="width:15%">                    
                     <div ng-hide="editingUser[user.id]">{{user.sexe}}</div>
                     <!--<div ng-show="editingUser[user.id]"><input type="text" ng-model="user.roles.id"></div>-->
@@ -59,6 +59,7 @@
                     <button ng-hide="editingUser[user.id]" ng-click="modifyUser(user)">Modifier</button>
                     <button ng-show="editingUser[user.id]" ng-click="updateUser(user)">Valider</button>
                     <button ng-click="deleteUser(user)">Supprimer</button>
+                    <a ng-href="/artist_cv_consult/{{user.id}}" class="btn btn-info" role="button">CV</a>
                 </td>
 
             </tr>
