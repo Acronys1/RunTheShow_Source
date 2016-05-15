@@ -77,7 +77,7 @@ and open the template in the editor.
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
 
-                    <p class="lead" editable-textarea="artist.description" e-cols="140" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                    <p class="lead" editable-textarea="artist.description" e-cols="80" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
                 <div class="col-md-2"></div>
@@ -87,45 +87,15 @@ and open the template in the editor.
                     <p ng-show="errorUrlFb" class="text-danger">{{errorUrlFb}}</p>
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
                 </div>
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-md-4" id="divYoutubeChanProfilArtist">
+                    <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{ "Chaîne Youtube: " + artist.youtubeArtiste || 'Pas de chaîne Youtube: Ajoutez en une!'}}</label></p>
+                    <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
+                    <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
+                </div>
             </div>
 
             <div class="row portfolio-project">
-
-                <section>
-
-                    <div class="col-sm-8">
-                        <div class="project owl-carousel">
-                            <div class="item">
-                                <img src="img/main-slider1.jpg" alt="" class="img-responsive">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="img/main-slider2.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="img/main-slider3.jpg" alt="">
-                            </div>
-                            <div class="item">
-                                <img class="img-responsive" src="img/main-slider4.jpg" alt="">
-                            </div>
-                        </div>
-                        <!-- /.project owl-slider -->
-
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="project-more">
-                            <h4>Client</h4>
-                            <p>Pietro Filippi</p>
-                            <h4>Services</h4>
-                            <p>Consulting, Webdesign, Print</p>
-                            <h4>Technologies</h4>
-                            <p>PHP, HipHop, Break-dance</p>
-                            <h4>Dates</h4>
-                            <p>10/2013 - 06/2014</p>
-                        </div>
-                    </div>
-
-                </section>
 
                 <section>
 

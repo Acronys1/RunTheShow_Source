@@ -90,10 +90,18 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
     //obtient l'url fb de du groupe fb de l'artiste
     $scope.getFbUrlArtist = function () {
         var fbUrlStart = "https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2F";
-        var fbArtist = $scope.artist != null && $scope.artist.facebookArtiste != null && $scope.artist.facebookArtiste != "" ? $scope.artist.facebookArtiste : "assassinscreed.france";
+        var fbArtist = $scope.artist != null && $scope.artist.facebookArtiste != null && $scope.artist.facebookArtiste != "" ? $scope.artist.facebookArtiste : "LesInconnusOfficiel";
         var fbUrlEnd = "&tabs=timeline&width=340&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId";
         console.log(fbUrlStart + fbArtist + fbUrlEnd);
         return $scope.trustSrc(fbUrlStart + fbArtist + fbUrlEnd);
+    };
+
+    //obtient l'url de la chaîne youtube de l'artiste
+    $scope.getYtUrlArtist = function () {
+        var fbUrlStart = "http://www.youtube.com/embed/?listType=user_uploads&list=";
+        var fbArtist = $scope.artist != null && $scope.artist.youtubeArtiste != null && $scope.artist.youtubeArtiste != "" ? $scope.artist.youtubeArtiste : "lesinconnusVEVO";        
+        console.log(fbUrlStart + fbArtist);
+        return $scope.trustSrc(fbUrlStart + fbArtist);
     };
 
     $scope.initRegion = function () {
@@ -139,19 +147,6 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
         data = $scope.localisation;
         $scope.updateUser();
     };
-
-//Vérifie l'url du groupe Facebook
-    /*$scope.checkFbUrl = function (data) {
-     $scope.errorUrlFb = "";
-     var urlExample = "https://www.facebook.com/FacebookFrance/";
-     var regex = new RegExp("(https:\/\/www.facebook.com\/)((\w+)\/)");
-     var monTableau = data.match(regex);
-     console.log(monTableau)
-     if (data !== 'awesome') {
-     $scope.errorUrlFb = "L'url devrait être sous la forme:`https://www.facebook.com/nom_groupe_facebook/";
-     }
-     };*/
-
 });
 
 artist_cv_edit.directive('datepicker', function () {
