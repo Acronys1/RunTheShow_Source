@@ -1,0 +1,183 @@
+
+<div ng-controller="myEvent" ng-init="initFirst()">
+    <script>
+        function toggle5(showHideDiv, switchImgTag) {
+            alert("toto");
+            var ele = document.getElementById(showHideDiv);
+            var imageEle = document.getElementById(switchImgTag);
+            if(ele.style.display == "block") {
+                    ele.style.display = "none";
+                    imageEle.innerHTML = '<img src="img/plus.png">';
+            }
+            else {
+                    ele.style.display = "block";
+                    imageEle.innerHTML = '<img src="img/minus.png">';
+            }
+        }
+        
+        function toto(ti)
+        {
+            alert("toto " + ti);
+        }
+    </script>
+    
+    
+    
+    <div class="container">
+        <div class="panel-group">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                  Evènement : {{ oneEvent.intitule }}
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class='col-md-3'>
+                            <label><b>Date de début : </b></label>
+                            {{ oneEvent.dateHeureDebut }}
+                        </div>
+                        <div class='col-md-3'>
+                            <label><b>Date de fin : </b></label>
+                            {{ oneEvent.dateHeureFin }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-5'>
+                            <label><b>Description : </b></label>
+                            {{ oneEvent.description }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-5'>
+                            <label><b>Informations complémentaires : </b></label>
+                            {{ oneEvent.infoComp }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="panel-group" data-ng-repeat="asefoe in allSousEventForOneEvent">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                  Sous-évènement : {{ asefoe.intitule }}
+                  <a id="imageDivLink-{{asefoe.id}}" changesign=''><img src="img/plus.png"></a>
+                </div>
+                <div class="panel-body" id="contentDivImg-{{asefoe.id}}" style="display: none;">
+                    <div class="row">
+                        <div class='col-md-3'>
+                            <label><b>Date de début : </b></label>
+                            {{ asefoe.dateDebut }}
+                        </div>
+                        <div class='col-md-3'>
+                            <label><b>Date de fin : </b></label>
+                            {{ asefoe.dateFin }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-5'>
+                            <label><b>Etage : </b></label>
+                            {{ asefoe.etage }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-5'>
+                            <label><b>Scène : </b></label>
+                            {{ asefoe.scene }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section>
+            <div class="row portfolio">
+
+                <div class="col-md-12">
+                    <div class="heading">
+                        <h3>Photographies de l'évènement</h3>
+                    </div>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="box-image">
+                        <div class="image">
+                            <img src="img/portfolio-1.jpg" alt="" class="img-responsive">
+                        </div>
+                        <div class="bg"></div>
+                        <div class="name">
+                            <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                        </div>
+                        <div class="text">
+                            <p class="buttons">
+                                <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.box-image -->
+
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="box-image">
+                        <div class="image">
+                            <img src="img/portfolio-2.jpg" alt="" class="img-responsive">
+                        </div>
+                        <div class="bg"></div>
+                        <div class="name">
+                            <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                        </div>
+                        <div class="text">
+                            <p class="buttons">
+                                <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.box-image -->
+
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="box-image">
+                        <div class="image">
+                            <img src="img/portfolio-3.jpg" alt="" class="img-responsive">
+                        </div>
+                        <div class="bg"></div>
+                        <div class="name">
+                            <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                        </div>
+                        <div class="text">
+                            <p class="buttons">
+                                <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.box-image -->
+
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <div class="box-image">
+                        <div class="image">
+                            <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
+                        </div>
+                        <div class="bg"></div>
+                        <div class="name">
+                            <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                        </div>
+                        <div class="text">
+                            <p class="buttons">
+                                <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.box-image -->
+                </div>
+
+            </div>
+        </section>
+    </div>
+</div>
+

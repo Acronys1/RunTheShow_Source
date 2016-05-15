@@ -38,4 +38,10 @@ public class EventService {
     public List<Evenement> getAllEvent(Principal user, HttpServletResponse response) {
         return metier.getAllEvent(user);
     }
+    
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public Evenement getEventById(@PathVariable String id) {
+        long idEvent = Long.parseLong(id);
+        return metier.getEventById(idEvent);
+    }
 }

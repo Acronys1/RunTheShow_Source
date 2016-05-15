@@ -156,6 +156,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     $scope.infoSousEvent = function(idSousEvent) {
         $scope.idSousEvent = idSousEvent;
     }
+    
     /* event source that pulls from google.com */
     /*$scope.eventSource = {
             url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
@@ -206,6 +207,11 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
                     $scope.allSousEventForOneEvent = data;
                 });
             }
+            
+            for(var i = 0; i<$scope.allSousEventForOneEvent.length; i++)
+            {
+                $scope.idEventForClick = $scope.allSousEventForOneEvent[i].evenement.id;
+            }
         });
         
         
@@ -249,6 +255,8 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         uiCalendarConfig.calendars[calendar].fullCalendar('render');
       }
     };
+    
+
      /* Render Tooltip */
     $scope.eventRender = function( event, element, view ) { 
         element.attr({'tooltip': event.title,
@@ -318,6 +326,17 @@ app.directive('modal', function () {
           scope.$apply(function(){
             scope.$parent[attrs.visible] = false;
           });
+        });
+        
+        $(element).on('click',"a[data-window='external']", function() {
+            //alert('Toto ' + scope.showModal);
+            scope.showModal = false;
+            $('#text-page').modal('hide');
+            $('.modal-backdrop').hide();
+            //alert('Toto ' + scope.showModal);
+            window.location($(this).attr('href'));
+            alert('Toto');
+            return false; 
         });
       }
     };
