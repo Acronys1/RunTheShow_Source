@@ -1,4 +1,4 @@
-angular.module('artist_presentation', []).controller('artist_presentation', function ($scope, $http, $rootScope, $window, $filter, $sce) {
+angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($scope, $http, $rootScope, $window, $filter, $sce) {
 
     $scope.artist = {};
     $scope.errorMessage = "";
@@ -154,7 +154,7 @@ angular.module('artist_presentation', []).controller('artist_presentation', func
 
 });
 
-artist_presentation.directive('datepicker', function () {
+artist_cv_edit.directive('datepicker', function () {
     return {
         restrict: 'A',
         require: 'ngModel',

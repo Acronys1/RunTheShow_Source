@@ -4,7 +4,7 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<div ng-controller="artist_presentation" ng-init="initArtistPresentation()">
+<div ng-controller="artist_cv_edit" ng-init="initArtistPresentation()">
     <span class="text-danger" ng-show="errorMessage.init"> 
         {{errorMessage.init}}                     
     </span>  
@@ -243,71 +243,3 @@ and open the template in the editor.
     </div>
 
 </div>
-<!--
-
-<div class="box clearfix" ng-controller="artist_presentation">
-    <div class="heading">
-        <h3 class="text-uppercase">Page de présentation</h3>
-    </div>
-    <div class="container">
-        <form class="form-horizontal" editable-form name="editableForm" onaftersave="saveUser()">
-            <div class="form-group">
-                <label class="control-label">Artiste:</label>
-                <label editable-text="artist.name" e-required>{{ artist.name || '' }}</label>
-            </div>
-            <div class="form-group">
-                <label class="control-label">Specialite:</label>
-                    <label editable-text="artist.specialite" e-required>{{ artist.specialite || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Nombre d'artiste:</label>
-                <label editable-text="artist.nbArtist" e-required>{{ artist.nbArtist || '1' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Tarif minimum:</label>
-                <label editable-text="artist.tarifMin" e-required>{{ artist.tarifMin || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Tarif maximum:</label>
-                <label editable-text="artist.tarifMax" e-required>{{ artist.tarifMax || '' }}</label>                    
-            </div>
-
-            <div class="form-group">
-                <label class="title">A propos: </label>
-                <label editable-text="artist.apropos" e-required>{{ artist.apropos || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Pré-requis:</label>
-                <label editable-text="artist.prerequis" e-required>{{ artist.prerequis || 'Aucun' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Localisation</label>
-                <label editable-text="artist.localisation" e-required>{{ artist.localisation || '' }}</label>
-            </div>
-
-            <div class="form-group">
-                <label class="title">Notation:</label>
-                {{artist.note|| 'Pas de note'}}
-            </div>
-            <button type="button" class="btn btn-template-maint" ng-click="editableForm.$show()" ng-show="!editableForm.$visible">
-                <i class="fa fa-save"></i> Editer
-            </button>
-            <span ng-show="editableForm.$visible">
-                <button type="submit" class="btn btn-primary" ng-disabled="editableForm.$waiting">
-                    Save
-                </button>
-                <button type="button" class="btn btn-default" ng-disabled="editableForm.$waiting" ng-click="editableForm.$cancel()">
-                    Cancel
-                </button>
-            </span>
-        </form>
-    </div>
-<!-- /.container
-
-
-</div> -->

@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_presentation', 'xeditable', 'disableAll', 'file', 'calendarDemoApp'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -20,9 +20,12 @@ angular
                     }).when('/userprofile', {
                         templateUrl: 'js/userprofile/userprofile.html',
                         controller: 'userprofile'
-                    }).when('/artist_presentation', {
-                        templateUrl: 'js/artist_presentation/artist_presentation.html',
-                        controller: 'artist_presentation'
+                    }).when('/artist_cv_edit', {
+                        templateUrl: 'js/artist_cv_edit/artist_cv_edit.html',
+                        controller: 'artist_cv_edit'
+                    }).when('/artist_cv_consult/:artistId', {
+                        templateUrl: 'js/artist_cv_consult/artist_cv_consult.html',
+                        controller: 'artist_cv_consult'
                     }).when('/invitation', {
                         templateUrl: 'js/event/invitation.html',
                         controller: 'DemoCtrl'
