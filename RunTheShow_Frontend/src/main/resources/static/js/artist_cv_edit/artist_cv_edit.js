@@ -53,7 +53,7 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
         if ($scope.artist == null || $scope.typesArtiste[0] == null)
             return 'no set';
         if ($scope.artist.typeArtiste == null)//default selected typeArtist
-            return $scope.typesArtiste[0].text;
+            return "Type d'artiste non précisé, veuilliez en cliquez pour choisir un type d'artiste.";
         var selected = null;
         var idArtiste = $scope.artist.typeArtiste.id;
         for (var i = 0; i < $scope.typesArtiste[i].value != null; i++) {
@@ -128,7 +128,7 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
             if (regionFound != null && regionFound.length > 0)
                 selected.push(regionFound[0].nom);
         });
-        return selected.length ? selected.join(', ') : 'Not set';
+        return selected.length ? selected.join(', ') : 'Localisation non précisée';
     };
 
     //mise à jour des régions de l'artiste
