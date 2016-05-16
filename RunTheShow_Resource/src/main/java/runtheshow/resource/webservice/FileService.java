@@ -111,6 +111,8 @@ public class FileService {
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ResponseEntity uploadFile(MultipartHttpServletRequest request) {
 
+        String filePath = "";
+         
         try {
             Iterator<String> itr = request.getFileNames();
 
@@ -123,13 +125,13 @@ public class FileService {
 
                 FileUpload newFile = new FileUpload(filename, bytes, mimeType);
 
-                fileUploadService.UploadFile(newFile);
+                filePath = fileUploadService.UploadFile(newFile);
             }
         } catch (Exception e) {
             return new ResponseEntity<>("{}", HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-        return new ResponseEntity<>("{}", HttpStatus.OK);
+        return new ResponseEntity<>("{\"filePath\":\""+filePath+"\"}", HttpStatus.OK);
     }
 
 }
