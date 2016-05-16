@@ -31,11 +31,13 @@ public class FileMetier implements IFileMetier{
 
     // Store the file reference to database
     @Override
-    public void UploadFile(FileUpload doc) throws IOException {
+    public String UploadFile(FileUpload doc) throws IOException {
 
         SaveFileDirectory(doc);
 
         fileUploadRepository.saveAndFlush(doc);
+        
+        return getFilePathFromDirectory(doc.getFilename());
     }
 
     // Upload the file to disk

@@ -10,7 +10,7 @@ public interface IFileMetier {
          
          public List<FileUpload> findAll();
          
-         public void UploadFile(FileUpload doc) throws IOException;
+         public String UploadFile(FileUpload doc) throws IOException;
          
          public void SaveFileDirectory(FileUpload doc) throws IOException;
          

@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import java.io.IOException;
 import java.security.Principal;
+import runtheshow.resource.entities.FileUpload;
 import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.entities.Region;
 import runtheshow.resource.entities.TypeArtiste;
 import runtheshow.resource.entities.User;
+import runtheshow.resource.repository.FileUploadRepository;
 import runtheshow.resource.repository.ProfileArtisteRepository;
 import runtheshow.resource.repository.RegionRepository;
 import runtheshow.resource.repository.TypeArtisteRepository;
@@ -30,6 +33,9 @@ public class ArtisteMetier implements IArtisteMetier {
     
     @Autowired
     private RegionRepository regionRepository;
+    
+    @Autowired
+    FileUploadRepository fileUploadRepository;
 
     // liste des profiles d'artiste
     @Override
@@ -57,7 +63,7 @@ public class ArtisteMetier implements IArtisteMetier {
 
     //update d'un artiste, anti contrafaçon de l'id du profile
     @Override
-    public Boolean UpdateArtiste(ProfileArtiste artiste,Principal user){
+    public Boolean UpdateArtiste(ProfileArtiste artiste,Principal user){    
         User unUser = userRepository.findUserByLogin(user.getName());
         ProfileArtiste unProfile = artisteRepository.findByUserArtiste(unUser);
         artiste.setId(unProfile.getId());
@@ -79,4 +85,5 @@ public class ArtisteMetier implements IArtisteMetier {
     public List<Region> getAllRegion() {
         return Lists.newArrayList(regionRepository.findAll());
     }
+    
 }
