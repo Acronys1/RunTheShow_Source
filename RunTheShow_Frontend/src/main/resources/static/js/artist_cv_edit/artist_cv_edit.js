@@ -1,4 +1,4 @@
-angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($scope, $http, $rootScope, $window, $filter, $sce) {
+angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', function ($scope, $http, $rootScope, $window, $filter, $sce) {
 
     $scope.artist = {};
     $scope.errorMessage = "";
@@ -67,7 +67,7 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
 
     //met à jour les informations de l'artiste
     $scope.updateUser = function () {
-        if($scope.localisation.length > 0)
+        if ($scope.localisation.length > 0)
             $scope.artist.localisation = $scope.localisation;
         var data = $scope.artist;
         $http.put("/resource/artiste/update", data).success(function (data, status) {
@@ -99,7 +99,7 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
     //obtient l'url de la chaîne youtube de l'artiste
     $scope.getYtUrlArtist = function () {
         var fbUrlStart = "http://www.youtube.com/embed/?listType=user_uploads&list=";
-        var fbArtist = $scope.artist != null && $scope.artist.youtubeArtiste != null && $scope.artist.youtubeArtiste != "" ? $scope.artist.youtubeArtiste : "lesinconnusVEVO";        
+        var fbArtist = $scope.artist != null && $scope.artist.youtubeArtiste != null && $scope.artist.youtubeArtiste != "" ? $scope.artist.youtubeArtiste : "lesinconnusVEVO";
         console.log(fbUrlStart + fbArtist);
         return $scope.trustSrc(fbUrlStart + fbArtist);
     };
@@ -147,7 +147,30 @@ angular.module('artist_cv_edit', []).controller('artist_cv_edit', function ($sco
         data = $scope.localisation;
         $scope.updateUser();
     };
+    // upload des images
+    $scope.partialDownloadLink = 'http://localhost:8080/resource/file/download2?filename=';
+
+    $scope.uploadFileBanniere = function () {
+        $scope.processDropzone();
+        if ($scope.fileAdded = true && $scope.file.name != '') {
+            $http.get('/resource/file/getFilePath/filename='+$scope.file.name).success(function (data, status) {
+                $scope.artist.imageBanniere = data;
+                $scope.updateUser();
+                console.log("File path retrieved OK");
+            }).error(function (data, status) {
+                console.log("File path not retrieved ERROR");
+            });
+        }
+    };
+
+    $scope.reset = function () {
+        $scope.filename = '';
+        $scope.resetDropzone();
+    };
+
 });
+
+angular.module('artist_cv_edit').directive('dropzone', dropzone);
 
 artist_cv_edit.directive('datepicker', function () {
     return {

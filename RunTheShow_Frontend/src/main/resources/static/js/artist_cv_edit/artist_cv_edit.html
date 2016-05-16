@@ -9,7 +9,9 @@ and open the template in the editor.
         {{errorMessage.init}}                     
     </span>  
     <div id="" class="ng-scope">
-        <div class="jumbotron" ng-style="{'background-image': artist.imageBanniere || '', 'height':'300px'}"></div>
+        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal">
+            <div class="jumbotron" ng-style="{'background-image': artist.imageBanniere || '', 'height':'300px'}"></div>
+        </a>
         <div class="container">
             <div class="row panelProfileArtiste">
                 <div class="col-md-3" id="divImgProfileArtiste">
@@ -34,8 +36,8 @@ and open the template in the editor.
                         </a>
                         <!--<label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label>-->
                     </p>
-                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{'Taille du groupe: '+artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
-                    <p><label ng-bind="artist.note">{{'Note générale: '+artist.note || 'Pas de note, groupe non évalué' }}</label></p>
+                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{'Taille du groupe: ' + artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
+                    <p><label ng-bind="artist.note">{{'Note générale: ' + artist.note|| 'Pas de note, groupe non évalué' }}</label></p>
                 </div>
                 <div class="col-md-2"></div>
                 <form class="form-horizontal text-center">
@@ -83,7 +85,7 @@ and open the template in the editor.
                 <div class="col-md-2"></div>
                 <!-- Div Facebook-->
                 <div class="col-md-4">
-                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ (artist.facebookArtiste != null ? 'Groupe Facebook:  '+artist.facebookArtiste : 'Pas de groupe Facebook: Ajoutez en un!')}}</label></p>
+                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ (artist.facebookArtiste != null ? 'Groupe Facebook:  ' + artist.facebookArtiste : 'Pas de groupe Facebook: Ajoutez en un!')}}</label></p>
                     <p ng-show="errorUrlFb" class="text-danger">{{errorUrlFb}}</p>
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
                 </div>
@@ -208,8 +210,41 @@ and open the template in the editor.
 
         </div>
         <!-- /.container -->
+        <!-- upload images bannière-->
+        <div class="modal fade" id="bannerUpload-modal" tabindex="-1" role="dialog" aria-labelledby="bannerUpload" aria-hidden="true" ng-click="reInitBannerUploadModal()">
+            <div class="modal-dialog modal-sm">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="reInitBannerUploadModal()">&times;</button>
+                        <h4 class="modal-title" id="bannerUpload">Uploadez une image de bannière de votre profil</h4>
+                    </div>
+                    <div class="modal-body">
+                            <div class="">
+                                <div class="well">
+                                    <form action="" class="dropzone" dropzone="" id="dropzone" style="min-height:250px">
+                                        <div class="dz-default dz-message">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-success" ng-click="uploadFileBanniere()">Upload File</button>
+                                    <button class="btn btn-danger" ng-click="reset()">Reset Dropzone</button>
+                                </div>
+                            </div>
+                            <img src="banner.jpg" alt="test" width="100">
 
 
-    </div>
+                            <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                            <p>{{image.filename}}</p>
 
-</div>
+                            <a ng-repeat="images in all_image" href="">
+                                <img src="{{images.filename}}" alt="test" width="100">
+                                <h5>{{images.filename}}</h5>   
+                            </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end of images bannière -->
