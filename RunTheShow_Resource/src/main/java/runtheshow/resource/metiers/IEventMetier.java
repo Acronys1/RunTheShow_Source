@@ -18,4 +18,6 @@ public interface IEventMetier {
     public List<Evenement> getAllEvent(Principal user);
     
     public Boolean addEvent(Principal user, Evenement event);
+
+    public Evenement getEventById(long idEvent);
 }

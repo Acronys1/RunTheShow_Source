@@ -40,4 +40,9 @@ public class EventMetier implements IEventMetier {
     public List<Evenement> getAllEvent(Principal user) {
         return Lists.newArrayList(eventRepository.findByCreateur(userRepository.findUserByLogin(user.getName())));
     }    
+
+    @Override
+    public Evenement getEventById(long idEvent) {
+        return eventRepository.findById(idEvent);
+    }
 }

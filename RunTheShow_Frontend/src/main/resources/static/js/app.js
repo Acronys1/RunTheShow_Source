@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp', 'myEvent'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -14,6 +14,9 @@ angular
                     }).when('/event', {
                         templateUrl: 'js/event/event.html',
                         controller: 'event'
+                    }).when('/myEvent/:param', {
+                        templateUrl: 'js/event/myEvent.html',
+                        controller: 'myEvent'
                     }).when('/login', {
                         templateUrl: 'js/navigation/login.html',
                         controller: 'navigation'
