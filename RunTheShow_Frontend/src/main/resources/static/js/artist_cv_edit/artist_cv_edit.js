@@ -1,4 +1,4 @@
-angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', function ($scope, $http, $rootScope, $window, $filter, $sce) {
+angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', function ($scope, $http, $rootScope, $window, $filter, $sce, $route) {
 
     $scope.artist = {};
     $scope.errorMessage = "";
@@ -10,7 +10,10 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     $scope.error = false;
     $scope.errorUrlFb = "";
     $scope.errorUrlYoutube = "";
+    $scope.bannerStyle = {};
     $scope.localisation = [];
+    $scope.errorBannerImport = null;
+    $scope.importBannerOK = null;
 
     //initialise le CV des artistes
     $scope.initArtistPresentation = function () {
@@ -34,6 +37,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             if ($scope.artist != null) {
                 console.log("user is an artist")
                 $scope.facebookURL = $scope.getFbUrlArtist();
+                $scope.initBanner();
                 $scope.initRegion();
             } else {
                 $scope.errorMessage.init = "not an artist";
@@ -150,22 +154,40 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     // upload des images
     $scope.partialDownloadLink = 'http://localhost:8080/resource/file/download2?filename=';
 
+    $scope.initBanner = function () {
+        //bannière
+        if ($scope.artist.imageBanniere != null && $scope.artist.imageBanniere != "") {
+            $scope.bannerStyle = {
+                "background": "url(" + $scope.artist.imageBanniere + ")",
+                'height': '300px',
+            };
+        }
+    };
+    //upload de la bannière
     $scope.uploadFileBanniere = function () {
         $scope.processDropzone();
-        if ($scope.fileAdded = true && $scope.file.name != '') {
-            $http.get('/resource/file/getFilePath/filename='+$scope.file.name).success(function (data, status) {
-                $scope.artist.imageBanniere = data;
-                $scope.updateUser();
-                console.log("File path retrieved OK");
-            }).error(function (data, status) {
-                console.log("File path not retrieved ERROR");
-            });
+        if ($scope.uploadOK == true && $scope.filePath != null && $scope.filePath != "") {
+            $scope.artist.imageBanniere = $scope.filePath;
+            $scope.updateUser();
+            $scope.initBanner();
+            console.log("File path retrieved OK");
+            $scope.importBannerOK = "Image importée avec succes";
+        } else {
+            console.log("File path not retrieved ERROR");
+            $scope.errorBannerImport = "Erreur import";
         }
     };
 
     $scope.reset = function () {
         $scope.filename = '';
+        $scope.importBannerOK = null;
+        $scope.errorBannerImport = null;
+        $scope.initBanner();
         $scope.resetDropzone();
+    };
+
+    $scope.reInitBannerUploadModal = function () {
+        $scope.reset();
     };
 
 });

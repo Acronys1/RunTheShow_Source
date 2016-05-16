@@ -10,7 +10,7 @@ and open the template in the editor.
     </span>  
     <div id="" class="ng-scope">
         <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal">
-            <div class="jumbotron" ng-style="{'background-image': artist.imageBanniere || '', 'height':'300px'}"></div>
+            <div class="jumbotron" ng-style="bannerStyle"></div>
         </a>
         <div class="container">
             <div class="row panelProfileArtiste">
@@ -211,37 +211,43 @@ and open the template in the editor.
         </div>
         <!-- /.container -->
         <!-- upload images bannière-->
-        <div class="modal fade" id="bannerUpload-modal" tabindex="-1" role="dialog" aria-labelledby="bannerUpload" aria-hidden="true" ng-click="reInitBannerUploadModal()">
+        <div class="modal fade" id="bannerUpload-modal" tabindex="-1" role="dialog" aria-labelledby="bannerUpload" aria-hidden="true">
             <div class="modal-dialog modal-sm">
 
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="reInitBannerUploadModal()">&times;</button>
-                        <h4 class="modal-title" id="bannerUpload">Uploadez une image de bannière de votre profil</h4>
+                        <h4 class="modal-title" id="bannerUpload">Uploadez une image de bannière de votre profil</h4>                        
+                    </div>
+                    <div class="alert alert-success" ng-show="importBannerOK">
+                        <p>{{importBannerOK}}</p>
+                    </div>
+                    <div class="alert alert-danger" ng-show="errorBannerImport">
+                        <p>{{errorBannerImport}}</p>
                     </div>
                     <div class="modal-body">
-                            <div class="">
-                                <div class="well">
-                                    <form action="" class="dropzone" dropzone="" id="dropzone" style="min-height:250px">
-                                        <div class="dz-default dz-message">
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="pull-right">
-                                    <button class="btn btn-success" ng-click="uploadFileBanniere()">Upload File</button>
-                                    <button class="btn btn-danger" ng-click="reset()">Reset Dropzone</button>
-                                </div>
+                        <div class="form-horizontal">
+                            <div class="well">
+                                <form action="" class="dropzone" dropzone="" id="dropzone" style="min-height:250px">
+                                    <div class="dz-default dz-message">
+                                    </div>
+                                </form>
                             </div>
-                            <img src="banner.jpg" alt="test" width="100">
+                            <div class="">
+                                <button class="btn btn-success" ng-click="uploadFileBanniere()">Upload File</button>
+                                <button class="btn btn-danger" ng-click="reset()">Reset Dropzone</button>
+                            </div>
+                        </div>
+                        <!--<img src="banner.jpg" alt="" width="100">-->
 
 
-                            <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
-                            <p>{{image.filename}}</p>
+                        <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                        <p>{{image.filename}}</p>
 
-                            <a ng-repeat="images in all_image" href="">
-                                <img src="{{images.filename}}" alt="test" width="100">
-                                <h5>{{images.filename}}</h5>   
-                            </a>
+                        <a ng-repeat="images in all_image" href="">
+                            <img src="{{images.filename}}" alt="" width="100">
+                            <h5>{{images.filename}}</h5>   
+                        </a>
                     </div>
 
                 </div>

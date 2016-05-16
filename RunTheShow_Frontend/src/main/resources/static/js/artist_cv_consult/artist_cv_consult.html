@@ -4,13 +4,257 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div ng-controller="artist_cv_consult" ng-init="initArtistCvConsult()"><p>{{artistId}}</p></div>
-    </body>
-</html>
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<div ng-controller="artist_cv_edit" ng-init="initArtistPresentation()">
+    <span class="text-danger" ng-show="errorMessage.init"> 
+        {{errorMessage.init}}                     
+    </span>  
+    <div id="" class="ng-scope">
+        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal">
+            <div class="jumbotron" ng-style="{'background-image': artist.imageBanniere || '', 'height':'300px'}"></div>
+        </a>
+        <div class="container">
+            <div class="row panelProfileArtiste">
+                <div class="col-md-3" id="divImgProfileArtiste">
+                    <div class="box-image" style="border-radius: 3%;">
+                        <div class="image">
+                            <img style="width:120%;height:120%;" ng-src="{{artist.imageProfile|| 'img/portfolio-1.jpg'}}" class="img-responsive">
+                        </div>
+                    </div>
+                </div>
+                <div class="row col-md-4 form-group">
+                    <!--<h4>Nom de l'artise</h4>-->
+                    <h2><>{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</h2></h2>
+                    <p>  
+                        <a href="#" ng-options="r.value as r.text for r in artistRegions">
+                            {{ showArtistRegions()}}
+                        </a>
+                        <select id="role" name="role" class="form-control" ng-model="user.userRole" ng-options="r.name for r in artist.localisation" required>
+                            <option value="" >-- Select --</option>
+                        </select>
+                        <!--<label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label>-->
+                    </p>
+                    <p>
+                        <a href="#" editable-select="artist.typeArtiste.id" e-required e-ng-options="t.value as t.text for t in typesArtiste" onaftersave="updateUser()">
+                            {{ showArtistTypes()}}
+                        </a>
+                        <!--<label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label>-->
+                    </p>
+                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{'Taille du groupe: ' + artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
+                    <p><label ng-bind="artist.note">{{'Note générale: ' + artist.note|| 'Pas de note, groupe non évalué' }}</label></p>
+                </div>
+                <div class="col-md-2"></div>
+                <form class="form-horizontal text-center">
+                    <div class="form-group col-md-3" style="border-style: solid;border-radius: 5px;" id="divDmdPrestationProfileArtiste">
+                        <div class="panel-heading">
+                            <h4>Demande de prestation</h4>
+                        </div>                            
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">Date début</label>
+                            <div class="col-sm-8">
+                                <input datepicker="" ng-model="demandeEventStartDate" class="form-control" id="datedebut" placeholder="Date début">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label">Date fin</label>
+                            <div class="col-sm-8">
+                                <input datepicker="" ng-model="demandeEventEndDate" class="form-control" id="datefin" placeholder="Date fin">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-sm btn-template-main"><i class="fa fa-save"></i> Envoyer la demande</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="row"></div>
+
+        </div>
+    </div>
+
+    <div id="content">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="heading">
+                        <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
+                    </div>
+
+                    <p class="lead" editable-textarea="artist.description" e-cols="80" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                        mi vitae est. Mauris placerat eleifend leo.'}}</p>
+                </div>
+                <div class="col-md-2"></div>
+                <!-- Div Facebook-->
+                <div class="col-md-4">
+                    <p><label editable-text="artist.facebookArtiste" e-required onaftersave="updateUser()">{{ (artist.facebookArtiste != null ? 'Groupe Facebook:  ' + artist.facebookArtiste : 'Pas de groupe Facebook: Ajoutez en un!')}}</label></p>
+                    <p ng-show="errorUrlFb" class="text-danger">{{errorUrlFb}}</p>
+                    <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
+                </div>
+                <div class="clearfix visible-xs-block"></div>
+                <div class="col-md-4" id="divYoutubeChanProfilArtist">
+                    <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
+                    <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
+                    <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
+                </div>
+            </div>
+
+            <div class="row portfolio-project">
+
+                <section>
+
+                    <div class="col-sm-12">
+
+                        <div class="heading">
+                            <h3>Project description</h3>
+                        </div>
+
+                        <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved
+                            written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
+
+                        <p>To sorry world an at do spoil along. Incommode he depending do frankness remainder to. Edward day almost active him friend thirty piqued. People as period twenty my extent as. Set was better abroad ham plenty secure had horses.
+                            Admiration has sir decisively excellence say everything inhabiting acceptance. Sooner settle add put you sudden him.</p>
+                    </div>
+                </section>
+
+            </div>
+
+            <section>
+                <div class="row portfolio">
+
+                    <div class="col-md-12">
+                        <div class="heading">
+                            <h3>Représentations récentes</h3>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="box-image">
+                            <div class="image">
+                                <img src="img/portfolio-1.jpg" alt="" class="img-responsive">
+                            </div>
+                            <div class="bg"></div>
+                            <div class="name">
+                                <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                            </div>
+                            <div class="text">
+                                <p class="buttons">
+                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                    <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.box-image -->
+
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="box-image">
+                            <div class="image">
+                                <img src="img/portfolio-2.jpg" alt="" class="img-responsive">
+                            </div>
+                            <div class="bg"></div>
+                            <div class="name">
+                                <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                            </div>
+                            <div class="text">
+                                <p class="buttons">
+                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                    <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.box-image -->
+
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="box-image">
+                            <div class="image">
+                                <img src="img/portfolio-3.jpg" alt="" class="img-responsive">
+                            </div>
+                            <div class="bg"></div>
+                            <div class="name">
+                                <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                            </div>
+                            <div class="text">
+                                <p class="buttons">
+                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                    <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.box-image -->
+
+                    </div>
+
+                    <div class="col-sm-6 col-md-3">
+                        <div class="box-image">
+                            <div class="image">
+                                <img src="img/portfolio-4.jpg" alt="" class="img-responsive">
+                            </div>
+                            <div class="bg"></div>
+                            <div class="name">
+                                <h3><a href="portfolio-detail.html">Portfolio box-image</a></h3> 
+                            </div>
+                            <div class="text">
+                                <p class="buttons">
+                                    <a href="portfolio-detail.html" class="btn btn-template-transparent-primary">View</a>
+                                    <a href="#" class="btn btn-template-transparent-primary">Website</a>
+                                </p>
+                            </div>
+                        </div>
+                        <!-- /.box-image -->
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+        <!-- /.container -->
+        <!-- upload images bannière-->
+        <div class="modal fade" id="bannerUpload-modal" tabindex="-1" role="dialog" aria-labelledby="bannerUpload" aria-hidden="true" ng-click="reInitBannerUploadModal()">
+            <div class="modal-dialog modal-sm">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="reInitBannerUploadModal()">&times;</button>
+                        <h4 class="modal-title" id="bannerUpload">Uploadez une image de bannière de votre profil</h4>
+                    </div>
+                    <div class="modal-body">
+                            <div class="">
+                                <div class="well">
+                                    <form action="" class="dropzone" dropzone="" id="dropzone" style="min-height:250px">
+                                        <div class="dz-default dz-message">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="pull-right">
+                                    <button class="btn btn-success" ng-click="uploadFileBanniere()">Upload File</button>
+                                    <button class="btn btn-danger" ng-click="reset()">Reset Dropzone</button>
+                                </div>
+                            </div>
+                            <img src="banner.jpg" alt="test" width="100">
+
+
+                            <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                            <p>{{image.filename}}</p>
+
+                            <a ng-repeat="images in all_image" href="">
+                                <img src="{{images.filename}}" alt="test" width="100">
+                                <h5>{{images.filename}}</h5>   
+                            </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- end of images bannière -->
+
