@@ -11,9 +11,12 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     $scope.errorUrlFb = "";
     $scope.errorUrlYoutube = "";
     $scope.bannerStyle = {};
+    $scope.imgProfileStyle = {};
+    $scope.imgProfileStyle = {};
     $scope.localisation = [];
     $scope.errorBannerImport = null;
     $scope.importBannerOK = null;
+    $scope.urlImageProfile = "";
 
     //initialise le CV des artistes
     $scope.initArtistPresentation = function () {
@@ -39,6 +42,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
                 $scope.facebookURL = $scope.getFbUrlArtist();
                 $scope.initBanner();
                 $scope.initRegion();
+                $scope.initImgProfile();
             } else {
                 $scope.errorMessage.init = "not an artist";
                 $scope.error = true;
@@ -49,6 +53,9 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             $scope.error = true;
             console.log("user is not an artist")
         });
+
+        $rootScope.processUploadBanniere = false;
+        $rootScope.processUploadImgProfile = false;
     };
 
     $scope.showArtistTypes = function () {
@@ -154,6 +161,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     // upload des images
     $scope.partialDownloadLink = 'http://localhost:8080/resource/file/download2?filename=';
 
+    //propriétés de la bannière
     $scope.initBanner = function () {
         //bannière
         if ($scope.artist.imageBanniere != null && $scope.artist.imageBanniere != "") {
@@ -163,37 +171,128 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             };
         }
     };
+
+    //propriétés de l'image de profil
+    $scope.initImgProfile = function () {
+        //profil img
+        $scope.urlImageProfile = ($scope.artist.imageProfile != null && $scope.artist.imageProfile != "" ? $scope.artist.imageProfile : 'img/portfolio-1.jpg');
+        $scope.imgProfileStyle = {
+            "background-image": "url(" + urlImageProfile + ")",
+            'height': '300px',
+            'width': '120%',
+            'height':'120%',
+        };
+    };
+
     //upload de la bannière
     $scope.uploadFileBanniere = function () {
         $scope.processDropzone();
-        if ($scope.uploadOK == true && $scope.filePath != null && $scope.filePath != "") {
-            $scope.artist.imageBanniere = $scope.filePath;
-            $scope.updateUser();
-            $scope.initBanner();
-            console.log("File path retrieved OK");
-            $scope.importBannerOK = "Image importée avec succes";
-        } else {
-            console.log("File path not retrieved ERROR");
-            $scope.errorBannerImport = "Erreur import";
-        }
     };
+
+    //upload de l'image de profile
+    $scope.uploadImgProfile = function () {
+        $scope.resetDropzone();
+        $scope.processUploadImgProfile = true;
+        $scope.processUploadBanniere = false;
+    };
+
+    $scope.uploadBanniere = function () {
+        $scope.resetDropzone();
+        $scope.processUploadBanniere = true;
+        $scope.processUploadImgProfile = false;
+    };
+
+    $scope.uploadImages = function (filepath) {
+        if ($scope.processUploadBanniere == true) {
+            $scope.artist.imageBanniere = $scope.filePath;
+            console.log("image banniere mise à jour");
+            $scope.initBanner();
+        } else if ($scope.processUploadImgProfile == true) {
+            $console.log("image profile mise à jour");
+            $scope.artist.imageProfile = filepath;
+            $scope.initImgProfile();
+        }
+        $scope.updateUser();
+    }
 
     $scope.reset = function () {
         $scope.filename = '';
         $scope.importBannerOK = null;
         $scope.errorBannerImport = null;
+        $rootScope.processUploadBanniere = false;
+        $rootScope.processUploadImgProfile = false;
         $scope.initBanner();
         $scope.resetDropzone();
     };
 
-    $scope.reInitBannerUploadModal = function () {
+    $scope.reInitUploadModal = function () {
         $scope.reset();
     };
 
 });
 
-angular.module('artist_cv_edit').directive('dropzone', dropzone);
+//angular.module('artist_cv_edit').directive('dropZone', dropzone);
+angular.module('artist_cv_edit').directive('dropzonecv', function ($cookies, $http) {
+    return {
+        restrict: 'C',
+        link: function (scope, element, attrs) {
 
+            var config = {
+                url: 'http://localhost:8080/resource/file/upload',
+                maxFilesize: 20,
+                withCredentials: true,
+                paramName: "uploadfile",
+                maxThumbnailFilesize: 10,
+                parallelUploads: 1, headers: {
+                    'X-XSRF-TOKEN': $cookies.get('XSRF-TOKEN')
+                },
+                autoProcessQueue: false
+            };
+
+            var eventHandlers = {
+                'addedfile': function (file) {
+                    scope.file = file;
+                    if (this.files[1] != null) {
+                        this.removeFile(this.files[0]);
+                    }
+                    scope.$apply(function () {
+                        scope.fileAdded = true;
+                    });
+                },
+                'success': function (file, response) {
+                    scope.filePath = response.filePath;
+                    scope.uploadFileOK = true;
+                    scope.uploadImages(scope.filePath);
+                    console.log("File path retrieved OK");
+                    scope.importBannerOK = "Image importée avec succes";
+                },
+                'complete': function (file, response) {
+                    console.log(file);
+                },
+                'error': function (file, errorMessage) {
+                    scope.errorBannerImport = errorMessage;
+                    console.log("Erreur import image");
+                }
+            };
+
+            dropzone = new Dropzone(element[0], config);
+
+            angular.forEach(eventHandlers, function (handler, event) {
+                dropzone.on(event, handler);
+            });
+
+            scope.processDropzone = function () {
+                scope.uploadFileOK = false;
+                dropzone.processQueue();
+            };
+
+            scope.resetDropzone = function () {
+                scope.uploadFileOK = false;
+                dropzone.removeAllFiles();
+            };
+        }
+    }
+});
 artist_cv_edit.directive('datepicker', function () {
     return {
         restrict: 'A',

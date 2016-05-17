@@ -9,18 +9,20 @@ and open the template in the editor.
         {{errorMessage.init}}                     
     </span>  
     <div id="" class="ng-scope">
-        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal">
+        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()">
             <div class="jumbotron" ng-style="bannerStyle"></div>
         </a>
         <div class="container">
             <div class="row panelProfileArtiste">
+                <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadImgProfile()">
                 <div class="col-md-3" id="divImgProfileArtiste">
                     <div class="box-image" style="border-radius: 3%;">
                         <div class="image">
-                            <img style="width:120%;height:120%;" ng-src="{{artist.imageProfile|| 'img/portfolio-1.jpg'}}" class="img-responsive">
+                            <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive">
                         </div>
                     </div>
                 </div>
+                </a>
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
                     <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
@@ -79,7 +81,7 @@ and open the template in the editor.
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
 
-                    <p class="lead" editable-textarea="artist.description" e-cols="80" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                    <p class="lead" editable-textarea="artist.description" e-cols="50" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
                 <div class="col-md-2"></div>
@@ -217,18 +219,18 @@ and open the template in the editor.
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="reInitBannerUploadModal()">&times;</button>
-                        <h4 class="modal-title" id="bannerUpload">Uploadez une image de bannière de votre profil</h4>                        
+                        <h4 class="modal-title" id="bannerUpload">Uploadez une image</h4>                        
                     </div>
-                    <div class="alert alert-success" ng-show="importBannerOK">
+                    <p class="text-success text-center" ng-show="importBannerOK">
                         <p>{{importBannerOK}}</p>
-                    </div>
-                    <div class="alert alert-danger" ng-show="errorBannerImport">
+                    </p>
+                    <p class="text-danger text-center" ng-show="errorBannerImport">
                         <p>{{errorBannerImport}}</p>
-                    </div>
+                    </p>
                     <div class="modal-body">
                         <div class="form-horizontal">
                             <div class="well">
-                                <form action="" class="dropzone" dropzone="" id="dropzone" style="min-height:250px">
+                                <form action="" dropzonecv="" class="dropzonecv" id="dropzonecv" style="min-height:120px">
                                     <div class="dz-default dz-message">
                                     </div>
                                 </form>
@@ -253,4 +255,4 @@ and open the template in the editor.
                 </div>
             </div>
         </div>
-        <!-- end of images bannière -->
+        <!-- end of images bannière -->       
