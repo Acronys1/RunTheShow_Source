@@ -25,6 +25,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "REGION")
 public class Region extends AbstractEntity {
+    
     private static final long serialVersionUID = 1L;
 
     @Column(name = "region_nom")
@@ -38,8 +39,9 @@ public class Region extends AbstractEntity {
     public Region() {
     }
     
-    public Region(String nom){
-        this.nom = nom;        
+    public Region(Long id, String nom){
+        this.id = id;
+        this.nom = nom;      
     }
 
     public Region(String nom, List<ProfileArtiste> profils) {

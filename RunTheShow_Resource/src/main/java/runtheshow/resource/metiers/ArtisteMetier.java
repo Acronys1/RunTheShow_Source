@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Set;
 import runtheshow.resource.entities.FileUpload;
 import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.entities.Region;
@@ -84,6 +85,11 @@ public class ArtisteMetier implements IArtisteMetier {
     @Override
     public List<Region> getAllRegion() {
         return Lists.newArrayList(regionRepository.findAll());
+    }
+    
+    @Override
+    public List<ProfileArtiste> SearchArtiste(Set<Long> type, Set<Long> localisation) {
+        return Lists.newArrayList(artisteRepository.findArtisteByTypeAndLocalisation(type, localisation));
     }
     
 }

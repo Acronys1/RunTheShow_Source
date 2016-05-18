@@ -6,13 +6,16 @@
 package runtheshow.resource.webservice;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.entities.Region;
@@ -49,6 +52,22 @@ public class ArtisteService {
     public Boolean updateArtiste(@RequestBody ProfileArtiste artiste, Principal user, HttpServletResponse response) {
         return artisteMetier.UpdateArtiste(artiste, user);
     }
+    
+    /*@RequestMapping(value = "/search/{type}/{localisation}", method = RequestMethod.GET)
+    public boolean searchArtiste(@PathVariable String type, String localisation) {
+        String[] typeArtiste = type.split(",");
+        String[] localisationArtiste = localisation.split(",");
+        
+        for(int i=0; i<typeArtiste.length;i++){
+             
+        }
+        
+        for(int i=0; i<typeArtiste.length; i++){
+            
+        }
+        
+        return true;
+    }*/
     
     @RequestMapping(value = "/types", method = RequestMethod.GET)
     public List<TypeArtiste> getAllArtistTypes(){

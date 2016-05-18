@@ -27,7 +27,7 @@ and open the template in the editor.
                     <!--<h4>Nom de l'artise</h4>-->
                     <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
                     <p>  
-                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onbeforesave="updateArtistRegions($data)">
+                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onaftersave="updateArtistRegions($data)">
                             {{ showArtistRegions()}}
                         </a>
                         <!--<label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label>-->

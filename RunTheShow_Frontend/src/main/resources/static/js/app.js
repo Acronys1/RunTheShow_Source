@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp', 'myEvent'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp', 'myEvent', 'search'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -35,6 +35,9 @@ angular
                     }).when('/file', {
                         templateUrl: 'js/file/file_example.html',
                         controller: 'file'
+                    }).when('/search', {
+                        templateUrl: 'js/search/search.html',
+                        controller: 'search'
                     }).when('/accueil', {
                         templateUrl: 'js/home/accueil.html'
                     }).otherwise('/');

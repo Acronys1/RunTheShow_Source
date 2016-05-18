@@ -155,7 +155,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             var regionName = regionFound[0].text;
             $scope.localisation[i] = {'id': idRegion, 'nom': regionName};
         }
-        data = $scope.localisation;
+        //data = $scope.localisation;
         $scope.updateUser();
     };
     // upload des images

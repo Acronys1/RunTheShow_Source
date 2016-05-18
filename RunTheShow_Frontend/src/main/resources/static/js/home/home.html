@@ -40,21 +40,21 @@
                     <div class="col-md-10 col-md-offset-1">
                         <div class="form-section">
                             <div class="row">
-                                <form id="search_artiste" method="post" class="form-horizontal">
+                                <form id="search_artiste" method="post" ng-submit="search()" class="form-horizontal">
                                     <div class="form-group">
                                         <div class="col-md-3 col-sm-5 search_field">
-                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" title="Type d'artiste">
+                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" multiple data-actions-box="true" title="Type d'artiste">
                                                 <option class="small-font" ng-repeat="type in typesArtiste" data-select-watcher data-last="{{$last}}" value="{{type.id}}">{{type.nom}}</option>
                                             </select>
                                         </div>
                                         <div class="col-md-3 col-sm-5 search_field">
-                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" title="Région">
+                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" multiple data-actions-box="true" title="Région">
                                                 <option class="small-font" ng-repeat="region in regions" data-select-watcher data-last="{{$last}}" value="{{region.id}}">{{region.nom}}</option>
                                             </select>
                                         </div>
 
                                         <div class="col-md-2 col-sm-10 search_field">
-                                            <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+                                            <a href="/search" class="btn btn-primary btn-lg">Rechercher</a>
                                         </div>
                                     </div>
                                 </form>
