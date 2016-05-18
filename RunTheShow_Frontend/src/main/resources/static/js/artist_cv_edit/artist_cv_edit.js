@@ -166,8 +166,8 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
         //bannière
         if ($scope.artist.imageBanniere != null && $scope.artist.imageBanniere != "") {
             $scope.bannerStyle = {
-                "background": "url(" + $scope.artist.imageBanniere + ")",
-                'height': '300px',
+                'background-image': "url(" + $scope.artist.imageBanniere + ")",
+                'height': '300px'
             };
         }
     };
@@ -177,10 +177,9 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
         //profil img
         $scope.urlImageProfile = ($scope.artist.imageProfile != null && $scope.artist.imageProfile != "" ? $scope.artist.imageProfile : 'img/portfolio-1.jpg');
         $scope.imgProfileStyle = {
-            "background-image": "url(" + urlImageProfile + ")",
-            'height': '300px',
-            'width': '120%',
-            'height':'120%',
+            'background-image': "url(" + $scope.urlImageProfile + ")",
+            'height': '200px',
+            'width': '280px'
         };
     };
 
@@ -208,7 +207,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             console.log("image banniere mise à jour");
             $scope.initBanner();
         } else if ($scope.processUploadImgProfile == true) {
-            $console.log("image profile mise à jour");
+            console.log("image profile mise à jour");
             $scope.artist.imageProfile = filepath;
             $scope.initImgProfile();
         }
@@ -221,7 +220,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
         $scope.errorBannerImport = null;
         $rootScope.processUploadBanniere = false;
         $rootScope.processUploadImgProfile = false;
-        $scope.initBanner();
+        //$scope.initBanner();
         $scope.resetDropzone();
     };
 

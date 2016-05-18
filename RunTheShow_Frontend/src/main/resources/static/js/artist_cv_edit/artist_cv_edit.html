@@ -15,13 +15,13 @@ and open the template in the editor.
         <div class="container">
             <div class="row panelProfileArtiste">
                 <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadImgProfile()">
-                <div class="col-md-3" id="divImgProfileArtiste">
-                    <div class="box-image" style="border-radius: 3%;">
-                        <div class="image">
-                            <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive">
+                    <div class="col-md-3" id="divImgProfileArtiste">
+                        <div class="box-image" style="border-radius: 3%;">
+                            <div class="image">
+                                <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive">
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
@@ -92,7 +92,7 @@ and open the template in the editor.
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
                 </div>
                 <div class="clearfix visible-xs-block"></div>
-                <div class="col-md-4" id="divYoutubeChanProfilArtist">
+                <div class="col-md-8" id="divYoutubeChanProfilArtist">
                     <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
                     <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
                     <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
@@ -222,10 +222,10 @@ and open the template in the editor.
                         <h4 class="modal-title" id="bannerUpload">Uploadez une image</h4>                        
                     </div>
                     <p class="text-success text-center" ng-show="importBannerOK">
-                        <p>{{importBannerOK}}</p>
+                        {{importBannerOK}}
                     </p>
                     <p class="text-danger text-center" ng-show="errorBannerImport">
-                        <p>{{errorBannerImport}}</p>
+                        {{errorBannerImport}}
                     </p>
                     <div class="modal-body">
                         <div class="form-horizontal">
@@ -243,13 +243,16 @@ and open the template in the editor.
                         <!--<img src="banner.jpg" alt="" width="100">-->
 
 
-                        <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
-                        <p>{{image.filename}}</p>
 
-                        <a ng-repeat="images in all_image" href="">
-                            <img src="{{images.filename}}" alt="" width="100">
-                            <h5>{{images.filename}}</h5>   
-                        </a>
+                        <p class="text-center text-success">
+                            <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                            {{image.filename}}
+                        </p>
+
+                        <!-- <a ng-repeat="images in all_image" href="">
+                             <img src="{{images.filename}}" alt="" width="100">
+                             <h5>{{images.filename}}</h5>   
+                         </a>-->
                     </div>
 
                 </div>
