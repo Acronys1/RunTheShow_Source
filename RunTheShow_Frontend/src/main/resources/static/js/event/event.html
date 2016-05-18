@@ -27,6 +27,18 @@
                     }
                 }
                 
+                function changeUrl()
+                {
+                    var url1 = document.getElementById("sModal").href;
+                    document.getElementById("showEvent").href = url1;
+                    
+                    var url2 = document.getElementById("showEvent").href;
+                    
+                    
+                    var toto = document.getElementById("showEvent").href;
+                    //setTimeout(function() {alert('hello ' + url2);window.location($("#showEvent").attr('href'));},2000);
+                }
+                
             </script>
             
             <div ng-controller="calendarCtrl as calDemo" ng-init="initCalendar()">
@@ -72,7 +84,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="3">
-                                            <a href="/myEvent/{{ idEventForClick }}" data-window="external" data-dismiss="modal">Show event</a>
+                                            <a href="/myEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Show event</a>
                                         </td>
                                     </tr>
                                 </tbody>

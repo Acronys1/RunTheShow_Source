@@ -10,6 +10,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     $scope.bindCtrl = "Ok";
     $scope.eventTab = [];
     $scope.sousEventTab = [];
+    $scope.url = "";
     
     var date = new Date();
     var d = date.getDate();
@@ -21,6 +22,10 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     $scope.showModal = false;
     $scope.toggleModal = function(){
         $scope.showModal = !$scope.showModal;
+    };
+    
+    $scope.close = function(){
+        $scope.showModal = false;
     };
     
     
@@ -291,7 +296,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
 
 app.directive('modal', function () {
     return {
-      template: '<div class="modal fade">' + 
+      template: '<div class="modal fade" id="eventModal">' + 
           '<div class="modal-dialog">' + 
             '<div class="modal-content">' + 
               '<div class="modal-header">' + 
@@ -330,12 +335,13 @@ app.directive('modal', function () {
         
         $(element).on('click',"a[data-window='external']", function() {
             //alert('Toto ' + scope.showModal);
-            scope.showModal = false;
-            $('#text-page').modal('hide');
+            
+            $('#eventModal').modal('hide');
             $('.modal-backdrop').hide();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
             //alert('Toto ' + scope.showModal);
             window.location($(this).attr('href'));
-            alert('Toto');
             return false; 
         });
       }
