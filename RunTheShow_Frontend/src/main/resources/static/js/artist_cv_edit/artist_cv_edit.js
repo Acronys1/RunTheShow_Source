@@ -190,13 +190,13 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
 
     //upload de l'image de profile
     $scope.uploadImgProfile = function () {
-        $scope.resetDropzone();
+        $scope.reInitUploadModal();
         $scope.processUploadImgProfile = true;
         $scope.processUploadBanniere = false;
     };
 
     $scope.uploadBanniere = function () {
-        $scope.resetDropzone();
+        $scope.reInitUploadModal();
         $scope.processUploadBanniere = true;
         $scope.processUploadImgProfile = false;
     };
@@ -231,7 +231,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
 });
 
 //angular.module('artist_cv_edit').directive('dropZone', dropzone);
-angular.module('artist_cv_edit').directive('dropzonecv', function ($cookies, $http) {
+angular.module('artist_cv_edit').directive('dropzonecv', function ($cookies, $http, $route) {
     return {
         restrict: 'C',
         link: function (scope, element, attrs) {

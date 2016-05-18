@@ -9,8 +9,9 @@ and open the template in the editor.
         {{errorMessage.init}}                     
     </span>  
     <div id="" class="ng-scope">
-        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()">
+        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
             <div class="jumbotron" ng-style="bannerStyle"></div>
+            <div class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de bannière</p></div>
         </a>
         <div class="container">
             <div class="row panelProfileArtiste">
@@ -18,7 +19,7 @@ and open the template in the editor.
                     <div class="col-md-3" id="divImgProfileArtiste">
                         <div class="box-image" style="border-radius: 3%;">
                             <div class="image">
-                                <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive">
+                                <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;"><div style="width:280px" class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de profile</p></div></img>
                             </div>
                         </div>
                     </div>
@@ -81,7 +82,7 @@ and open the template in the editor.
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
 
-                    <p class="lead" editable-textarea="artist.description" e-cols="50" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                    <p class="lead" editable-textarea="artist.description" e-cols="30" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
                 <div class="col-md-2"></div>
