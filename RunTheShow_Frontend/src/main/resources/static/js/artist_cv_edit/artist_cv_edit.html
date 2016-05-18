@@ -9,8 +9,9 @@ and open the template in the editor.
         {{errorMessage.init}}                     
     </span>  
     <div id="" class="ng-scope">
-        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()">
+        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
             <div class="jumbotron" ng-style="bannerStyle"></div>
+            <div class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de bannière</p></div>
         </a>
         <div class="container">
             <div class="row panelProfileArtiste">
@@ -18,7 +19,7 @@ and open the template in the editor.
                     <div class="col-md-3" id="divImgProfileArtiste">
                         <div class="box-image" style="border-radius: 3%;">
                             <div class="image">
-                                <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive">
+                                <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;"><div style="width:280px" class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de profile</p></div></img>
                             </div>
                         </div>
                     </div>
