@@ -6,7 +6,9 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import java.util.List;
 import javax.persistence.Column;
@@ -37,7 +39,7 @@ public class ProfileArtiste extends AbstractEntity {
      * Propriétés de la classe
      */
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "user_id_fk")
     private User userArtiste;
 
