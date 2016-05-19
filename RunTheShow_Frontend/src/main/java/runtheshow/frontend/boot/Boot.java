@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import runtheshow.frontend.config.AppConfiguration;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Configuration
@@ -41,5 +42,22 @@ public class Boot {
 		// Forward to home page so that route is preserved.
 		return "forward:/";
 	}
+        
+        @RequestMapping(value = "/myEvent/{id}")
+        public String redirectEvent(@PathVariable Long id) {
+            return "forward:/";
+        }
+        
+        @RequestMapping(value = "/artist_cv_consult/{id}")
+        public String redirectArtiste() {
+            return "forward:/";
+        }
+        
+        @RequestMapping(value = "/updateEvent/{id}")
+        public String redirectUpdateEvent() {
+            return "forward:/";
+        }
+
+        
 
 }
