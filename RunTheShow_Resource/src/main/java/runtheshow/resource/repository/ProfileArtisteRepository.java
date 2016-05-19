@@ -14,6 +14,8 @@ public interface ProfileArtisteRepository extends CrudRepository<ProfileArtiste,
 
     // recherche d'un profile d'artiste via son nom
     ProfileArtiste findByNomArtiste(String nom);
+    
+    ProfileArtiste findById(Long id);
 
     ProfileArtiste findByUserArtiste(User unUser);
     

@@ -59,7 +59,8 @@ public class ArtisteMetier implements IArtisteMetier {
     //récupérer un utilisateur par son id
     @Override
     public ProfileArtiste getArtisteById(Long id){
-        return artisteRepository.findOne(id);
+        ProfileArtiste art = artisteRepository.findById(id);
+        return art;
     }
 
     //update d'un artiste, anti contrafaçon de l'id du profile
