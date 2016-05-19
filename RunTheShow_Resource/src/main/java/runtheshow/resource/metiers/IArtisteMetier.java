@@ -35,5 +35,5 @@ public interface IArtisteMetier {
     public List<Region> getAllRegion();
     
     //recherche des artistes par le type et la localisation
-    public List<ProfileArtiste> SearchArtiste(Set<Long> type, Set<Long> localisation);
+    public List<ProfileArtiste> SearchArtiste(String type, String localisation);
 }
