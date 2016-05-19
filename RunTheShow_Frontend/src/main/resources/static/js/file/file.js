@@ -48,7 +48,6 @@ function dropzone($http, $cookies) {
                 });
             },
             'success': function (file, response) {
-                scope.uploadOK = true;
                 scope.filePath = response.filePath;
             }
         };
@@ -72,13 +71,11 @@ function dropzone($http, $cookies) {
         });
 
         scope.processDropzone = function () {
-            scope.uploadOK = false;
             scope.filePath = "";
             dropzone.processQueue();
         };
 
         scope.resetDropzone = function () {
-            scope.uploadOK = false;
             scope.filePath = "";
             dropzone.removeAllFiles();
         }

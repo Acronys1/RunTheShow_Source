@@ -9,25 +9,26 @@ and open the template in the editor.
         {{errorMessage.init}}                     
     </span>  
     <div id="" class="ng-scope">
-        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()">
+        <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
             <div class="jumbotron" ng-style="bannerStyle"></div>
+            <div class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de bannière</p></div>
         </a>
         <div class="container">
             <div class="row panelProfileArtiste">
                 <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadImgProfile()">
-                <div class="col-md-3" id="divImgProfileArtiste">
-                    <div class="box-image" style="border-radius: 3%;">
-                        <div class="image">
-                            <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive">
+                    <div class="col-md-3" id="divImgProfileArtiste">
+                        <div class="box-image" style="border-radius: 3%;">
+                            <div class="image">
+                                <img ng-style="imgProfileStyle" ng-src="{{urlImageProfile}}" class="img-responsive" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;"><div style="width:280px" class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de profile</p></div></img>
+                            </div>
                         </div>
                     </div>
-                </div>
                 </a>
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
                     <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
                     <p>  
-                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onbeforesave="updateArtistRegions($data)">
+                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onaftersave="updateArtistRegions($data)">
                             {{ showArtistRegions()}}
                         </a>
                         <!--<label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label>-->
@@ -81,7 +82,7 @@ and open the template in the editor.
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
 
-                    <p class="lead" editable-textarea="artist.description" e-cols="50" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                    <p class="lead" editable-textarea="artist.description" e-cols="30" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
                         mi vitae est. Mauris placerat eleifend leo.'}}</p>
                 </div>
                 <div class="col-md-2"></div>
@@ -92,7 +93,7 @@ and open the template in the editor.
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
                 </div>
                 <div class="clearfix visible-xs-block"></div>
-                <div class="col-md-4" id="divYoutubeChanProfilArtist">
+                <div class="col-md-8" id="divYoutubeChanProfilArtist">
                     <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
                     <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
                     <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
@@ -222,10 +223,10 @@ and open the template in the editor.
                         <h4 class="modal-title" id="bannerUpload">Uploadez une image</h4>                        
                     </div>
                     <p class="text-success text-center" ng-show="importBannerOK">
-                        <p>{{importBannerOK}}</p>
+                        {{importBannerOK}}
                     </p>
                     <p class="text-danger text-center" ng-show="errorBannerImport">
-                        <p>{{errorBannerImport}}</p>
+                        {{errorBannerImport}}
                     </p>
                     <div class="modal-body">
                         <div class="form-horizontal">
@@ -243,13 +244,16 @@ and open the template in the editor.
                         <!--<img src="banner.jpg" alt="" width="100">-->
 
 
-                        <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
-                        <p>{{image.filename}}</p>
 
-                        <a ng-repeat="images in all_image" href="">
-                            <img src="{{images.filename}}" alt="" width="100">
-                            <h5>{{images.filename}}</h5>   
-                        </a>
+                        <p class="text-center text-success">
+                            <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                            {{image.filename}}
+                        </p>
+
+                        <!-- <a ng-repeat="images in all_image" href="">
+                             <img src="{{images.filename}}" alt="" width="100">
+                             <h5>{{images.filename}}</h5>   
+                         </a>-->
                     </div>
 
                 </div>

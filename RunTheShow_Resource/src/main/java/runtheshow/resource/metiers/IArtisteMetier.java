@@ -2,6 +2,7 @@ package runtheshow.resource.metiers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Set;
 import runtheshow.resource.entities.ProfileArtiste;
 import runtheshow.resource.entities.Region;
 import runtheshow.resource.entities.TypeArtiste;
@@ -32,4 +33,7 @@ public interface IArtisteMetier {
     
     //récupère les régions
     public List<Region> getAllRegion();
+    
+    //recherche des artistes par le type et la localisation
+    public List<ProfileArtiste> SearchArtiste(Set<Long> type, Set<Long> localisation);
 }

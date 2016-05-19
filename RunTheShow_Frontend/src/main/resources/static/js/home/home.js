@@ -1,7 +1,10 @@
-angular.module('home', []).controller('home', function ($scope, $http) {
+angular.module('home', ['navigation']).controller('home', function ($rootScope, $scope, $http) {
     
     $scope.initFirst = function ()
     {
+       
+        $rootScope.artisteSearch = {};
+        
         $http.get('/resource/user/current').success(function (data) {
             $scope.user = data;
         });
@@ -16,6 +19,9 @@ angular.module('home', []).controller('home', function ($scope, $http) {
             console.log(data);
         });
     }
+    
+    
+    
 }).directive('selectWatcher', function ($timeout) {
     return {
         link: function (scope, element, attr) {
