@@ -67,9 +67,6 @@
                                 <tbody>
                                     <tr data-ng-repeat="asefoe in allSousEventForOneEvent">
                                         <td>
-                                            {{ asefoe.id }}
-                                        </td>
-                                        <td>
                                             {{ asefoe.dateDebut }}
                                         </td>
                                         <td>
@@ -83,8 +80,11 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">
+                                        <td colspan="2">
                                             <a href="/myEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Show event</a>
+                                        </td>
+                                        <td colspan="2">
+                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Modifier l'évènement</a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -234,7 +234,7 @@
                                 <div class='col-md-10'>
                                     <div class="form-group">
                                         <label for="sdescription">Description</label>
-                                        <textarea class="form-control" sinput="" id="sdescription-{{$index}}"  ng-model="sousEvent.sdescription[$index]" name="sdescription" rows="3"></textarea>
+                                        <textarea class="form-control" ng-model="sousEvent.sdescription[$index]" id="sdescription-{{$index}}" name="sdescription-{{$index}}" rows="3"></textarea>
                                     </div>
                                     <span class="text-danger"> 
                                         {{sousEvent.sdescription[$index]}}                     
@@ -271,6 +271,10 @@
 
                     <div id="choicesDisplay">
                        {{ choices }}
+                    </div>
+                    
+                    <div id="sousEventDisplay">
+                       {{ sousEvent }}
                     </div>
                     
                     <div id="scheckinDisplay">

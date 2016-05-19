@@ -1,0 +1,172 @@
+
+<div ng-controller="updateEvent" ng-init="initFirst()">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading">
+                    <h3>Modification de l'évènement</h3>
+                </div>
+            </div>
+        </div>
+        
+        <form name="fen" role="form" ng-submit="">
+            <div class="alert alert-danger" ng-show="errorAjout">
+                {{errorMessage}}
+            </div>
+            <div class="row">
+                <fieldset class="form-group">
+                    <label for="intitule"><b>Intitulé :</b></label>
+                    <input id="intitule" class="form-control" type="text" ng-model="event.intitule" name="intitule" />
+                </fieldset>
+            </div>
+            
+            <div class="row">
+                <fieldset class="form-group">
+                   <label for="description"><b>Description :</b></label>
+                   <textarea class="form-control" id="description" ng-model="event.description" name="description" rows="3"></textarea>
+                </fieldset>
+            </div>
+
+            <div class="row">
+                <div class='col-md-5'>
+                    <label for="checkin"><b>Date début :</b></label>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker6'>
+                            <input type='text' ng-model="event.dateHeureDebut" datepicker="" class="form-control" id="checkin" name="checkin" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        <span class="text-danger"> 
+                            {{event.dateHeureDebut}}                     
+                        </span>
+                    </div>
+                </div>
+
+                <div class='col-md-5'>
+                    <label for="checkout"><b>Date fin :</b></label>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker7'>
+                            <input type='text' ng-model="event.dateHeureFin" datepicker="" class="form-control" id="checkout" name="checkout" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <span class="text-danger"> 
+                            {{event.dateHeureFin}}                     
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <fieldset class="form-group">
+                   <label for="description"><b>Informations complémentaires :</b></label>
+                   <textarea class="form-control" id="info" ng-model="event.infoComp" name="info" rows="3"></textarea>
+                </fieldset>
+            </div>
+
+
+                <fieldset style="background: #FCFCFC;padding: 16px;border: 1px solid #D5D5D5;box-shadow: 8px 8px 0px #aaa; " data-ng-repeat="sousEvent in allSousEventForOneEvent">
+                    <div class="container">
+                        <div class="row">
+                            <div class='col-md-5'>
+                                <label for="checkin">Date début sous-évènement</label>
+                                <div class="form-group">
+                                    <div class='input-group date' id="datetimedeb">
+                                        <input type='text' class="form-control" ng-model="sousEvent.dateDebut" sdatepicker="" id="scheckin-{{$index}}"/>
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                    <span class="text-danger"> 
+                                        {{sousEvent.dateDebut}}                     
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class='col-md-5'>
+                                <label for="checkout">Date fin sous-évènement</label>
+                                <div class="form-group">
+                                    <div class='input-group date' id="datetimefin">
+                                        <input type='text' class="form-control" ng-model="sousEvent.dateFin" sdatepicker="" id="scheckout-{{$index}}" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                    <span class="text-danger"> 
+                                        {{sousEvent.dateFin}}                     
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class='col-md-10'>
+                                <div class="form-group">
+                                    <label for="sdescription">Description</label>
+                                    <textarea class="form-control" ng-model="sousEvent.intitule" id="sdescription-{{$index}}" name="sdescription-{{$index}}" rows="3"></textarea>
+                                </div>
+                                <span class="text-danger"> 
+                                    {{sousEvent.intitule}}                     
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class='col-md-2'>
+                                <div class="form-group">
+                                    <label for="setage">Etage</label>
+                                    <input type="number" min="0" max ="20" class="form-control" sinput="" id="setage-{{$index}}" ng-model="sousEvent.etage" name="setage-{{$index}}">
+                                </div>
+                                <div role="alert">
+                                    <span class="error" ng-show="sousEvent.etage.$error.required">
+                                      Required!</span>
+                                    <span class="error" ng-show="sousEvent.etage.$error.number">
+                                      Not valid number!</span>
+                                </div>
+                                <span class="text-danger"> 
+                                    {{sousEvent.etage}}                     
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>  
+                    <button class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">Supprimer</button>
+
+                </fieldset>
+                <br>
+                <br>
+                <button type="button" class="btn btn-primary" ng-click="addNewChoice()" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))">Ajouter</button>
+
+                <div id="choicesDisplay">
+                   {{ choices }}
+                </div>
+
+                <div id="sousEventDisplay">
+                   {{ sousEvent }}
+                </div>
+
+                <div id="scheckinDisplay">
+                   {{ sousEvent.scheckin }}
+                </div>
+
+                <div id="scheckoutDisplay">
+                   {{ sousEvent.scheckout }}
+                </div>
+
+                <div id="sdescriptionDisplay">
+                   {{ sousEvent.sdescription }}
+                </div>
+
+                <div id="setageDisplay">
+                   {{ sousEvent.setage }}
+                </div>
+
+            <button type="submit" class="btn btn-template-main" ng-disabled="((!event.dateHeureDebut) || (!event.dateHeureFin) || (!event.intitule) || (!event.description))"><i class="fa fa-save"></i> Modifier les évènements</button>
+
+        </form>
+    </div>
+</div>
+
