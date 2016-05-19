@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import runtheshow.resource.entities.FileUpload;
 import runtheshow.resource.entities.ProfileArtiste;
@@ -89,8 +91,27 @@ public class ArtisteMetier implements IArtisteMetier {
     }
     
     @Override
-    public List<ProfileArtiste> SearchArtiste(Set<Long> type, Set<Long> localisation) {
-        return Lists.newArrayList(artisteRepository.findArtisteByTypeAndLocalisation(type, localisation));
+    public List<ProfileArtiste> SearchArtiste(String type, String localisation) {
+        
+        String[] typeArtiste = type.split(",");
+        String[] localisationArtiste = localisation.split(",");
+        
+        Long[] typeLong = new Long[typeArtiste.length];
+        for(int i=0; i<typeArtiste.length;i++){
+            typeLong[i] = Long.valueOf(typeArtiste[i]);
+        }
+        
+        Long[] localisationLong = new Long[localisationArtiste.length];
+        for(int i=0; i<localisationArtiste.length; i++){
+            localisationLong[i] = Long.valueOf(localisationArtiste[i]);
+        }
+        
+        Set<Long> setTypeArtiste = new HashSet<>(Arrays.asList(typeLong));
+        Set<Long> setLocalisationArtiste = new HashSet<>(Arrays.asList(localisationLong));
+        
+        int i;
+        
+        return Lists.newArrayList(artisteRepository.findArtisteByTypeAndLocalisation(setTypeArtiste, setLocalisationArtiste));
     }
     
 }

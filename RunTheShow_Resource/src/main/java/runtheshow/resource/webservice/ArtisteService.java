@@ -6,6 +6,7 @@
 package runtheshow.resource.webservice;
 
 import java.security.Principal;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,21 +54,10 @@ public class ArtisteService {
         return artisteMetier.UpdateArtiste(artiste, user);
     }
     
-    /*@RequestMapping(value = "/search/{type}/{localisation}", method = RequestMethod.GET)
-    public boolean searchArtiste(@PathVariable String type, String localisation) {
-        String[] typeArtiste = type.split(",");
-        String[] localisationArtiste = localisation.split(",");
-        
-        for(int i=0; i<typeArtiste.length;i++){
-             
-        }
-        
-        for(int i=0; i<typeArtiste.length; i++){
-            
-        }
-        
-        return true;
-    }*/
+    @RequestMapping(value = "/search/{type}/{localisation}", method = RequestMethod.GET)
+    public List<ProfileArtiste> searchArtiste(@PathVariable String type,@PathVariable String localisation) {
+        return artisteMetier.SearchArtiste(type, localisation);
+    }
     
     @RequestMapping(value = "/types", method = RequestMethod.GET)
     public List<TypeArtiste> getAllArtistTypes(){

@@ -14,16 +14,16 @@ public interface ProfileArtisteRepository extends CrudRepository<ProfileArtiste,
 
     // recherche d'un profile d'artiste via son nom
     ProfileArtiste findByNomArtiste(String nom);
-    
+
     ProfileArtiste findById(Long id);
 
     ProfileArtiste findByUserArtiste(User unUser);
-    
-    //List<ProfileArtiste> findByTypeArtisteInAndLocalisationIn(List<TypeArtiste> type, List<Region> regions);
 
-    @Query("SELECT pa "
+    List<ProfileArtiste> findByLocalisationIn(List<Region> regions);
+
+    @Query("SELECT DISTINCT pa "
             + "FROM ProfileArtiste pa "
             + "JOIN pa.typeArtiste pat JOIN pa.localisation pal "
-            + "WHERE pat.id = :type AND pal.id = :localisation")
+            + "WHERE pat.id IN :type AND pal.id IN :localisation")
     public List<ProfileArtiste> findArtisteByTypeAndLocalisation(@Param("type") Set<Long> type, @Param("localisation") Set<Long> localisation);
 }
