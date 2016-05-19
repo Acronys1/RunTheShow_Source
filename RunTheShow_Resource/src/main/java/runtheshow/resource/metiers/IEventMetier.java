@@ -20,4 +20,6 @@ public interface IEventMetier {
     public Boolean addEvent(Principal user, Evenement event);
 
     public Evenement getEventById(long idEvent);
+
+    public Boolean updateEvenement(Evenement event);
 }

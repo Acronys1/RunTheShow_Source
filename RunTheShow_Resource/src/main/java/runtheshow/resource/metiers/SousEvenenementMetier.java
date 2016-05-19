@@ -93,4 +93,16 @@ public class SousEvenenementMetier implements ISousEventMetier {
     public List<SousEvenement> getSousEventById(Long id, Principal user) {
         return Lists.newArrayList(sousEventRepository.findByIdAndUser(id, userRepository.findUserByLogin(user.getName())));
     }
+
+    @Override
+    public Boolean updateSousEvenement(SousEvenement sevent) {
+        SousEvenement sEventBind = sousEventRepository.findById(sevent.getId());
+        sEventBind.setDateDebut(sevent.getDateDebut());
+        sEventBind.setDateFin(sevent.getDateFin());
+        sEventBind.setIntitule(sevent.getIntitule());
+        sEventBind.setEtage(sevent.getEtage());
+        
+        sEventBind = sousEventRepository.save(sEventBind);
+        return sEventBind != null;
+    }
 }

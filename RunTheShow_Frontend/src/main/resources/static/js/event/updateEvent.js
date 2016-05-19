@@ -12,12 +12,66 @@ updateEvent.controller('updateEvent', function ($scope, $routeParams, $http) {
             
             $http.get('/resource/sousEvent/filter/'+$scope.param).success(function (data) {
                 $scope.allSousEventForOneEvent = data;
+                
+                $scope.sizeSEvent = $scope.allSousEventForOneEvent.length;
             });
+        });
+    };
+    
+    $scope.changeDate = function(dateChange) {
+        var array = dateChange.split(' ');
+        var dateSplit = array[0].split('/');
+        
+        var dateRecompose = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0] + " " + array[1];
+        
+        return new Date(dateRecompose);
+    };
+    
+    $scope.modifier = function ()
+    {
+        var data = JSON.stringify({
+            id: $scope.event.id,
+            intitule: $scope.event.intitule,
+            description: $scope.event.description,
+            dateHeureDebut: $scope.event.dateHeureDebut,
+            dateHeureFin: $scope.event.dateHeureFin,
+            infoComp: $scope.event.infoComp
+        })
+        
+        $http.put("/resource/event/update", data).success(function (data, status) {
+            $scope.response = data;
+            
+            for(var i = 0; i<$scope.allSousEventForOneEvent.length; i++)
+            {
+                var data = JSON.stringify({
+                    id: $scope.allSousEventForOneEvent[i].id,
+                    dateDebut: $scope.allSousEventForOneEvent[i].dateDebut,
+                    dateFin: $scope.allSousEventForOneEvent[i].dateFin,
+                    intitule: $scope.allSousEventForOneEvent[i].intitule,
+                    etage: $scope.allSousEventForOneEvent[i].etage
+                })
+                
+                $http.put("/resource/sousEvent/update", data).success(function (data, status) {
+                    $scope.response = data;
+                    
+                    $scope.successUpdate = true;
+                    $scope.successMessage = "La modification est un succès";
+                    
+                }).error(function (data, status) { // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                    $scope.errorAjout = true;
+                    $scope.errorMessage = "Erreur lors de la modification d'un sous-évènement. Data : " + data + "    Status : " + status;
+                });
+            }
+        }).error(function (data, status) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.errorAjout = true;
+            $scope.errorMessage = "Erreur lors de la modification d'un évènement. Data : " + data + "    Status : " + status;
         });
     };
 });
 
-updateEvent.directive('datepicker', function() {
+updateEvent.directive('udatepicker', function() {
     return {
         restrict: 'A',
         require : 'ngModel',
@@ -25,19 +79,12 @@ updateEvent.directive('datepicker', function() {
             $(function () {
                 var min = new Date();
                 
-                if(attrs.id.indexOf("in") != -1)
-                {
-                    element.datetimepicker({
-                        locale: 'fr',
-                        format: 'DD/MM/YYYY HH:mm',
-                        minDate: min,
-                        calendarWeeks: true
-                    });
-                }
-                else
-                {
-                    ngModCtrl.$setViewValue(document.getElementById('checkout').value);
-                }
+                element.datetimepicker({
+                    locale: 'fr',
+                    format: 'DD/MM/YYYY HH:mm',
+                    minDate: min,
+                    calendarWeeks: true
+                });
                 
                 
                 element.on("dp.hide", function (e) {
@@ -74,32 +121,43 @@ updateEvent.directive('datepicker', function() {
     }
 });
 
-updateEvent.directive('sdatepicker', function() {
+updateEvent.directive('usdatepicker', function() {
     return {
         restrict: 'A',
         require : 'ngModel',
         link : function (scope, element, attrs, ngModelCtrl) {
             $(function(){
-                var cpt = 6;
+                
+                var index = attrs.id.split('-');
+                var cpt = index[1];
                 var datemin;
                 var datemax;
                 
-                datemax = $('#checkout').data("DateTimePicker").date();
+                datemax = scope.changeDate(scope.event.dateHeureFin);
                 
                 if(cpt == 0)
                 {
-                   datemin = $('#checkin').data("DateTimePicker").date();
+                    if(attrs.id.indexOf("in") != -1)
+                    {
+                        datemin = scope.changeDate(scope.event.dateHeureDebut);
+                    }
+                    else
+                    {
+                        datemin = scope.changeDate(scope.allSousEventForOneEvent[cpt].dateDebut);
+                    }
+                   //alert("Cpt = 0 donc " + datemin);
                 }
                 else
                 {
                     if(attrs.id.indexOf("in") != -1)
                     {
-                        //alert("Je suis dans scheckout-"+(cpt-1));
-                        datemin = $("#scheckout-"+(cpt-1)).data("DateTimePicker").date();
+                        datemin = scope.changeDate(scope.allSousEventForOneEvent[cpt-1].dateFin);
+                        //alert("Je suis dans scheckout-"+(cpt-1) + " :  datemin = " + datemin);
                     }
                     else
                     {
-                        datemin = $('#checkin').data("DateTimePicker").date();
+                        datemin = scope.changeDate(scope.allSousEventForOneEvent[cpt-1].dateDebut);
+                        //alert("Je suis dans scheckin-"+(cpt) + " :  datemin = " + datemin);
                         //alert("Je suis dans scheckin-"+cpt)
                         //datemin = $("#scheckin-"+cpt).data("DateTimePicker").date();
                     }
@@ -109,6 +167,7 @@ updateEvent.directive('sdatepicker', function() {
                 {
                     element.datetimepicker({
                         format: 'DD/MM/YYYY HH:mm',
+                        locale: 'fr',
                         minDate: datemin,
                         maxDate: datemax,
                         calendarWeeks: true
@@ -118,6 +177,7 @@ updateEvent.directive('sdatepicker', function() {
                 {
                     element.datetimepicker({
                         format: 'DD/MM/YYYY HH:mm',
+                        locale: 'fr',
                         minDate: datemin,
                         maxDate: datemax,
                         useCurrent: false,
@@ -130,19 +190,14 @@ updateEvent.directive('sdatepicker', function() {
                     if(attrs.id.indexOf("in") != -1)
                     {
                         //alert("Check in value = " + attrs.id + "   CPT = " + cpt);
-                        $("#scheckout-"+cpt).data("DateTimePicker").minDate(e.date);
-                        ngModelCtrl.$setViewValue(document.getElementById('scheckin-'+cpt).value);
+                        //$("#scheckout-"+cpt).data("DateTimePicker").minDate(e.date);
+                        //ngModelCtrl.$setViewValue(document.getElementById('scheckin-'+cpt).value);
                     }
                     else
                     {
                         //alert("Check out value = " + attrs.id + "   CPT = " + cpt);
-                        $("#scheckin-"+cpt).data("DateTimePicker").maxDate(e.date);
-                        ngModelCtrl.$setViewValue(document.getElementById('scheckout-'+cpt).value);
-                    }
-                    
-                    if(cpt == 0)
-                    {
-                        
+                        //$("#scheckin-"+cpt).data("DateTimePicker").maxDate(e.date);
+                        //ngModelCtrl.$setViewValue(document.getElementById('scheckout-'+cpt).value);
                     }
                     
                 });
@@ -150,12 +205,12 @@ updateEvent.directive('sdatepicker', function() {
                 element.on("dp.hide", function (e) {
                     if(attrs.id.indexOf("in") != -1)
                     {
-                        $("#scheckout-"+cpt).data("DateTimePicker").minDate(e.date);
-                        ngModelCtrl.$setViewValue(document.getElementById('scheckin-'+cpt).value);
+                        //$("#scheckout-"+cpt).data("DateTimePicker").minDate(e.date);
+                        //ngModelCtrl.$setViewValue(document.getElementById('scheckin-'+cpt).value);
                     }
                     else
                     {
-                        ngModelCtrl.$setViewValue(document.getElementById('scheckout-'+cpt).value);
+                        //ngModelCtrl.$setViewValue(document.getElementById('scheckout-'+cpt).value);
                     }
                 });
             })
@@ -163,14 +218,17 @@ updateEvent.directive('sdatepicker', function() {
     }
 });
 
-updateEvent.directive('sinput', function() {
+updateEvent.directive('usinput', function() {
     return {
         restrict: 'A',
         require : 'ngModel',
         link : function (scope, element, attrs, ngModelCtrl) {
             $(function(){
-                //ngModelCtrl.$setViewValue(attrs.id);
                 
+                var index = attrs.id.split('-');
+                var cpt = index[1];
+                ngModelCtrl.$setViewValue(scope.allSousEventForOneEvent[cpt].etage);
+                attrs.value = scope.allSousEventForOneEvent[cpt].etage;
                 element.on("keypress", function (e) {
                     //alert("toto");
                     

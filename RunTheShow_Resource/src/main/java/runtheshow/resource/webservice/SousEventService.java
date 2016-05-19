@@ -49,4 +49,9 @@ public class SousEventService {
         long idSousEvent = Long.parseLong(id);
         return metier.getSousEventById(idSousEvent, user);
     }
+    
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
+    public Boolean updateUser(@RequestBody SousEvenement sevent, HttpServletResponse response) {
+        return metier.updateSousEvenement(sevent);
+    }
 }

@@ -23,6 +23,8 @@ public interface SousEventRepository extends CrudRepository<SousEvenement, Long>
     List<SousEvenement> findByEvenement(Evenement event);
     
     SousEvenement findByIdAndUser(Long id, User user);
+    
+    SousEvenement findById(Long id);
 }
 
 

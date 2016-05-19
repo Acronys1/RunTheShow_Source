@@ -222,7 +222,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         
         
         $scope.toggleModal();
-        $scope.alertMessage = (date.title + ' was clicked ');
+        $scope.alertMessage = (date.title + ' a été consulté ');
     };
     /* alert on Drop */
      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){

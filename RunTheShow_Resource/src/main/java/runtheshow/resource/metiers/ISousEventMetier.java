@@ -25,4 +25,6 @@ public interface ISousEventMetier {
     public List<SousEvenement> getSousEventByIdEvent(Long id);
 
     public List<SousEvenement> getSousEventById(Long idSousEvent, Principal user);
+
+    public Boolean updateSousEvenement(SousEvenement sevent);
 }

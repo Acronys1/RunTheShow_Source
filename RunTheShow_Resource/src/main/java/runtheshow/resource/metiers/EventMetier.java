@@ -45,4 +45,17 @@ public class EventMetier implements IEventMetier {
     public Evenement getEventById(long idEvent) {
         return eventRepository.findById(idEvent);
     }
+
+    @Override
+    public Boolean updateEvenement(Evenement event) {
+        Evenement eventBind = eventRepository.findOne(event.getId());
+        eventBind.setIntitule(event.getIntitule());
+        eventBind.setDescription(event.getDescription());
+        eventBind.setDateHeureDebut(event.getDateHeureDebut());
+        eventBind.setDateHeureFin(event.getDateHeureFin());
+        eventBind.setInfoComp(event.getInfoComp());
+        
+        eventBind = eventRepository.save(eventBind);
+        return eventBind != null;
+    }
 }

@@ -44,4 +44,9 @@ public class EventService {
         long idEvent = Long.parseLong(id);
         return metier.getEventById(idEvent);
     }
+    
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
+    public Boolean updateUser(@RequestBody Evenement event, HttpServletResponse response) {
+        return metier.updateEvenement(event);
+    }
 }
