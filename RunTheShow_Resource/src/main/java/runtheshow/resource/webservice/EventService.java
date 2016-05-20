@@ -49,4 +49,9 @@ public class EventService {
     public Boolean updateUser(@RequestBody Evenement event, HttpServletResponse response) {
         return metier.updateEvenement(event);
     }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
+    public Boolean deleteEvent(@RequestBody Evenement event, HttpServletResponse response) {
+        return metier.deleteEvenement(event);
+    }
 }

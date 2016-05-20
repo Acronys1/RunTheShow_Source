@@ -22,4 +22,6 @@ public interface IEventMetier {
     public Evenement getEventById(long idEvent);
 
     public Boolean updateEvenement(Evenement event);
+
+    public Boolean deleteEvenement(Evenement event);
 }

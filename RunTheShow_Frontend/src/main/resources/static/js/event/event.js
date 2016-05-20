@@ -72,6 +72,11 @@ event.controller('event', function ($scope, $http) {
         
     };
     
+    $scope.deleteEvent = function (idEvent)
+    {
+        
+    };
+    
     $scope.addEvent = function ()
     {
         var data = JSON.stringify({
@@ -100,18 +105,16 @@ event.controller('event', function ($scope, $http) {
                 
                 $http.post("/resource/sousEvent/add", ssEvent).success(function (ssEvent, status) {
                     $scope.response = ssEvent;
-
-                    $scope.initFirst();
-                    $scope.errorAjout = false;
+                    
+                    $scope.successAjout = true;
+                    $scope.successMessage = "Vous venez d'ajouter un évènement et ses sous-évènements";
+                    
                 }).error(function (ssEvent, status) { // called asynchronously if an error occurs
                     // or server returns response with an error status.
                     $scope.errorAjout = true;
                     $scope.errorMessage = "Erreur lors de l'ajout d'un sous-évènement, un ou plusieurs champs sont manquants. Data : " + ssEvent + "    Status : " + status;
                 });
             }
-            
-            
-            $scope.errorAjout = false;
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;
@@ -156,16 +159,16 @@ event.directive('datepicker', function() {
                     if(attrs.id.indexOf("in") != -1)
                     {
                         //alert("Check in value = " + attrs.id);
-                        scope.removeAllChoice();
+                        if(scope.choices.length>0) scope.removeAllChoice();
                         ngModCtrl.$setViewValue(document.getElementById('checkin').value);
                         //$("#checkout").data("DateTimePicker").minDate(e.date);
                     }
                     else
                     {
                         //alert("Check out value = " + attrs.id + "   CPT = " + cpt);
-                        scope.removeAllChoice();
+                        if(scope.choices.length>0) scope.removeAllChoice();
                         ngModCtrl.$setViewValue(document.getElementById('checkout').value);
-                        $("#checkin").data("DateTimePicker").maxDate(e.date);
+                        //$("#checkin").data("DateTimePicker").maxDate(e.date);
                     }
                     
                 });

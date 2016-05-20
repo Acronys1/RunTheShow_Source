@@ -52,7 +52,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
                         id: $scope.allEvent[i].id,
                         title: $scope.allEvent[i].intitule,
                         start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
-                        end: $scope.changeDateAddOneDay($scope.allEvent[i].dateHeureFin)
+                        end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
                     })
                 }
 
@@ -83,7 +83,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
                         id: $scope.allSousEvent[i].id,
                         title: $scope.allSousEvent[i].intitule,
                         start: $scope.changeDate($scope.allSousEvent[i].dateDebut),
-                        end: $scope.changeDateAddOneDay($scope.allSousEvent[i].dateFin)
+                        end: $scope.changeDate($scope.allSousEvent[i].dateFin)
                     })
                 }
 
@@ -261,11 +261,23 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
       }
     };
     
+    /* Supprimer un évènement et ses sous-évènements */
+    $scope.deleteEvent = function(id) {
+
+        var data = JSON.stringify({
+            id: id
+        })
+        
+        $http.post("/resource/event/delete", data).success(function (data, status) {
+            $scope.response = data;
+            
+            location.reload();
+        })
+    };
 
      /* Render Tooltip */
     $scope.eventRender = function( event, element, view ) { 
-        element.attr({'tooltip': event.title,
-                     'tooltip-append-to-body': true});
+        
         $compile(element)($scope);
     };
     /* config object */
@@ -347,3 +359,21 @@ app.directive('modal', function () {
       }
     };
   });
+  
+  app.directive('ngConfirmClick', [
+  function(){
+    return {
+      priority: -1,
+      restrict: 'A',
+      link: function(scope, element, attrs){
+        element.bind('click', function(e){
+          var message = attrs.ngConfirmClick;
+          if(message && !confirm(message)){
+            e.stopImmediatePropagation();
+            e.preventDefault();
+          }
+        });
+      }
+    }
+  }
+]);
