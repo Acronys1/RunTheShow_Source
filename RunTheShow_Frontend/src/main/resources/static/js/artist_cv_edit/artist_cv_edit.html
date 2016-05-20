@@ -8,7 +8,7 @@ and open the template in the editor.
     <span class="text-danger" ng-show="errorMessage.init"> 
         {{errorMessage.init}}                     
     </span>  
-    <div id="" class="ng-scope">
+    <div id="containerBanner" class="ng-scope">
         <a href="javascript: void(0)" data-toggle="modal" data-target="#bannerUpload-modal" data-dismiss="modal" ng-click="uploadBanniere()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
             <div class="jumbotron" ng-style="bannerStyle"></div>
             <div class="text-center divBannerCaptionCV" ng-show="showCaptionBanner == true"><p>Ajoutez une image de bannière</p></div>
@@ -40,11 +40,11 @@ and open the template in the editor.
                         <!--<label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label>-->
                     </p>
                     <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{'Taille du groupe: ' + artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
-                    <p><label ng-bind="artist.note">{{'Note générale: ' + artist.note|| 'Pas de note, groupe non évalué' }}</label></p>
+                    <!--<p><label ng-bind="artist.note">{{'Note générale: ' + artist.note|| 'Pas de note, groupe non évalué' }}</label></p>-->
                 </div>
                 <div class="col-md-2"></div>
-                <form class="form-horizontal text-center">
-                    <div class="form-group col-md-3" style="border-style: solid;border-radius: 5px;" id="divDmdPrestationProfileArtiste">
+                <!--<form class="form-horizontal text-center">
+                    <div class="form-group col-md-3" style="border-style: solid;border-radius: 5px;width:29%;" id="divDmdPrestationProfileArtiste">
                         <div class="panel-heading">
                             <h4>Demande de prestation</h4>
                         </div>                            
@@ -64,7 +64,7 @@ and open the template in the editor.
                             <button type="submit" class="btn btn-sm btn-template-main"><i class="fa fa-save"></i> Envoyer la demande</button>
                         </div>
                     </div>
-                </form>
+                </form>-->
             </div>
 
 
@@ -77,13 +77,14 @@ and open the template in the editor.
         <div class="container">
 
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-8" id="artistCVDescription">
                     <div class="heading">
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
-
-                    <p class="lead" editable-textarea="artist.description" e-cols="30" onaftersave="updateUser()">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                        mi vitae est. Mauris placerat eleifend leo.'}}</p>
+                    <a class="" editable-textarea="artist.description" e-cols="80" e-rows="20" onaftersave="updateUser()">
+                        <pre class="lead" id="descriptionArtistPre">{{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
+                        mi vitae est. Mauris placerat eleifend leo.'}}</pre>
+                    </a>
                 </div>
                 <div class="col-md-2"></div>
                 <!-- Div Facebook-->
@@ -93,7 +94,7 @@ and open the template in the editor.
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
                 </div>
                 <div class="clearfix visible-xs-block"></div>
-                <div class="col-md-8" id="divYoutubeChanProfilArtist">
+                <div class="col-md-8">
                     <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
                     <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
                     <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
@@ -101,23 +102,23 @@ and open the template in the editor.
             </div>
 
             <div class="row portfolio-project">
-
-                <section>
-
-                    <div class="col-sm-12">
-
-                        <div class="heading">
-                            <h3>Project description</h3>
-                        </div>
-
-                        <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved
-                            written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
-
-                        <p>To sorry world an at do spoil along. Incommode he depending do frankness remainder to. Edward day almost active him friend thirty piqued. People as period twenty my extent as. Set was better abroad ham plenty secure had horses.
-                            Admiration has sir decisively excellence say everything inhabiting acceptance. Sooner settle add put you sudden him.</p>
-                    </div>
-                </section>
-
+                <!--
+                                <section>
+                
+                                    <div class="col-sm-12">
+                
+                                        <div class="heading">
+                                            <h3>Project description</h3>
+                                        </div>
+                
+                                        <p>Bringing unlocked me an striking ye perceive. Mr by wound hours oh happy. Me in resolution pianoforte continuing we. Most my no spot felt by no. He he in forfeited furniture sweetness he arranging. Me tedious so to behaved
+                                            written account ferrars moments. Too objection for elsewhere her preferred allowance her. Marianne shutters mr steepest to me. Up mr ignorant produced distance although is sociable blessing. Ham whom call all lain like.</p>
+                
+                                        <p>To sorry world an at do spoil along. Incommode he depending do frankness remainder to. Edward day almost active him friend thirty piqued. People as period twenty my extent as. Set was better abroad ham plenty secure had horses.
+                                            Admiration has sir decisively excellence say everything inhabiting acceptance. Sooner settle add put you sudden him.</p>
+                                    </div>
+                                </section>
+                -->
             </div>
 
             <section>

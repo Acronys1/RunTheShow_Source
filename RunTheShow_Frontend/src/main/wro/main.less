@@ -146,19 +146,24 @@ hr {
 #divDmdPrestationProfileArtiste{
     margin-top: -50px;
     border: 1px solid #dce0e0;     
-    background-color: #fff;     
+    background-color: #fff;
     -webkit-border-radius: 0;     
     -moz-border-radius: 0;     
-    border-radius: 0;
+    border-radius: 0;       
+    padding-right: none;
+    padding-left: none;
     opacity: 0.8;    
 }
 
 .panelProfileArtiste{
     border: 1px solid #dce0e0;     
-    background-color: #fff;     
+    background-color: transparent;     
     -webkit-border-radius: 0;     
     -moz-border-radius: 0;     
     border-radius: 0;
+    border-bottom: none;
+    border-left:none;
+    border-right:none;
 }
 //Chaine youtube dans le cv de l'artiste, applique la prop margin-top seulement pour les devices avec un screen >= 768px
 @media screen and (min-width: 768px) {
@@ -173,4 +178,15 @@ hr {
     margin-top: -30px; 
     position: absolute; 
     right: 0px;       
+}
+
+#containerBanner{
+    border-bottom: 1px solid rgb(220, 224, 224);
+    background-color: #f5f5f5;
+}
+
+#descriptionArtistPre{
+    border:none;
+    background-color: transparent;
+    color:#428bca;
 }
