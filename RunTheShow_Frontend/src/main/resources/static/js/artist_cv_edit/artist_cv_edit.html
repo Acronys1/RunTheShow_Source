@@ -212,6 +212,18 @@ and open the template in the editor.
                 </div>
             </section>
 
+            <section>
+                <div ng-controller="calendarCtrl
+                                            as calDemo" ng-init="initCalendar()"> 
+                    <tab select="renderCalender('myCalendar1');"> 
+                        <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar">
+
+                        </div> 
+                    </tab>
+                </div>
+
+            </section>
+
         </div>
         <!-- /.container -->
         <!-- upload images bannière-->

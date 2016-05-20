@@ -202,6 +202,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     };
 
     $scope.uploadImages = function (filepath) {
+        sleep(1000)
         if ($scope.processUploadBanniere == true) {
             $scope.artist.imageBanniere = $scope.filePath;
             console.log("image banniere mise à jour");
@@ -212,6 +213,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             $scope.initImgProfile();
         }
         $scope.updateUser();
+        $window.location.reload();
     }
 
     $scope.reset = function () {
@@ -229,6 +231,30 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     };
 
 });
+
+angular.module('artist_cv_edit').directive('imageonload', function () {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            element.bind('load', function () {
+                alert('image is loaded');
+            });
+            element.bind('error', function () {
+                alert('image could not be loaded');
+            });
+        }
+    };
+});
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
 
 //angular.module('artist_cv_edit').directive('dropZone', dropzone);
 angular.module('artist_cv_edit').directive('dropzonecv', function ($cookies, $http, $route) {
