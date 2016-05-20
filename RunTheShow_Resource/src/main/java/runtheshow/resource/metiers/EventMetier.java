@@ -58,4 +58,10 @@ public class EventMetier implements IEventMetier {
         eventBind = eventRepository.save(eventBind);
         return eventBind != null;
     }
+
+    @Override
+    public Boolean deleteEvenement(Evenement event) {
+        eventRepository.delete(event);
+        return eventRepository.findOne(event.getId()) != null;
+    }
 }
