@@ -109,9 +109,14 @@ public class ArtisteMetier implements IArtisteMetier {
         Set<Long> setTypeArtiste = new HashSet<>(Arrays.asList(typeLong));
         Set<Long> setLocalisationArtiste = new HashSet<>(Arrays.asList(localisationLong));
         
-        int i;
+            if((Long) setTypeArtiste.toArray()[0]==0){
+            return Lists.newArrayList(artisteRepository.findArtisteByLocalisation(setLocalisationArtiste));
+        }else if((Long) setLocalisationArtiste.toArray()[0]==0)
+        {
+            return Lists.newArrayList(artisteRepository.findArtisteByType(setTypeArtiste));
+        }else 
+            return Lists.newArrayList(artisteRepository.findArtisteByTypeAndLocalisation(setTypeArtiste, setLocalisationArtiste));
         
-        return Lists.newArrayList(artisteRepository.findArtisteByTypeAndLocalisation(setTypeArtiste, setLocalisationArtiste));
     }
     
 }

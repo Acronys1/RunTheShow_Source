@@ -23,6 +23,18 @@ public interface ProfileArtisteRepository extends CrudRepository<ProfileArtiste,
 
     @Query("SELECT DISTINCT pa "
             + "FROM ProfileArtiste pa "
+            + "JOIN pa.typeArtiste pat "
+            + "WHERE pat.id IN :type")
+    public List<ProfileArtiste> findArtisteByType(@Param("type") Set<Long> type);
+    
+    @Query("SELECT DISTINCT pa "
+            + "FROM ProfileArtiste pa "
+            + "JOIN pa.localisation pal "
+            + "WHERE pal.id IN :localisation")
+    public List<ProfileArtiste> findArtisteByLocalisation(@Param("localisation") Set<Long> localisation);
+    
+    @Query("SELECT DISTINCT pa "
+            + "FROM ProfileArtiste pa "
             + "JOIN pa.typeArtiste pat JOIN pa.localisation pal "
             + "WHERE pat.id IN :type AND pal.id IN :localisation")
     public List<ProfileArtiste> findArtisteByTypeAndLocalisation(@Param("type") Set<Long> type, @Param("localisation") Set<Long> localisation);
