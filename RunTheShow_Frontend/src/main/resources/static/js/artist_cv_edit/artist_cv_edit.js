@@ -202,7 +202,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     };
 
     $scope.uploadImages = function (filepath) {
-        sleep(1000)
+        sleep(1000);
         if ($scope.processUploadBanniere == true) {
             $scope.artist.imageBanniere = $scope.filePath;
             console.log("image banniere mise à jour");
@@ -214,7 +214,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
         }
         $scope.updateUser();
         $window.location.reload();
-    }
+    };
 
     $scope.reset = function () {
         $scope.filename = '';
@@ -228,6 +228,11 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
 
     $scope.reInitUploadModal = function () {
         $scope.reset();
+    };
+    
+    $scope.checkTailleGroupe = function(data) {
+        if(isNaN(data))
+            return 'Veuillez entrez un nombre entier';
     };
 
 });

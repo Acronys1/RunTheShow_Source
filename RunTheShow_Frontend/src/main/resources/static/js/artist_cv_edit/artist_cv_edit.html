@@ -26,20 +26,20 @@ and open the template in the editor.
                 </a>
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
-                    <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
+                    <h2><label editable-text="artist.nomArtiste" e-required onaftersave="updateUser()" e-placeholder="indiquez votre nom d'artiste">{{ artist.nomArtiste || 'Pas de nom d\' artiste' }}</label></h2>
                     <p>  
-                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onaftersave="updateArtistRegions($data)">
+                        <a href="#" editable-select="artist.localisation" e-multiple e-ng-options="r.value as r.text for r in artistRegions" onaftersave="updateArtistRegions($data)" e-placeholder="Indiquez votre région">
                             {{ showArtistRegions()}}
                         </a>
                         <!--<label editable-text="artist.localisation" e-required onaftersave="updateUser()">{{artist.localisation|| 'Pas de localisation'}}</label>-->
                     </p>
                     <p>
-                        <a href="#" editable-select="artist.typeArtiste.id" e-required e-ng-options="t.value as t.text for t in typesArtiste" onaftersave="updateUser()">
+                        <a href="#" editable-select="artist.typeArtiste.id" e-required e-ng-options="t.value as t.text for t in typesArtiste" onaftersave="updateUser()" e-placeholder="Indiquez le type d'artiste">
                             {{ showArtistTypes()}}
                         </a>
                         <!--<label editable-text="artist.typeArtiste" e-required onaftersave="updateUser()">{{artist.typeArtiste|| 'Pas de type groupe'}}</label>-->
                     </p>
-                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()">{{'Taille du groupe: ' + artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
+                    <p><label editable-text="artist.tailleGroupe" e-required onaftersave="updateUser()" onbeforesave="checkTailleGroupe($data)" e-placeholder="Entrez le nombre de membres dans votre groupe">{{'Taille du groupe: ' + artist.tailleGroupe|| 'Pas de taille groupe précisée'}}</label></p>
                     <!--<p><label ng-bind="artist.note">{{'Note générale: ' + artist.note|| 'Pas de note, groupe non évalué' }}</label></p>-->
                 </div>
                 <div class="col-md-2"></div>
