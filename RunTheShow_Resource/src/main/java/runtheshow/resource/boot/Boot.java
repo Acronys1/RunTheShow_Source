@@ -36,7 +36,4 @@ public class Boot {
 	public Principal user(Principal user) {
 		return user;
 	}
-        
-        
-
 }
