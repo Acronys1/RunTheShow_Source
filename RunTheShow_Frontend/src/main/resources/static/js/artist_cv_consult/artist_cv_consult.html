@@ -67,7 +67,52 @@ and open the template in the editor.
     <div id="content">
         <div class="container">
 
-            <div class="row">
+            <div class="row portfolio-project" ng-controller="DemoCtrl as ctrl">
+                <div class="col-md-12">
+                    <div class="heading">
+                        <h2>Mes invitations</h2>
+                    </div>
+
+                    <p class="lead" ng-hide="artist.userArtiste.mesInvitationsDestintaire.length">
+                        
+                        <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Expediteur</th>
+                                        <th>Evènement</th>
+                                        <th>Commentaire</th>
+                                        <th>Date de début</th>
+                                        <th>Date de fin</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="invitation in artist.userArtiste.mesInvitationsDestintaire">
+                                        <td>                    
+                                            {{ invitation.expediteur.prenom }} &nbsp; {{ invitation.expediteur.nom }}
+                                        </td>
+                                        <td>                    
+                                            {{ invitation.sousEvenement.intitule }}
+                                        </td>
+                                        <td>
+                                            {{ invitation.commentaire }}
+                                        </td>
+                                        <td>
+                                            {{ invitation.sousEvenement.dateDebut }}
+                                        </td>
+                                        <td>
+                                            {{ invitation.sousEvenement.dateFin }}
+                                        </td>     
+                                        <td>
+                                            <button class="btn btn-success" ng-click="accepterInvit(invitation)">Accepter</button>
+                                            <button class="btn btn-danger" ng-click="refuserInvit(invitation)">Refuser</button>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                    </p>
+                </div>
                 <div class="col-md-6">
                     <div class="heading">
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>

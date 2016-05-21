@@ -36,6 +36,6 @@ public interface UserRepository extends CrudRepository<User, Long> {
        
         @Query("SELECT ur "
                 + "FROM User ur "
-                + "WHERE ur.id = :ids")
+                + "WHERE ur.id IN :ids")
         public List<User> findUserArtisteByIds(@Param("ids") Set<Long> ids);
 }

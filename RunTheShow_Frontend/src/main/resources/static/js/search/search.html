@@ -7,20 +7,22 @@
                         <div class="row">
                             <form id="search_artiste" method="post" ng-submit="search()" class="form-horizontal">
                                 <div class="form-group">
-                                    <div class="col-md-3 col-sm-5 search_field">
+                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
                                         <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" multiple data-actions-box="true" title="Type d'artiste">
                                             <option class="small-font" ng-repeat="type in typesArtiste" data-select-watcher data-last="{{$last}}" value="{{type.id}}">{{type.nom}}</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-3 col-sm-5 search_field">
+                                    <div class="col-lg-1 col-md-1"></div>
+                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
                                         <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" multiple data-actions-box="true" title="Région">
                                             <option class="small-font" ng-repeat="region in regions" data-select-watcher data-last="{{$last}}" value="{{region.id}}">{{region.nom}}</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-md-2 col-sm-10 search_field">
+                                    <div class="col-lg-1 col-md-1"></div>
+                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
                                         <a ng-href="/search" ng-click="initFirst()" class="btn btn-primary btn-lg">Rechercher</a>
                                     </div>
+                                    <div class="col-lg-1 col-md-1"></div>
                                 </div>
                             </form>
                         </div>
@@ -46,7 +48,7 @@
                     <!-- /.image -->
                     <div class="text">
                         <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.typeArtiste.nom}}</a></h3>
-                        <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.description | limitTo:50}}...</a></h3>
+                        <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.description| limitTo:50}}...</a></h3>
                         <p class="price" style="text-transform: uppercase">{{artiste.nomArtiste}}</p>
                     </div>
                     <!-- /.text -->
@@ -61,5 +63,5 @@
 <!-- /#content -->
 
 <script>
-    $('.selectpicker').selectpicker('selectAll');
+            $('.selectpicker').selectpicker('selectAll');
 </script>
