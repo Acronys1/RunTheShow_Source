@@ -10,6 +10,7 @@ myEvent.controller('myEvent', function ($scope, $routeParams, $http) {
             
             $http.get('/resource/sousEvent/filter/'+$scope.param).success(function (data) {
                 $scope.allSousEventForOneEvent = data;
+                console.log(data);
             });
         });
     };

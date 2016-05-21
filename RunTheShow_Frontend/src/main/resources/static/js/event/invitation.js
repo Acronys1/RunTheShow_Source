@@ -46,7 +46,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
   
   
   $scope.refreshArtiste = function(caracteres){
-      if(caracteres.length > 3){
+      if(caracteres.length > 2){
           $timeout(function() {
             $http.get("/resource/invitation/filter/"+caracteres).success(function (data, status) {
                 vm.people = [];    
@@ -57,7 +57,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
                 }).error(function (data, status) {
                     console.log("Erreur lors de l'envoie des informations.");
                 });
-          }, 1000, true);
+          }, 500, true);
       }
          
   };
@@ -105,6 +105,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
       var mes_invit = {};
       mes_invit['id_art'] = [];
       mes_invit['message_perso'] = '';
+      mes_invit['idSousEvent'] = $scope.idSousEvent;
       if($scope.msgPerso !== '')
           mes_invit['message_perso'] = $scope.msgPerso;
       
@@ -116,6 +117,8 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
        
        $http.post("/resource/invitation/add", data).success(function (data, status) {
             $scope.response = data;
+            $scope.successInvit = true;
+            $scope.successMessageInvit = "Les invitations ont été envoyées.";
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;
