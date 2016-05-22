@@ -1,151 +1,202 @@
 <div class="box clearfix">
-    <div class="heading">
-        <h3 class="text-uppercase">Personal details</h3>
-    </div>
 
     <div class="alert alert-success" ng-show="updateOK">
         <p>{{updateOK}}</p>
     </div>
-
-    <form role="form" ng-submit="updateUser()">
-
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="mailContact">Email de contact</label>
-                    <input class="form-control" id="nom" type="mailContact" ng-model="currentUser.mailContact">
-                    <span class="text-danger" ng-show="errorMessage.emailContact"> 
-                        {{errorMessage.emailContact}}                     
-                    </span>                
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="login">Login</label>
-                    <input class="form-control" id="Login" type="login" ng-model="currentUser.login">
-                    <span class="text-danger" ng-show="errorMessage.login"> 
-                        {{errorMessage.login}}                     
-                    </span>                
-                </div>
-
-
-            </div>               
+    <div class="container">
+        <div class="heading">
+            <h3 class="text-uppercase">Détails personnels</h3>
         </div>
-
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="nom">Nom</label>
-                    <input class="form-control" id="nom" type="text" ng-model="currentUser.nom">
-                    <span class="text-danger" ng-show="errorMessage.nom"> 
-                        {{errorMessage.nom}}                     
-                    </span>                
-                </div>
-
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="prenom">Prénom</label>
-                    <input class="form-control" id="prenom" type="text" ng-model="currentUser.prenom">
-
-                    <span class="text-danger" ng-show="errorMessage.prenom"> 
-                        {{errorMessage.prenom}}                     
-                    </span>                
+        <form role="form" ng-submit="updateUser()">
+            <div class="row">
+                <div class="col-sm-6">
+                    <a href="javascript: void(0)" data-toggle="modal" data-target="#profilPicUpload-modal" data-dismiss="modal">
+                        <p>Photo de profil (cliquez pour uploader)</p>
+                        <img ng-src="{{currentUser.photo|| ''}}" ng-style="initImgProfile()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
+                        <div style="width:170px" class="text-center divBannerCaptionUserProfile" ng-show="showCaptionBanner == true">
+                            <p>Ajoutez une image de profile</p>
+                        </div>
+                    </a>
                 </div>
             </div>
-        </div>
-        <!-- /.row -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="mailContact">Email de contact</label>
+                        <input class="form-control" id="nom" type="mailContact" ng-model="currentUser.mailContact">
+                        <span class="text-danger" ng-show="errorMessage.emailContact"> 
+                            {{errorMessage.emailContact}}                     
+                        </span>                
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="login">Login</label>
+                        <input class="form-control" id="Login" type="login" ng-model="currentUser.login">
+                        <span class="text-danger" ng-show="errorMessage.login"> 
+                            {{errorMessage.login}}                     
+                        </span>                
+                    </div>
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group" ng-model="currentUser.sexe">
-                    <label for="Sexe">Sexe</label>
-                    <select id="sexe" name="sexe" class="form-control" ng-model="currentUser.sexe" required>
-                        <option value="0">M</option>
-                        <option value="1">F</option>
-                        <option value="2">Autre</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-6">                
-                <label for="DateDeNaissance">Date de naissance</label>
-                <div class="form-group" id="divDateNaissance">
-                    <input class="form-control" id="dateDeNaissance" type="text" ng-model="currentUser.dateDeNaissance">                    
-                    <span class="text-danger" ng-show="errorMessage.dateNaissance"> 
-                        {{errorMessage.dateNaissance}}                     
-                    </span>                     
-                </div>                  
-            </div>
-        </div>        
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="telFixe">Télephone fixe</label>
-                    <input class="form-control" id="telFixe" type="text" ng-model="currentUser.telephoneFixe">
-                    <span class="text-danger" ng-show="errorMessage.telFixe"> 
-                        {{errorMessage.telFixe}}                     
-                    </span>                
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="telPortable">Télphone portable</label>
-                    <input class="form-control" id="telPortable" type="text" ng-model="currentUser.telephonePortable">
-                    <span class="text-danger" ng-show="errorMessage.telPortable"> 
-                        {{errorMessage.telPortable}}                     
-                    </span>                 
+
                 </div>               
             </div>
-        </div>
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="adresse">Adresse</label>
-                    <input class="form-control" id="adresse" type="text" ng-model="currentUser.adresse">
-                    <span class="text-danger" ng-show="errorMessage.adresse"> 
-                        {{errorMessage.adresse}}                     
-                    </span>                
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="nom">Nom</label>
+                        <input class="form-control" id="nom" type="text" ng-model="currentUser.nom">
+                        <span class="text-danger" ng-show="errorMessage.nom"> 
+                            {{errorMessage.nom}}                     
+                        </span>                
+                    </div>
+
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="prenom">Prénom</label>
+                        <input class="form-control" id="prenom" type="text" ng-model="currentUser.prenom">
+
+                        <span class="text-danger" ng-show="errorMessage.prenom"> 
+                            {{errorMessage.prenom}}                     
+                        </span>                
+                    </div>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="codePostal">Code postal</label>
-                    <input class="form-control" id="codePostal" type="text" ng-model="currentUser.codePostal">
-                    <span class="text-danger" ng-show="errorMessage.codePostal"> 
-                        {{errorMessage.codePostal}}                     
-                    </span>                 
-                </div>               
-            </div>
-        </div>
+            <!-- /.row -->
 
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="ville">Ville</label>
-                    <input class="form-control" id="ville" type="text" ng-model="currentUser.ville">                    
-
-                    <span class="text-danger" ng-show="errorMessage.ville"> 
-                        {{errorMessage.ville}}                     
-                    </span>                    
-                </div>             
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <input class="form-control" id="description" type="text" ng-model="currentUser.description">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group" ng-model="currentUser.sexe">
+                        <label for="Sexe">Sexe</label>
+                        <select id="sexe" name="sexe" class="form-control" ng-model="currentUser.sexe" required>
+                            <option value="0">M</option>
+                            <option value="1">F</option>
+                            <option value="2">Autre</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">                
+                    <label for="DateDeNaissance">Date de naissance</label>
+                    <div class="form-group" id="divDateNaissance">
+                        <input class="form-control" id="dateDeNaissance" type="text" ng-model="currentUser.dateDeNaissance">                    
+                        <span class="text-danger" ng-show="errorMessage.dateNaissance"> 
+                            {{errorMessage.dateNaissance}}                     
+                        </span>                     
+                    </div>                  
+                </div>
+            </div>        
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="telFixe">Télephone fixe</label>
+                        <input class="form-control" id="telFixe" type="text" ng-model="currentUser.telephoneFixe">
+                        <span class="text-danger" ng-show="errorMessage.telFixe"> 
+                            {{errorMessage.telFixe}}                     
+                        </span>                
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="telPortable">Télphone portable</label>
+                        <input class="form-control" id="telPortable" type="text" ng-model="currentUser.telephonePortable">
+                        <span class="text-danger" ng-show="errorMessage.telPortable"> 
+                            {{errorMessage.telPortable}}                     
+                        </span>                 
+                    </div>               
                 </div>
             </div>
-        </div>        
 
-
-
-        <div class="row">
-            <div class="col-sm-12 text-center">
-                <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Sauvegarder les modifications</button>
-
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="adresse">Adresse</label>
+                        <input class="form-control" id="adresse" type="text" ng-model="currentUser.adresse">
+                        <span class="text-danger" ng-show="errorMessage.adresse"> 
+                            {{errorMessage.adresse}}                     
+                        </span>                
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="codePostal">Code postal</label>
+                        <input class="form-control" id="codePostal" type="text" ng-model="currentUser.codePostal">
+                        <span class="text-danger" ng-show="errorMessage.codePostal"> 
+                            {{errorMessage.codePostal}}                     
+                        </span>                 
+                    </div>               
+                </div>
             </div>
-        </div>
 
-    </form>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="ville">Ville</label>
+                        <input class="form-control" id="ville" type="text" ng-model="currentUser.ville">                    
+
+                        <span class="text-danger" ng-show="errorMessage.ville"> 
+                            {{errorMessage.ville}}                     
+                        </span>                    
+                    </div>             
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input class="form-control" id="description" type="text" ng-model="currentUser.description">
+                    </div>
+                </div>
+            </div>        
+
+
+
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-save"></i> Sauvegarder les modifications</button>
+
+                </div>
+            </div>
+
+        </form>
+    </div>
 </div>
+
+<!-- upload of images profil pic-->
+<div class="modal fade" id="profilPicUpload-modal" tabindex="-1" role="dialog" aria-labelledby="profilPicUpload" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="reInitProfilPiUploadModal()">&times;</button>
+                <h4 class="modal-title" id="profilPicUpload">Uploadez une image</h4>                        
+            </div>
+            <p class="text-success text-center" ng-show="importProfilePic">
+                {{importProfilePic}}
+            </p>
+            <p class="text-danger text-center" ng-show="errorProfilePicUpload">
+                {{errorProfilePicUpload}}
+            </p>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="well">
+                        <form action="" dropzoneuserprofile="" class="dropzoneuserprofile" id="dropzoneuserprofile" style="min-height:120px">
+                            <div class="dz-default dz-message">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-success" ng-click="uploadImgProfile()">Upload File</button>
+                        <button class="btn btn-danger" ng-click="reset()">Reset Dropzone</button>
+                    </div>
+                </div>
+
+                <p class="text-center text-success">
+                    <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                    {{image.filename}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end of images profil pic -->       

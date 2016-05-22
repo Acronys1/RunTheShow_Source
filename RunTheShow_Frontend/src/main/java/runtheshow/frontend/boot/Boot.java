@@ -57,7 +57,4 @@ public class Boot {
         public String redirectUpdateEvent() {
             return "forward:/";
         }
-
-        
-
 }

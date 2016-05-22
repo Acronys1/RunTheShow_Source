@@ -96,16 +96,11 @@
                                 </tbody>
                             </table>
                     </div>
-                    <div id="divInvitation" style="display : none;">
-                        <h4 class="modal-title" id="myModalLabel">ID Event : {{ idEvent }} and ID SousEvent : {{ idSousEvent }}. Inviter des artistes</h4>
+                    <div id="divInvitation" style="display : none;" ng-controller="DemoCtrl as ctrl">
+                        <div class="alert alert-success" ng-show="successInvit">
+                            <span>{{successMessageInvit }}</span>
+                        </div>
                         <div>
-
-
-                                  <!-- <p class="lead">A remplacer dans modal invitation multiple. Test binding ctrl : {{ bindCtrl }}</p> -->
-
-          <!--                        <h3>Recherche plusieurs artistes +  com perso pour envoyer invit</h1>-->
-
-          <!--                        <hr>-->
                                   <label>Inviter des artistes</label>
                                   <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: '1000px';">
                                       <ui-select-match placeholder="Chercher des artistes à inviter">
@@ -120,19 +115,12 @@
                                         <div style="margin-left: 60px;">BLABLABLABLA</div>
                                     </ui-select-choices>
                                   </ui-select>
-                                  selection : {{ ctrl.multipleDemo.selectedPeople }}<br>
 
                                   <br><br>
                                   <fieldset class="form-group">
                                       <label for="msgPerso">Envoyer un message personnel</label>
                                       <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
                                   </fieldset>
-
-          <!--                        <div class="row">
-                                      <div class="col-sm-12 text-center">
-                                          <button ng-click="sendInvitation()" type="submit" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
-                                      </div>
-                                  </div>-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" onclick="visibleOrHidden();">Retour</button>

@@ -42,8 +42,8 @@ _________________________________________________________ -->
                                 </li>
                                 <li ng-show="admin()" ng-class="{active:tab('users')}"><a href="/users">Users</a>
                                 </li>
-                                <li><a href="/login">Login</a>
-                                </li>
+                                <!--<li ng-hide="authenticated()"><a href="/login">Login</a>
+                                </li>-->
 
                             </ul>
                         </li>
@@ -96,7 +96,7 @@ _________________________________________________________ -->
 
                         <li class="dropdown" ng-show="authenticated()">
                             <a href="javascript: void(0)" class="dropdown-user" data-toggle="dropdown"> 
-                                <img src="/img/customer-3.png" class ="img-circle img-small" alt=""> {{currentUser.prenom}}
+                                <img ng-src="{{profilePic || '/img/customer-3.png'}}" class ="img-circle img-small" alt=""> {{currentUser.prenom}}
                             </a>
                             <ul class="dropdown-menu">
                                 <li ng-show="authenticated()"><a href="/userprofile">Mon profil</a>

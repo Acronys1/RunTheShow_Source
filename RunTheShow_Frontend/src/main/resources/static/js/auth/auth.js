@@ -50,6 +50,7 @@ angular.module('auth', ['home']).factory(
                             //initialisation de la variable de session de l'utilisateur
                             $http.get('/resource/user/current').success(function (data) {
                                 $rootScope.currentUser = data;
+                                $rootScope.profilePic = data.photo;
                                 $rootScope.currentUserPrenomHeader = data.prenom;
                             });
                             //fin initilisation de la variable de session de l'utilisateur
