@@ -98,9 +98,11 @@ public class User extends AbstractEntity {
     private List<Evenement> mesEvenements;
 
     @OneToMany(mappedBy = "expediteur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnore
     private List<Invitation> mesInvitationsExpediteur;
 
     @OneToMany(mappedBy = "destinataire", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JsonIgnore
     private List<Invitation> mesInvitationsDestintaire;
 
     @OneToMany(mappedBy = "organisateur", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})

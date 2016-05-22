@@ -47,12 +47,10 @@ public class Invitation extends AbstractEntity {
     
     @ManyToOne
     @NotNull
-    @JsonIgnore
     private User expediteur;
     
     @ManyToOne
     @NotNull
-    @JsonIgnore
     private User destinataire;
     
     //Constructeur
