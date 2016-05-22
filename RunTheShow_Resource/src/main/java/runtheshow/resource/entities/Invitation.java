@@ -6,6 +6,7 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -19,7 +20,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "Invitation")
-@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
+//@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="id")
 public class Invitation extends AbstractEntity {
     private static final long serialVersionUID = 1L;
     
@@ -41,14 +42,17 @@ public class Invitation extends AbstractEntity {
     
     @ManyToOne
     @NotNull
+    @JsonIgnore
     private SousEvenement sousEvenement;
     
     @ManyToOne
     @NotNull
+    @JsonIgnore
     private User expediteur;
     
     @ManyToOne
     @NotNull
+    @JsonIgnore
     private User destinataire;
     
     //Constructeur
