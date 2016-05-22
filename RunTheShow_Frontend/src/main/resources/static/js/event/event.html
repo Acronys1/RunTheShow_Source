@@ -3,7 +3,7 @@
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
         <li class="active"><a data-toggle="tab" href="#myAgenda">Mon Agenda</a></li>
-        <li><a data-toggle="tab" href="#addEvent">Ajouter un évènement</a></li>
+        <li ng-show="showEvent()"><a data-toggle="tab" href="#addEvent">Ajouter un évènement</a></li>
     </ul>
 
     <!-- Tab panes -->
@@ -60,7 +60,8 @@
                                     <th>Date début</th>
                                     <th>Date fin</th>
                                     <th>intitule</th>
-                                    <th>Invitation</th>
+                                    <th ng-show="showButton">Invitation</th>
+                                    <th ng-show="showButton">Supprimer</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -75,26 +76,27 @@
                                             {{ asefoe.intitule }}
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-default" onclick="visibleOrHidden();" ng-click="infoSousEvent(asefoe.id)">Invitation</button>
+                                            <button type="button" class="btn btn-default" onclick="visibleOrHidden();" ng-click="infoSousEvent(asefoe.id)" ng-show="showButton">Invitation</button>
+                                        </td>
+                                        <td>
+                                            <a href="#" id="sDelete" ng-show="showButton" ng-click="deleteSEvent(asefoe.id)"><span class = "glyphicon glyphicon-remove"></span></a>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">
                                             <a href="/myEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Show event</a>
                                         </td>
-                                        <td colspan="2">
-                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Modifier l'évènement</a>
+                                        <td colspan="3">
+                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" ng-show="showButton">Modifier l'évènement</a>
                                         </td>
                                         
                                     </tr>
-                                    <tr align="center">
-                                        <td colspan="4">
-                                            <button class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                            <button class="btn btn-danger" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
+                        <div class="row" align="center">
+                            <button class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            <button class="btn btn-danger" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
+                        </div>
                     </div>
                     <div id="divInvitation" style="display : none;" ng-controller="DemoCtrl as ctrl">
                         <div class="alert alert-success" ng-show="successInvit">
@@ -135,7 +137,7 @@
         
         
         
-        <div id="addEvent" class="tab-pane fade">
+        <div id="addEvent" class="tab-pane fade" ng-show="showEvent()">
             <div class="alert alert-danger" ng-show="errorAjout">
                 {{errorMessage}}
             </div>

@@ -67,7 +67,7 @@ public class Evenement extends AbstractEntity {
     @ManyToOne
     private Lieu lieu;
     
-    @OneToMany(mappedBy = "evenement", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "evenement", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true)
     private List<SousEvenement> mesSousEvenements;
     
     @OneToMany(mappedBy = "evenement", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})

@@ -105,4 +105,10 @@ public class SousEvenenementMetier implements ISousEventMetier {
         sEventBind = sousEventRepository.save(sEventBind);
         return sEventBind != null;
     }
+
+    @Override
+    public Boolean deleteSousEvenement(SousEvenement sevent) {
+        sousEventRepository.delete(sevent);
+        return sousEventRepository.findOne(sevent.getId()) != null;
+    }
 }

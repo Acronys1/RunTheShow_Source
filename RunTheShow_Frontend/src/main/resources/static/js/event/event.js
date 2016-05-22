@@ -1,6 +1,6 @@
 var event = angular.module('event', []);
 
-event.controller('event', function ($scope, $http) {
+event.controller('event', function ($scope, $http, $rootScope) {
     
     $scope.choices = [];
     $scope.scheckin = [];
@@ -12,6 +12,9 @@ event.controller('event', function ($scope, $http) {
     $scope.sousEvent = {};
     $scope.allEvent = {};
     $scope.eventTab = [];
+    $scope.userCurrent = {};
+    $scope.userCurrent.roles = [];
+    
     
   
     $scope.addNewChoice = function() {
@@ -69,12 +72,21 @@ event.controller('event', function ($scope, $http) {
     
     $scope.initFirst = function ()
     {
-        
+        $http.get('/resource/user/current').success(function (data) {
+            $scope.userCurrent = data;
+        });
     };
     
-    $scope.deleteEvent = function (idEvent)
+    $scope.showEvent = function ()
     {
+        for(var i=0; i< $scope.userCurrent.roles.length; i++)
+        {
+            if($scope.userCurrent.roles[i] == "ROLE_ADMIN") return true;
+        }
         
+        
+        
+        return false;
     };
     
     $scope.addEvent = function ()

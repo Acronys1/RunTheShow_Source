@@ -11,6 +11,9 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     $scope.eventTab = [];
     $scope.sousEventTab = [];
     $scope.url = "";
+    $scope.userCurrent = {};
+    $scope.userCurrent.roles = [];
+    $scope.showButton = false;
     
     var date = new Date();
     var d = date.getDate();
@@ -31,6 +34,10 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     
     $scope.initCalendar = function ()
     {
+        $http.get('/resource/user/current').success(function (data) {
+            $scope.userCurrent = data;
+        });
+        
         /* Return all event for the User */
         $http.get('/resource/event/all').success(function (data) {
             $scope.allEvent = data;
@@ -42,6 +49,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
                     var eventJson = JSON.stringify({
                         id: $scope.allEvent[i].id,
                         title: $scope.allEvent[i].intitule,
+                        createurId : $scope.allEvent[i].createur.id,
                         start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
                         end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
                     })
@@ -51,6 +59,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
                     var eventJson = JSON.stringify({
                         id: $scope.allEvent[i].id,
                         title: $scope.allEvent[i].intitule,
+                        createurId : $scope.allEvent[i].createur.id,
                         start: $scope.changeDate($scope.allEvent[i].dateHeureDebut),
                         end: $scope.changeDate($scope.allEvent[i].dateHeureFin)
                     })
@@ -93,6 +102,17 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
             }
         });
     };
+    
+    $scope.showEvent = function ()
+    {
+        for(var i=0; i< $scope.userCurrent.roles.length; i++)
+        {
+            if($scope.userCurrent.roles[i] == "ROLE_ADMIN") return true;
+        }
+        
+        return false;
+    };
+    
     
     $scope.changeDate = function(dateChange) {
         var array = dateChange.split(' ');
@@ -162,6 +182,8 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
         $scope.idSousEvent = idSousEvent;
     }
     
+    
+    
     /* event source that pulls from google.com */
     /*$scope.eventSource = {
             url: "http://www.google.com/calendar/feeds/usa__en%40holiday.calendar.google.com/public/basic",
@@ -202,6 +224,7 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     $scope.alertOnEventClick = function( date, jsEvent, view){
         $scope.idEvent = date.id;
         $scope.titleEvent = date.title;
+        $scope.showButton = false;
         
         $http.get('/resource/sousEvent/filter/'+$scope.idEvent).success(function (data) {
             $scope.allSousEventForOneEvent = data;
@@ -219,11 +242,16 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
             }
         });
         
-        
-        
-        $scope.toggleModal();
+        if(date.createurId == $scope.userCurrent.id)
+        {
+            $scope.showButton = true;
+        }
+                
+        if($scope.showEvent() == true || $scope.showButton == true) $scope.toggleModal();
         $scope.alertMessage = (date.title + ' a été consulté ');
     };
+    
+    
     /* alert on Drop */
      $scope.alertOnDrop = function(event, delta, revertFunc, jsEvent, ui, view){
        $scope.alertMessage = ('Event Droped to make dayDelta ' + delta);
@@ -274,7 +302,21 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
             location.reload();
         })
     };
-
+    
+    
+    $scope.deleteSEvent = function(idSousEvent) {
+        var data = JSON.stringify({
+            id: idSousEvent
+        })
+        
+        console.log(data);
+        
+        $http.post("/resource/sousEvent/delete", data).success(function (data, status) {
+            $scope.response = data;
+            
+            location.reload();
+        })
+    }
      /* Render Tooltip */
     $scope.eventRender = function( event, element, view ) { 
         

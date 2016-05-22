@@ -54,4 +54,9 @@ public class SousEventService {
     public Boolean updateUser(@RequestBody SousEvenement sevent, HttpServletResponse response) {
         return metier.updateSousEvenement(sevent);
     }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
+    public Boolean deleteSousEvent(@RequestBody SousEvenement sevent, HttpServletResponse response) {
+        return metier.deleteSousEvenement(sevent);
+    }
 }
