@@ -96,7 +96,7 @@ _________________________________________________________ -->
 
                         <li class="dropdown" ng-show="authenticated()">
                             <a href="javascript: void(0)" class="dropdown-user" data-toggle="dropdown"> 
-                                <img ng-src="{{profilePic || '/img/customer-3.png'}}" class ="img-circle img-small" alt=""> {{currentUser.prenom}}
+                                {{currentUser.prenom}} &nbsp;&nbsp;<img ng-src="{{profilePic || '/img/customer-3.png'}}" class ="img-circle img-small" alt="">
                             </a>
                             <ul class="dropdown-menu">
                                 <li ng-show="authenticated()"><a href="/userprofile">Mon profil</a>
