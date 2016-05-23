@@ -38,7 +38,7 @@ angular
                     }).when('/file', {
                         templateUrl: 'js/file/file_example.html',
                         controller: 'file'
-                    }).when('/search', {
+                    }).when('/search/:type/:region', {
                         templateUrl: 'js/search/search.html',
                         controller: 'search'
                     }).when('/accueil', {

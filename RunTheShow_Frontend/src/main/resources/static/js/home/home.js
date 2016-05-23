@@ -1,4 +1,4 @@
-angular.module('home', ['navigation']).controller('home', function ($rootScope, $scope, $http) {
+angular.module('home', ['navigation']).controller('home', function ($rootScope, $scope, $http, $location) {
     
     $scope.initFirst = function ()
     {
@@ -18,6 +18,25 @@ angular.module('home', ['navigation']).controller('home', function ($rootScope, 
             $scope.regions = data;
             console.log(data);
         });
+    }
+    
+    $scope.search = function(){
+        
+        $scope.type = '';
+        $scope.region = '';
+        
+        for (var i = 0; i < $rootScope.artisteSearch.type.length; i++) {
+            if(i===$rootScope.artisteSearch.type.length-1) $scope.type += $rootScope.artisteSearch.type[i];
+            else $scope.type += $rootScope.artisteSearch.type[i]+",";
+            $rootScope.artisteSearch.type[i] = parseInt($rootScope.artisteSearch.type[i], 10);
+        }
+        for (var i = 0; i < $rootScope.artisteSearch.region.length; i++) {
+            if(i===$rootScope.artisteSearch.type.length-1) $scope.region += $rootScope.artisteSearch.region[i]
+            else $scope.region += $rootScope.artisteSearch.region[i]+",";
+            $rootScope.artisteSearch.region[i] = parseInt($rootScope.artisteSearch.region[i], 10);
+        }
+        
+        $location.path( "/search/"+$scope.type+"/"+$scope.region);
     }
     
     

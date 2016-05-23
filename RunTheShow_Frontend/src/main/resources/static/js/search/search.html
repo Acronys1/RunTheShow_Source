@@ -1,66 +1,67 @@
-<div class="search_bar_search" ng-init="initFirst()">
-    <div class="search">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-10 col-md-offset-1">
-                    <div class="form-section">
-                        <div class="row">
-                            <form id="search_artiste" method="post" ng-submit="search()" class="form-horizontal">
-                                <div class="form-group">
-                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
-                                        <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" multiple data-actions-box="true" title="Type d'artiste">
-                                            <option class="small-font" ng-repeat="type in typesArtiste" data-select-watcher data-last="{{$last}}" value="{{type.id}}">{{type.nom}}</option>
-                                        </select>
+<div ng-controller="search" ng-init="initFirst()">
+    <div class="search_bar_accueil">
+        <div class="search">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="form-section">
+                            <div class="row">
+                                <form id="search_artiste" method="post" ng-submit="search()" class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-lg-3 col-md-12 col-sm-12 search_field">
+                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" data-actions-box="true" title="Type d'artiste">
+                                                <option class="small-font" ng-repeat="type in typesArtiste" data-select-watcher data-last="{{$last}}" value="{{type.id}}">{{type.nom}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1"></div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 search_field">
+                                            <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" data-actions-box="true" title="Région">
+                                                <option class="small-font" ng-repeat="region in regions" data-select-watcher data-last="{{$last}}" value="{{region.id}}">{{region.nom}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1"></div>
+                                        <div class="col-lg-3 col-md-12 col-sm-12 search_field">
+                                            <a ng-click="search()" class="btn btn-primary btn-lg" style="width: 100% !important">Rechercher</a>
+                                        </div>
                                     </div>
-                                    <div class="col-lg-1 col-md-1"></div>
-                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
-                                        <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" multiple data-actions-box="true" title="Région">
-                                            <option class="small-font" ng-repeat="region in regions" data-select-watcher data-last="{{$last}}" value="{{region.id}}">{{region.nom}}</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-lg-1 col-md-1"></div>
-                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
-                                        <a ng-href="/search" ng-click="initFirst()" class="btn btn-primary btn-lg">Rechercher</a>
-                                    </div>
-                                    <div class="col-lg-1 col-md-1"></div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div id="content">
-    <div class="container">
-        <p class="text-muted lead text-center">Voici les artistes {{type}} pour les régions {{region}}</p>
+    <div id="content">
+        <div class="container">
+            <p class="text-muted lead text-center">Voici les artistes {{type}} pour les régions {{region}}</p>
 
-        <div class="row products">
+            <div class="row products">
 
-            <div class="col-md-3 col-sm-4" ng-repeat="artiste in response">
-                <div class="product">
-                    <div class="image">
-                        <a href="artist_cv_consult/{{artiste.id}}">
-                            <img ng-src="{{artiste.imageProfile}}" alt="" class="img-responsive image1">
-                        </a>
+                <div class="col-md-3 col-sm-4" ng-repeat="artiste in response">
+                    <div class="product">
+                        <div class="image">
+                            <a href="artist_cv_consult/{{artiste.id}}">
+                                <div class="search-result-image" style="background-image: url({{artiste.imageProfile}})"></div>
+                            </a>
+                        </div>
+                        <!-- /.image -->
+                        <div class="text">
+                            <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.typeArtiste.nom}}</a></h3>
+                            <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.description| limitTo:50}}...</a></h3>
+                            <p class="price" style="text-transform: uppercase">{{artiste.nomArtiste}}</p>
+                        </div>
+                        <!-- /.text -->
                     </div>
-                    <!-- /.image -->
-                    <div class="text">
-                        <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.typeArtiste.nom}}</a></h3>
-                        <h3><a href="artist_cv_consult/{{artiste.id}}">{{artiste.description| limitTo:50}}...</a></h3>
-                        <p class="price" style="text-transform: uppercase">{{artiste.nomArtiste}}</p>
-                    </div>
-                    <!-- /.text -->
+                    <!-- /.product -->
                 </div>
-                <!-- /.product -->
             </div>
+            <!-- /.products -->
         </div>
-        <!-- /.products -->
+        <!-- /.container -->
     </div>
-    <!-- /.container -->
+    <!-- /#content -->
 </div>
-<!-- /#content -->
 
 <script>
             $('.selectpicker').selectpicker('selectAll');
