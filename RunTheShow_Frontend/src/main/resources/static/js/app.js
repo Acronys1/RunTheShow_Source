@@ -1,5 +1,5 @@
 angular
-        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp', 'myEvent', 'updateEvent', 'search'])
+        .module('app', ['ngRoute', 'auth', 'home', 'users', 'navigation', 'datatables', 'demo', 'event', 'userprofile', 'signup', 'artist_cv_edit', 'artist_cv_consult', 'xeditable', 'disableAll', 'file', 'calendarDemoApp', 'myEvent', 'updateEvent', 'search', 'tests'])
         .config(
                 function ($routeProvider, $httpProvider, $locationProvider) {
 
@@ -43,6 +43,9 @@ angular
                         controller: 'search'
                     }).when('/accueil', {
                         templateUrl: 'js/home/accueil.html'
+                    }).when('/tests', {
+                        templateUrl: 'js/tests/tests.html',
+                        controller: 'tests'
                     }).otherwise('/');
 
                     $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';

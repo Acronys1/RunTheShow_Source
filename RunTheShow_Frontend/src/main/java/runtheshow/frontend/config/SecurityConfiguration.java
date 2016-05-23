@@ -66,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .logout()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/", "/login", "/message", "/home", "/resource/user/add","/artist_cv_consult").permitAll()
+                .antMatchers("/index.html", "/", "/login", "/message", "/home", "/resource/user/add","/artist_cv_consult", "/tests").permitAll()
                 .antMatchers("/user", "/event","/userprofile","/artist_cv_edit").authenticated()
                 .antMatchers("/resource/user/**").authenticated()
                 .and()
