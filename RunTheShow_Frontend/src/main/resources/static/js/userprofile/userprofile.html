@@ -1,9 +1,13 @@
 <div class="box clearfix">
 
-    <div class="alert alert-success" ng-show="updateOK">
-        <p>{{updateOK}}</p>
-    </div>
+
     <div class="container">
+        <div class="alert text-success text-center" ng-show="updateOK">
+            <p>{{updateOK}}</p>
+        </div>
+        <div class="alert text-danger text-center" ng-show="errorMessage.erreurServeur">
+            <p>{{errorMessage.erreurServeur}}</p>
+        </div>
         <div class="heading">
             <h3 class="text-uppercase">Détails personnels</h3>
         </div>
