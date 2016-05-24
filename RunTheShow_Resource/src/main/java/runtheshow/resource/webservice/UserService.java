@@ -41,7 +41,7 @@ public class UserService {
     }
     
     @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
-    public Boolean updateUser(@RequestBody User user, HttpServletResponse response) {
+    public int updateUser(@RequestBody User user, HttpServletResponse response) {
         return metier.UpdateUser(user);
     }
     
