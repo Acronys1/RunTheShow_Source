@@ -1,6 +1,6 @@
 var event = angular.module('event', []);
 
-event.controller('event', function ($scope, $http, $rootScope) {
+event.controller('event', function ($scope, $http, $rootScope, $timeout) {
     
     $scope.choices = [];
     $scope.scheckin = [];
@@ -9,12 +9,14 @@ event.controller('event', function ($scope, $http, $rootScope) {
     $scope.setage = [];
     $scope.result;
     $scope.event = {};
+    $scope.lieu = {};
     $scope.sousEvent = {};
     $scope.allEvent = {};
     $scope.eventTab = [];
     $scope.userCurrent = {};
     $scope.userCurrent.roles = [];
-    
+    $scope.currentLieu = [];
+    $scope.toto = {};
     
   
     $scope.addNewChoice = function() {
@@ -74,7 +76,7 @@ event.controller('event', function ($scope, $http, $rootScope) {
     {
         $http.get('/resource/user/current').success(function (data) {
             $scope.userCurrent = data;
-        });
+        }); 
     };
     
     $scope.showEvent = function ()
@@ -134,7 +136,26 @@ event.controller('event', function ($scope, $http, $rootScope) {
         });
     };
     
-    
+    $scope.getVilleByName = function(val) {
+        if($scope.lieu.adresse.length > 2)
+        {
+            //$scope.currentLieu = [];
+            console.log("OK");
+            $http.get('/resource/villes/filter/'+$scope.lieu.adresse).success(function (data) {
+                $scope.villesCurrent = data;
+
+                for(var i = 0; i<$scope.villesCurrent.length; i++)
+                {
+                    //$scope.currentLieu.push("{id:" + $scope.villesCurrent[i].id + ",ville_nom_reel:" + $scope.villesCurrent[i].ville_nom_reel + ",ville_code_postal:" + $scope.villesCurrent[i].ville_code_postal + "}");
+                    $scope.currentLieu.push($scope.villesCurrent[i].ville_nom_reel);
+                }
+            });
+        }
+        else
+        {
+            //$scope.currentLieu = [];
+        }
+    };
     
 });
 

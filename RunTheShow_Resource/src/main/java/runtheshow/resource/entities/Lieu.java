@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -83,30 +84,30 @@ public class Lieu extends AbstractEntity {
     /**
      * @return the ville
      */
-    public String getVille() {
+    /*public String getVille() {
         return ville;
-    }
+    }*/
 
     /**
      * @param ville the ville to set
      */
-    public void setVille(String ville) {
+    /*public void setVille(String ville) {
         this.ville = ville;
-    }
+    }*/
 
     /**
      * @return the cp
      */
-    public String getCp() {
+    /*public String getCp() {
         return cp;
-    }
+    }*/
 
     /**
      * @param cp the cp to set
      */
-    public void setCp(String cp) {
+    /*public void setCp(String cp) {
         this.cp = cp;
-    }
+    }*/
 
     /**
      * @return the description
