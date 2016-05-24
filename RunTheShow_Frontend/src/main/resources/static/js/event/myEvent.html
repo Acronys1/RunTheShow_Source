@@ -62,6 +62,43 @@
                             {{ asefoe.scene }}
                         </div>
                     </div>
+                    <hr>
+                    <div ng-controller="DemoCtrl as ctrl">
+                        <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th>Destinataire</th>
+                                <th>Message personnel</th>
+                                <th>Statut</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="invitation in asefoe.lesInvitations">
+                                <td>
+                                    <img src="http://placehold.it/50x50" alt="Aucune image" style="float:left;border-radius: 25px;">
+                                    {{ invitation.destinataire.nomArtiste }}
+                                </td>
+                                <td>{{ invitation.commentaire }}</td>
+                                <td ng-switch="invitation.statut">
+                                    <span ng-switch-when="Invitation acceptée." style="color:#00b200;">
+                                        {{ invitation.statut }}
+                                    </span>
+                                    <span ng-switch-when="Invitation refusée." style="color:red;">
+                                        {{ invitation.statut }}
+                                    </span>
+                                    <span ng-switch-default style="color:orange">
+                                        {{ invitation.statut }}
+                                    </span>
+                                </td>
+                                <td >
+                                    <button type="button" class="btn btn-success">Accepter</button>
+                                    <button type="button" class="btn btn-danger">Refuser</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

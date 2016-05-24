@@ -39,7 +39,6 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
   var vm = this;
   
   $scope.bindCtrl = "Ok";
-  $scope.lstInvtitation = {};
   
   vm.disabled = undefined;
   vm.searchEnabled = undefined;
@@ -57,7 +56,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
                 }).error(function (data, status) {
                     console.log("Erreur lors de l'envoie des informations.");
                 });
-          }, 500, true);
+          }, 0, true);
       }
          
   };
@@ -72,7 +71,8 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
     
     $scope.initInvitationReceived = function(){
       $http.get("/resource/invitation/retreiveReceivedInvit").success(function (data, status) {
-            $scope.lstInvtitation = data;
+          console.log(data);
+            $scope.lstInvitation = data;
         }).error(function (data, status) { 
 
         });
@@ -94,7 +94,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
         var data = JSON.stringify({id: invitation.id});
         $http.post("/resource/invitation/accepterInvit",data).success(function (data, status) {
           console.log(data);
-          $scope.initInvitationReceived();
+         $scope.initInvitationReceived();
         }).error(function (data, status) { 
           
         });
