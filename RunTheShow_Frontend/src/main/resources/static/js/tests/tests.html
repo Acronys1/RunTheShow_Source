@@ -6,40 +6,71 @@ and open the template in the editor.
 -->
 
 <script type="text/javascript">
-describe('calculator', function () {
-	it('1 + 1 should equal 2');
-});
+    describe('Signup', function () {
+        //Enregistre et initialise une instance de l'app angularjs
+        beforeEach(angular.mock.module('app'));
+        //une variable dans laquelle on stockera une référence du controlleur à tester
+        var myCtrlToTest;
+        //Obtiens une référence du contrôlleur signup
+        beforeEach(angular.mock.inject(function (_$controller_) {
+            myCtrlToTest = _$controller_;
+        }));
+        //Un use case / spec  métier utilisateur
+        describe('Inscription d\'un organisateur', function () {
+            it('Le rôle doit être egale à ROLE_UTILISATEUR', function () {
+                var $scope = {};
+                var controller = myCtrlToTest('signup', {$scope: $scope});
+                $scope.newUser = {};
+                $scope.newUser.username = "john.smith@aol.com";
+                $scope.newUser.password = "jhsmith89";
+                $scope.newUser.passwordConfirmed = "jhsmith89";
+                $scope.newUser.userlastname = "Smith";
+                $scope.newUser.userfirstname = "John";
+                $scope.newUser.role = false;
+                $scope.signUp();
+                expect($scope.newUser.userRole).toBe($scope.ROLE_USER);
+            });
+        });
+        describe('Inscription d\'un artiste', function () {
+            it('Le rôle doit être egale à ROLE_ARTISTE', function () {
+                var $scope = {};
+                var controller = myCtrlToTest('signup', {$scope: $scope});
+                $scope.newUser = {};
+                $scope.newUser.username = "john.smith@aol.com";
+                $scope.newUser.password = "jhsmith89";
+                $scope.newUser.passwordConfirmed = "jhsmith89";
+                $scope.newUser.userlastname = "Smith";
+                $scope.newUser.userfirstname = "John";
+                $scope.newUser.role = true;
+                $scope.newUser.typeArtist = true;
+                $scope.signUp();
+                expect($scope.newUser.userRole).toBe($scope.ROLE_ARTISTE);
+            });
+        });
+    });
 
-describe('Signup',function(){
-    //Enregistre et initialise une instance du controlleur signup
-   beforeEach(angular.mock.module('signup'));
-   
-   //une variable dans laquelle on stockera une référence du controlleur à tester
-   var $signUpcontroller;
-   
-   //Obtiens une référence du contrôlleur signup
-   beforeEach(angular.mock.inject(function(_$controller_){
-       $signUpcontroller = _$controller_;
-   }));
-   
-   //Un use case / spec  métier utilisateur
-   describe('Inscription d\'un organisateur', function(){
-      it('Le rôle doit être egale à ROLE_UTILISATEUR', function(){
-          $scope.newUser.username = "john.smith@aol.com";
-          $scope.newUser.password = "jhsmith89";
-          $scope.newUser.passwordConfirmed = "jhsmith89";
-          $scope.newUser.userlastname = "Smith";
-          $scope.newUser.userfirstname = "John";
-          $scope.newUser.role = false;
-          $scope.signup();
-          expect($scope.newUser.userRole).toBe($scope.ROLE_USER);
-      }); 
-   });
-   
-});
+    describe('Search', function () {
+        beforeEach(angular.mock.module('app'));
+        var myCtrlToTest;
+        beforeEach(angular.mock.inject(function (_$controller_) {
+            myCtrlToTest = _$controller_;
+        }));
 
-var jasmineEnv = jasmine.getEnv();
-jasmineEnv.execute();
+
+        describe('Recherche artiste', function () {
+            it('Le nombre d\'artiste trouvés est positif', function () {
+                var $scope = {};
+                var controller = myCtrlToTest('search', {$scope: $scope});
+                $scope.typesArtiste = {};
+                $scope.initFirst();
+                expect($scope.typesArtiste.length).not.toBeLessThan(0);
+            });
+        });
+
+       
+    });
+    var jasmineEnv = jasmine.getEnv();
+    jasmineEnv.execute();
 
 
 </script>
