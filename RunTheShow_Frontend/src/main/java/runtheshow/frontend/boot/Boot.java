@@ -57,4 +57,9 @@ public class Boot {
         public String redirectUpdateEvent() {
             return "forward:/";
         }
+        
+        @RequestMapping(value = "/search/{type}/{region}")
+        public String redirectSearch() {
+            return "forward:/";
+        }
 }

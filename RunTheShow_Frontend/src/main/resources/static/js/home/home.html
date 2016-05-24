@@ -42,21 +42,20 @@
                         <div class="row">
                             <form id="search_artiste" method="post" ng-submit="search()" class="form-horizontal">
                                 <div class="form-group">
-                                    <div class="col-lg-1 col-md-1"></div>
-                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
+                                    <div class="col-lg-3 col-md-12 col-sm-12 search_field">
                                         <select id="type" class="selectpicker" multiple ng-model="artisteSearch.type" data-actions-box="true" title="Type d'artiste">
                                             <option class="small-font" ng-repeat="type in typesArtiste" data-select-watcher data-last="{{$last}}" value="{{type.id}}">{{type.nom}}</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-1 col-md-1"></div>
-                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
+                                    <div class="col-lg-3 col-md-12 col-sm-12 search_field">
                                         <select id="type" class="selectpicker" multiple ng-model="artisteSearch.region" data-actions-box="true" title="Région">
                                             <option class="small-font" ng-repeat="region in regions" data-select-watcher data-last="{{$last}}" value="{{region.id}}">{{region.nom}}</option>
                                         </select>
                                     </div>
                                     <div class="col-lg-1 col-md-1"></div>
-                                    <div class="col-lg-3 col-md-4 col-sm-12 search_field">
-                                        <a href="/search" class="btn btn-primary btn-lg" style="width: 100% !important">Rechercher</a>
+                                    <div class="col-lg-3 col-md-12 col-sm-12 search_field">
+                                        <a ng-click="search()" class="btn btn-primary btn-lg" style="width: 100% !important">Rechercher</a>
                                     </div>
                                 </div>
                             </form>

@@ -21,7 +21,7 @@
 
 //image dropdown utilisateur
 .img-small{
-    max-width: 70px !important;
+    max-height: 39px !important;
 }
 
 //hover des menu de la navbar @Override bootstrap
@@ -118,13 +118,20 @@ hr {
 
 //Search bar accueil
 .search_bar_accueil {
-    background-color: #000;
-    background-color: rgba(0,0,0,0.65);
+    background-image: url("/img/homepage-slider.jpg");
+    background-repeat:no-repeat;
+    background-size: 100%;
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    display: block;
+    /*background-color: #000;
+    background-color: rgba(0,0,0,0.65);*/
     left: 0;
     padding-top: 20px;
     position:relative;
     right: 0;
-    top : -105px;
 }
 
 //Search bar page search
@@ -139,6 +146,7 @@ hr {
 
 .search-control{
     height : 45px;
+    
 }
 
 .bootstrap-select > .btn {
@@ -225,4 +233,9 @@ hr {
 
 .bootstrap-select:not([class*=span]):not([class*=col-]):not([class*=form-control]):not(.input-group-btn) {
     width: 100% !important;
+}
+
+.search-result-image{
+    height:260px; 
+    background-size:cover;
 }

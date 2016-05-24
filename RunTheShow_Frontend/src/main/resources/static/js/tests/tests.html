@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<script type="text/javascript">
+describe('calculator', function () {
+	it('1 + 1 should equal 2');
+});
+
+describe('Signup',function(){
+    //Enregistre et initialise une instance du controlleur signup
+   beforeEach(angular.mock.module('signup'));
+   
+   //une variable dans laquelle on stockera une référence du controlleur à tester
+   var $signUpcontroller;
+   
+   //Obtiens une référence du contrôlleur signup
+   beforeEach(angular.mock.inject(function(_$controller_){
+       $signUpcontroller = _$controller_;
+   }));
+   
+   //Un use case / spec  métier utilisateur
+   describe('Inscription d\'un organisateur', function(){
+      it('Le rôle doit être egale à ROLE_UTILISATEUR', function(){
+          $scope.newUser.username = "john.smith@aol.com";
+          $scope.newUser.password = "jhsmith89";
+          $scope.newUser.passwordConfirmed = "jhsmith89";
+          $scope.newUser.userlastname = "Smith";
+          $scope.newUser.userfirstname = "John";
+          $scope.newUser.role = false;
+          $scope.signup();
+          expect($scope.newUser.userRole).toBe($scope.ROLE_USER);
+      }); 
+   });
+   
+});
+
+var jasmineEnv = jasmine.getEnv();
+jasmineEnv.execute();
+
+
+</script>
