@@ -113,15 +113,18 @@ and open the template in the editor.
                             </table>
                     </p>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-8">
                     <div class="heading">
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
-
-                    <p class="lead">
-                        {{ artist.description || 'Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies
-                        mi vitae est. Mauris placerat eleifend leo.'}}
-                    </p>
+                    <pre class="lead" id="descriptionArtistPreCVConsult" ng-show="artist.description">
+                        {{artist.description}}
+                    </pre>
+                    
+                    <pre class="lead text-warning" id="descriptionArtistPreCVConsult" ng-hide="artist.description">
+                        Cette artiste n'a pas de description
+                    </pre>
+                    
                 </div>
                 <div class="col-md-2"></div>
                 <!-- Div Facebook-->
@@ -131,7 +134,7 @@ and open the template in the editor.
                     <iframe ng-src="{{getFbUrlArtist()}}" style="border:none;overflow:hidden" scrolling="yes" allowtransparency="true" frameborder="0" width="340" height="500" scrolling="yes"></iframe>
                 </div>
                 <div class="clearfix visible-xs-block"></div>
-                <div class="col-md-8" id="divYoutubeChanProfilArtist">
+                <div class="col-md-8" id="">
                     <p><label>{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
                     <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
                     <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
@@ -247,6 +250,18 @@ and open the template in the editor.
                     </div>
 
                 </div>
+            </section>
+            
+                        <section>
+                <div ng-controller="calendarCtrl
+                                            as calDemo" ng-init="initCalendar()"> 
+                    <tab select="renderCalender('myCalendar1');"> 
+                        <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar">
+
+                        </div> 
+                    </tab>
+                </div>
+
             </section>
 
         </div>

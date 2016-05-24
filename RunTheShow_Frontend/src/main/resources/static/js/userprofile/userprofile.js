@@ -14,6 +14,11 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
     $scope.filePath = null;
     $scope.processUploadOK = false;
     $scope.errorProfilePicUpload = null;
+    $scope.currentPassword = null;
+    $scope.newPassword = null;
+    $scope.newPassword2 = null;
+    $scope.errorMessage = {};
+    $scope.passwordChange = false;
 
     function isEmail(myVar) {
         // La 1ère étape consiste à définir l'expression régulière d'une adresse email
@@ -78,23 +83,75 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
             $scope.errorMessage.dateNaissance = "La date doit être sous la forme jj/mm/aaaa";
             noError = false;
         }
+
+        //Gestion du mot de passe
+        if ($scope.currentPassword != null || $scope.newPassword != null || $scope.newPassword2 != null) {
+            if ($scope.currentPassword == null) {
+                $scope.errorMessage.password = "Veuillez renseigner votre mot de passe courant";
+                noError = false;
+            }
+            else {
+                if ($scope.newPassword == null) {
+                    $scope.errorMessage.newPassword = "Renseignez votre nouveau mot de passe";
+                    noError = false;
+                }
+                if ($scope.newPassword2 == null) {
+                    $scope.errorMessage.passwordConfirmed = "Confirmez votre nouveau mot de passe";
+                    noError = false;
+                }
+                if ($scope.newPassword.length < 5) {
+                    $scope.errorMessage.newPassword = "Le nouveau mot de passe doit contenir au moins 5 caractères";
+                    noError = false;
+                }
+                if (noError) {
+                    if ($scope.newPassword != $scope.newPassword2) {
+                        noError = false;
+                        $scope.errorMessage.newPassword = "Les nouveaux mots de passe ne correspondent pas";
+                    }
+                    $scope.passwordChange = true;
+                }
+            }
+        }
+
         if (noError == true) {
             $scope.errorMessage = {};
-            var data = JSON.stringify({
-                id: $rootScope.currentUser.id,
-                mailContact: $rootScope.currentUser.mailContact,
-                login: $rootScope.currentUser.login,
-                telephoneFixe: $rootScope.currentUser.telephoneFixe,
-                telephonePortable: $rootScope.currentUser.telephonePortable,
-                nom: $rootScope.currentUser.nom,
-                prenom: $rootScope.currentUser.prenom,
-                dateDeNaissance: $rootScope.currentUser.dateDeNaissance,
-                sexe: $rootScope.currentUser.sexe,
-                codePostal: $rootScope.currentUser.codePostal,
-                ville: $rootScope.currentUser.ville,
-                description: $rootScope.currentUser.description,
-                adresse: $rootScope.currentUser.adresse
-            });
+            var data;
+            if ($scope.passwordChange == true) {
+                data = JSON.stringify({
+                    id: $rootScope.currentUser.id,
+                    mailContact: $rootScope.currentUser.mailContact,
+                    login: $rootScope.currentUser.login,
+                    telephoneFixe: $rootScope.currentUser.telephoneFixe,
+                    telephonePortable: $rootScope.currentUser.telephonePortable,
+                    nom: $rootScope.currentUser.nom,
+                    prenom: $rootScope.currentUser.prenom,
+                    dateDeNaissance: $rootScope.currentUser.dateDeNaissance,
+                    sexe: $rootScope.currentUser.sexe,
+                    codePostal: $rootScope.currentUser.codePostal,
+                    ville: $rootScope.currentUser.ville,
+                    description: $rootScope.currentUser.description,
+                    adresse: $rootScope.currentUser.adresse,
+                    ancienPassword: $scope.currentPassword,
+                    password: $scope.newPassword
+                });
+            }
+            else {
+                data = JSON.stringify({
+                    id: $rootScope.currentUser.id,
+                    mailContact: $rootScope.currentUser.mailContact,
+                    login: $rootScope.currentUser.login,
+                    telephoneFixe: $rootScope.currentUser.telephoneFixe,
+                    telephonePortable: $rootScope.currentUser.telephonePortable,
+                    nom: $rootScope.currentUser.nom,
+                    prenom: $rootScope.currentUser.prenom,
+                    dateDeNaissance: $rootScope.currentUser.dateDeNaissance,
+                    sexe: $rootScope.currentUser.sexe,
+                    codePostal: $rootScope.currentUser.codePostal,
+                    ville: $rootScope.currentUser.ville,
+                    description: $rootScope.currentUser.description,
+                    adresse: $rootScope.currentUser.adresse
+                });
+            }
             $scope.sendData(data);
 
         } else {
@@ -119,6 +176,14 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
             $scope.response = data;
             console.log("User update");
             $scope.updateOK = "Informations mises à jour";
+            if (response == 1) {
+                console.log("User update but password not updated");
+                $scope.errorMessage["erreurServeur"] = "Le mot de passe courant ne correspond pas avec le mot de passe enregistré dans le serveur";
+            }
+            if (response == 2) {
+                console.log("User NOT update");
+                $scope.errorMessage["erreurServeur"] = "Erreur lors de la mise à jours des infos";
+            }
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorMessage["erreurServeur"] = "Erreur lors de la mise à jours des infos";
@@ -136,13 +201,13 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
     $scope.reset = function () {
         $scope.errorProfilePicUpload = null;
         $scope.importProfilePic = null;
-        $scope.updateOK = false;        
+        $scope.updateOK = false;
         $scope.resetDropzone();
     };
 
     $scope.uploadImages = function (filepath) {
         sleep(1000);
-        if ($scope.uploadFileOK  == true) {
+        if ($scope.uploadFileOK == true) {
             var data = JSON.stringify({
                 id: $rootScope.currentUser.id,
                 mailContact: $rootScope.currentUser.mailContact,
@@ -157,7 +222,7 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
                 ville: $rootScope.currentUser.ville,
                 description: $rootScope.currentUser.description,
                 adresse: $rootScope.currentUser.adresse,
-                photo:$scope.filePath,
+                photo: $scope.filePath,
             });
             $scope.sendData(data);
             console.log("profil pic mise à jour");

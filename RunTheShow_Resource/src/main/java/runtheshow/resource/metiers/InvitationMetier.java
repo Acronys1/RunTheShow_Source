@@ -22,14 +22,14 @@ public class InvitationMetier implements IInvitationMetier {
 
     @Override
     public Invitation accepterInvitation(Invitation invit) {
-        invit.setStatut("Acceptée");
+        invit.setStatut("Invitation acceptée.");
         invitationRepository.save(invit);
         return invit;
     }
 
     @Override
     public Invitation refuserInvitation(Invitation invit) {
-        invit.setStatut("Refusée");
+        invit.setStatut("Invitation refusée.");
         invitationRepository.save(invit);
         return invit;
     }
