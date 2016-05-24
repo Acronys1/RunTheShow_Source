@@ -17,7 +17,7 @@ angular.module('navigation', ['ngRoute', 'auth']).controller(
             };
             
             $scope.artist = function () {
-                console.log("isArtist: "+auth.isArtist);
+                //auth.isArtist ? console.log("isArtist: "+auth.isArtist) : console.log();
                 return auth.isArtist;
             };
 
