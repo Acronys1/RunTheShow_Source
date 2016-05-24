@@ -176,11 +176,11 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
             $scope.response = data;
             console.log("User update");
             $scope.updateOK = "Informations mises à jour";
-            if (response == 1) {
+            if ($scope.response == 1) {
                 console.log("User update but password not updated");
                 $scope.errorMessage["erreurServeur"] = "Le mot de passe courant ne correspond pas avec le mot de passe enregistré dans le serveur";
             }
-            if (response == 2) {
+            if ($scope.response == 2) {
                 console.log("User NOT update");
                 $scope.errorMessage["erreurServeur"] = "Erreur lors de la mise à jours des infos";
             }
