@@ -22,6 +22,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -89,6 +90,9 @@ public class User extends AbstractEntity {
 
     @Column(name = "user_photo")
     private String photo;
+    
+    @Transient
+    private String ancienPassword;
 
     /**
      * Relations avec les aures entités
@@ -310,7 +314,14 @@ public class User extends AbstractEntity {
     public void setPhoto(String photo) {
         this.photo = photo;
     }
-    
+
+    public String getAncienPassword() {
+        return ancienPassword;
+    }
+
+    public void setAncienPassword(String ancienPassword) {
+        this.ancienPassword = ancienPassword;
+    }
 
     /**
      * @return the mesEvenements

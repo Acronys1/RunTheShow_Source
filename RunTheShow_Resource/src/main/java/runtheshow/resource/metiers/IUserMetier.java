@@ -19,7 +19,7 @@ public interface IUserMetier {
         public Boolean AddUser(User user);
         
         //update d'un utilisateur
-        public Boolean UpdateUser(User user);
+        public int UpdateUser(User user);
         
         //delete d'un utilisateur
         public Boolean DeleteUser(User user);

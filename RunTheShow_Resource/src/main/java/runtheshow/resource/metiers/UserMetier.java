@@ -63,8 +63,10 @@ public class UserMetier implements IUserMetier {
     }
 
     @Override
-    public Boolean UpdateUser(User user) {
+    public int UpdateUser(User user) {
 
+        boolean validatePassword = false;
+        
         User userBind = userRepository.findOne(user.getId());
         userBind.setLogin(user.getLogin());
         userBind.setNom(user.getNom());
@@ -81,9 +83,20 @@ public class UserMetier implements IUserMetier {
         userBind.setDescription(user.getDescription());
         userBind.setMailContact(user.getMailContact());
         userBind.setPhoto(user.getPhoto());
+        
+        if(user.getPassword() != null){
+            if(BCrypt.checkpw(user.getAncienPassword(), userBind.getPassword())){
+                userBind.setPassword(user.getPassword());
+                validatePassword = true;
+            }
+        }
+        else validatePassword = true;
 
         userBind = userRepository.save(userBind);
-        return userBind != null;
+        
+        if(userBind != null && validatePassword) return 0;
+        else if (!validatePassword) return 1;
+        else return -1;
     }
 
     @Override

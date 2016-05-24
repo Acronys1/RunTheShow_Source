@@ -33,12 +33,12 @@ _________________________________________________________ -->
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown use-yamm yamm-  fw">
 
-                            <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="modal" data-target="#login-modal" ng-show="!authenticated()">Connexion</a>
+                            <a href="javascript: void(0)" id="connexion" class="dropdown-toggle" data-toggle="modal" data-target="#login-modal" ng-show="!authenticated()">Connexion</a>
                         </li>
                         <li class="dropdown active">
                             <a href="javascript: void(0)" class="dropdown-toggle" data-toggle="dropdown">Home </a>
                             <ul class="dropdown-menu">
-                                <li ng-class="{active:tab('home')}"><a href="/">Home</a>
+                                <li ng-class="{active:tab('home')}"><a href="/" id="home">Home</a>
                                 </li>
                                 <li ng-show="admin()" ng-class="{active:tab('users')}"><a href="/users">Users</a>
                                 </li>
@@ -99,17 +99,17 @@ _________________________________________________________ -->
                                 {{currentUser.prenom}} &nbsp;&nbsp;<img ng-src="{{profilePic || '/img/customer-3.png'}}" class ="img-circle img-small" alt="">
                             </a>
                             <ul class="dropdown-menu">
-                                <li ng-show="authenticated()"><a href="/userprofile">Mon profil</a>
+                                <li ng-show="authenticated()"><a href="/userprofile" id="MyProfilNav">Mon profil</a>
                                 </li>
                                 <li ng-show="artist()"><a href="/artist_cv_edit">Editez votre CV</a>
                                 </li>
-                                <li><a href="/event">Mes évènements</a>
+                                <li><a href="/event" id="evenement">Mes évènements</a>
                                 </li>
-                                <li><a href="/invitation">Invitations</a>
+                                <li><a href="/invitation" id="invitations">Invitations</a>
                                 </li>
                                 <li><a href="#">Paramètre du compte</a>
                                 </li>
-                                <li ng-show="authenticated()"><a href="" ng-click="logout()">Déconnexion</a>
+                                <li ng-show="authenticated()"><a href="" ng-click="logout()" id="deconnexion">Déconnexion</a>
                                 </li>
                             </ul>
                         </li>
