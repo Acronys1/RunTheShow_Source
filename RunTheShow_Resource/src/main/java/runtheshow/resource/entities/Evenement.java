@@ -87,13 +87,14 @@ public class Evenement extends AbstractEntity {
         this.mesMedias = new ArrayList<>();
     }
     
-    public Evenement(String intitule, String description, Calendar dateHeureDebut, Calendar dateHeureFin, String infoComp, User u){
+    public Evenement(String intitule, String description, Calendar dateHeureDebut, Calendar dateHeureFin, String infoComp, User u, Lieu l){
         this.intitule = intitule;
         this.description = description;
         this.dateHeureDebut = dateHeureDebut;
         this.dateHeureFin = dateHeureFin;
         this.infoComp = infoComp;
         this.createur = u;
+        this.lieu = l;
         this.mesSousEvenements = new ArrayList<>();
         this.mesMedias = new ArrayList<>();
         this.tag = new ArrayList<>();
@@ -215,5 +216,19 @@ public class Evenement extends AbstractEntity {
                 + "\"dateHeureFin\":\"%s\","
                 + "\"infoComp\":\"%s\"}",
                 id, intitule, description, dateHeureDebut, dateHeureFin, infoComp);
+    }
+
+    /**
+     * @return the lieu
+     */
+    public Lieu getLieu() {
+        return lieu;
+    }
+
+    /**
+     * @param lieu the lieu to set
+     */
+    public void setLieu(Lieu lieu) {
+        this.lieu = lieu;
     }
 }

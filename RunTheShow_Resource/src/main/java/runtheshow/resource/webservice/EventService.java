@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import runtheshow.resource.entities.Evenement;
+import runtheshow.resource.entities.Lieu;
 import runtheshow.resource.entities.User;
 import runtheshow.resource.metiers.IEventMetier;
 

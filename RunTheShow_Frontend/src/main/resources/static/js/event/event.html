@@ -196,8 +196,9 @@
                 <fieldset class="form-group">
                     <label for="adresse">Adresse :</label>
                     <div id="locationField">
-                        <input id="autocomplete" class="form-control" placeholder="Enter your address" type="text" ng-model="lieu.adresse" onFocus="geolocate()" name="autocomplete" />
+                        <input id="autocomplete" class="form-control" placeholder="Enter your address" type="text" onFocus="geolocate()" ng-model="lieu.adresse" adresseclick="" name="autocomplete" />
                     </div>
+                    Adresse {{ lieu.adresse }}
                 </fieldset>
                 
                 <div class="row" align="center">
@@ -225,7 +226,8 @@
 
                             <td><b>Code postal : </b>&nbsp;</td>
                             <td>
-                                <input class="form-control" id="postal_code" ng-model="lieu.code_postal" disabled="true"></input>
+                                <input class="form-control" id="postal_code" ng-model="lieu.code_postal"></input>
+                                Code Postal {{ lieu.code_postal }}
                             </td>
                         </tr>
                         <tr>
@@ -244,7 +246,12 @@
                     </table>
                     <br><br>
                 </div>
-
+                
+                <fieldset class="form-group">
+                   <label for="description">Description du lieu</label>
+                   <textarea class="form-control" id="descLieu" ng-model="lieu.description" name="descLieu" rows="3"></textarea>
+                   {{ lieu.description }}
+                </fieldset>
 
                 <script>
                     // This example displays an address form, using the autocomplete feature

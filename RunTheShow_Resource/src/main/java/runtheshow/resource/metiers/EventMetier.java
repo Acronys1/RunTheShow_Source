@@ -5,6 +5,7 @@
  */
 package runtheshow.resource.metiers;
 
+import ch.qos.logback.classic.util.ContextInitializer;
 import com.google.common.collect.Lists;
 import java.security.Principal;
 import java.util.List;
@@ -12,7 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import runtheshow.resource.entities.Evenement;
+import runtheshow.resource.entities.Lieu;
 import runtheshow.resource.repository.EventRepository;
+import runtheshow.resource.repository.LieuRepository;
 import runtheshow.resource.repository.UserRepository;
 
 /**
@@ -27,11 +30,15 @@ public class EventMetier implements IEventMetier {
     
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private LieuRepository lieuRepository;
 
     @Override
     public Boolean addEvent(Principal user, Evenement event) 
     {
-        Evenement eventPersist = new Evenement(event.getIntitule(), event.getDescription(), event.getDateHeureDebut(), event.getDateHeureFin(), event.getInfoComp(), userRepository.findUserByLogin(user.getName()));
+        System.out.println("Lieu " + event.getLieu().getAdresse() + "  " + event.getLieu().getCp() + "    " + event.getLieu().getDescription());
+        Evenement eventPersist = new Evenement(event.getIntitule(), event.getDescription(), event.getDateHeureDebut(), event.getDateHeureFin(), event.getInfoComp(), userRepository.findUserByLogin(user.getName()), lieuRepository.findByAdresseAndCpAndDescription(event.getLieu().getAdresse(), event.getLieu().getCp(), event.getLieu().getDescription()));
         event = eventRepository.save(eventPersist);
         return event != null;
     }

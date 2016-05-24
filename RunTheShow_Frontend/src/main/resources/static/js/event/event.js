@@ -93,70 +93,64 @@ event.controller('event', function ($scope, $http, $rootScope, $timeout) {
     
     $scope.addEvent = function ()
     {
-        var data = JSON.stringify({
-            intitule: $scope.event.intitule,
-            description: $scope.event.description,
-            dateHeureDebut: $scope.event.datetimedebevent,
-            dateHeureFin: $scope.event.datetimefinevent,
-            infoComp: $scope.event.info
+        $scope.lieu.code_postal = document.getElementById("postal_code").value;
+        var lieu = JSON.stringify({
+            adresse: $scope.lieu.adresse,
+            cp: $scope.lieu.code_postal,
+            description: $scope.lieu.description
         })
         
-        //console.log("JSON1 " + data);
         
-        $http.post("/resource/event/add", data).success(function (data, status) {
-            $scope.response = data;
+        $http.post("/resource/lieu/add", lieu).success(function (data) {
+            $scope.responseLieu = data;
             
-            for(var i = 0; i<$scope.choices.length; i++)
-            {
-                var ssEvent = JSON.stringify({
-                    dateDebut: $scope.sousEvent.scheckin[i],
-                    dateFin: $scope.sousEvent.scheckout[i],
-                    intitule: $scope.sousEvent.sdescription[i],
-                    etage: $scope.sousEvent.setage[i]
-                })
-                
-                console.log("JSON " + ssEvent + "    Taille choices " + $scope.choices.length);
-                
-                $http.post("/resource/sousEvent/add", ssEvent).success(function (ssEvent, status) {
-                    $scope.response = ssEvent;
-                    
-                    $scope.successAjout = true;
-                    $scope.successMessage = "Vous venez d'ajouter un évènement et ses sous-évènements";
-                    
-                }).error(function (ssEvent, status) { // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    $scope.errorAjout = true;
-                    $scope.errorMessage = "Erreur lors de l'ajout d'un sous-évènement, un ou plusieurs champs sont manquants. Data : " + ssEvent + "    Status : " + status;
-                });
-            }
+            var data = JSON.stringify({
+                intitule: $scope.event.intitule,
+                description: $scope.event.description,
+                dateHeureDebut: $scope.event.datetimedebevent,
+                dateHeureFin: $scope.event.datetimefinevent,
+                infoComp: $scope.event.info,
+                lieu: {adresse: $scope.lieu.adresse, cp: $scope.lieu.code_postal, description: $scope.lieu.description}
+            })
+
+            //console.log("JSON1 " + data);
+
+            $http.post("/resource/event/add", data, lieu).success(function (data, status) {
+                $scope.response = data;
+
+                for(var i = 0; i<$scope.choices.length; i++)
+                {
+                    var ssEvent = JSON.stringify({
+                        dateDebut: $scope.sousEvent.scheckin[i],
+                        dateFin: $scope.sousEvent.scheckout[i],
+                        intitule: $scope.sousEvent.sdescription[i],
+                        etage: $scope.sousEvent.setage[i]
+                    })
+
+                    $http.post("/resource/sousEvent/add", ssEvent).success(function (ssEvent, status) {
+                        $scope.response = ssEvent;
+
+                        $scope.successAjout = true;
+                        $scope.successMessage = "Vous venez d'ajouter un évènement et ses sous-évènements";
+
+                    }).error(function (ssEvent, status) { // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        $scope.errorAjout = true;
+                        $scope.errorMessage = "Erreur lors de l'ajout d'un sous-évènement, un ou plusieurs champs sont manquants. Data : " + ssEvent + "    Status : " + status;
+                    });
+                }
+            }).error(function (data, status) { // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                $scope.errorAjout = true;
+                $scope.errorMessage = "Erreur lors de l'ajout d'un évènement, un ou plusieurs champs sont manquants. Data : " + data + "    Status : " + status;
+            });
+            
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;
-            $scope.errorMessage = "Erreur lors de l'ajout d'un évènement, un ou plusieurs champs sont manquants. Data : " + data + "    Status : " + status;
+            $scope.errorMessage = "Erreur lors de l'ajout d'un lieu, un ou plusieurs champs sont manquants.";
         });
     };
-    
-    $scope.getVilleByName = function(val) {
-        if($scope.lieu.adresse.length > 2)
-        {
-            //$scope.currentLieu = [];
-            console.log("OK");
-            $http.get('/resource/villes/filter/'+$scope.lieu.adresse).success(function (data) {
-                $scope.villesCurrent = data;
-
-                for(var i = 0; i<$scope.villesCurrent.length; i++)
-                {
-                    //$scope.currentLieu.push("{id:" + $scope.villesCurrent[i].id + ",ville_nom_reel:" + $scope.villesCurrent[i].ville_nom_reel + ",ville_code_postal:" + $scope.villesCurrent[i].ville_code_postal + "}");
-                    $scope.currentLieu.push($scope.villesCurrent[i].ville_nom_reel);
-                }
-            });
-        }
-        else
-        {
-            //$scope.currentLieu = [];
-        }
-    };
-    
 });
 
 event.directive('datepicker', function() {
@@ -314,6 +308,28 @@ event.directive('sinput', function() {
                        //alert("Seul les chiffres sont autorisés")
                     }
                 });
+            })
+        }
+    }
+});
+
+event.directive('adresseclick', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+            $(function(){
+                
+                /*element.on("change", function (e) {
+                    ngModelCtrl.$setViewValue(attrs.value);
+                    alert("toto " + attrs.value);
+                });*/
+                
+                element.on("blur", function (e) {
+                    setTimeout(function(){ngModelCtrl.$setViewValue(document.getElementById("autocomplete").value);}, 1000)
+                });
+                
+                
             })
         }
     }

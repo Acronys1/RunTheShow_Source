@@ -7,6 +7,7 @@ package runtheshow.resource.metiers;
 
 import java.security.Principal;
 import runtheshow.resource.entities.Evenement;
+import runtheshow.resource.entities.Lieu;
 import java.util.List;
 
 /**

@@ -6,6 +6,7 @@
 package runtheshow.resource.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -34,23 +35,19 @@ public class Lieu extends AbstractEntity {
     @NotNull
     private String adresse;
     
-    @Column(name="lieu_ville")
-    @NotNull
-    private String ville;
-    
     @Column(name="lieu_codePostal")
     @NotNull
     private String cp;
     
     @Lob
     @Column(name="lieu_description")
-    @NotNull
     private String description;
     
     @OneToMany(mappedBy = "lieu", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
     private List<Media> mesMedias;
     
     @OneToMany(mappedBy = "lieu", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+    @JsonIgnore
     private List<Evenement> mesEvenements;
     
     @ManyToMany(fetch = FetchType.EAGER)
@@ -63,6 +60,14 @@ public class Lieu extends AbstractEntity {
     
     // constructeur
     public Lieu() {
+        this.mesEvenements = new ArrayList<>();
+        this.mesMedias = new ArrayList<>();
+    }
+    
+    // constructeur
+    public Lieu(String adresse, String cp) {
+        this.adresse = adresse;
+        this.cp = cp;
         this.mesEvenements = new ArrayList<>();
         this.mesMedias = new ArrayList<>();
     }
@@ -81,33 +86,20 @@ public class Lieu extends AbstractEntity {
         this.adresse = adresse;
     }
 
-    /**
-     * @return the ville
-     */
-    /*public String getVille() {
-        return ville;
-    }*/
-
-    /**
-     * @param ville the ville to set
-     */
-    /*public void setVille(String ville) {
-        this.ville = ville;
-    }*/
 
     /**
      * @return the cp
      */
-    /*public String getCp() {
+    public String getCp() {
         return cp;
-    }*/
+    }
 
     /**
      * @param cp the cp to set
      */
-    /*public void setCp(String cp) {
+    public void setCp(String cp) {
         this.cp = cp;
-    }*/
+    }
 
     /**
      * @return the description
