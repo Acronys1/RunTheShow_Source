@@ -24,6 +24,8 @@ angular.module('search', ['navigation']).controller('search', function ($rootSco
 
             $scope.typeAffichage = '';
             $scope.regionAffichage = '';
+            
+            $scope.request = "/search/";
 
             if ($rootScope.artisteSearch.type == null)
                 $scope.type = "0";
@@ -53,8 +55,10 @@ angular.module('search', ['navigation']).controller('search', function ($rootSco
                     }
                 }
 
-            if ($rootScope.artisteSearch.type != null || $rootScope.artisteSearch.region != null)
-                $location.path("/search/" + $scope.type + "/" + $scope.region);
+            if ($rootScope.artisteSearch.type != null || $rootScope.artisteSearch.region != null){
+                $scope.request += $scope.type + "/" + $scope.region;
+                $location.path($scope.request);
+            }
         }
 
         $http.get("/resource/artiste/search" + "/" + $scope.type + "/" + $scope.region).success(function (data, status) {
