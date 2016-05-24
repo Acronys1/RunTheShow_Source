@@ -1,8 +1,8 @@
 package runtheshow.frontend.boot;
 
-
-
-
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import java.io.IOException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,38 +23,59 @@ import runtheshow.frontend.config.AppConfiguration;
 @IntegrationTest("server.port:0")
 public class BootTest {
 
-	@Value("${local.server.port}")
-	private int port;
+    @Value("${local.server.port}")
+    private int port;
 
-	private RestTemplate template = new TestRestTemplate();
+    private RestTemplate template = new TestRestTemplate();
 
-	@Test
-	public void homePageLoads() {
-		ResponseEntity<String> response = template.getForEntity("http://localhost:"
-				+ port + "/", String.class);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
+    @Test
+    public void homePageLoads() {
+        ResponseEntity<String> response = template.getForEntity("http://localhost:"
+                + port + "/", String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 
-	@Test
-	public void userEndpointProtected() {
-		ResponseEntity<String> response = template.getForEntity("http://localhost:"
-				+ port + "/user", String.class);
-		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-	}
+    @Test
+    public void userEndpointProtected() {
+        ResponseEntity<String> response = template.getForEntity("http://localhost:"
+                + port + "/user", String.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
 
-	@Test
-	public void resourceEndpointProtected() {
-		ResponseEntity<String> response = template.getForEntity("http://localhost:"
-				+ port + "/resource/user/current", String.class);
-		assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-	}
+    @Test
+    public void resourceEndpointProtected() {
+        ResponseEntity<String> response = template.getForEntity("http://localhost:"
+                + port + "/resource/user/current", String.class);
+        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
+    }
 
-	@Test
-	public void loginSucceeds() {
-		RestTemplate template = new TestRestTemplate("admin@admin.fr", "admin");
-		ResponseEntity<String> response = template.getForEntity("http://localhost:" + port
-				+ "/user", String.class);
-		assertEquals(HttpStatus.OK, response.getStatusCode());
-	}
+    @Test
+    public void loginSucceeds() {
+        RestTemplate template = new TestRestTemplate("admin@admin.fr", "admin");
+        ResponseEntity<String> response = template.getForEntity("http://localhost:" + port
+                + "/user", String.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    public void artisteCurrentTest() {
+        RestTemplate template = new TestRestTemplate("artiste@artiste.fr", "artiste");
+
+        ResponseEntity<String> response = template.getForEntity("http://localhost:" + port
+                + "/resource/artiste/current", String.class);
+        
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    public static boolean isValidJSON(final String json) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        boolean valid = true;
+        try {
+            objectMapper.readTree(json);
+        } catch (JsonProcessingException e) {
+            valid = false;
+        }
+        return valid;
+    }
 
 }
