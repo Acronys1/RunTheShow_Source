@@ -86,7 +86,7 @@ public class UserMetier implements IUserMetier {
         
         if(user.getPassword() != null){
             if(BCrypt.checkpw(user.getAncienPassword(), userBind.getPassword())){
-                userBind.setPassword(user.getPassword());
+                userBind.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(12)));
                 validatePassword = true;
             }
         }

@@ -148,7 +148,43 @@
                 </div>
             </div>        
 
+            <!-- Password -->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="currentPwd">Mot de passe courant</label>
+                        <input class="form-control" id="ville" type="text" ng-model="currentPassword">                    
 
+                        <span class="text-danger" ng-show="errorMessage.password"> 
+                            {{errorMessage.password}}                     
+                        </span>                    
+                    </div>             
+                </div>
+            </div>
+
+            <!-- New Password Confirmation-->
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="newPwd">Nouveau mot de passe</label>
+                        <input class="form-control" id="ville" type="text" ng-model="newPassword">                    
+
+                        <span class="text-danger" ng-show="errorMessage.newPassword"> 
+                            {{errorMessage.newPassword}}                     
+                        </span>                    
+                    </div>             
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="newPwd2">Confirmation nouveau mot de passe</label>
+                        <input class="form-control" id="ville" type="text" ng-model="newPassword2">                    
+
+                        <span class="text-danger" ng-show="errorMessage.passwordConfirmed"> 
+                            {{errorMessage.passwordConfirmed}}                     
+                        </span>                    
+                    </div>             
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-sm-12 text-center">

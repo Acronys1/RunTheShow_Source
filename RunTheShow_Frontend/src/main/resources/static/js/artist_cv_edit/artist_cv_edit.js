@@ -17,6 +17,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     $scope.errorBannerImport = null;
     $scope.importBannerOK = null;
     $scope.urlImageProfile = "";
+    $scope.lstInvitation = {};
 
     //initialise le CV des artistes
     $scope.initArtistPresentation = function () {
@@ -33,10 +34,19 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             $scope.error = true;
             console.log("récup roles KO");
         });
+        
+        //récupère les invitations reçues par un artiste
+        $http.get("/resource/invitation/retreiveReceivedInvit").success(function (data, status) {
+            $scope.lstInvitation = data;
+            console.log(data);
+        }).error(function (data, status) { 
+
+        });
 
         //récupère l'utilisateur et check si c'est un artiste.
         $http.get("/resource/artiste/current").success(function (data, status) {
             $scope.artist = data;
+            console.log($scope.artist);
             if ($scope.artist != null) {
                 console.log("user is an artist")
                 $scope.facebookURL = $scope.getFbUrlArtist();

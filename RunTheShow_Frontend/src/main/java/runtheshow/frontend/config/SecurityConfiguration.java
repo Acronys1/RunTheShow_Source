@@ -68,7 +68,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/index.html", "/", "/login", "/message", "/home", "/resource/user/add","/artist_cv_consult", "/tests").permitAll()
                 .antMatchers("/user", "/event","/userprofile","/artist_cv_edit").authenticated()
-                .antMatchers("/resource/user/**").authenticated()
+                .antMatchers("/resource/user/**", "/resource/artiste/current").authenticated()
                 .and()
                 .csrf().csrfTokenRepository(csrfTokenRepository())
                 .and()
