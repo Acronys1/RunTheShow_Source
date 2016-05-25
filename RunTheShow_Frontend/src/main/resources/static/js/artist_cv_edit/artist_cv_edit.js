@@ -189,7 +189,7 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
         $scope.imgProfileStyle = {
             'background-image': "url(" + $scope.urlImageProfile + ")",
             'height': '200px',
-            'width': '280px'
+            'width': '200px'
         };
     };
 

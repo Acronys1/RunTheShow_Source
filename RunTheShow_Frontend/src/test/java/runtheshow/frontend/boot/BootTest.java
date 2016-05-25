@@ -54,7 +54,7 @@ public class BootTest {
         RestTemplate template = new TestRestTemplate("admin@admin.fr", "admin");
         ResponseEntity<String> response = template.getForEntity("http://localhost:" + port
                 + "/user", String.class);
-        assertEquals(HttpStatus.OK, response.getHeaders());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test

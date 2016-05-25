@@ -29,4 +29,9 @@ public class LieuService
     public Boolean addLieu(@RequestBody Lieu lieu, HttpServletResponse response) {
         return metier.addLieu(lieu);
     }
+    
+    @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
+    public Boolean updateUser(@RequestBody Lieu lieu, HttpServletResponse response) {
+        return metier.updateLieu(lieu);
+    }
 }
