@@ -28,4 +28,15 @@ public class LieuMetier implements ILieuMetier {
         
         return lieu != null;
     }
+
+    @Override
+    public Boolean updateLieu(Lieu lieu) {
+        Lieu lieuBind = lieuRepository.findOne(lieu.getId());
+        lieuBind.setAdresse(lieu.getAdresse());
+        lieuBind.setCp(lieu.getCp());
+        lieuBind.setDescription(lieu.getDescription());
+        
+        lieuBind = lieuRepository.save(lieuBind);
+        return lieuBind != null;
+    }
 }

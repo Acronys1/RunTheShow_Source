@@ -41,28 +41,46 @@ updateEvent.controller('updateEvent', function ($scope, $routeParams, $http) {
         $http.put("/resource/event/update", data).success(function (data, status) {
             $scope.response = data;
             
-            for(var i = 0; i<$scope.allSousEventForOneEvent.length; i++)
-            {
-                var data = JSON.stringify({
-                    id: $scope.allSousEventForOneEvent[i].id,
-                    dateDebut: $scope.allSousEventForOneEvent[i].dateDebut,
-                    dateFin: $scope.allSousEventForOneEvent[i].dateFin,
-                    intitule: $scope.allSousEventForOneEvent[i].intitule,
-                    etage: $scope.allSousEventForOneEvent[i].etage
-                })
+            $scope.event.lieu.cp = document.getElementById("postal_code").value;
+            
+            var lieu = JSON.stringify({
+                id: $scope.event.lieu.id,
+                adresse: $scope.event.lieu.adresse,
+                cp: $scope.event.lieu.cp,
+                description: $scope.event.lieu.description
+            })
+            
+            $http.put("/resource/lieu/update", lieu).success(function (data, status) {
+                $scope.response = data;
                 
-                $http.put("/resource/sousEvent/update", data).success(function (data, status) {
-                    $scope.response = data;
-                    
-                    $scope.successUpdate = true;
-                    $scope.successMessage = "La modification est un succès";
-                    
-                }).error(function (data, status) { // called asynchronously if an error occurs
-                    // or server returns response with an error status.
-                    $scope.errorAjout = true;
-                    $scope.errorMessage = "Erreur lors de la modification d'un sous-évènement. Data : " + data + "    Status : " + status;
-                });
-            }
+                for(var i = 0; i<$scope.allSousEventForOneEvent.length; i++)
+                {
+                    var data = JSON.stringify({
+                        id: $scope.allSousEventForOneEvent[i].id,
+                        dateDebut: $scope.allSousEventForOneEvent[i].dateDebut,
+                        dateFin: $scope.allSousEventForOneEvent[i].dateFin,
+                        intitule: $scope.allSousEventForOneEvent[i].intitule,
+                        etage: $scope.allSousEventForOneEvent[i].etage
+                    })
+
+                    $http.put("/resource/sousEvent/update", data).success(function (data, status) {
+                        $scope.response = data;
+
+                        $scope.successUpdate = true;
+                        $scope.successMessage = "La modification est un succès";
+
+                    }).error(function (data, status) { // called asynchronously if an error occurs
+                        // or server returns response with an error status.
+                        $scope.errorAjout = true;
+                        $scope.errorMessage = "Erreur lors de la modification d'un sous-évènement. Data : " + data + "    Status : " + status;
+                    });
+                }
+
+            }).error(function (data, status) { // called asynchronously if an error occurs
+                // or server returns response with an error status.
+                $scope.errorAjout = true;
+                $scope.errorMessage = "Erreur lors de la modification d'un sous-évènement. Data : " + data + "    Status : " + status;
+            });
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;
@@ -236,6 +254,28 @@ updateEvent.directive('usinput', function() {
                        //alert("Seul les chiffres sont autorisés")
                     }
                 });
+            })
+        }
+    }
+});
+
+updateEvent.directive('adresseclick', function() {
+    return {
+        restrict: 'A',
+        require : 'ngModel',
+        link : function (scope, element, attrs, ngModelCtrl) {
+            $(function(){
+                
+                /*element.on("change", function (e) {
+                    ngModelCtrl.$setViewValue(attrs.value);
+                    alert("toto " + attrs.value);
+                });*/
+                
+                element.on("blur", function (e) {
+                    setTimeout(function(){ngModelCtrl.$setViewValue(document.getElementById("autocomplete").value);}, 1000)
+                });
+                
+                
             })
         }
     }

@@ -14,5 +14,7 @@ import runtheshow.resource.entities.Lieu;
 public interface ILieuMetier {
 
     public Boolean addLieu(Lieu lieu);
+
+    public Boolean updateLieu(Lieu lieu);
     
 }
