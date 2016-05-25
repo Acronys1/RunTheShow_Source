@@ -321,7 +321,11 @@
                     </script>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHfGaiZSXfDjwKLG73Tp66fYRe4PYOETY&signed_in=true&libraries=places&callback=initAutocomplete"
                         async defer></script>
-                
+                <!-- lien show upload modal -->
+                <a href="javascript: void(0)" data-toggle="modal" data-target="#profilPicUpload-modal" data-dismiss="modal">
+                    <h4>uploadez des images!</h4>
+                </a>
+                <!-- fin lien show upload modal -->
                 
                 <div ng-app="event">
                     <fieldset style="background: #FCFCFC;padding: 16px;border: 1px solid #D5D5D5;box-shadow: 8px 8px 0px #aaa; " data-ng-repeat="choice in choices">
@@ -429,3 +433,44 @@
         </div>
     </div>
 </div>
+
+
+<!-- upload of images event pics-->
+<div class="modal fade" id="profilPicUpload-modal" tabindex="-1" role="dialog" aria-labelledby="profilPicUpload" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="resetImgEventUpload()">&times;</button>
+                <h4 class="modal-title" id="profilPicUpload">Uploadez une image</h4>                        
+            </div>
+            <p class="text-success text-center" ng-show="importOK">
+                {{importOK}}
+            </p>
+            <p class="text-danger text-center" ng-show="importKO">
+                {{importKO}}
+            </p>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="well">
+                        <form action="" dropzoneevent="" class="dropzoneevent" id="dropzoneevent" style="min-height:120px">
+                            <div class="dz-default dz-message">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-success" ng-click="uploadImageEvent()">Upload File</button>
+                        <button class="btn btn-danger" ng-click="resetImgEventUpload()">Reset Dropzone</button>
+                    </div>
+                </div>
+
+                <p class="text-center text-success">
+                    <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                    {{image.filename}}
+                </p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- end of images event pics -->

@@ -18,6 +18,11 @@ event.controller('event', function ($scope, $http, $rootScope, $timeout) {
     $scope.currentLieu = [];
     $scope.toto = {};
     
+    //upload images
+    $scope.uploadFileOK = false;
+    $scope.filePath = null;
+    $scope.importOK = null;
+    $scope.importKO = null;
   
     $scope.addNewChoice = function() {
         var newItemNo = $scope.choices.length+1;
@@ -150,6 +155,21 @@ event.controller('event', function ($scope, $http, $rootScope, $timeout) {
             $scope.errorMessage = "Erreur lors de l'ajout d'un lieu, un ou plusieurs champs sont manquants.";
         });
     };
+    
+    //upload des images
+    $scope.uploadImageEvent = function(){
+      $scope.filePath = null;
+      $scope.uploadFileOK = false;
+      $scope.processDropzone();  
+    };
+    //reset du form d'upload des images
+    $scope.resetImgEventUpload = function () {
+        $scope.importOK = null;
+        $scope.importProfilePic = null;
+        $scope.uploadFileOK = false;
+        $scope.resetDropzone();
+    };
+    
 });
 
 event.directive('datepicker', function() {
@@ -330,6 +350,70 @@ event.directive('adresseclick', function() {
                 
                 
             })
+        }
+    }
+});
+
+
+//upload des images
+angular.module('event').directive('dropzoneevent', function ($cookies, $http, $route) {
+    return {
+        restrict: 'C',
+        link: function (scope, element, attrs) {
+
+            var config = {
+                url: 'http://localhost:8080/resource/file/upload',
+                maxFilesize: 20,
+                withCredentials: true,
+                paramName: "uploadfile",
+                maxThumbnailFilesize: 10,
+                parallelUploads: 2, headers: {
+                    'X-XSRF-TOKEN': $cookies.get('XSRF-TOKEN')
+                },
+                autoProcessQueue: false
+            };
+
+            var eventHandlers = {
+                'addedfile': function (file) {
+                    scope.file = file;
+                    if (this.files[1] != null) {
+                        this.removeFile(this.files[0]);
+                    }
+                    scope.$apply(function () {
+                        scope.fileAdded = true;
+                    });
+                    console.log("File added ready to be upload");
+                },
+                'success': function (file, response) {
+                    scope.filePath = response.filePath;
+                    scope.uploadFileOK = true;
+                    scope.importOK = "Upload OK";
+                    console.log("Succes import: File path retrieved OK");
+                },
+                'complete': function (file, response) {
+                    console.log(file);
+                },
+                'error': function (file, errorMessage) {
+                    $scope.importKO = "Erreur lors de l'upload";
+                    console.log("Error import: Erreur import image");
+                }
+            };
+
+            dropzone = new Dropzone(element[0], config);
+
+            angular.forEach(eventHandlers, function (handler, event) {
+                dropzone.on(event, handler);
+            });
+
+            scope.processDropzone = function () {
+                scope.uploadFileOK = false;
+                dropzone.processQueue();
+            };
+
+            scope.resetDropzone = function () {
+                scope.uploadFileOK = false;
+                dropzone.removeAllFiles();
+            };
         }
     }
 });
