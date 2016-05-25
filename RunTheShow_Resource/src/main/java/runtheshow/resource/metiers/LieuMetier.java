@@ -23,7 +23,7 @@ public class LieuMetier implements ILieuMetier {
     @Override
     public Boolean addLieu(Lieu lieu) 
     {
-        Lieu lieuPersist = new Lieu(lieu.getAdresse(), lieu.getCp());
+        Lieu lieuPersist = new Lieu(lieu.getAdresse(), lieu.getCp(), lieu.getDescription());
         lieu = lieuRepository.save(lieuPersist);
         
         return lieu != null;

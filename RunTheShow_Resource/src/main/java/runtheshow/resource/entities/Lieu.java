@@ -65,9 +65,10 @@ public class Lieu extends AbstractEntity {
     }
     
     // constructeur
-    public Lieu(String adresse, String cp) {
+    public Lieu(String adresse, String cp, String description) {
         this.adresse = adresse;
         this.cp = cp;
+        this.description = description;
         this.mesEvenements = new ArrayList<>();
         this.mesMedias = new ArrayList<>();
     }

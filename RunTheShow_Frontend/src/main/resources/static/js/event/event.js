@@ -100,7 +100,6 @@ event.controller('event', function ($scope, $http, $rootScope, $timeout) {
             description: $scope.lieu.description
         })
         
-        
         $http.post("/resource/lieu/add", lieu).success(function (data) {
             $scope.responseLieu = data;
             
