@@ -35,7 +35,7 @@ app.filter('propsFilter', function() {
   };
 });
 
-app.controller('DemoCtrl', function ($scope, $http, $timeout) {
+app.controller('DemoCtrl', function ($scope, $http, $timeout, $rootScope) {
   var vm = this;
   
   $scope.bindCtrl = "Ok";
@@ -119,6 +119,33 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout) {
             $scope.response = data;
             $scope.successInvit = true;
             $scope.successMessageInvit = "Les invitations ont été envoyées.";
+        }).error(function (data, status) { // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            $scope.errorAjout = true;
+            $scope.errorMessage = "Erreur lors de l'ajout, un ou plusieurs champs sont manquants";
+        });
+        
+      //console.log($scope.msgPerso);
+      //console.log($scope.ctrl.multipleDemo.selectedPeople);
+  };
+  
+  $scope.sendInvitation2 = function(){
+      var mes_invit = {};
+      mes_invit['id_art'] = [];
+      mes_invit['message_perso'] = '';
+      mes_invit['idSousEvent'] = $scope.idSousEvent;
+      if($scope.msgPerso !== '')
+          mes_invit['message_perso'] = $scope.msgPerso;
+      
+      mes_invit['id_art'].push($rootScope.idUserArt);
+
+      var data;
+      data = JSON.stringify(mes_invit);
+       
+       $http.post("/resource/invitation/add", data).success(function (data, status) {
+            $scope.response = data;
+            $scope.successInvit = true;
+            $scope.successMessageInvit = "L'invitation a été envoyée.";
         }).error(function (data, status) { // called asynchronously if an error occurs
             // or server returns response with an error status.
             $scope.errorAjout = true;

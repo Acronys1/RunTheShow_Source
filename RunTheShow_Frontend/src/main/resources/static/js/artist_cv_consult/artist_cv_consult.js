@@ -7,16 +7,19 @@ angular.module('artist_cv_consult', []).controller('artist_cv_consult', function
 
     $scope.artist = {};
     $scope.ArtistID = null;
+    $rootScope.idUserArt = null;
 
     $scope.initArtistCvConsult = function () {
         console.log("Ctr artist_cv_consult");
         console.log("Artiste ID = " + $routeParams.artistId);
         $scope.ArtistID = $routeParams.artistId;
+        
 
         if ($scope.ArtistID != null) {
             //récupère les informations de l'artiste:
             $http.get('/resource/artiste/' + $scope.ArtistID).success(function (data, status) {
                 $scope.artist = data;
+                $rootScope.idUserArt = $scope.artist.userArtiste.id;
                 console.log("Récupération artiste OK");
                 $scope.initImgProfile();
                 $scope.initBanner();                
@@ -71,6 +74,120 @@ angular.module('artist_cv_consult', []).controller('artist_cv_consult', function
             };
         }
     };
+    
+    $scope.showModal = false;
+    $scope.toggleModal = function(){
+        $scope.showModal = !$scope.showModal;
+    };
+    
+    $scope.close = function(){
+        $scope.showModal = false;
+    };
+    
 
 });
 
+
+app.directive('modal2', function () {
+    return {
+      template: '<div class="modal fade" id="eventModal2">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+                '<button type="button" data-dismiss="modal2" aria-hidden="true" data-window="external">&times;</button>' + 
+                '<h4 class="modal-title">{{ title }}</h4>' + 
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      transclude: true,
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+        scope.title = attrs.title;
+
+        scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+        
+        $(element).on('click',"a[data-window='external']", function() {
+            //alert('Toto ' + scope.showModal);
+            
+            $('#eventModal2').modal('hide');
+            return false; 
+        });
+      }
+    };
+  });
+  
+  app.directive('modal', function () {
+    return {
+      template: '<div class="modal fade" id="eventModal">' + 
+          '<div class="modal-dialog">' + 
+            '<div class="modal-content">' + 
+              '<div class="modal-header">' + 
+                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                '<h4 class="modal-title">{{ title }}</h4>' + 
+              '</div>' + 
+              '<div class="modal-body" ng-transclude></div>' + 
+            '</div>' + 
+          '</div>' + 
+        '</div>',
+      restrict: 'E',
+      transclude: true,
+      replace:true,
+      scope:true,
+      link: function postLink(scope, element, attrs) {
+        scope.title = attrs.title;
+
+        scope.$watch(attrs.visible, function(value){
+          if(value == true)
+            $(element).modal('show');
+          else
+            $(element).modal('hide');
+        });
+
+        $(element).on('shown.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = true;
+          });
+        });
+
+        $(element).on('hidden.bs.modal', function(){
+          scope.$apply(function(){
+            scope.$parent[attrs.visible] = false;
+          });
+        });
+        
+        $(element).on('click',"a[data-window='external']", function() {
+            //alert('Toto ' + scope.showModal);
+            
+            $('#eventModal').modal('hide');
+            $('.modal-backdrop').hide();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+            //alert('Toto ' + scope.showModal);
+            window.location($(this).attr('href'));
+            return false; 
+        });
+      }
+    };
+  });
+  

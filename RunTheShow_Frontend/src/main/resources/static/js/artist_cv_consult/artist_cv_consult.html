@@ -4,7 +4,113 @@ To change this license header, choose License Headers in Project Properties.
 To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
+
+<script>
+                function visibleOrHidden()
+                {
+                    var sousEventDiv = document.getElementById('divSousEvent');
+                    var invit = document.getElementById('divInvitation');
+                    
+                    if(sousEventDiv.style.display == "none")
+                    {
+                        sousEventDiv.style.display = "block";
+                        invit.style.display = "none";
+                    }
+                    else
+                    {
+                        sousEventDiv.style.display = "none";
+                        invit.style.display = "block";
+                    }
+                }
+</script>
+
 <div ng-controller="artist_cv_consult" ng-init="initArtistCvConsult()">
+    <modal id="text-page" visible="showModal" title="Evènement : {{ titleEvent }}">
+        <div ng-controller="calendarCtrl as calDemo" ng-init="initCalendar()">
+                <tab select="renderCalender('myCalendar1');">
+                    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                      <h4>{{alertMessage}}</h4>
+                    </div>
+                    <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                </tab>
+                <!-- <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> -->
+                
+                <!-- Modal -->
+                <modal id="text-page" visible="showModal" >
+                    
+                    <div id="divSousEvent" style="display : block;">
+                            <table class="table table-striped">
+                                <thead>
+                                  <tr>
+                                    <th>Date début</th>
+                                    <th>Date fin</th>
+                                    <th>intitule</th>
+                                    <th ng-show="showButton">Invitation</th>
+                                    <th ng-show="showButton">Supprimer</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr data-ng-repeat="asefoe in allSousEventForOneEvent">
+                                        <td>
+                                            {{ asefoe.dateDebut }}
+                                        </td>
+                                        <td>
+                                            {{ asefoe.dateFin }}
+                                        </td>
+                                        <td>
+                                            {{ asefoe.intitule }}
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-default" onclick="visibleOrHidden();" ng-click="infoSousEvent(asefoe.id)" ng-show="showButton">Inviter {{  artist.nomArtiste }}</button>
+                                        </td>
+                                        <td>
+                                            <a href="#" id="sDelete" ng-show="showButton" ng-click="deleteSEvent(asefoe.id)"><span class = "glyphicon glyphicon-remove"></span></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <a href="/myEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Show event</a>
+                                        </td>
+                                        <td colspan="3">
+                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" ng-show="showButton">Modifier l'évènement</a>
+                                        </td>
+                                        
+                                    </tr>
+                                </tbody>
+                            </table>
+                        <div class="row" align="center">
+                            <button class="btn btn-default" data-dismiss="modal">Fermer</button>
+                            <button class="btn btn-danger" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
+                        </div>
+                    </div>
+                    <div id="divInvitation" style="display : none;" ng-controller="DemoCtrl as ctrl">
+                        <div class="alert alert-success" ng-show="successInvit">
+                            <span>{{successMessageInvit }}</span>
+                        </div>
+                        <div>
+                                  <fieldset class="form-group">
+                                      <label for="msgPerso">Envoyer un message personnel</label>
+                                      <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
+                                  </fieldset>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" onclick="visibleOrHidden();">Retour</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                          <button type="button" ng-click="sendInvitation2()" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer l'invitations</button>
+                        </div>
+                    </div>
+                </modal>
+            </div>
+    </modal>
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <span class="text-danger" ng-show="errorMessage.init"> 
         {{errorMessage.init}}                     
     </span>  
@@ -21,7 +127,9 @@ and open the template in the editor.
                 </div>
                 <div class="row col-md-4 form-group">
                     <!--<h4>Nom de l'artise</h4>-->
-                    <h2>{{ artist.nomArtiste}}</h2>
+                    <h2>{{ artist.nomArtiste}} <button ng-show="authenticated" type="button" class="btn btn-sm btn-template-main" ng-click="toggleModal()"><i class="fa fa-save"></i>Inviter cet artiste</button></h2>
+                            
+
                     <div id="nomArtisteDisplay">{{ artist.nomArtiste}}</div>
                     <p>  
                     <div>
@@ -34,28 +142,13 @@ and open the template in the editor.
                     <p><label>{{'Note générale: ' + artist.note|| 'Pas de note, groupe non évalué' }}</label></p>
                 </div>
                 <div class="col-md-2"></div>
-                <form class="form-horizontal text-center">
+<!--                <form class="form-horizontal text-center">
                     <div class="form-group col-md-3" style="border-style: solid;border-radius: 5px;" id="divDmdPrestationProfileArtiste">
-                        <div class="panel-heading">
-                            <h4>Demande de prestation</h4>
-                        </div>                            
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">Date début</label>
-                            <div class="col-sm-8">
-                                <input datepicker="" ng-model="demandeEventStartDate" class="form-control" id="datedebut" placeholder="Date début">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label  class="col-sm-2 control-label">Date fin</label>
-                            <div class="col-sm-8">
-                                <input datepicker="" ng-model="demandeEventEndDate" class="form-control" id="datefin" placeholder="Date fin">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-sm btn-template-main"><i class="fa fa-save"></i> Envoyer la demande</button>
+                            <button type="submit" class="btn btn-sm btn-template-main"><i class="fa fa-save"></i>Inviter cet artiste</button>
                         </div>
                     </div>
-                </form>
+                </form>-->
             </div>
 
 
@@ -68,51 +161,6 @@ and open the template in the editor.
         <div class="container">
 
             <div class="row portfolio-project" ng-controller="DemoCtrl as ctrl">
-                <div class="col-md-12">
-                    <div class="heading">
-                        <h2>Mes invitations</h2>
-                    </div>
-
-                    <p class="lead" ng-hide="artist.userArtiste.mesInvitationsDestintaire.length">
-                        
-                        <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Expediteur</th>
-                                        <th>Evènement</th>
-                                        <th>Commentaire</th>
-                                        <th>Date de début</th>
-                                        <th>Date de fin</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="invitation in artist.userArtiste.mesInvitationsDestintaire">
-                                        <td>                    
-                                            {{ invitation.expediteur.prenom }} &nbsp; {{ invitation.expediteur.nom }}
-                                        </td>
-                                        <td>                    
-                                            {{ invitation.sousEvenement.intitule }}
-                                        </td>
-                                        <td>
-                                            {{ invitation.commentaire }}
-                                        </td>
-                                        <td>
-                                            {{ invitation.sousEvenement.dateDebut }}
-                                        </td>
-                                        <td>
-                                            {{ invitation.sousEvenement.dateFin }}
-                                        </td>     
-                                        <td>
-                                            <button class="btn btn-success" ng-click="accepterInvit(invitation)">Accepter</button>
-                                            <button class="btn btn-danger" ng-click="refuserInvit(invitation)">Refuser</button>
-                                        </td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                    </p>
-                </div>
                 <div class="col-md-8">
                     <div style="margin-bottom: 0px;" class="heading">
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
@@ -263,6 +311,8 @@ and open the template in the editor.
                 </div>
 
             </section>
-
+            
+            
         </div>
-        <!-- /.container -->       
+        <!-- /.container -->  
+        
