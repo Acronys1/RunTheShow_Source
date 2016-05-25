@@ -206,7 +206,7 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
     };
 
     $scope.uploadImages = function (filepath) {
-        sleep(1000);
+        sleep(1700);
         if ($scope.uploadFileOK == true) {
             var data = JSON.stringify({
                 id: $rootScope.currentUser.id,
