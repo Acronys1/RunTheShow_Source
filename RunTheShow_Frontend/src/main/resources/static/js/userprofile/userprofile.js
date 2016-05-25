@@ -112,7 +112,7 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
                 }
             }
         }
-
+        $scope.noError = noError;
         if (noError == true) {
             $scope.errorMessage = {};
             var data;

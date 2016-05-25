@@ -67,7 +67,77 @@ and open the template in the editor.
             });
         });
 
-       
+
+    });
+
+    describe('Userprofile', function () {
+        beforeEach(angular.mock.module('app'));
+        var myCtrlToTest;
+        beforeEach(angular.mock.inject(function (_$controller_) {
+            myCtrlToTest = _$controller_;
+        }));
+
+
+        describe('Modification du mot de passe', function () {
+            it('Le flag de changement de mot de passe est à TRUE', function () {
+                var $scope = {};
+                var $rootScope = {};
+                var controller = myCtrlToTest('userprofile', {$scope: $scope, $rootScope: $rootScope});
+                $rootScope.currentUser = {};
+                $rootScope.currentUser.id = 185;
+                $rootScope.currentUser.mailContact = "test@test.fr";
+                $rootScope.currentUser.login = "test@test.fr";
+                $rootScope.currentUser.telephoneFixe = "0148454545";
+                $rootScope.currentUser.telephonePortable = "0748479796";
+                $rootScope.currentUser.nom = "testMan";
+                $rootScope.currentUser.prenom = "testName";
+                $rootScope.currentUser.dateDeNaissance = "15/05/1984";
+                $rootScope.currentUser.sexe = "M";
+                $rootScope.currentUser.codePostal = "75015";
+                $rootScope.currentUser.ville = "Paris";
+                $rootScope.currentUser.description = "description test";
+                $rootScope.currentUser.adresse = "15 rue de la concorde";
+                $rootScope.currentUser.ancienPassword = "testMan";
+                $rootScope.currentUser.password = "TestWoman";
+                $scope.currentPassword = "testMan";
+                $scope.newPassword = "testWoman";
+                $scope.newPassword2 = "testWoman";
+                $scope.updateUser();
+                expect($scope.passwordChange).toEqual(true);
+            });
+        });
+
+        describe('Modification du mot de passe', function () {
+            it('Le mot de passe doit au moins contenir 5 caractères', function () {
+                var $scope = {};
+                var $rootScope = {};
+                var controller = myCtrlToTest('userprofile', {$scope: $scope, $rootScope: $rootScope});
+                $rootScope.currentUser = {};
+                $rootScope.currentUser.id = 185;
+                $rootScope.currentUser.mailContact = "test@test.fr";
+                $rootScope.currentUser.login = "test@test.fr";
+                $rootScope.currentUser.telephoneFixe = "0148454545";
+                $rootScope.currentUser.telephonePortable = "0748479796";
+                $rootScope.currentUser.nom = "testMan";
+                $rootScope.currentUser.prenom = "testName";
+                $rootScope.currentUser.dateDeNaissance = "15/05/1984";
+                $rootScope.currentUser.sexe = "M";
+                $rootScope.currentUser.codePostal = "75015";
+                $rootScope.currentUser.ville = "Paris";
+                $rootScope.currentUser.description = "description test";
+                $rootScope.currentUser.adresse = "15 rue de la concorde";
+                $rootScope.currentUser.ancienPassword = "testMan";
+                $rootScope.currentUser.password = "TestWoman";
+                $scope.currentPassword = "testMan";
+                $scope.newPassword = "test";
+                $scope.newPassword2 = "test";
+                $scope.updateUser();
+                expect($scope.noError).toEqual(false);
+                expect($scope.errorMessage.newPassword).toEqual("Le nouveau mot de passe doit contenir au moins 5 caractères");
+            });
+        });
+
+
     });
     var jasmineEnv = jasmine.getEnv();
     jasmineEnv.execute();
