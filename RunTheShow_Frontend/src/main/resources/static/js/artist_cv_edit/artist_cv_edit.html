@@ -137,7 +137,7 @@ and open the template in the editor.
                 <div class="col-md-8">
                     <p><label editable-text="artist.youtubeArtiste" e-required onaftersave="updateUser()">{{(artist.youtubeArtiste != null ? 'Chaîne Youtube:'+artist.youtubeArtiste :'Pas de chaîne Youtube: Ajoutez en une!')}}</label></p>
                     <p ng-show="errorUrlYt" class="text-danger">{{errorUrlYt}}</p>
-                    <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="480" height="400"></iframe>
+                    <iframe ng-src="{{getYtUrlArtist()}}" src="http://www.youtube.com/embed/?listType=user_uploads&list=YOURCHANNELNAME" width="780" height="400"></iframe>
                 </div>
             </div>
 
