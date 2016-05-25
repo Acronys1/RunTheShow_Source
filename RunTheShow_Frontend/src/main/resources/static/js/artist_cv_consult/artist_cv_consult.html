@@ -114,11 +114,11 @@ and open the template in the editor.
                     </p>
                 </div>
                 <div class="col-md-8">
-                    <div class="heading">
+                    <div style="margin-bottom: 0px;" class="heading">
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
                     </div>
-                    <pre class="lead" id="descriptionArtistPreCVConsult" ng-show="artist.description">
-                        {{artist.description}}
+                    <pre data-type="text" class="lead text-left" id="descriptionArtistPreCVConsult" ng-show="artist.description">
+                        <br/>{{artist.description}}
                     </pre>
                     
                     <pre class="lead text-warning" id="descriptionArtistPreCVConsult" ng-hide="artist.description">
