@@ -17,6 +17,7 @@ event.controller('event', function ($scope, $http, $rootScope, $timeout) {
     $scope.userCurrent.roles = [];
     $scope.currentLieu = [];
     $scope.toto = {};
+    
   
     $scope.addNewChoice = function() {
         var newItemNo = $scope.choices.length+1;

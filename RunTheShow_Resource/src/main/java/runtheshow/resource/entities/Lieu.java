@@ -46,7 +46,7 @@ public class Lieu extends AbstractEntity {
     @OneToMany(mappedBy = "lieu", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
     private List<Media> mesMedias;
     
-    @OneToMany(mappedBy = "lieu", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+    @OneToMany(mappedBy = "lieu", cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH, CascadeType.REMOVE}, orphanRemoval = true)
     @JsonIgnore
     private List<Evenement> mesEvenements;
     

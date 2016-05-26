@@ -290,17 +290,23 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
     };
     
     /* Supprimer un évènement et ses sous-évènements */
-    $scope.deleteEvent = function(id) {
+    $scope.deleteEvent = function(idEvent) {
 
         var data = JSON.stringify({
-            id: id
+            id: idEvent
         })
         
-        $http.post("/resource/event/delete", data).success(function (data, status) {
+        $http.post("/resource/lieu/delete", data).success(function (data, status) {
             $scope.response = data;
             
             location.reload();
         })
+        
+        /*$http.post("/resource/event/delete", data).success(function (data, status) {
+            $scope.response = data;
+            
+            location.reload();
+        })*/
     };
     
     
@@ -350,11 +356,11 @@ app.controller('calendarCtrl', function ($scope, $http, $timeout, $compile,uiCal
 
 app.directive('modal', function () {
     return {
-      template: '<div class="modal fade" id="eventModal">' + 
+      template: '<div class="modal fade" id="eventModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true" data-backdrop="static">' + 
           '<div class="modal-dialog">' + 
-            '<div class="modal-content">' + 
+            '<div class="modal-content" id="contentModal">' + 
               '<div class="modal-header">' + 
-                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
+                '<button type="button" onClick="initViewModal();" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>' + 
                 '<h4 class="modal-title">{{ title }}</h4>' + 
               '</div>' + 
               '<div class="modal-body" ng-transclude></div>' + 
