@@ -82,7 +82,7 @@ event.controller('event', function ($scope, $http, $rootScope, $timeout) {
     {
         for(var i=0; i< $scope.userCurrent.roles.length; i++)
         {
-            if($scope.userCurrent.roles[i] == "ROLE_ADMIN") return true;
+            if($scope.userCurrent.roles[i] == "ROLE_ADMIN" || $scope.userCurrent.roles[i] == "ROLE_USER") return true;
         }
         
         
