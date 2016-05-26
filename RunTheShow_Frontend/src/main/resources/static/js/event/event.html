@@ -106,15 +106,15 @@
                                   <label>Inviter des artistes</label>
                                   <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: '1000px';">
                                       <ui-select-match placeholder="Chercher des artistes à inviter">
-                                          <img style="float:left;border-radius: 25px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
+                                          <img style="float:left;border-radius: 25px;width:50px;height:50px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
                                           {{$item.name}}
                                       </ui-select-match>
                                       <ui-select-choices refresh="refreshArtiste($select.search)" refresh-delay="0" repeat="person in ctrl.people">
                                           <small>
-                                            <img style="float:left;border-radius: 25px;" ng-src="{{person.image}}"  alt="ImageMarchePas" />
+                                            <img  style="float:left;border-radius: 25px;width:50px;height:50px;" ng-src="{{person.image}}"  alt="ImageMarchePas" />
                                           </small>
                                         <div style="margin-left: 60px;" ng-bind-html="person.name | highlight: $select.search"></div>
-                                        <div style="margin-left: 60px;">BLABLABLABLA</div>
+                                        <div style="margin-left: 60px;">{{person.description}}</div>
                                     </ui-select-choices>
                                   </ui-select>
 

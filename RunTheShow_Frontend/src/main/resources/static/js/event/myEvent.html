@@ -86,13 +86,12 @@
                                 <th>Destinataire</th>
                                 <th>Message personnel</th>
                                 <th>Statut</th>
-                                <th>Action</th>
                               </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="invitation in asefoe.lesInvitations">
                                 <td>
-                                    <img src="http://placehold.it/50x50" alt="Aucune image" style="float:left;border-radius: 25px;">
+                                    <img src="{{ invitation.destinataire.photo}}" style="float:left;border-radius: 25px;width:50px;height:50px;" alt="Aucune image" style="float:left;border-radius: 25px;">
                                     {{ invitation.destinataire.nomArtiste }}
                                 </td>
                                 <td>{{ invitation.commentaire }}</td>
@@ -106,10 +105,6 @@
                                     <span ng-switch-default style="color:orange">
                                         {{ invitation.statut }}
                                     </span>
-                                </td>
-                                <td >
-                                    <button type="button" class="btn btn-success">Accepter</button>
-                                    <button type="button" class="btn btn-danger">Refuser</button>
                                 </td>
                             </tr>
                             </tbody>
