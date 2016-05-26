@@ -5,6 +5,7 @@
  */
 package runtheshow.resource.metiers;
 
+import runtheshow.resource.entities.Evenement;
 import runtheshow.resource.entities.Lieu;
 
 /**
@@ -16,5 +17,7 @@ public interface ILieuMetier {
     public Boolean addLieu(Lieu lieu);
 
     public Boolean updateLieu(Lieu lieu);
+
+    public Boolean deleteLieu(Evenement event);
     
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import runtheshow.resource.entities.Evenement;
 import runtheshow.resource.entities.Lieu;
 import runtheshow.resource.metiers.ILieuMetier;
 
@@ -33,5 +34,10 @@ public class LieuService
     @RequestMapping(value = "/update", method = RequestMethod.PUT, consumes = "application/json; charset=UTF-8")
     public Boolean updateUser(@RequestBody Lieu lieu, HttpServletResponse response) {
         return metier.updateLieu(lieu);
+    }
+    
+    @RequestMapping(value = "/delete", method = RequestMethod.POST, consumes = "application/json; charset=UTF-8")
+    public Boolean deleteEvent(@RequestBody Evenement event, HttpServletResponse response) {
+        return metier.deleteLieu(event);
     }
 }

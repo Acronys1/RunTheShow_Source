@@ -1,14 +1,14 @@
-
 <div ng-controller="event" ng-init="initFirst()">
+    <div class="tabs">
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#myAgenda">Mon Agenda</a></li>
-        <li ng-show="showEvent()"><a data-toggle="tab" href="#addEvent">Ajouter un évènement</a></li>
+        <li class="active"><a href="#myAgenda" data-toggle="tab" aria-expanded="true">Mon Agenda</a></li>
+        <li ng-show="showEvent()"><a href="#addEvent" data-toggle="tab" aria-expanded="false">Ajouter un évènement</a></li>
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div id="myAgenda" class="tab-pane fade in active">
+        <div id="myAgenda" class="tab-pane active">
             <script>
                 function visibleOrHidden()
                 {
@@ -39,6 +39,14 @@
                     //setTimeout(function() {alert('hello ' + url2);window.location($("#showEvent").attr('href'));},2000);
                 }
                 
+                function initViewModal()
+                {
+                    var sousEventDiv = document.getElementById('divSousEvent');
+                    var invit = document.getElementById('divInvitation');
+                    
+                    sousEventDiv.style.display = "block";
+                    invit.style.display = "none";
+                }
             </script>
             
             <div ng-controller="calendarCtrl as calDemo" ng-init="initCalendar()">
@@ -51,7 +59,7 @@
                 <!-- <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> -->
                 
                 <!-- Modal -->
-                <modal id="text-page" visible="showModal" title="Evènement : {{ titleEvent }}">
+                <modal id="" visible="showModal" title="Evènement : {{ titleEvent }}">
                     
                     <div id="divSousEvent" style="display : block;">
                             <table class="table table-striped">
@@ -76,7 +84,7 @@
                                             {{ asefoe.intitule }}
                                         </td>
                                         <td>
-                                            <button type="button" class="btn btn-default" onclick="visibleOrHidden();" ng-click="infoSousEvent(asefoe.id)" ng-show="showButton">Invitation</button>
+                                            <button type="button" id="buttonInvit" class="btn btn-default" onclick="visibleOrHidden();" ng-click="infoSousEvent(asefoe.id)" ng-show="showButton">Invitation</button>
                                         </td>
                                         <td>
                                             <a href="#" id="sDelete" ng-show="showButton" ng-click="deleteSEvent(asefoe.id)"><span class = "glyphicon glyphicon-remove"></span></a>
@@ -84,18 +92,18 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <a href="/myEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" >Show event</a>
+                                            <a href="/myEvent/{{ idEventForClick }}" id="sModal1" data-window="external" data-dismiss="modal">Show event</a>
                                         </td>
                                         <td colspan="3">
-                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal" data-window="external" data-dismiss="modal" ng-show="showButton">Modifier l'évènement</a>
+                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal2" data-window="external" data-dismiss="modal" ng-show="showButton">Modifier l'évènement</a>
                                         </td>
                                         
                                     </tr>
                                 </tbody>
                             </table>
                         <div class="row" align="center">
-                            <button class="btn btn-default" data-dismiss="modal">Fermer</button>
-                            <button class="btn btn-danger" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
+                            <button class="btn btn-default" data-dismiss="modal" id="Exit" onClick="initViewModal();">Fermer</button>
+                            <button class="btn btn-danger" id="DeleteEvent" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
                         </div>
                     </div>
                     <div id="divInvitation" style="display : none;" ng-controller="DemoCtrl as ctrl">
@@ -126,7 +134,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" onclick="visibleOrHidden();">Retour</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal" onClick="initViewModal();">Fermer</button>
                           <button type="button" ng-click="sendInvitation()" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
                         </div>
                     </div>
@@ -137,7 +145,7 @@
         
         
         
-        <div id="addEvent" class="tab-pane fade" ng-show="showEvent()">
+        <div id="addEvent" class="tab-pane" ng-show="showEvent()">
             <div class="alert alert-danger" ng-show="errorAjout">
                 {{errorMessage}}
             </div>
@@ -467,5 +475,6 @@
 
         </div>
     </div>
+</div>
 </div>
 <!-- end of images event pics -->
