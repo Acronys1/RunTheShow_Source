@@ -82,7 +82,8 @@ public class UserMetier implements IUserMetier {
         userBind.setVille(user.getVille());
         userBind.setDescription(user.getDescription());
         userBind.setMailContact(user.getMailContact());
-        userBind.setPhoto(user.getPhoto());
+        if(user.getPhoto() != null && user.getPhoto().trim() != "")
+            userBind.setPhoto(user.getPhoto());
         
         if(user.getPassword() != null){
             if(BCrypt.checkpw(user.getAncienPassword(), userBind.getPassword())){
