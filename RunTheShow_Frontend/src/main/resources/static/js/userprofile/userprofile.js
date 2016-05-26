@@ -165,7 +165,6 @@ angular.module('userprofile', []).controller('userprofile', function ($scope, $h
         $scope.urlImageProfile = ($rootScope.currentUser.photo != null && $rootScope.currentUser.photo != "" ? $rootScope.currentUser.photo : 'img/portfolio-1.jpg');
         $scope.imgProfileStyle = {
             'background-image': "url(" + $scope.urlImageProfile + ")",
-            'height': '200px',
             'width': '170px'
         };
         return $scope.imgProfileStyle;
