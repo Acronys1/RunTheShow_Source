@@ -60,7 +60,7 @@ public class FileMetier implements IFileMetier{
         }
 
         //Create directory if not exist
-        File files = new File("..\\RunTheShow_Frontend\\src\\main\\resources\\static\\files_import\\"/* + deepPath1 */);
+        File files = new File("/home/files_import/"/* + deepPath1 */);
         if (!files.exists()) {
             if (files.mkdirs()) {
                 System.out.println("sub directories created successfully");
@@ -71,7 +71,7 @@ public class FileMetier implements IFileMetier{
 
         doc.setFilename(idOne.toString()+"-"+timestamp+"." + ext);
 
-        FileOutputStream stream = new FileOutputStream("..\\RunTheShow_Frontend\\src\\main\\resources\\static\\files_import\\"/*+deepPath1 + "\\" */+ filePath + "." + ext);
+        FileOutputStream stream = new FileOutputStream("/home/files_import/"/*+deepPath1 + "\\" */+ filePath + "." + ext);
 
         try {
             stream.write(doc.getFile());
@@ -88,7 +88,7 @@ public class FileMetier implements IFileMetier{
         //String deepPath2 = fileName.substring(2, 4);
         String filePath = fileName.substring(3);
         
-        return "files_import\\"/*+deepPath1+"\\"*/+filePath;
+        return "files_import/"/*+deepPath1+"\\"*/+filePath;
     }
     
     // Retrive filename for webservice
