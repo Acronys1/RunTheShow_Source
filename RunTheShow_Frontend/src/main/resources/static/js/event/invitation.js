@@ -48,9 +48,10 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout, $rootScope) {
       if(caracteres.length > 2){
           $timeout(function() {
             $http.get("/resource/invitation/filter/"+caracteres).success(function (data, status) {
+                console.log(data);
                 vm.people = [];    
                 for(var i in data){
-                    vm.people.push({ name: data[i]['nomArtiste'],      image: 'http://lorempixel.com/50/50/people', id:data[i]['id']});
+                    vm.people.push({ name: data[i]['nomArtiste'],      image: data[i]['photo'], id:data[i]['id'],    description:data[i]['description']});
                 }
                 
                 }).error(function (data, status) {
