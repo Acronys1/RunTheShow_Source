@@ -1,87 +1,87 @@
 <div ng-controller="event" ng-init="initFirst()">
     <div class="tabs">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs">
-        <li class="active"><a href="#myAgenda" data-toggle="tab" aria-expanded="true">Mon Agenda</a></li>
-        <li ng-show="showEvent()"><a href="#addEvent" data-toggle="tab" aria-expanded="false">Ajouter un évènement</a></li>
-    </ul>
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#myAgenda" data-toggle="tab" aria-expanded="true">Mon Agenda</a></li>
+            <li ng-show="showEvent()"><a href="#addEvent" data-toggle="tab" aria-expanded="false">Ajouter un évènement</a></li>
+            <li ng-show="isArtist"><a href="#myInvitations" data-toggle="tab" aria-expanded="true">Mes invitations</a></li>
+        </ul>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div id="myAgenda" class="tab-pane active">
-            <script>
-                function visibleOrHidden()
-                {
-                    var sousEventDiv = document.getElementById('divSousEvent');
-                    var invit = document.getElementById('divInvitation');
-                    
-                    if(sousEventDiv.style.display == "none")
-                    {
-                        sousEventDiv.style.display = "block";
-                        invit.style.display = "none";
-                    }
-                    else
-                    {
-                        sousEventDiv.style.display = "none";
-                        invit.style.display = "block";
-                    }
-                }
-                
-                function changeUrl()
-                {
-                    var url1 = document.getElementById("sModal").href;
-                    document.getElementById("showEvent").href = url1;
-                    
-                    var url2 = document.getElementById("showEvent").href;
-                    
-                    
-                    var toto = document.getElementById("showEvent").href;
-                    //setTimeout(function() {alert('hello ' + url2);window.location($("#showEvent").attr('href'));},2000);
-                }
-                
-                function initViewModal()
-                {
-                    var sousEventDiv = document.getElementById('divSousEvent');
-                    var invit = document.getElementById('divInvitation');
-                    
-                    sousEventDiv.style.display = "block";
-                    invit.style.display = "none";
-                }
-            </script>
-            
-            <div ng-controller="calendarCtrl as calDemo" ng-init="initCalendar()">
-                <tab select="renderCalender('myCalendar1');">
-                    <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
-                      <h4>{{alertMessage}}</h4>
-                    </div>
-                    <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
-                </tab>
-                <!-- <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> -->
-                
-                <!-- Modal -->
-                <modal id="" visible="showModal" title="Evènement : {{ titleEvent }}">
-                    
-                    <div id="divSousEvent" style="display : block;">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <div id="myAgenda" class="tab-pane active">
+                <script>
+                                    function visibleOrHidden()
+                                    {
+                                        var sousEventDiv = document.getElementById('divSousEvent');
+                                        var invit = document.getElementById('divInvitation');
+
+                                        if (sousEventDiv.style.display == "none")
+                                        {
+                                            sousEventDiv.style.display = "block";
+                                            invit.style.display = "none";
+                                        } else
+                                        {
+                                            sousEventDiv.style.display = "none";
+                                            invit.style.display = "block";
+                                        }
+                                    }
+
+                                    function changeUrl()
+                                    {
+                                        var url1 = document.getElementById("sModal").href;
+                                        document.getElementById("showEvent").href = url1;
+
+                                        var url2 = document.getElementById("showEvent").href;
+
+
+                                        var toto = document.getElementById("showEvent").href;
+                                        //setTimeout(function() {alert('hello ' + url2);window.location($("#showEvent").attr('href'));},2000);
+                                    }
+
+                                    function initViewModal()
+                                    {
+                                        var sousEventDiv = document.getElementById('divSousEvent');
+                                        var invit = document.getElementById('divInvitation');
+
+                                        sousEventDiv.style.display = "block";
+                                        invit.style.display = "none";
+                                    }
+                </script>
+
+                <div ng-controller="calendarCtrl as calDemo" ng-init="initCalendar()">
+                    <tab select="renderCalender('myCalendar1');">
+                        <div class="alert-success calAlert" ng-show="alertMessage != undefined && alertMessage != ''">
+                            <h4>{{alertMessage}}</h4>
+                        </div>
+                        <div class="calendar" ng-model="eventSources" calendar="myCalendar1" ui-calendar="uiConfig.calendar"></div>
+                    </tab>
+                    <!-- <div ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div> -->
+
+                    <!-- Modal -->
+                    <modal id="" visible="showModal" title="Evènement : {{ titleEvent}}">
+
+                        <div id="divSousEvent" style="display : block;">
                             <table class="table table-striped">
                                 <thead>
-                                  <tr>
-                                    <th>Date début</th>
-                                    <th>Date fin</th>
-                                    <th>intitule</th>
-                                    <th ng-show="showButton">Invitation</th>
-                                    <th ng-show="showButton">Supprimer</th>
-                                  </tr>
+                                    <tr>
+                                        <th>Date début</th>
+                                        <th>Date fin</th>
+                                        <th>intitule</th>
+                                        <th ng-show="showButton">Invitation</th>
+                                        <th ng-show="showButton">Supprimer</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <tr data-ng-repeat="asefoe in allSousEventForOneEvent">
                                         <td>
-                                            {{ asefoe.dateDebut }}
+                                            {{ asefoe.dateDebut}}
                                         </td>
                                         <td>
-                                            {{ asefoe.dateFin }}
+                                            {{ asefoe.dateFin}}
                                         </td>
                                         <td>
-                                            {{ asefoe.intitule }}
+                                            {{ asefoe.intitule}}
                                         </td>
                                         <td>
                                             <button type="button" id="buttonInvit" class="btn btn-default" onclick="visibleOrHidden();" ng-click="infoSousEvent(asefoe.id)" ng-show="showButton">Invitation</button>
@@ -92,389 +92,434 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">
-                                            <a href="/myEvent/{{ idEventForClick }}" id="sModal1" data-window="external" data-dismiss="modal">Show event</a>
+                                            <a href="/myEvent/{{ idEventForClick}}" id="sModal1" data-window="external" data-dismiss="modal">Show event</a>
                                         </td>
                                         <td colspan="3">
-                                            <a href="/updateEvent/{{ idEventForClick }}" id="sModal2" data-window="external" data-dismiss="modal" ng-show="showButton">Modifier l'évènement</a>
+                                            <a href="/updateEvent/{{ idEventForClick}}" id="sModal2" data-window="external" data-dismiss="modal" ng-show="showButton">Modifier l'évènement</a>
                                         </td>
-                                        
+
                                     </tr>
                                 </tbody>
                             </table>
-                        <div class="row" align="center">
-                            <button class="btn btn-default" data-dismiss="modal" id="Exit" onClick="initViewModal();">Fermer</button>
-                            <button class="btn btn-danger" id="DeleteEvent" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
+                            <div class="row" align="center">
+                                <button class="btn btn-default" data-dismiss="modal" id="Exit" onClick="initViewModal();">Fermer</button>
+                                <button class="btn btn-danger" id="DeleteEvent" ng-click="deleteEvent(idEvent)" ng-confirm-click="Êtes-vous sûr de vouloir supprimer cet évènement et tous ses sous-évènements?">Supprimer</button> 
+                            </div>
                         </div>
-                    </div>
-                    <div id="divInvitation" style="display : none;" ng-controller="DemoCtrl as ctrl">
-                        <div class="alert alert-success" ng-show="successInvit">
-                            <span>{{successMessageInvit }}</span>
-                        </div>
-                        <div>
-                                  <label>Inviter des artistes</label>
-                                  <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: '1000px';">
-                                      <ui-select-match placeholder="Chercher des artistes à inviter">
-                                          <img style="float:left;border-radius: 25px;width:50px;height:50px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
-                                          {{$item.name}}
-                                      </ui-select-match>
-                                      <ui-select-choices refresh="refreshArtiste($select.search)" refresh-delay="0" repeat="person in ctrl.people">
-                                          <small>
+                        <div id="divInvitation" style="display : none;" ng-controller="DemoCtrl as ctrl">
+                            <div class="alert alert-success" ng-show="successInvit">
+                                <span>{{successMessageInvit}}</span>
+                            </div>
+                            <div>
+                                <label>Inviter des artistes</label>
+                                <ui-select multiple ng-model="ctrl.multipleDemo.selectedPeople" theme="bootstrap" ng-disabled="ctrl.disabled" sortable="true" close-on-select="false" style="width: '1000px';">
+                                    <ui-select-match placeholder="Chercher des artistes à inviter">
+                                        <img style="float:left;border-radius: 25px;width:50px;height:50px;" ng-src="{{$item.image}}"  alt="ImageMarchePas" />
+                                        {{$item.name}}
+                                    </ui-select-match>
+                                    <ui-select-choices refresh="refreshArtiste($select.search)" refresh-delay="0" repeat="person in ctrl.people">
+                                        <small>
                                             <img  style="float:left;border-radius: 25px;width:50px;height:50px;" ng-src="{{person.image}}"  alt="ImageMarchePas" />
-                                          </small>
+                                        </small>
                                         <div style="margin-left: 60px;" ng-bind-html="person.name | highlight: $select.search"></div>
                                         <div style="margin-left: 60px;">{{person.description}}</div>
                                     </ui-select-choices>
-                                  </ui-select>
+                                </ui-select>
 
-                                  <br><br>
-                                  <fieldset class="form-group">
-                                      <label for="msgPerso">Envoyer un message personnel</label>
-                                      <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
-                                  </fieldset>
+                                <br><br>
+                                <fieldset class="form-group">
+                                    <label for="msgPerso">Envoyer un message personnel</label>
+                                    <textarea class="form-control" id="msgPerso" ng-model="msgPerso" name="info" rows="2"></textarea>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" onclick="visibleOrHidden();">Retour</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal" onClick="initViewModal();">Fermer</button>
+                                <button type="button" ng-click="sendInvitation()" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
+                            </div>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" onclick="visibleOrHidden();">Retour</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal" onClick="initViewModal();">Fermer</button>
-                          <button type="button" ng-click="sendInvitation()" class="btn btn-template-main"><i class="fa fa-paper-plane"></i>Envoyer les invitations</button>
+                    </modal>
+                </div>
+            </div>
+
+
+
+
+            <div id="addEvent" class="tab-pane" ng-show="showEvent()">
+                <div class="alert alert-danger" ng-show="errorAjout">
+                    {{errorMessage}}
+                </div>
+                <div class="alert alert-success" ng-show="successAjout">
+                    {{successMessage}}
+                </div>
+                <form name="fen" role="form" ng-submit="addEvent()">
+                    <fieldset class="form-group">
+                        <label for="intitule">Intitulé :</label>
+                        <input id="intitule" class="form-control" type="text" ng-model="event.intitule" name="intitule" />
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control" id="description" ng-model="event.description" name="description" rows="3"></textarea>
+                    </fieldset>
+
+                    <div class="container">
+                        <div class='col-md-5'>
+                            <label for="checkin">Date début</label>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker6'>
+                                    <input type='text' datepicker="" ng-model="event.datetimedebevent" class="form-control" id="checkin" name="checkin" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                                <!-- <span class="text-danger"> 
+                                    {{event.datetimedebevent}}                     
+                                </span> -->
+                            </div>
                         </div>
-                    </div>
-                </modal>
-            </div>
-        </div>
-        
-        
-        
-        
-        <div id="addEvent" class="tab-pane" ng-show="showEvent()">
-            <div class="alert alert-danger" ng-show="errorAjout">
-                {{errorMessage}}
-            </div>
-            <div class="alert alert-success" ng-show="successAjout">
-                {{successMessage}}
-            </div>
-            <form name="fen" role="form" ng-submit="addEvent()">
-                <fieldset class="form-group">
-                    <label for="intitule">Intitulé :</label>
-                    <input id="intitule" class="form-control" type="text" ng-model="event.intitule" name="intitule" />
-                </fieldset>
-                
-                <fieldset class="form-group">
-                   <label for="description">Description</label>
-                   <textarea class="form-control" id="description" ng-model="event.description" name="description" rows="3"></textarea>
-                </fieldset>
-                
-                <div class="container">
-                    <div class='col-md-5'>
-                        <label for="checkin">Date début</label>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker6'>
-                                <input type='text' datepicker="" ng-model="event.datetimedebevent" class="form-control" id="checkin" name="checkin" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
+
+                        <div class='col-md-5'>
+                            <label for="checkout">Date fin</label>
+                            <div class="form-group">
+                                <div class='input-group date' id='datetimepicker7'>
+                                    <input type='text' datepicker="" ng-model="event.datetimefinevent" class="form-control" id="checkout" name="checkout" />
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
                             </div>
                             <!-- <span class="text-danger"> 
-                                {{event.datetimedebevent}}                     
+                                    {{event.datetimefinevent}}                     
                             </span> -->
                         </div>
                     </div>
-                    
-                    <div class='col-md-5'>
-                        <label for="checkout">Date fin</label>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepicker7'>
-                                <input type='text' datepicker="" ng-model="event.datetimefinevent" class="form-control" id="checkout" name="checkout" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
+
+
+                    <fieldset class="form-group">
+                        <label for="description">Informations complémentaires</label>
+                        <textarea class="form-control" id="info" ng-model="event.info" name="info" rows="3"></textarea>
+                    </fieldset>
+
+                    <fieldset class="form-group">
+                        <label for="adresse">Adresse :</label>
+                        <div id="locationField">
+                            <input id="autocomplete" class="form-control" placeholder="Enter your address" type="text" onFocus="geolocate()" ng-model="lieu.adresse" adresseclick="" name="autocomplete" />
                         </div>
-                        <!-- <span class="text-danger"> 
-                                {{event.datetimefinevent}}                     
-                        </span> -->
+                    </fieldset>
+
+                    <div class="row" align="center">
+                        <table id="address">
+                            <tr>
+                                <td><b>Numéro : </b>&nbsp;</td>
+                                <td>
+                                    <input class="form-control" id="street_number" disabled="true"></input>
+                                </td>
+
+                                <td></td>
+
+                                <td><b>Rue : </b>&nbsp;</td>
+                                <td>
+                                    <input class="form-control" id="route" disabled="true"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Ville : </b>&nbsp;</td>
+                                <td>
+                                    <input class="form-control" id="locality" disabled="true" ng-model="lieu.ville"></input>
+                                </td>
+
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+
+                                <td><b>Code postal : </b>&nbsp;</td>
+                                <td>
+                                    <input class="form-control" id="postal_code" ng-model="lieu.code_postal"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Région : </b>&nbsp;</td>
+                                <td>
+                                    <input class="form-control" id="administrative_area_level_1" disabled="true"></input>
+                                </td>
+
+                                <td>&nbsp;&nbsp;&nbsp;</td>
+
+                                <td><b>Pays : </b>&nbsp;</td>
+                                <td>
+                                    <input class="form-control" id="country" disabled="true"></input>
+                                </td>
+                            </tr>
+                        </table>
+                        <br><br>
                     </div>
-                </div>
-                
-                
-                <fieldset class="form-group">
-                   <label for="description">Informations complémentaires</label>
-                   <textarea class="form-control" id="info" ng-model="event.info" name="info" rows="3"></textarea>
-                </fieldset>
-                
-                <fieldset class="form-group">
-                    <label for="adresse">Adresse :</label>
-                    <div id="locationField">
-                        <input id="autocomplete" class="form-control" placeholder="Enter your address" type="text" onFocus="geolocate()" ng-model="lieu.adresse" adresseclick="" name="autocomplete" />
-                    </div>
-                </fieldset>
-                
-                <div class="row" align="center">
-                    <table id="address">
-                        <tr>
-                            <td><b>Numéro : </b>&nbsp;</td>
-                            <td>
-                                <input class="form-control" id="street_number" disabled="true"></input>
-                            </td>
 
-                            <td></td>
+                    <fieldset class="form-group">
+                        <label for="description">Description du lieu</label>
+                        <textarea class="form-control" id="descLieu" ng-model="lieu.description" name="descLieu" rows="3"></textarea>
+                    </fieldset>
 
-                            <td><b>Rue : </b>&nbsp;</td>
-                            <td>
-                                <input class="form-control" id="route" disabled="true"></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Ville : </b>&nbsp;</td>
-                            <td>
-                                <input class="form-control" id="locality" disabled="true" ng-model="lieu.ville"></input>
-                            </td>
+                    <script>
+                                        // This example displays an address form, using the autocomplete feature
+                                        // of the Google Places API to help users fill in the information.
 
-                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                        var placeSearch, autocomplete;
+                                        var componentForm = {
+                                            street_number: 'short_name',
+                                            route: 'long_name',
+                                            locality: 'long_name',
+                                            administrative_area_level_1: 'short_name',
+                                            country: 'long_name',
+                                            postal_code: 'short_name'
+                                        };
+                                                function initAutocomplete() {
+                                                    // Create the autocomplete object, restricting the search to geographical
+                                                    // location types.
+                                                    autocomplete = new google.maps.places.Autocomplete(
+                                                            /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
+                                                            {types: ['geocode']});
 
-                            <td><b>Code postal : </b>&nbsp;</td>
-                            <td>
-                                <input class="form-control" id="postal_code" ng-model="lieu.code_postal"></input>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><b>Région : </b>&nbsp;</td>
-                            <td>
-                                <input class="form-control" id="administrative_area_level_1" disabled="true"></input>
-                            </td>
+                                                    // When the user selects an address from the dropdown, populate the address
+                                                    // fields in the form.
+                                                    autocomplete.addListener('place_changed', fillInAddress);
+                                                }
 
-                            <td>&nbsp;&nbsp;&nbsp;</td>
+                                        // [START region_fillform]
+                                        function fillInAddress() {
+                                            // Get the place details from the autocomplete object.
+                                            var place = autocomplete.getPlace();
 
-                            <td><b>Pays : </b>&nbsp;</td>
-                            <td>
-                                <input class="form-control" id="country" disabled="true"></input>
-                            </td>
-                        </tr>
-                    </table>
-                    <br><br>
-                </div>
-                
-                <fieldset class="form-group">
-                   <label for="description">Description du lieu</label>
-                   <textarea class="form-control" id="descLieu" ng-model="lieu.description" name="descLieu" rows="3"></textarea>
-                </fieldset>
+                                            for (var component in componentForm) {
+                                                document.getElementById(component).value = '';
+                                                document.getElementById(component).disabled = false;
+                                            }
 
-                <script>
-                    // This example displays an address form, using the autocomplete feature
-                    // of the Google Places API to help users fill in the information.
+                                            // Get each component of the address from the place details
+                                            // and fill the corresponding field on the form.
+                                            for (var i = 0; i < place.address_components.length; i++) {
+                                                var addressType = place.address_components[i].types[0];
+                                                if (componentForm[addressType]) {
+                                                    var val = place.address_components[i][componentForm[addressType]];
+                                                    document.getElementById(addressType).value = val;
+                                                }
+                                            }
+                                        }
+                                        // [END region_fillform]
 
-                    var placeSearch, autocomplete;
-                    var componentForm = {
-                      street_number: 'short_name',
-                      route: 'long_name',
-                      locality: 'long_name',
-                      administrative_area_level_1: 'short_name',
-                      country: 'long_name',
-                      postal_code: 'short_name'
-                    };
-
-                    function initAutocomplete() {
-                      // Create the autocomplete object, restricting the search to geographical
-                      // location types.
-                      autocomplete = new google.maps.places.Autocomplete(
-                          /** @type {!HTMLInputElement} */(document.getElementById('autocomplete')),
-                          {types: ['geocode']});
-
-                      // When the user selects an address from the dropdown, populate the address
-                      // fields in the form.
-                      autocomplete.addListener('place_changed', fillInAddress);
-                    }
-
-                    // [START region_fillform]
-                    function fillInAddress() {
-                        // Get the place details from the autocomplete object.
-                        var place = autocomplete.getPlace();
-
-                        for (var component in componentForm) {
-                          document.getElementById(component).value = '';
-                          document.getElementById(component).disabled = false;
-                        }
-
-                        // Get each component of the address from the place details
-                        // and fill the corresponding field on the form.
-                        for (var i = 0; i < place.address_components.length; i++) {
-                          var addressType = place.address_components[i].types[0];
-                          if (componentForm[addressType]) {
-                            var val = place.address_components[i][componentForm[addressType]];
-                            document.getElementById(addressType).value = val;
-                          }
-                        }
-                    }
-                    // [END region_fillform]
-
-                    // [START region_geolocation]
-                    // Bias the autocomplete object to the user's geographical location,
-                    // as supplied by the browser's 'navigator.geolocation' object.
-                    function geolocate() {
-                      if (navigator.geolocation) {
-                        navigator.geolocation.getCurrentPosition(function(position) {
-                          var geolocation = {
-                            lat: position.coords.latitude,
-                            lng: position.coords.longitude
-                          };
-                          var circle = new google.maps.Circle({
-                            center: geolocation,
-                            radius: position.coords.accuracy
-                          });
-                          autocomplete.setBounds(circle.getBounds());
-                        });
-                      }
-                    }
-                    // [END region_geolocation]
+                                        // [START region_geolocation]
+                                        // Bias the autocomplete object to the user's geographical location,
+                                        // as supplied by the browser's 'navigator.geolocation' object.
+                                        function geolocate() {
+                                            if (navigator.geolocation) {
+                                                navigator.geolocation.getCurrentPosition(function (position) {
+                                                    var geolocation = {
+                                                        lat: position.coords.latitude,
+                                                        lng: position.coords.longitude
+                                                    };
+                                                    var circle = new google.maps.Circle({
+                                                        center: geolocation,
+                                                        radius: position.coords.accuracy
+                                                    });
+                                                    autocomplete.setBounds(circle.getBounds());
+                                                });
+                                            }
+                                        }
+                                        // [END region_geolocation]
 
                     </script>
                     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCHfGaiZSXfDjwKLG73Tp66fYRe4PYOETY&signed_in=true&libraries=places&callback=initAutocomplete"
-                        async defer></script>
-                
-                <div ng-app="event">
-                    <fieldset style="background: #FCFCFC;padding: 16px;border: 1px solid #D5D5D5;box-shadow: 8px 8px 0px #aaa; " data-ng-repeat="choice in choices">
-                        <div class="container" disable-all="lastDateTimePickerSousEvent($index)">
-                            <div class="row">
-                                <div class='col-md-5'>
-                                    <label for="checkin">Date début sous-évènement</label>
-                                    <div class="form-group">
-                                        <div class='input-group date' id="datetimedeb">
-                                            <input type='text' class="form-control" sdatepicker="" ng-model="sousEvent.scheckin[$index]" id="scheckin-{{$index}}"/>
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
+                    async defer></script>
+
+                    <div ng-app="event">
+                        <fieldset style="background: #FCFCFC;padding: 16px;border: 1px solid #D5D5D5;box-shadow: 8px 8px 0px #aaa; " data-ng-repeat="choice in choices">
+                            <div class="container" disable-all="lastDateTimePickerSousEvent($index)">
+                                <div class="row">
+                                    <div class='col-md-5'>
+                                        <label for="checkin">Date début sous-évènement</label>
+                                        <div class="form-group">
+                                            <div class='input-group date' id="datetimedeb">
+                                                <input type='text' class="form-control" sdatepicker="" ng-model="sousEvent.scheckin[$index]" id="scheckin-{{$index}}"/>
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            <!-- <span class="text-danger"> 
+                                                {{sousEvent.scheckin[$index]}}                     
+                                            </span> -->
+                                        </div>
+                                    </div>
+
+                                    <div class='col-md-5'>
+                                        <label for="checkout">Date fin sous-évènement</label>
+                                        <div class="form-group">
+                                            <div class='input-group date' id="datetimefin">
+                                                <input type='text' class="form-control" sdatepicker="" ng-model="sousEvent.scheckout[$index]" id="scheckout-{{$index}}" />
+                                                <span class="input-group-addon">
+                                                    <span class="glyphicon glyphicon-calendar"></span>
+                                                </span>
+                                            </div>
+                                            <!-- <span class="text-danger"> 
+                                                {{sousEvent.scheckout[$index]}}                     
+                                            </span> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class='col-md-10'>
+                                        <div class="form-group">
+                                            <label for="sdescription">Description</label>
+                                            <textarea class="form-control" ng-model="sousEvent.sdescription[$index]" id="sdescription-{{$index}}" name="sdescription-{{$index}}" rows="3"></textarea>
                                         </div>
                                         <!-- <span class="text-danger"> 
-                                            {{sousEvent.scheckin[$index]}}                     
+                                            {{sousEvent.sdescription[$index]}}                     
                                         </span> -->
                                     </div>
                                 </div>
 
-                                <div class='col-md-5'>
-                                    <label for="checkout">Date fin sous-évènement</label>
-                                    <div class="form-group">
-                                        <div class='input-group date' id="datetimefin">
-                                            <input type='text' class="form-control" sdatepicker="" ng-model="sousEvent.scheckout[$index]" id="scheckout-{{$index}}" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
+
+                                <div class="row">
+                                    <div class='col-md-2'>
+                                        <div class="form-group">
+                                            <label for="setage">Etage</label>
+                                            <input type="number" min="0" max ="20" class="form-control" sinput="" id="setage-{{$index}}" ng-model="sousEvent.setage[$index]" name="setage-{{$index}}">
+                                        </div>
+                                        <div role="alert">
+                                            <span class="error" ng-show="sousEvent.setage[$index].$error.required">
+                                                Required!</span>
+                                            <span class="error" ng-show="sousEvent.setage[$index].$error.number">
+                                                Not valid number!</span>
                                         </div>
                                         <!-- <span class="text-danger"> 
-                                            {{sousEvent.scheckout[$index]}}                     
+                                            {{sousEvent.setage[$index]}}                     
                                         </span> -->
                                     </div>
                                 </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class='col-md-10'>
-                                    <div class="form-group">
-                                        <label for="sdescription">Description</label>
-                                        <textarea class="form-control" ng-model="sousEvent.sdescription[$index]" id="sdescription-{{$index}}" name="sdescription-{{$index}}" rows="3"></textarea>
-                                    </div>
-                                    <!-- <span class="text-danger"> 
-                                        {{sousEvent.sdescription[$index]}}                     
-                                    </span> -->
-                                </div>
-                            </div>
-                            
-                            
-                            <div class="row">
-                                <div class='col-md-2'>
-                                    <div class="form-group">
-                                        <label for="setage">Etage</label>
-                                        <input type="number" min="0" max ="20" class="form-control" sinput="" id="setage-{{$index}}" ng-model="sousEvent.setage[$index]" name="setage-{{$index}}">
-                                    </div>
-                                    <div role="alert">
-                                        <span class="error" ng-show="sousEvent.setage[$index].$error.required">
-                                          Required!</span>
-                                        <span class="error" ng-show="sousEvent.setage[$index].$error.number">
-                                          Not valid number!</span>
-                                    </div>
-                                    <!-- <span class="text-danger"> 
-                                        {{sousEvent.setage[$index]}}                     
-                                    </span> -->
-                                </div>
-                            </div>
-                            
-                        </div>  
-                        <button class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">Supprimer</button>
 
-                    </fieldset>
-                    <br><br>
-                    <div class="row" align="center">
-                        <button type="button" class="btn btn-primary" ng-click="addNewChoice()" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))">Ajouter un sous-évènement</button>
+                            </div>  
+                            <button class="btn btn-danger" ng-show="$last" ng-click="removeChoice()">Supprimer</button>
+
+                        </fieldset>
+                        <br><br>
+                        <div class="row" align="center">
+                            <button type="button" class="btn btn-primary" ng-click="addNewChoice()" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))">Ajouter un sous-évènement</button>
+                        </div>
+                        <!-- <div id="choicesDisplay">
+                           {{ choices }}
+                        </div>
+                        
+                        <div id="sousEventDisplay">
+                           {{ sousEvent }}
+                        </div>
+                        
+                        <div id="scheckinDisplay">
+                           {{ sousEvent.scheckin }}
+                        </div>
+                        
+                        <div id="scheckoutDisplay">
+                           {{ sousEvent.scheckout }}
+                        </div>
+                        
+                        <div id="sdescriptionDisplay">
+                           {{ sousEvent.sdescription }}
+                        </div>
+                        
+                        <div id="setageDisplay">
+                           {{ sousEvent.setage }}
+                        </div>-->
+
                     </div>
-                    <!-- <div id="choicesDisplay">
-                       {{ choices }}
+
+                    <button type="submit" class="btn btn-template-main" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))"><i class="fa fa-save"></i> Sauvegarder les évènements</button>
+
+                </form>
+            </div>
+
+            <div id="myInvitations" class="tab-pane">
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="heading">
+                        <h2>Mes invitations reçues</h2>
                     </div>
-                    
-                    <div id="sousEventDisplay">
-                       {{ sousEvent }}
+                    <div ng-controller="DemoCtrl as ctrl">
+                        <table class="table table-hover" ng-init="getAllInvit()">
+                            <thead>
+                                <tr>
+                                    <th>Expediteur</th>
+                                    <th>Message personnel</th>
+                                    <th>Statut</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="invitation in lstInvitation">
+                                    <td>
+                                        {{ invitation.expediteur.prenom}}  {{ invitation.expediteur.nom}}
+                                    </td>
+                                    <td>{{ invitation.commentaire}}</td>
+                                    <td ng-switch="invitation.statut">
+                                        <span ng-switch-when="Invitation acceptée." style="color:#00b200;">
+                                            {{ invitation.statut}}
+                                        </span>
+                                        <span ng-switch-when="Invitation refusée." style="color:red;">
+                                            {{ invitation.statut}}
+                                        </span>
+                                        <span ng-switch-default style="color:orange">
+                                            {{ invitation.statut}}
+                                        </span>
+                                    </td>
+                                    <td >
+                                        <button type="button" ng-click="accepterInvit(invitation)" class="btn btn-success">Accepter</button>
+                                        <button type="button" ng-click="refuserInvit(invitation)" class="btn btn-danger">Refuser</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
-                    
-                    <div id="scheckinDisplay">
-                       {{ sousEvent.scheckin }}
-                    </div>
-                    
-                    <div id="scheckoutDisplay">
-                       {{ sousEvent.scheckout }}
-                    </div>
-                    
-                    <div id="sdescriptionDisplay">
-                       {{ sousEvent.sdescription }}
-                    </div>
-                    
-                    <div id="setageDisplay">
-                       {{ sousEvent.setage }}
-                    </div>-->
-                    
                 </div>
-                
-                <button type="submit" class="btn btn-template-main" ng-disabled="((!event.datetimedebevent) || (!event.datetimefinevent) || (!event.intitule) || (!event.description))"><i class="fa fa-save"></i> Sauvegarder les évènements</button>
-                
-            </form>
+                </div>
+            </div>
+
         </div>
     </div>
-</div>
 
 
-<!-- upload of images event pics-->
-<div class="modal fade" id="profilPicUpload-modal" tabindex="-1" role="dialog" aria-labelledby="profilPicUpload" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <!-- upload of images event pics-->
+    <div class="modal fade" id="profilPicUpload-modal" tabindex="-1" role="dialog" aria-labelledby="profilPicUpload" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
 
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="resetImgEventUpload()">&times;</button>
-                <h4 class="modal-title" id="profilPicUpload">Uploadez une image</h4>                        
-            </div>
-            <p class="text-success text-center" ng-show="importOK">
-                {{importOK}}
-            </p>
-            <p class="text-danger text-center" ng-show="importKO">
-                {{importKO}}
-            </p>
-            <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="well">
-                        <form action="" dropzoneevent="" class="dropzoneevent" id="dropzoneevent" style="min-height:120px">
-                            <div class="dz-default dz-message">
-                            </div>
-                        </form>
-                    </div>
-                    <div class="">
-                        <button class="btn btn-success" ng-click="uploadImageEvent()">Upload File</button>
-                        <button class="btn btn-danger" ng-click="resetImgEventUpload()">Reset Dropzone</button>
-                    </div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="resetImgEventUpload()">&times;</button>
+                    <h4 class="modal-title" id="profilPicUpload">Uploadez une image</h4>                        
                 </div>
-
-                <p class="text-center text-success">
-                    <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
-                    {{image.filename}}
+                <p class="text-success text-center" ng-show="importOK">
+                    {{importOK}}
                 </p>
-            </div>
+                <p class="text-danger text-center" ng-show="importKO">
+                    {{importKO}}
+                </p>
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        <div class="well">
+                            <form action="" dropzoneevent="" class="dropzoneevent" id="dropzoneevent" style="min-height:120px">
+                                <div class="dz-default dz-message">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-success" ng-click="uploadImageEvent()">Upload File</button>
+                            <button class="btn btn-danger" ng-click="resetImgEventUpload()">Reset Dropzone</button>
+                        </div>
+                    </div>
 
+                    <p class="text-center text-success">
+                        <a href="" class="thumb"><img src="{{image.filename}}" alt="{{image.filename}}" width="100"></a>
+                        {{image.filename}}
+                    </p>
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!-- end of images event pics -->

@@ -17,7 +17,6 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     $scope.errorBannerImport = null;
     $scope.importBannerOK = null;
     $scope.urlImageProfile = "";
-    $scope.lstInvitation = {};
 
     //initialise le CV des artistes
     $scope.initArtistPresentation = function () {
@@ -33,14 +32,6 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
             $scope.errorMessage.init = "erreur récupération type artiste.";
             $scope.error = true;
             console.log("récup roles KO");
-        });
-        
-        //récupère les invitations reçues par un artiste
-        $http.get("/resource/invitation/retreiveReceivedInvit").success(function (data, status) {
-            $scope.lstInvitation = data;
-            console.log(data);
-        }).error(function (data, status) { 
-
         });
 
         //récupère l'utilisateur et check si c'est un artiste.
@@ -239,9 +230,9 @@ angular.module('artist_cv_edit', ['ngCookies']).controller('artist_cv_edit', fun
     $scope.reInitUploadModal = function () {
         $scope.reset();
     };
-    
-    $scope.checkTailleGroupe = function(data) {
-        if(isNaN(data))
+
+    $scope.checkTailleGroupe = function (data) {
+        if (isNaN(data))
             return 'Veuillez entrez un nombre entier';
     };
 
@@ -262,12 +253,12 @@ angular.module('artist_cv_edit').directive('imageonload', function () {
 });
 
 function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+        if ((new Date().getTime() - start) > milliseconds) {
+            break;
+        }
     }
-  }
 }
 
 

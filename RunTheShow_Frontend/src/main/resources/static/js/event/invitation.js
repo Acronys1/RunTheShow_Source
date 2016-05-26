@@ -43,6 +43,7 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout, $rootScope) {
   vm.disabled = undefined;
   vm.searchEnabled = undefined;
   
+    $scope.lstInvitation = {};
   
   $scope.refreshArtiste = function(caracteres){
       if(caracteres.length > 2){
@@ -180,6 +181,15 @@ app.controller('DemoCtrl', function ($scope, $http, $timeout, $rootScope) {
    */
   vm.people = [];
   
+  $scope.getAllInvit = function(){
+              
+        //récupère les invitations reçues par un artiste
+        $http.get("/resource/invitation/retreiveReceivedInvit").success(function (data, status) {
+            $scope.lstInvitation = data;
+            console.log(data);
+        }).error(function (data, status) { 
 
+        });
+  };
   
 });

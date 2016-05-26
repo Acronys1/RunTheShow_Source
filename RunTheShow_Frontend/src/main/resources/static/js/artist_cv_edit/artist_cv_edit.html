@@ -77,46 +77,6 @@ and open the template in the editor.
         <div class="container">
 
             <div class="row">
-                <div class="col-md-12">
-                    <div class="heading">
-                        <h2>Mes invitations reçues</h2>
-                    </div>
-                    <div ng-controller="DemoCtrl as ctrl">
-                        <table class="table table-hover">
-                            <thead>
-                              <tr>
-                                <th>Expediteur</th>
-                                <th>Message personnel</th>
-                                <th>Statut</th>
-                                <th>Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                            <tr ng-repeat="invitation in lstInvitation">
-                                <td>
-                                    {{ invitation.expediteur.prenom }}  {{ invitation.expediteur.nom }}
-                                </td>
-                                <td>{{ invitation.commentaire }}</td>
-                                <td ng-switch="invitation.statut">
-                                    <span ng-switch-when="Invitation acceptée." style="color:#00b200;">
-                                        {{ invitation.statut }}
-                                    </span>
-                                    <span ng-switch-when="Invitation refusée." style="color:red;">
-                                        {{ invitation.statut }}
-                                    </span>
-                                    <span ng-switch-default style="color:orange">
-                                        {{ invitation.statut }}
-                                    </span>
-                                </td>
-                                <td >
-                                    <button type="button" ng-click="accepterInvit(invitation)" class="btn btn-success">Accepter</button>
-                                    <button type="button" ng-click="refuserInvit(invitation)" class="btn btn-danger">Refuser</button>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
                 <div class="col-md-8" id="artistCVDescription">
                     <div class="heading">
                         <h2>A propos de {{artist.nomArtiste|| 'l\'artiste'}}</h2>
