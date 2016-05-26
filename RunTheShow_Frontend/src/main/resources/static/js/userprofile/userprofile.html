@@ -16,7 +16,7 @@
                 <div class="col-sm-6">
                     <a href="javascript: void(0)" data-toggle="modal" data-target="#profilPicUpload-modal" data-dismiss="modal">
                         <p>Photo de profil (cliquez pour uploader)</p>
-                        <img ng-src="{{currentUser.photo|| ''}}" ng-style="initImgProfile()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
+                        <img class="img-circle img-responsive" ng-src="{{currentUser.photo|| ''}}" ng-style="initImgProfile()" ng-mouseover="showCaptionBanner = true;" ng-mouseleave="showCaptionBanner = false;">
                         <div style="width:170px" class="text-center divBannerCaptionUserProfile" ng-show="showCaptionBanner == true">
                             <p>Ajoutez une image de profile</p>
                         </div>
